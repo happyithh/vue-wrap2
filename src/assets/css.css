@@ -1,0 +1,33 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,label,p,blockquote,table,th,td,a{ margin:0; padding:0;box-sizing: border-box;font-family: "PingFangSC-Regular", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif}
+body { background:#f2f2f2; color:#000; font-size:14px;position: relative;width: 100%;height: 100%; font-family: "PingFangHK-Thin", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif!important;}
+table { border-collapse:collapse; }
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#000; text-decoration:none;display: block;}
+a:hover, a:active, a:focus{color:#000;}
+.img>img{
+    width: 100%;
+    height: 100%;
+}
+ol,ul,li { list-style:none; }
+img{border:none;}
+.logo img{background: none;}
+
+input, textarea, select, button { font-size:14px; outline: none;border: none;display: inline-block;font-family: "PingFangHK-Thin", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif!important;}
+a,button{
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    cursor: pointer;
+}
+a:hover,a:active,a:focus{
+    color: #fff;
+    text-decoration: none;
+}
+
+.fl{float: left;}
+.fr{float: right;}
+
+.clearfix:after {content: " "; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
