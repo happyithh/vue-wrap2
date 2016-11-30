@@ -1,7 +1,5 @@
 # vue-wap
 
-> wap project
-
 ## Build Setup
 
 ``` bash
