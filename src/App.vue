@@ -6,6 +6,8 @@
 
 <script>
 import Hello from './components/Hello'
+
+
 import 'assets/css.css';
 
 export default {

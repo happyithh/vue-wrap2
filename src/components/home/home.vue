@@ -25,6 +25,7 @@
                 <li>
                     <span class="icon"></span>
                     <p>我要办活动</p>
+                    
                 </li>
                 <li>
                     <span class="icon"></span>
@@ -42,17 +43,23 @@
             <h2>精选专题</h2>
 
         </div>
+        <router-link to="/askprice">askprice</router-link>
     </div>
 </template>
 
 <script>
+// import activities from './components/activities/activities'
+
+    
     export default {
         name: 'home',
         data () {
             return {
                 msg: 'home.vue'
             }
-        }
+           
+    }
+    
     }
 </script>
 
