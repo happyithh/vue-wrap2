@@ -1,5 +1,7 @@
 <template>
     <div class="container">
+
+        <!--头部-->
         <header>
             <div class="citys">
                 <select>
@@ -11,6 +13,8 @@
             <div class="logo"><img src="/static/images/logo.png"></div>
             <a href="javascript:;" class="logreg">登录/注册</a>
         </header>
+
+        <!--banner-star-->
         <div class="banner">
             <img src="">
             <div class="text">
@@ -18,8 +22,25 @@
                 <p>省时，省力，找你所想…</p>
             </div>
             <ul>
-                <li></li>
+                <li>
+                    <span class="icon"></span>
+                    <p>我要办活动</p>
+                </li>
+                <li>
+                    <span class="icon"></span>
+                    <p>我要开快闪店</p>
+                </li>
+                <li>
+                    <span class="icon"></span>
+                    <p>我要找IP文创</p>
+                </li>
             </ul>
+        </div><!--banner-end-->
+
+        <!--精选专题-star-->
+        <div class="subject">
+            <h2>精选专题</h2>
+
         </div>
     </div>
 </template>
