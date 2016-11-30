@@ -5,7 +5,7 @@
         <header class="clearfix">
             <div class="left fl">
                 <div class="citys">
-                    <input class="weui_input" id="job" type="text" value="上海" readonly="">
+                    <input class="weui_input" id="job" type="text" value="上海" readonly="true">
                     <i class="icon-arrowbottom white"></i>
                 </div>
             </div>
@@ -20,29 +20,31 @@
         <!--banner-star-->
         <div class="banner">
             <img src="/static/images/home_banner.jpg">
-            <div class="text">
-                <h2>中国最专业的商业空间短租平台</h2>
-                <p>省时，省力，找你所想…</p>
+            <div class="cont">
+                <div class="text">
+                    <h2>中国最专业的商业空间短租平台</h2>
+                    <p>省时，省力，找你所想…</p>
+                </div>
+                <ul class="banner-cont clearfix">
+                    <li>
+                        <span class="icon hold-event"></span>
+                        <p>我要办活动</p>
+                    </li>
+                    <li>
+                        <span class="icon openshop"></span>
+                        <p>我要开快闪店</p>
+                    </li>
+                    <li>
+                        <span class="icon ip"></span>
+                        <p>我要找IP文创</p>
+                    </li>
+                </ul>
             </div>
-            <ul>
-                <li>
-                    <span class="icon"></span>
-                    <p>我要办活动</p>
-                </li>
-                <li>
-                    <span class="icon"></span>
-                    <p>我要开快闪店</p>
-                </li>
-                <li>
-                    <span class="icon"></span>
-                    <p>我要找IP文创</p>
-                </li>
-            </ul>
         </div><!--banner-end-->
 
         <!--精选专题-star-->
         <div class="selectedtopic">
-            <div class="title">
+            <div class="list-title clearfix">
                 <h2>精选专题</h2>
             </div>
 
@@ -59,10 +61,10 @@
         </div><!--精选专题-end-->
 
         <!--场地推荐-star-->
-        <div class="place-recommend">
-            <div class="title">
+        <div class="space-list">
+            <div class="list-title clearfix">
                 <h2 class="fl">场地推荐</h2>
-                <a class="fr more" href="javascript:;">查看所有</a>
+                <a class="fr more" href="javascript:;">查看所有<span class="icon icon-arrowright"></span></a>
             </div>
             <ul>
                 <li>

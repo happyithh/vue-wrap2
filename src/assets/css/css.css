@@ -1,6 +1,6 @@
 body,header,section,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,label,p,blockquote,table,th,td,a{ margin:0; padding:0;box-sizing: border-box;font-family: "PingFangSC-Regular", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif}
 body { background:#f2f2f2; color:#000; font-size:14px;position: relative;width: 100%;height: 100%; font-family: "PingFangHK-Thin", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif!important;}
-body{max-width: 750px;margin: 0 auto;}
+body{max-width: 750px;margin: 0 auto;background: #fff;}
 table { border-collapse:collapse; }
 td,th,caption { font-size:14px; }
 h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
@@ -20,10 +20,13 @@ a,button{
     transition: all .5s;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
+
+    outline: none;
     cursor: pointer;
 }
 a:hover,a:active,a:focus{
     text-decoration: none;
+    outline: none;
 }
 
 .fl{float: left;}
