@@ -30,6 +30,10 @@ window.router = new VueRouter({
             path: '/event',
             component: (resolve) => require(['./components/event/event'], resolve)
         },
+        {
+            path: '/form',
+            component: (resolve) => require(['./components/form/leasehold'], resolve)
+        },
     ]
 })
 
