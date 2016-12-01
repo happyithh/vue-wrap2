@@ -1,16 +1,15 @@
 <template>
     <div class="askprice">
-        <div class="title">
-            <div class="title-left">
-                <div class="comeback">
-                    <div class="comeback-img"></div>
-                    <div class="comeback-text">返回</div>
-                </div>
-            </div>      
-            <div class="title-right">
-                <div class="title-askprice ml">一键询价</div>
-            </div>      
-        </div>
+        <header class="clearfix">
+            <div class="left fl">
+                <i class="icon-arrowleft white comeback-img fl"></i>
+                <div class="comeback-text fl">返回</div>
+                
+            </div>
+            <div class="title-right fl">
+                <div class="title-askprice">一键询价</div>
+            </div> 
+        </header>
         <div class="list">
             <ul>
                 <li v-for='info in informations'class="ml">
@@ -50,16 +49,29 @@
                 <div class="base-info-tit">基本信息</div>
             </div>
             <div class="base--detail ml">
-                <div class="base-info-name"><img src="../../../static/images/＊ 必填icon.png" alt="">您的称呼</div>
-                <input type="text" class="base-detail-name">
+                <div class="input-box">
+                    <div class="base-info-name"><img src="../../../static/images/icon/＊ 必填icon.png" alt="">您的称呼</div>
+                    <input type="text" class="base-detail-name">
+                    <div class="border-bottom"></div>
+                </div>
+                <div class="input-box">
+                    <div class="base-info-name"><img src="../../../static/images/icon/＊ 必填icon.png" alt="">您的联系方式</div>
+                    <input type="text" class="base-detail-name">
+                    <div class="border-bottom"></div>
+                </div>
+                <div class="input-box">
+                    <div class="base-info-name"><img src="../../../static/images/icon/＊ 必填icon.png" alt="">邮箱</div>
+                    <input type="text" class="base-detail-name" placeholder="请填写您的邮箱地址">
+                    <div class="border-bottom"></div>
+                </div>
+                <button type="" class="submit">提交</button>
             </div>
+           
         </div>
     </div>
-        
-   
-   
 </template>
 <script>
+    
     export default {
         name: 'home',
         data () {
@@ -74,60 +86,51 @@
     
 </script>
 <style scoped>
-    html{
-        font-size: 125%!important;
-    }
-    .fl{
-        float: left;
-    }
     .ml{
-        margin-left:0.75rem; 
+        margin-left:10px; 
     }
-    .ml10{
-        margin-left: 5px;
+    header{
+        width:100%;
+        padding:0 10px;
+        font-size:.6rem;
     }
     
-    .title{
-        background:#222222;
-        width:100vw;
-        height:2.2rem;
+    header .left{
+        width:16%;
+        height: 50px;
+       
     }
-    .title-left{
-        background:#222222;
-        width:6rem;
-        height:2.2rem;
-        float: left;
+    
+    .comeback-img{
+        margin:20px 5px;
     }
-    .title-right{
-        background:222222;
-       line-height: 2rem;
-        width:12.25rem;
-        height:2.2rem;
-        float: left;
-
-    }
-    .comeback{
-        margin-left: 20px;
-    }
+    
+    
     .comeback-text{
         font-family:PingFangSC-Regular;
-        font-size:0.6rem;
+        font-size:13px;
         color:#ffffff;
         text-align:left;
-        line-height: 2rem;
+        line-height: 50px;
+    }
+    .title-right{
+        width:80%;
+        height: 50px;
     }
     .title-askprice{
-        font-size: 0.8rem;
-        text-align: left;
-        color:#ffffff;
+        width:30%;
+        height: 50px;
+        font-size:.8rem;
+        line-height: 50px;
+        margin: 0 auto;
     }
+    
+    
+    
+
     .list{
-        width:100vw;
-        height:11.5rem;
+        width:100%;
         background:#f4f4f4;
-        
-
-
     }
     
     
@@ -144,7 +147,7 @@
         margin: 0.35rem 0;
     }
     .blank{
-        width:100vw;
+        width:100%;
         height: 2px;
         background: #ffffff;
     }
@@ -152,16 +155,22 @@
         height: auto;
         background: #ffffff;
     }
+    .ifrom input{
+        width:100%;
+    }
+    .base--detail{
+        margin: 0 15px;
+    }
     .base-info{
-        width:100vw;
+        width:100%;
         height: 0.8rem;
         text-align:center;
-        background: #ffffff
+        background: #ffffff;
     }
 
     
     .base-info-tit{
-        margin:0.75rem 0;
+        padding:30px 0;
         font-family:PingFangHK-Regular;
         font-size:0.8rem;
         color:#000000;
@@ -174,5 +183,28 @@
         color:#000000;
         line-height:0.7rem;
         text-align:left;
+    }
+    .border-bottom{
+        border:1px solid #222222;
+        width:100%;
+        height:1px;
+    }
+    .input-box{
+        padding-top:31px; 
+    }
+    .base-info-name{
+        padding-bottom: 15px;
+    }
+    .submit{
+        width:100%;
+        margin-top:20px; 
+        height: 40px;
+        background:#f7c73f;
+        font-family:PingFangSC-Regular;
+        font-size:.8rem;
+        color:#000000;
+        text-align:center;
+        line-height:40px;
+
     }
 </style>
