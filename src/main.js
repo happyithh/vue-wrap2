@@ -30,6 +30,10 @@ window.router = new VueRouter({
             path: '/event',
             component: (resolve) => require(['./components/event/event'], resolve)
         },
+        {
+            path: '/openshop',
+            component: (resolve) => require(['./components/event/openshop'], resolve)
+        },
     ]
 })
 

@@ -5,7 +5,7 @@
         <header class="clearfix">
             <div class="left fl">
                 <div class="citys back">
-                    <input class="weui_input" id="job" type="text" value="上海" readonly="true">
+                    <input class="weui_input" id="citys" type="text" value="上海" readonly="true">
                     <i class="icons icon-arrowbottom white"></i>
                 </div>
             </div>
@@ -121,7 +121,7 @@
             var self = this;
             self.init();//调用轮播
 
-            $("#job").select({
+            $("#citys").select({
                 title: "请选择",
                 items: [
                     {

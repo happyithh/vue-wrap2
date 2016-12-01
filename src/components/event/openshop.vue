@@ -10,10 +10,11 @@
                 </a>
             </div>
             <div class="fl center">
-                <p class="display-center">我要办活动</p>
+                <p class="display-center">我要开快闪店</p>
             </div>
             <div class="right fr">
-                <a class="btn-inquiry in" href="javascript:;">询价</a>
+                <span class="numb fr">3</span>
+                <a class="btn-inquiry fr in" href="javascript:;">询价</a>
             </div>
         </header>
 
@@ -45,9 +46,9 @@
 
         <!--一键租场地-->
         <div class="onekey-rentail-wrap">
-            <h2>我们只做一件事 精耕线下场地</h2>
-            <p>免收服务费，一站式搞定，低于市场价20%</p>
-            <a href="" class="btn-onekey">一键租场地</a>
+            <h2>打造未来商业移动的新体验</h2>
+            <p>找到适合你的商业短租场地</p>
+            <a href="" class="btn-onekey">立即提交需求</a>
         </div>
 
         <!--列表-star-->
