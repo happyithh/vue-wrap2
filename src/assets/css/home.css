@@ -54,23 +54,12 @@
 }
 header .citys{
     width: 60px;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 10px;
     position: relative;
 }
 header .citys i{
     position: absolute;
     right: 2px;
     top: 6px;
-    width: 9px;
-    height: 9px;
-}
-header .logreg{
-    color: #fff;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 10px;
 }
 
 /*banner*/
@@ -108,16 +97,18 @@ header .logreg{
     background: #fff;
     border-radius: 5px;
 }
-.banner-cont li{
+.banner-cont>a{
+    display: block;
     float: left;
     width: 33.33%;
     height: 50px;
     overflow: hidden;
+    color: #000;
     border-left: 1px solid #979797;
     text-align: center;
 }
-.banner-cont li:first-child{border: none;}
-.banner-cont li .icon{
+.banner-cont>a:first-child{border: none;}
+.banner-cont>a .icon{
     display: block;
     width: 24px;
     height: 24px;
@@ -126,16 +117,66 @@ header .logreg{
     background-repeat: no-repeat;
     background-position: center;
 }
-.banner-cont li .icon.hold-event{
+.banner-cont>a .icon.hold-event{
     background-image: url("/static/images/icon/hold_event.png");
 }
-.banner-cont li .icon.openshop{
+.banner-cont>a .icon.openshop{
     background-image: url("/static/images/icon/openshop.png");
 }
-.banner-cont li .icon.ip{
+.banner-cont>a .icon.ip{
     background-image: url("/static/images/icon/ip.png");
 }
-.banner-cont li p{margin-top: 7px;}
+.banner-cont>a p{margin-top: 7px;}
+
+/*列表*/
+.home.space-list .text h3{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/*了解更多*/
+.see-more{
+    width: 100%;
+    padding:10px 0 15px;
+    background: #f4f4f4;
+}
+.see-more a{
+    display: block;
+    width: 150px;
+    padding: 17px 0 15px;
+    border-bottom: 2px solid #999;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+    color: #999;
+}
+.see-more a:last-child{
+    border: none;
+}
+.see-more a img{
+    width: 28px;
+}
+.see-more-btn,.see-more-btn:active,.see-more-btn:focus{
+    color:#f7c73f;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

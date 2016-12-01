@@ -1,0 +1,80 @@
+
+/***列表样式***/
+
+/*标题*/
+.list-title{
+    width: 100%;
+    padding: 0 15px;
+    margin: 20px 0 10px;
+    height: 1.2rem;
+    line-height: 1.2rem;
+}
+.list-title h2{
+    font-size: 1.07rem;
+}
+.list-title .more{
+    font-size: 0.93rem;
+    padding-right: 15px;
+    position: relative;
+}
+.list-title .more .icon{
+    border-color: #000;
+    position: absolute;
+    right: 0;
+    top: 0.3rem;
+    width: 9px;
+    height: 9px;
+}
+/*列表内容*/
+.space-list .img{
+    display: block;
+    width: 100%;
+    position: relative;
+}
+.space-list img{
+    width: 100%;
+    display: block;
+}
+.space-list .price{
+    padding: 5px 15px 8px 10px;
+    background:rgba(34,34,34,0.9);
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    color: #fff;
+    font-family:PingFangSC-Semibold;
+    font-size: 1.07rem;
+}
+.space-list .price span{
+    font-size:0.8rem;
+    margin-left: 3px;
+}
+.space-list .text{
+    padding: 10px 15px 15px;
+}
+.space-list .text h3{
+    font-size: 0.93rem;
+    line-height: 1.35em;
+    margin-bottom: 5px;
+    max-height: 2.4rem;
+    overflow: hidden;
+}
+.space-list .text p{
+    font-size: 0.8rem;
+    color: #666;
+    margin-right: 10px;
+    line-height: 1.25em;
+    margin-top: 3px;
+}
+.space-list .text .btn-join{
+    width: 100px;
+    height: 40px;
+    border: 1px solid #222;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 15px;
+    font-size: 0.93rem;
+}
+.space-list .text .fl{
+    width: 65%;
+}

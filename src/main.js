@@ -25,11 +25,11 @@ window.router = new VueRouter({
         {
             path: '/askprice',
             component: (resolve) => require(['./components/askprice/askprice.vue'], resolve)
-        }
-        // {
-        //     path: '/event',
-        //     component: (resolve) => require(['./components/event/Event'], resolve)
-        // },
+        },
+        {
+            path: '/event',
+            component: (resolve) => require(['./components/event/event'], resolve)
+        },
     ]
 })
 

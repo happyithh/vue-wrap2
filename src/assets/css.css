@@ -35,6 +35,27 @@ a:hover,a:active,a:focus{
 .clearfix:after {content: " "; display: block; height:0; clear:both; visibility: hidden;}
 .clearfix { *zoom:1; }
 
+/*input框默认字体颜色*/
+input::-webkit-input-placeholder { color:#999;}
+input::-moz-placeholder { color:#999;} /* firefox 19+ */
+input:-ms-input-placeholder { color:#999;} /* ie */
+input:-moz-placeholder { color:#999;}
+
+/*文字上下居中*/
+.display-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
 
 .icon-arrowleft{/*箭头向左*/
     display: inline-block;
@@ -137,6 +158,10 @@ header{
     color: #fff;
     font-size: 16px;
 }
+header a{color: #fff;}
+header a:hover,header a:active,header a:focus{
+    color: #fff;
+}
 header .left,
 header .right{
     width: 22%;
@@ -145,11 +170,32 @@ header .left{text-align: left}
 header .right{text-align: right}
 header .center{
     width: 56%;
+    height: 100%;
     text-align: center;
+    font-size: 1.07rem;
 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+header .center p{
+    height: 100%;
+}
+header .back{
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+}
+header i.icons{
+    width: 9px;
+    height: 9px;
+}
+header .in{
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
 }
 
 
