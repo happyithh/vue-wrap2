@@ -132,7 +132,13 @@
         width:100%;
         background:#f4f4f4;
     }
-    
+    .base-info-name span{
+        color:red;
+        font-size:20px; 
+        display: block;
+        float: left;
+        line-height: 25px;
+    }
     
     .local-price{
         padding-top: 1rem;

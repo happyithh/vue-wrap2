@@ -114,6 +114,9 @@
     .base-info-name span{
         color:red;
         font-size:20px; 
+        display: block;
+        float: left;
+        line-height: 25px;
     }
     .onekey-rentail-wrap .btn-onekey{
     width: 100%;
