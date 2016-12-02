@@ -58,6 +58,12 @@
     margin-bottom: 5px;
     max-height: 2.4rem;
     overflow: hidden;
+
+    display: -webkit-box;  /*将对象作为弹性盒子模型显示*/
+    text-overflow:ellipsis;
+    word-break:break-all;
+    -webkit-box-orient:vertical;/*伸缩盒对象的子元素的排列方式-垂直*/
+    -webkit-line-clamp:2; /*限制在一个块级元素显示的文本的行数*/
 }
 .space-list .text p{
     font-size: 0.8rem;

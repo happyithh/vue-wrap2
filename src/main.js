@@ -32,7 +32,11 @@ window.router = new VueRouter({
         },
         {
             path: '/openshop',
-            component: (resolve) => require(['./components/event/openshop'], resolve)
+            component: (resolve) => require(['./components/openshop/openshop'], resolve)
+        },
+        {
+            path: '/openshop/search',
+            component: (resolve) => require(['./components/openshop/searchlist'], resolve)
         },
     ]
 })

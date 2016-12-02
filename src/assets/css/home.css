@@ -133,6 +133,7 @@ header .citys i{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    display: block;
 }
 
 /*了解更多*/
