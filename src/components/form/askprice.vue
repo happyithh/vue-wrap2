@@ -50,17 +50,17 @@
             </div>
             <div class="base--detail ml">
                 <div class="input-box">
-                    <div class="base-info-name"><img src="../../../static/images/icon/＊ 必填icon.png" alt="">您的称呼</div>
+                    <div class="base-info-name"><span>*</span>您的称呼</div>
                     <input type="text" class="base-detail-name">
                     <div class="border-bottom"></div>
                 </div>
                 <div class="input-box">
-                    <div class="base-info-name"><img src="../../../static/images/icon/＊ 必填icon.png" alt="">您的联系方式</div>
+                    <div class="base-info-name"><span>*</span>您的联系方式</div>
                     <input type="text" class="base-detail-name">
                     <div class="border-bottom"></div>
                 </div>
                 <div class="input-box">
-                    <div class="base-info-name"><img src="../../../static/images/icon/＊ 必填icon.png" alt="">邮箱</div>
+                    <div class="base-info-name"><span>*</span>邮箱</div>
                     <input type="text" class="base-detail-name" placeholder="请填写您的邮箱地址">
                     <div class="border-bottom"></div>
                 </div>
@@ -132,7 +132,13 @@
         width:100%;
         background:#f4f4f4;
     }
-    
+    .base-info-name span{
+        color:red;
+        font-size:20px; 
+        display: block;
+        float: left;
+        line-height: 25px;
+    }
     
     .local-price{
         padding-top: 1rem;
@@ -167,7 +173,11 @@
         text-align:center;
         background: #ffffff;
     }
-
+    .base-info-name span{
+        color:red;
+        font-size:20px; 
+        
+    }
     
     .base-info-tit{
         padding:30px 0;

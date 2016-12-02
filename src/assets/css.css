@@ -142,6 +142,7 @@ input:-moz-placeholder { color:#999;}
     transition: all linear .2s;
 }
 .triange-bg{
+    font-family:PingFangSC-Regular;
     border-left-width: 10px;
     border-right-width: 10px;
     border-top-width: 10px;

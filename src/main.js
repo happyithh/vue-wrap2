@@ -23,8 +23,8 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/home/home'], resolve)
         },
         {
-            path: '/askprice',
-            component: (resolve) => require(['./components/askprice/askprice.vue'], resolve)
+            path: '/form/askprice',
+            component: (resolve) => require(['./components/form/askprice.vue'], resolve)
         },
         {
             path: '/event',
@@ -37,6 +37,18 @@ window.router = new VueRouter({
         {
             path: '/openshop/search',
             component: (resolve) => require(['./components/openshop/searchlist'], resolve)
+        },
+        {
+            path: '/space',
+            component: (resolve) => require(['./components/space/space-detail.vue'], resolve)
+        },
+        {
+            path: '/form',
+            component: (resolve) => require(['./components/form/leasehold'], resolve)
+        },
+         {
+            path: '/form/site',
+            component: (resolve) => require(['./components/form/site'], resolve)
         },
     ]
 })

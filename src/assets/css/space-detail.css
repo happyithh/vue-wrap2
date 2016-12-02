@@ -1,0 +1,50 @@
+header .display-center{
+    font-family:PingFangSC-Regular;
+}
+/*轮播*/
+.selectedtopic-cont{
+    overflow: hidden;
+   
+}
+.swiper-container{
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    position: relative;
+}
+.swiper-container .swiper-slide{
+    background-color: #fff;
+    /*height: 350px;*/
+    position: relative;
+    margin: 0!important;
+}
+.swiper-container .swiper-slide a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-container .swiper-slide img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #aaa;
+}
+.swiper-container .swiper-slide p{
+    width: 100%;
+    font-size:0.9rem;
+    color:#000;
+    margin: 0;
+    height: 42px;
+    line-height: 1.35em;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+
+    transition: all .6s;
+    -webkit-transition: all .6s;
+    -moz-transition: all .6s;
+}
+
+    
