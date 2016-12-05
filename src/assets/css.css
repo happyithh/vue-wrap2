@@ -1,21 +1,15 @@
 body,header,section,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,label,p,blockquote,table,th,td,a{ margin:0; padding:0;box-sizing: border-box;font-family: "PingFangSC-Regular", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif}
 body { background:#f2f2f2; color:#000; font-size:14px;position: relative;width: 100%;height: 100%; font-family: "PingFangHK-Thin", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif!important;}
-body{max-width: 750px;margin: 0 auto;background: #fff;}
+body{max-width: 768px;margin: 0 auto;background: #fff;}
 table { border-collapse:collapse; }
 td,th,caption { font-size:14px; }
 h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
-address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
-a { color:#000; text-decoration:none;display: block;}
-a:hover, a:active, a:focus{color:#000;}
-.img>img{
-    width: 100%;
-    height: 100%;
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style:normal; font-weight:normal;
 }
 ol,ul,li { list-style:none; }
-img{border:none;}
-.logo img{background: none;}
-
 input, textarea, select, button { font-size:14px; outline: none;border: none;display: inline-block;font-family: "PingFangHK-Thin", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif!important;}
+a{ color:#000; text-decoration:none;display: block;}
 a,button{
     transition: all .5s;
     -webkit-transition: all .5s;
@@ -27,8 +21,17 @@ a,button{
 a:hover,a:active,a:focus{
     text-decoration: none;
     outline: none;
+    color:#000;
 }
-input[type="submit"], input[type="reset"], input[type="button"], button { -webkit-appearance: none; /*去掉苹果的默认UI来渲染按钮*/}
+input[type="submit"], input[type="reset"], input[type="button"], input[type="text"], button { -webkit-appearance: none; /*去掉苹果的默认UI来渲染按钮*/}
+input,button,select,textarea{outline:none;border:none;}
+textarea{resize:none}
+img{border:none;}
+.img>img{
+    width: 100%;
+    height: 100%;
+}
+.logo img{background: none;}
 
 .fl{float: left;}
 .fr{float: right;}
@@ -215,6 +218,7 @@ header.fixed{
     z-index: 100;
     transition: all .4s ease;
     webkit-transition: all .4s ease;
+    max-width:768px;
 }
 header.fixed .left,
 header.fixed  .right{
@@ -236,6 +240,31 @@ header .search-input-wrap input{
 header.fixed{
     position: fixed;
     top:-120px;
+}
+
+/*标题*/
+.list-title{
+    width: 100%;
+    padding: 0 15px;
+    margin: 20px 0 10px;
+    height: 1.2rem;
+    line-height: 1.2rem;
+}
+.list-title h2{
+    font-size: 1.07rem;
+}
+.list-title .more{
+    font-size: 0.93rem;
+    padding-right: 15px;
+    position: relative;
+}
+.list-title .more .icon{
+    border-color: #000;
+    position: absolute;
+    right: 0;
+    top: 0.3rem;
+    width: 9px;
+    height: 9px;
 }
 
 

@@ -39,6 +39,10 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/openshop/searchlist'], resolve)
         },
         {
+            path: '/ip',
+            component: (resolve) => require(['./components/ip/ip'], resolve)
+        },
+        {
             path: '/space',
             component: (resolve) => require(['./components/space/space-detail.vue'], resolve)
         },
