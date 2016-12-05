@@ -12,9 +12,9 @@
         background: #ffffff;
     }
     .ifrom input{
-        width:50%;
-        margin-bottom: 10px;
+        width:70%;
     }
+    
     .base--detail{
         margin: 0 15px;
     }
@@ -37,7 +37,7 @@
         right: 30px;
     }
      .base-info-tit{
-        padding:30px 0;
+        padding:15px 0;
         font-family:PingFangHK-Regular;
         font-size:0.8rem;
         color:#000000;
@@ -50,14 +50,15 @@
         color:#000000;
         line-height:0.7rem;
         text-align:left;
+        padding-bottom: 15px;
     }
-    .border-bottom{
-        border:1px solid #222222;
-        width:100%;
-        height:1px;
-    }
+    
     .input-box{
         padding-top:21px; 
+        border-bottom: 2px solid #222222;
+    }
+    .last-input-box{
+        border:none;
     }
     .input-box .advise{
         position: relative;
@@ -79,9 +80,7 @@
         color: #ffffff;
     }
     
-    .base-info-name{
-        padding-bottom: 15px;
-    }
+   
     .submit{
         width:100%;
         margin-top:20px; 
@@ -116,7 +115,7 @@
         font-size:20px; 
         display: block;
         float: left;
-        line-height: 25px;
+        line-height: 20px;
     }
     .onekey-rentail-wrap .btn-onekey{
     width: 100%;

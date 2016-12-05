@@ -52,26 +52,28 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的称呼</div>
                     <input type="text" class="base-detail-name">
-                    <div class="border-bottom"></div>
+                    
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的联系方式</div>
                     <input type="text" class="base-detail-name">
-                    <div class="border-bottom"></div>
+                    
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>邮箱</div>
                     <input type="text" class="base-detail-name" placeholder="请填写您的邮箱地址">
-                    <div class="border-bottom"></div>
+                 
                 </div>
-                <button type="" class="submit">提交</button>
+               <div class="onekey-rentail-wrap">
+                    <a href="" class="btn-onekey">提交</a>
+                </div>
             </div>
            
         </div>
     </div>
 </template>
 <script>
-    
+    import 'assets/css/form.css'
     export default {
         name: 'home',
         data () {
@@ -164,57 +166,29 @@
     .ifrom input{
         width:100%;
     }
+    .input-box{
+        padding-top:21px; 
+        border-bottom: 2px solid #222222;
+    }
     .base--detail{
         margin: 0 15px;
     }
-    .base-info{
+    /*.base-info{
         width:100%;
         height: 0.8rem;
         text-align:center;
         background: #ffffff;
     }
-    .base-info-name span{
-        color:red;
-        font-size:20px; 
-        
-    }
+    */
     
-    .base-info-tit{
-        padding:30px 0;
-        font-family:PingFangHK-Regular;
-        font-size:0.8rem;
-        color:#000000;
-        line-height:0.8rem;
-        
-    }
-    .base-info-name{
-        font-family:PingFangHK-Regular;
-        font-size:0.7rem;
-        color:#000000;
-        line-height:0.7rem;
-        text-align:left;
-    }
-    .border-bottom{
-        border:1px solid #222222;
-        width:100%;
-        height:1px;
-    }
+    
+    
+    
     .input-box{
         padding-top:31px; 
     }
     .base-info-name{
         padding-bottom: 15px;
     }
-    .submit{
-        width:100%;
-        margin-top:20px; 
-        height: 40px;
-        background:#f7c73f;
-        font-family:PingFangSC-Regular;
-        font-size:.8rem;
-        color:#000000;
-        text-align:center;
-        line-height:40px;
-
-    }
+   
 </style>

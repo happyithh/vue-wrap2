@@ -43,7 +43,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/space/space-detail.vue'], resolve)
         },
         {
-            path: '/form',
+            path: '/form/leasehold',
             component: (resolve) => require(['./components/form/leasehold'], resolve)
         },
          {
