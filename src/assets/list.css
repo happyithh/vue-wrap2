@@ -1,31 +1,5 @@
 
 /***列表样式***/
-
-/*标题*/
-.list-title{
-    width: 100%;
-    padding: 0 15px;
-    margin: 20px 0 10px;
-    height: 1.2rem;
-    line-height: 1.2rem;
-}
-.list-title h2{
-    font-size: 1.07rem;
-}
-.list-title .more{
-    font-size: 0.93rem;
-    padding-right: 15px;
-    position: relative;
-}
-.list-title .more .icon{
-    border-color: #000;
-    position: absolute;
-    right: 0;
-    top: 0.3rem;
-    width: 9px;
-    height: 9px;
-}
-/*列表内容*/
 .space-list .img{
     display: block;
     width: 100%;

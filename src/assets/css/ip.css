@@ -1,0 +1,144 @@
+
+.btn-big{
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.07rem;
+    background:#f7c73f;
+    margin-top: 10px;
+}
+/*合作品牌轮播*/
+.co-brands-cont{
+    overflow: hidden;
+    padding: 0 15px;
+}
+.swiper-container{
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    position: relative;
+}
+.swiper-container .swiper-slide{
+    background-color: #fff;
+    /*height: 350px;*/
+    margin-right: 10px !important;
+    position: relative;
+}
+.swiper-container .swiper-slide a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-container .swiper-slide img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #aaa;
+}
+.swiper-container .swiper-slide p{
+    width: 100%;
+    font-size:0.9rem;
+    color:#000;
+    margin: 0;
+    height: 42px;
+    line-height: 1.35em;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+
+    transition: all .6s;
+    -webkit-transition: all .6s;
+    -moz-transition: all .6s;
+}
+
+/*ip文创*/
+.ip-tags-wrap{
+    width:100%;
+    overflow: auto;
+}
+.ip-tags{
+    padding: 0 15px;
+    margin-bottom: 15px;
+    overflow: auto;
+}
+.ip-tags a{
+    float: left;
+    display: block;
+    font-size: 0.90rem;
+    padding: 0.6rem 1.2rem;
+}
+.ip-tags a.current{
+    background:#f7c73f;
+}
+.ip-cont .cont{
+    padding: 10px 15px 15px;
+}
+.ip-cont .title{
+    font-size: 1.05rem;
+    line-height: 1.35em;
+    margin-bottom: 10px;
+}
+.ip-cont .title .price{
+    float: left;
+    font-family:PingFangSC-Semibold;
+    font-size: 1.05rem;
+    color:#e92332;
+    margin-right: 10px;
+}
+.ip-cont .title .price span{
+    font-size: 0.8rem;
+    line-height: 1em;
+}
+.ip-cont .tags{margin-bottom: 5px;}
+.ip-cont .tags span{
+    float: left;
+    display: block;
+    background:#f4f4f4;
+    font-size: 0.8rem;
+    color:#999999;
+    padding: 8px 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.ip-cont .about{margin-bottom: 10px;}
+.ip-cont .about span{
+    font-size: 0.8rem;
+    color:#666666;
+    line-height: 1.25em;
+    margin-right: 10px;
+}
+.ip-cont .text{
+    font-size: 0.93rem;
+    line-height: 1.5em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

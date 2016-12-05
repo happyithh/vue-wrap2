@@ -26,18 +26,18 @@
                     <p>省时，省力，找你所想…</p>
                 </div>
                 <div class="banner-cont clearfix">
-                    <a href="javascript:;">
+                    <router-link to="/event">
                         <span class="icon hold-event"></span>
                         <p>我要办活动</p>
-                    </a>
-                    <a href="javascript:;">
+                    </router-link>
+                    <router-link to="/openshop">
                         <span class="icon openshop"></span>
                         <p>我要开快闪店</p>
-                    </a>
-                        <a href="javascript:;">
+                    </router-link>
+                    <router-link to="/ip">
                         <span class="icon ip"></span>
                         <p>我要找IP文创</p>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div><!--banner-end-->
