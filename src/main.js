@@ -25,6 +25,10 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/home/home'], resolve)
         },
         {
+            path: '/citys',
+            component: (resolve) => require(['./components/home/citys'], resolve)
+        },
+        {
             path: '/form/askprice',
             component: (resolve) => require(['./components/form/askprice.vue'], resolve)
         },
@@ -42,8 +46,16 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/openshop/searchlist'], resolve)
         },
         {
+            path: '/openshop/form',
+            component: (resolve) => require(['./components/openshop/form'], resolve)
+        },
+        {
             path: '/ip',
             component: (resolve) => require(['./components/ip/ip'], resolve)
+        },
+        {
+            path: '/ip_advice',
+            component: (resolve) => require(['./components/ip/ip_advice'], resolve)
         },
         {
             path: '/space',

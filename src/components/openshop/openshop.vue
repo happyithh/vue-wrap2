@@ -27,9 +27,9 @@
                 </a>
             </div>
             <div class="fl center">
-                <div class="search-input-wrap clearfix">
+                <a href="/openshop/search" class="search-input-wrap clearfix">
                     <input type="text" placeholder="搜索">
-                </div>
+                </a>
             </div>
             <div class="right fr">
                 <span class="numb fr">3</span>
@@ -39,16 +39,16 @@
 
         <!--搜索框-->
         <div class="search-input-wrap-bg">
-            <div class="search-input-wrap clearfix">
+            <a href="/openshop/search" class="search-input-wrap clearfix">
                 <input type="text" placeholder="搜索">
-            </div>
+            </a>
         </div>
 
         <!--一键租场地-->
-        <div class="onekey-rentail-wrap">
+        <div class="ev-onekey-rentail-wrap">
             <h2>打造未来商业移动的新体验</h2>
             <p>找到适合你的商业短租场地</p>
-            <a href="" class="btn-onekey">立即提交需求</a>
+            <a href="/openshop/form" class="btn-onekey">立即提交需求</a>
         </div>
 
         <!--列表-star-->
@@ -105,7 +105,7 @@
         methods:{
             //悬浮搜索导航
             headerSearchFixed:function () {
-                var htop=$('.onekey-rentail-wrap').offset().top;
+                var htop=$('.ev-onekey-rentail-wrap').offset().top;
                 $(document).scroll(function () {
                     var scrolltop=$(document).scrollTop();
                     if(scrolltop>htop){

@@ -18,6 +18,9 @@
     height: 100%;
     font-size: 0.8rem;
 }
+.search-input-wrap.lg input{
+    font-size: 14px;
+}
 .search-input-wrap:before{
     float: left;
     display: block;
@@ -27,20 +30,20 @@
     background: url("/static/images/icon/search.png") no-repeat center;
     background-size: 1rem 1rem;
 }
-.onekey-rentail-wrap{
+.ev-onekey-rentail-wrap{
     width: 100%;
     padding: 15px;
     text-align: center;
 }
-.onekey-rentail-wrap h2{
+.ev-onekey-rentail-wrap h2{
     font-family:PingFangSC-Medium;
     font-size:1.25rem;
     margin-top: 5px;
 }
-.onekey-rentail-wrap p{
+.ev-onekey-rentail-wrap p{
     font-size: 0.8rem;
 }
-.onekey-rentail-wrap .btn-onekey{
+.ev-onekey-rentail-wrap .btn-onekey{
     width: 100%;
     height: 2.67rem;
     line-height: 2.68rem;
@@ -70,4 +73,12 @@
     background-size: 100% auto;
     width: 22px;
     height: 22px;
+}
+
+
+
+@media screen and (min-width: 320px) and (max-width: 360px){
+    .search-input-wrap.lg input{
+        font-size: 12px;
+    }
 }

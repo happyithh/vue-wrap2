@@ -183,6 +183,8 @@ header .center{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+header .left.p20{width: 20%;}
+header .center.p78{width: 78%;}
 header .center p{
     height: 100%;
 }
@@ -227,12 +229,16 @@ header.fixed  .right{
 header.fixed .center{
     width: 60%;
 }
-header .search-input-wrap{
+header .center .search-input-wrap{
     height: 36px;
     margin-top: 10px;
+    border:none;
 }
-header .search-input-wrap:before{
+header .center .search-input-wrap:before{
     width: 16%;
+}
+header .center .search-input-wrap.lg:before{
+    width: 12%;
 }
 header .search-input-wrap input{
     width: 84%;
