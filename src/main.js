@@ -4,8 +4,6 @@ import VueRouter from 'vue-router'
 import LS from 'assets/Libs/store.min'
 import Vuex from 'vuex'
 import configRouter from './config_router.js'
-import Mint from 'mint-ui';
-Vue.use(Mint);
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
