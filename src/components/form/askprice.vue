@@ -173,22 +173,14 @@
     .base--detail{
         margin: 0 15px;
     }
-    /*.base-info{
-        width:100%;
-        height: 0.8rem;
-        text-align:center;
-        background: #ffffff;
-    }
-    */
-    
-    
-    
-    
-    .input-box{
+     .input-box{
         padding-top:31px; 
     }
     .base-info-name{
         padding-bottom: 15px;
+    }
+    .onekey-rentail-wrap{
+        padding-bottom: 12px;
     }
    
 </style>
