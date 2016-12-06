@@ -26,7 +26,7 @@
 .space-list .text{
     padding: 10px 15px 15px;
 }
-.space-list .text h3{
+.space-list .text .title{
     font-size: 0.93rem;
     line-height: 1.35em;
     margin-bottom: 5px;
@@ -57,4 +57,12 @@
 }
 .space-list .text .fl{
     width: 65%;
+}
+
+
+
+@media screen and (min-width: 420px) {
+    .space-list .text .btn-join{
+        width: 125px;
+    }
 }

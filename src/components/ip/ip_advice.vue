@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">合作咨询</p>
@@ -30,9 +30,10 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>短信验证码</div>
-                    <input type="text" class="base-detail-name send-msg1" placeholder="请输入6位验证码">
-                    <div  class="send-msg fr"><a href="">发送验证码</a></div>
-
+                    <div class="check-box">
+                        <input type="text" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码">
+                        <div  class="send-msg fr"><a href="">发送验证码</a></div>
+                    </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动城市</div>
