@@ -1,0 +1,67 @@
+
+.container-citys{padding: 0 15px;}
+.container-citys .title{
+    font-size: 0.93rem;
+    padding: 10px 0;
+}
+.position{
+    border-bottom: 2px solid #222;
+}
+.position .wrap{
+    padding: 0 0 10px;
+}
+.position .icon-position{
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    background: url("/static/images/icon/position.png") no-repeat center;
+    background-size: 1rem 1rem;
+    margin-right: 5px;
+}
+.position .city{
+    line-height: 1rem;
+    font-size: 0.93rem;
+}
+.select-city .tags span{
+    float: left;
+    display: block;
+    width: 25%;
+    padding: 8px 5px;
+    overflow: hidden;
+    text-align: center;
+    box-sizing: border-box;
+    color: #999;
+}
+.select-city .tags span.active{
+    background: #f7c73f;
+    color: #000;
+}
+
+
+
+
+
+/*了解更多*/
+.see-more{
+    width: 100%;
+    padding:10px 0 15px;
+}
+.see-more a{
+    display: block;
+    width: 150px;
+    padding: 17px 0 15px;
+    border-bottom: 2px solid #999;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+    color: #999;
+}
+.see-more a:last-child{
+    border: none;
+}
+.see-more a img{
+    width: 28px;
+}
+.see-more-btn,.see-more-btn:active,.see-more-btn:focus{
+    color:#f7c73f;
+}

@@ -44,7 +44,7 @@
         </div>
 
         <!--一键租场地-->
-        <div class="onekey-rentail-wrap">
+        <div class="ev-onekey-rentail-wrap">
             <h2>我们只做一件事 精耕线下场地</h2>
             <p>免收服务费，一站式搞定，低于市场价20%</p>
             <a href="" class="btn-onekey">一键租场地</a>
@@ -104,7 +104,7 @@
         methods:{
             //悬浮搜索导航
             headerSearchFixed:function () {
-                var htop=$('.onekey-rentail-wrap').offset().top;
+                var htop=$('.ev-onekey-rentail-wrap').offset().top;
                 $(document).scroll(function () {
                     var scrolltop=$(document).scrollTop();
                     if(scrolltop>htop){
