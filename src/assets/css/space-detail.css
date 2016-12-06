@@ -65,6 +65,7 @@ header .display-center{
 .infor-show{
     margin: 0 15px;
     border-bottom:1px solid #222222;
+    overflow: hidden;
 }
 .infor-show h1{
     padding: 15px 0 10px 0px;
@@ -73,6 +74,9 @@ header .display-center{
     color:#000000;
     line-height:.8rem;
     text-align:left;
+}
+.infor-show h3{
+margin-bottom: 10px;
 }
 .base-info{
     padding: 10px 0 10px 0px;
@@ -97,32 +101,109 @@ header .display-center{
 }
 .base-info-detail span{
     color:#000000;
+    
 }
-.icon-box{
-    width: 100%;
-    height: px;
-}
+
 .pic-icon{
-    padding: 15px 16px 15px 0;
+    padding: 15px 3px 15px 3px;
     width:20%;
-    /*float: left;*/
+    float: left;
     text-align: center;
     }
-    .base-info-ico{
-        padding: 15px 16px 15px 0;
-         /*float: left;*/
-    }
-    
 .pic-icon img{
     width:15px;
-    height: 20px;
+    height: 15px;
 }
 .pic-icon .pic-icon-exp{
     font-size: 13px;
     }
 
-.base-info-detail-booking{font-size: 13px;
+.pic-icon-expl{
+    font-size: 13px;
     margin-bottom:18px; 
+}
+ .btn-onekey{
+    width: 45%;
+    height: 2.67rem;
+    line-height: 2.68rem;
+    border-radius: 5px;
+    background:#f7c73f;
+    font-size: 1.07rem;
+    float: left;
+    margin-top: 15px;
+    margin-right:5% ;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.btn-onekey img{
+    width: 15px;
+    height: 15px;
+    padding-right:10px; 
+
+}
+.infor-showend{
+    border: none;
+}
+.tel-wrap{
+    width: 100%;
+    background: #f4f4f4;
+    padding: 20px 0;
+    margin-bottom: 10px;
+    
+   
+}
+.event-tel{
+    display: block;
+    text-align: center;
+    width: 285px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 auto;
+    color: #666;
+    font-size: 18px;
+}
+.event-tel .tel{
+    display: inline-block;
+    background: url("/static/images/icon/tel_01.png") no-repeat center;
+    background-size: 100% auto;
+    width: 22px;
+    height: 22px;
+}
+.infor-show1{
+    margin: 0 15px;
+    overflow: hidden;
+}
+.infor-price{
+    width: 50%;
+    margin-top:17px; 
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+.price-underline{
+    width: 50%;
+    height: 2.67rem;
+    color:#999999;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: line-through;
+}
+.btn-onekey1{
+    width:45%;
+    height: 2.67rem;
+    line-height: 2.68rem;
+    border-radius: 5px;
+    background:#f7c73f;
+    font-size: 1.07rem;
+    float: left;
+    margin-top: 15px;
+    margin-right:5% ;
+    margin-bottom: 15px;
+    text-align: center;
+}
+.infor-show-shadow{
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.10);
+    
 }
 
 

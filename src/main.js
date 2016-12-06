@@ -28,6 +28,7 @@ window.router = new VueRouter({
             path: '/form/askprice',
             component: (resolve) => require(['./components/form/askprice.vue'], resolve)
         },
+        
         {
             path: '/event',
             component: (resolve) => require(['./components/event/event'], resolve)
@@ -56,6 +57,16 @@ window.router = new VueRouter({
             path: '/form/site',
             component: (resolve) => require(['./components/form/site'], resolve)
         },
+        {
+            path: '/form/collect',
+            component: (resolve) => require(['./components/form/collect'], resolve)
+        },
+        {
+            path: '/form/case-article',
+            component: (resolve) => require(['./components/form/case-article'], resolve)
+        },
+       
+        
     ]
 })
 

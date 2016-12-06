@@ -123,7 +123,6 @@
 <style scoped>
     .red::-webkit-input-placeholder { color: #999999; }
     .up-photo-text{
-        font-family:PingFangSC-Regular;
         font-size:.6rem;
         color:#999999;
         text-align:left;
@@ -131,8 +130,7 @@
         margin-bottom:20px; 
     }
     .up-photo-text span{
-        font-family:PingFangSC-Regular;
-        font-size:.6rem;
+       font-size:.6rem;
         color:#000000;
         text-align:left;
     }

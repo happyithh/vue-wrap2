@@ -30,8 +30,11 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>短信验证码</div>
-                    <input type="text" class="base-detail-name send-msg1 red" placeholder="请输入6位验证码">
-                    <div  class="send-msg fr"><a href="">发送验证码</a></div>
+                    <div class="check-box">
+                        <input type="text" class="base-detail-name send-msg1 fl red " placeholder="请输入6位验证码">
+                        <div  class="send-msg fr"><a href="">发送验证码</a></div>
+                    </div>
+                    
                    
                 </div>
                 <div class="input-box">

@@ -1,0 +1,11 @@
+.case-content{
+    width: 100%;
+    height: auto;
+    background:#f4f4f4;
+}
+.case-content li{
+    padding:20px 15px;
+    font-size: .7rem;
+    border-bottom: 1px solid #ffffff;
+}
+
