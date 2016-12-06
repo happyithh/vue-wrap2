@@ -5,9 +5,10 @@
         <header class="clearfix">
             <div class="left fl">
                 <div class="citys back">
-                    <input class="weui_input" id="citys" type="text" value="上海" readonly="true">
+                    <input onfocus="this.blur()" class="weui_input" id="citys" type="text" value="上海" readonly="true">
                     <i class="icons icon-arrowbottom white"></i>
                 </div>
+                <div v-for="i in cities"></div>
             </div>
             <div class="fl center">
                 <div class="logo"><img src="/static/images/logo.png"></div>
@@ -50,10 +51,11 @@
 
             <div class="selectedtopic-cont">
                 <div class="swiper-wrapper swiper-container">
-                    <div class="swiper-slide" v-for="item in topicOfSelect">
+                    <div class="swiper-slide" v-for="item in citySpecial">
                         <a href="javascript:;" target="_blank">
-                            <img src="/static/images/test.png" alt="">
-                            <p>从户外到室内，冬日集市场地新选择</p>
+                            <!--<img src="/static/images/test.png" alt="">-->
+                            <img v-bind:src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                            <p>{{item.title}}</p>
                         </a>
                     </div>
                 </div>
@@ -67,15 +69,16 @@
                 <a class="fr more" href="javascript:;">查看所有<span class="icon icon-arrowright"></span></a>
             </div>
             <ul>
-                <li v-for="item in places">
+                <li v-for="item in recommendSite">
                     <a class="img" href="javascript:;">
-                        <img src="/static/images/test.png">
+                        <!--<img src="/static/images/test.png">-->
+                        <img v-bind:src="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''">
                     </a>
                     <div class="text">
-                        <h3>骥海商业文化传播有限公司会议骥海商业文化传播有限公司会议</h3>
+                        <h3>{{item.title}}</h3>
                         <p>
-                            <span>最大容纳 200人</span>
-                            <span>面积 200㎡</span>
+                            <span>最大容纳 {{item.max_people}}人</span>
+                            <span>面积 {{item.max_size}}㎡</span>
                         </p>
                     </div>
                 </li>
@@ -114,30 +117,55 @@
                 topicOfSelect: [
                     1,2,3,4
                 ],
-                places: [1,2,3]
+                places: [1,2,3],
+                recommendSite : [],
+                citySpecial : []
+
+            }
+        },
+        computed: {
+            cities (){
+                var cities = this.$store.state.cities
+                var cityesArray = []
+                if(cities.length > 0){
+                    cities.forEach(function (data) {
+                        cityesArray.push(data.name)
+                    })
+//                    $("#citys").select({
+//                        title: "请选择",
+//                        items: cityesArray
+//                    });
+//                    $("#citys").picker({
+//                        title: "请选择",
+//                        cols: [
+//                            {
+//                                textAlign: 'center',
+//                                values: cityesArray
+//                            }
+//                        ],
+//                        onChange : function () {
+//
+//                        }
+//                    });
+                }
+
+                return cityesArray
+            },
+            personalData (){
+                return this.$store.state.personalData
+            },
+            loading(){
+                return this.$store.state.loading
+            },
+            currentCityId(){
+                return this.$store.state.city_id
             }
         },
         mounted () {
             var self = this;
-            self.init();//调用轮播
 
-            $("#citys").select({
-                title: "请选择",
-                items: [
-                    {
-                        title:"上海",
-                        value:"01",
-                    },
-                    {
-                        title:"北京",
-                        value:"02",
-                    },
-                    {
-                        title:"深圳",
-                        value:"03",
-                    }
-                ]
-            });
+            self.getData()
+
 
         },
         methods:{
@@ -155,6 +183,23 @@
 //                    freeMode: true
                 });
             },
+            getData(){
+                var self = this
+                $.ajax({
+                    url: window.YUNAPI.home,
+                    data: {
+                        city_id: self.$store.state.city_id
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        self.recommendSite = data.home_recommend_site
+                        self.citySpecial = data.home_city_special
+                        setTimeout(function () {
+                            self.init();//调用轮播
+                        },300)
+                    }
+                })
+            }
         }
     }
 </script>
