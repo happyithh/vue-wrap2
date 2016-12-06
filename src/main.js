@@ -23,7 +23,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/home/home'], resolve)
         },
         {
-            path: '/citys',
+            path: '/city',
             component: (resolve) => require(['./components/home/citys'], resolve)
         },
         {
@@ -140,7 +140,8 @@ window.store = new Vuex.Store({
             }else{
                 return 1
             }
-        }
+        },
+
 
     },
     mutations : {
@@ -217,6 +218,7 @@ window.store = new Vuex.Store({
         },
         cityChange(state,id){
             state.city_id = id
+            LS.set('selectedCity',id)
         },
         getSelectedCity(state){
             var selectedCityId = LS.get('selectedCity')

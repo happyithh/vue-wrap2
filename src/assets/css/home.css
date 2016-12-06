@@ -12,7 +12,7 @@
 .swiper-container .swiper-slide{
     background-color: #fff;
     /*height: 350px;*/
-    margin-right: 10px !important;
+    margin-right: 10px;
     padding-bottom: 52px;
     position: relative;
 }

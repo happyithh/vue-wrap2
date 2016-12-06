@@ -1,13 +1,17 @@
 <template>
-    <div class="container">
+    <div class="container child-view">
 
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                <div class="citys back">
-                    <input onfocus="this.blur()" class="weui_input" id="citys" type="text" value="上海" readonly="true">
+                <!--<div class="citys back">-->
+                    <!--<input onfocus="this.blur()" class="weui_input" id="citys" type="text" value="上海" readonly="true">-->
+                    <!--<i class="icons icon-arrowbottom white"></i>-->
+                <!--</div>-->
+                <router-link to="/city" class="citys back">
+                    <input onfocus="this.blur()" class="weui_input" id="citys" type="text" v-model="city_name" readonly="true">
                     <i class="icons icon-arrowbottom white"></i>
-                </div>
+                </router-link>
                 <div v-for="i in cities"></div>
             </div>
             <div class="fl center">
@@ -54,7 +58,7 @@
                     <div class="swiper-slide" v-for="item in citySpecial">
                         <a href="javascript:;" target="_blank">
                             <!--<img src="/static/images/test.png" alt="">-->
-                            <img v-bind:src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                            <img class="lazy" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
                             <p>{{item.title}}</p>
                         </a>
                     </div>
@@ -72,7 +76,10 @@
                 <li v-for="item in recommendSite">
                     <a class="img" href="javascript:;">
                         <!--<img src="/static/images/test.png">-->
-                        <img v-bind:src="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''">
+                        <img class="lazy" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''">
+                        <!--<div class="price">-->
+                            <!--<sup>￥</sup>{{}} 元/天<span>起</span>-->
+                        <!--</div>-->
                     </a>
                     <div class="text">
                         <h3>{{item.title}}</h3>
@@ -119,37 +126,25 @@
                 ],
                 places: [1,2,3],
                 recommendSite : [],
-                citySpecial : []
+                citySpecial : [],
+                city_name:''
 
             }
         },
         computed: {
             cities (){
                 var cities = this.$store.state.cities
-                var cityesArray = []
+                var self = this
                 if(cities.length > 0){
                     cities.forEach(function (data) {
-                        cityesArray.push(data.name)
+                        if(data.id == self.city_id){
+                            self.city_name = data.name  // 需要获取城市名
+                        }
                     })
-//                    $("#citys").select({
-//                        title: "请选择",
-//                        items: cityesArray
-//                    });
-//                    $("#citys").picker({
-//                        title: "请选择",
-//                        cols: [
-//                            {
-//                                textAlign: 'center',
-//                                values: cityesArray
-//                            }
-//                        ],
-//                        onChange : function () {
-//
-//                        }
-//                    });
+                }else{
+                    self.city_name = '请选择' // 需要获取城市名
                 }
-
-                return cityesArray
+                return cities
             },
             personalData (){
                 return this.$store.state.personalData
@@ -157,16 +152,29 @@
             loading(){
                 return this.$store.state.loading
             },
-            currentCityId(){
+            city_id(){
                 return this.$store.state.city_id
-            }
+            },
+//            city_name(){
+//                var cities = this.$store.state.cities
+//                var cityesArray = []
+//                var self = this
+//                if(cities.length > 0){
+//                    cities.forEach(function (data) {
+//                        cityesArray.push(data.name)
+//                        if(data.id == self.city_id){
+//                            console.log(data.name)
+//                            return data.name
+//                        }
+//                    })
+//                }else{
+//                    return ''
+//                }
+//            }
         },
         mounted () {
             var self = this;
-
             self.getData()
-
-
         },
         methods:{
             /*轮播*/
@@ -178,9 +186,13 @@
 //                    loop : true,
                     slidesPerView: 1.2,
                     paginationClickable: true,
-                    spaceBetween: 2,
+                    spaceBetween: 10,
                     autoplay: false
 //                    freeMode: true
+                });
+                $("img.lazy").lazyload({
+                    effect : "fadeIn",
+                    placeholder : '/static/images/placeholder.jpg'
                 });
             },
             getData(){
