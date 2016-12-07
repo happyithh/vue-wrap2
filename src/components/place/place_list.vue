@@ -10,10 +10,11 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">我要办活动</p>
+                <p class="display-center">场地列表</p>
             </div>
             <div class="right fr">
-                <a class="btn-inquiry in" href="/form/askprice">询价</a>
+                <span class="numb fr">3</span>
+                <a class="btn-inquiry fr in" href="/form/askprice">询价</a>
             </div>
         </header>
 
@@ -26,7 +27,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <router-link to="/place" class="search-input-wrap clearfix">
+                <router-link to="place/search" class="search-input-wrap clearfix">
                     <input type="text" placeholder="搜索" readonly="readonly">
                 </router-link>
             </div>
@@ -38,16 +39,9 @@
 
         <!--搜索框-->
         <div class="search-input-wrap-bg">
-            <router-link to="/place" class="search-input-wrap clearfix">
+            <router-link to="place/search" class="search-input-wrap clearfix">
                 <input type="text" placeholder="搜索" readonly="readonly">
             </router-link>
-        </div>
-
-        <!--一键租场地-->
-        <div class="ev-onekey-rentail-wrap">
-            <h2>我们只做一件事 精耕线下场地</h2>
-            <p>免收服务费，一站式搞定，低于市场价20%</p>
-            <a href="" class="btn-onekey">一键租场地</a>
         </div>
 
         <!--列表-star-->
@@ -104,7 +98,7 @@
         methods:{
             //悬浮搜索导航
             headerSearchFixed:function () {
-                var htop=$('.ev-onekey-rentail-wrap').offset().top;
+                var htop=$('.space-list').offset().top;
                 $(document).scroll(function () {
                     var scrolltop=$(document).scrollTop();
                     if(scrolltop>htop){

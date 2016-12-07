@@ -4,44 +4,44 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">我要开快闪店</p>
             </div>
             <div class="right fr">
                 <span class="numb fr">3</span>
-                <a class="btn-inquiry fr in" href="javascript:;">询价</a>
+                <a class="btn-inquiry fr in" href="/form/askprice">询价</a>
             </div>
         </header>
 
         <!--悬浮搜索导航-->
         <header class="clearfix fixed">
             <div class="left fl">
-                <a href="" class="back">
+                <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
-                <a href="/openshop/search" class="search-input-wrap clearfix">
-                    <input type="text" placeholder="搜索">
-                </a>
+                <router-link to="/openshop/search" class="search-input-wrap clearfix">
+                    <input type="text" placeholder="搜索" readonly="readonly">
+                </router-link>
             </div>
             <div class="right fr">
                 <span class="numb fr">3</span>
-                <a class="btn-inquiry fr in" href="javascript:;">询价</a>
+                <a class="btn-inquiry fr in" href="/form/askprice">询价</a>
             </div>
         </header>
 
         <!--搜索框-->
         <div class="search-input-wrap-bg">
-            <a href="/openshop/search" class="search-input-wrap clearfix">
-                <input type="text" placeholder="搜索">
-            </a>
+            <router-link to="/openshop/search" class="search-input-wrap clearfix">
+                <input type="text" placeholder="搜索" readonly="readonly">
+            </router-link>
         </div>
 
         <!--一键租场地-->
@@ -63,7 +63,7 @@
                     </a>
                     <div class="text clearfix">
                         <div class="fl">
-                            <h3>骥海商业文化传播有限公司会议骥海商业文化传播有限公司会议</h3>
+                            <a class="title" href="javascript:;">骥海商业文化传播有限公司会议骥海商业文化传播有限公司会议</a>
                             <p>
                                 <span>最大容纳 200人</span>
                                 <span>面积 200㎡</span>

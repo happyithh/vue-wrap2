@@ -15,7 +15,7 @@
     import 'assets/css.css';
 
     //    const host = "http://api.yunspace.com.cn/";
-    const host = "http://172.16.1.33:3000/";
+    const host = "http://172.16.0.141:3000/";
 
     window.YUNAPI = {
         host: host,

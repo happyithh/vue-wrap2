@@ -281,6 +281,41 @@ body .toolbar .picker-button{
 body .weui_cells_radio .weui_check:checked+.weui_icon_checked:before{
     color: #f7c73f;
 }
+body .weui_dialog{
+    border-radius: 0;
+    width: 92%;
+}
+body .weui_dialog,body .weui_toast{
+    left: 4%;
+}
+body .weui_dialog_title{
+    font-size: 1.06rem;
+    font-family:PingFangSC-Medium;
+}
+body .weui_dialog_hd{padding-top: 1.5rem;}
+body .weui_dialog_bd{
+    color: #000;
+    font-size: 0.9rem;
+}
+body .weui_dialog_bd{
+    padding: 0 15px;
+}
+body .weui_dialog_ft{
+    background:#f7c73f;
+    height: auto;
+    line-height: 1;
+    padding: 15px 0;
+    margin-top: 1.5rem;
+}
+body .weui_dialog_ft a{
+    color: #000;
+    font-size: 1.06rem;
+}
+body .weui_dialog_ft:after{
+    border: none;
+}
+
+
 
 
 

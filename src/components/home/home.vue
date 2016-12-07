@@ -82,7 +82,7 @@
                         <!--</div>-->
                     </a>
                     <div class="text">
-                        <h3>{{item.title}}</h3>
+                        <a class="title" href="javascript:;">{{item.title}}</a>
                         <p>
                             <span>最大容纳 {{item.max_people}}人</span>
                             <span>面积 {{item.max_size}}㎡</span>
@@ -116,7 +116,7 @@
 <script>
     import 'assets/libs/swiper/swiper.js'
     import 'assets/list.css'
-    import 'assets/css/home.css'
+    //import 'assets/css/home.css'
 
     export default {
         data () {
@@ -218,5 +218,203 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+    /*轮播*/
+    .selectedtopic-cont{
+        overflow: hidden;
+        padding: 0 15px;
+    }
+    .swiper-container{
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        position: relative;
+    }
+    .swiper-container .swiper-slide{
+        background-color: #fff;
+        /*height: 350px;*/
+        margin-right: 10px !important;
+        padding-bottom: 52px;
+        position: relative;
+    }
+    .swiper-container .swiper-slide a{
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-container .swiper-slide img{
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #aaa;
+    }
+    .swiper-container .swiper-slide p{
+        width: 100%;
+        font-size:0.9rem;
+        color:#000;
+        margin: 0;
+        height: 42px;
+        line-height: 1.35em;
+        overflow: hidden;
+        position: absolute;
+        bottom: 0;
+        z-index: 2;
+
+        transition: all .6s;
+        -webkit-transition: all .6s;
+        -moz-transition: all .6s;
+    }
+
+
+    /*头部*/
+    .logo img{
+        display: inline-block;
+        height: 30px;
+        margin-top: 13px;
+    }
+    header .citys{
+        width: 60px;
+        position: relative;
+    }
+    header .citys i{
+        position: absolute;
+        right: 2px;
+        top: 6px;
+    }
+
+    /*banner*/
+    .banner{
+        width: 100%;
+        position: relative;
+    }
+    .banner>img{
+        display: block;
+        width: 100%;
+    }
+    .banner .cont{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+    }
+    .banner .text{
+        width: 100%;
+        padding: 0 20px;
+        margin-top: 30px;
+        color: #fff;
+        text-shadow:1px 2px 0 rgba(0,0,0,0.5);
+    }
+    .banner .text h2{
+        font-family:PingFangSC-Medium;
+        font-size: 1.2rem;
+    }
+    .banner-cont{
+        width: 90%;
+        padding: 15px 0;
+        margin: 30px 5%;
+        background: #fff;
+        border-radius: 5px;
+    }
+    .banner-cont>a{
+        display: block;
+        float: left;
+        width: 33.33%;
+        height: 50px;
+        overflow: hidden;
+        color: #000;
+        border-left: 1px solid #979797;
+        text-align: center;
+    }
+    .banner-cont>a:first-child{border: none;}
+    .banner-cont>a .icon{
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin: 0 auto;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .banner-cont>a .icon.hold-event{
+        background-image: url("/static/images/icon/hold_event.png");
+    }
+    .banner-cont>a .icon.openshop{
+        background-image: url("/static/images/icon/openshop.png");
+    }
+    .banner-cont>a .icon.ip{
+        background-image: url("/static/images/icon/ip.png");
+    }
+    .banner-cont>a p{margin-top: 7px;}
+
+    /*列表*/
+    .home.space-list .text .title{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+    }
+
+    /*了解更多*/
+    .see-more{
+        width: 100%;
+        padding:10px 0 15px;
+        background: #f4f4f4;
+    }
+    .see-more a{
+        display: block;
+        width: 150px;
+        padding: 17px 0 15px;
+        border-bottom: 2px solid #999;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 17px;
+        color: #999;
+    }
+    .see-more a:last-child{
+        border: none;
+    }
+    .see-more a img{
+        width: 28px;
+    }
+    .see-more-btn,.see-more-btn:active,.see-more-btn:focus{
+        color:#f7c73f;
+    }
+
+
+    @media screen and (min-width: 320px) and (max-width: 360px){
+        .banner-cont{margin: 25px auto;}
+    }
+    @media screen and (min-width: 640px) {
+        .banner .text{margin-top: 65px;padding: 0 30px;}
+        .banner .text h2{
+            font-size: 40px;
+        }
+        .banner .text p{
+            font-size: 32px;
+        }
+        .banner-cont{margin: 45px auto;}
+        .banner-cont>a{
+            height: 80px;
+        }
+        .banner-cont>a p{
+            font-size: 24px;
+            line-height: 24px;
+            margin-top: 25px;
+        }
+        .banner-cont>a .icon{
+            width: 30px;
+            height: 30px;
+        }
+    }
+    @media screen and (min-width: 750px) {
+        .banner .text{margin-top: 80px;}
+        .banner .text h2{
+            font-size: 48px;
+        }
+        .banner-cont{margin: 60px auto;}
+    }
 
 </style>

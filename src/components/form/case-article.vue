@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">案例文章</p>

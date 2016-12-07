@@ -4,10 +4,10 @@
         <!--头部-->
         <header class="clearfix">
             <div class="fl left p20">
-                <a href="" class="back">
+                <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center p78">
                 <div class="search-input-wrap lg clearfix">
