@@ -95,22 +95,23 @@
                 <div class="input-box">
                     <div class="base-info-name">预算范围</div>
                     <div class="triangle">
-                        <input type="text" class="base-detail-name fl" placeholder="请选择预算">
-                        <div class="triangle-right fr">
-                            <a href=""><div class="icon-triangedown icon-triangedown1"></div></a>
-                        </div>
+                        <select>
+                            <option>不限</option>
+                            <option>预算范围</option>
+                            <option>预算范围</option>
+                            <option>预算范围</option>
+                        </select>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">面积范围</div>
-                    <div class="tags clearfix">
-                        <span>不限</span>
-                        <span>小于200m²</span>
-                        <span>50-100人</span>
-                        <span>100-300人</span>
-                        <span>300-500人</span>
-                        <span>500-1000人</span>
-                        <span>1000人以上</span>
+                    <div class="triangle">
+                        <select>
+                            <option>不限</option>
+                            <option>面积范围</option>
+                            <option>面积范围</option>
+                            <option>面积范围</option>
+                        </select>
                     </div>
                 </div>
                 <div class="input-box">

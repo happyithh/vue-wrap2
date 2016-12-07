@@ -47,21 +47,21 @@
         <!--列表-star-->
         <div class="space-list">
             <ul>
-                <li v-for="item in venues">
-                    <router-link :to="'/event/'+item.site_id" class="img">
-                        <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                <li v-for="item in places">
+                    <router-link :to="'/place/'+item.id" class="img">
+                        <img :title="item.title" :src="item.site_pictures.length > 0 ? item.site_pictures[0]['url_400_267'] : ''">
                         <div class="price">
-                            {{item.special_price}}
+                            {{item.lower_price}}
                         </div>
                     </router-link>
                     <div class="text clearfix">
                         <div class="fl">
-                            <router-link :to="'/event/'+item.site_id">{{item.site_name}}</router-link>
+                            <h3><router-link :to="'/event/'+item.site_id" class="title">{{item.title}}</router-link></h3>
                             <p>
-                                <span>最大容纳 {{item.site_max_people}}人</span>
-                                <span>面积 {{item.area}}㎡</span>
+                                <span>最大容纳 {{item.max_people}}人</span>
+                                <span>面积 {{item.max_size}}㎡</span>
                             </p>
-                            <p>地址 {{item.city_name}} {{item.areas}}｜{{item.address}}</p>
+                            <p>地址 {{item.city_name}} {{item.district}}｜{{item.address}}</p>
                         </div>
                         <a class="fr btn-join" href="javascript:;">加入询价</a>
                     </div>
@@ -86,7 +86,7 @@
     export default {
         data () {
             return {
-                venues: []
+                places: []
             }
         },
         mounted () {
@@ -115,12 +115,12 @@
             },
 
             getData(){
-                var self = this
+                var self = this;
                 $.ajax({
-                    url: window.YUNAPI.active,
+                    url: window.YUNAPI.placeDtl,
                     success: function (data) {
-                        console.log(data)
-                        self.venues=data.space_recommend;
+                        console.log(data.sites)
+                        self.places = data.sites
                     }
                 })
             }
