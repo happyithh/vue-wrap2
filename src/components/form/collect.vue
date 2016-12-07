@@ -3,7 +3,7 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/" class="back">
+                <router-link to="/form/personal-center" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -13,33 +13,33 @@
             </div>
             
         </header>
-        <a href="">
+         <router-link to="/form/space-list" class="back">
             <div class="infor-show">
                 <div class="collect-line">
-                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt="">
+                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt=""/>
                     <div class="fl">场地空间</div>
                     <i class="icon-arrowright mt fr"></i>
                 </div>
             </div>
-        </a>
-        <a href="">
+       </router-link>
+         <router-link to="/form/case-article" class="back">
             <div class="infor-show">
                 <div class="collect-line">
-                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt="">
+                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt=""/>
                     <div class="fl">案例文章</div>
                     <i class="icon-arrowright mt fr"></i>
                 </div>
             </div>
-        </a>
-        <a href="">
+      </router-link>
+         <router-link to="/form/topics" class="back">
             <div class="infor-show">
                 <div class="collect-line">
-                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt="">
+                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt=""/>
                     <div class="fl">精选专题</div>
                     <i class="icon-arrowright mt fr"></i>
                 </div>
             </div>
-        </a>
+       </router-link>
     </div>
     
 </template>
@@ -95,7 +95,7 @@
         line-height: 46px;
         border-bottom:1px solid #222222;
         overflow: hidden;
-        font-size: .8rem;
+        font-size: 1rem;
     }
 
     .infor-show i{

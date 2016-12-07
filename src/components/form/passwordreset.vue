@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                 <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">密码重置</p>
@@ -18,12 +18,12 @@
             
             <div class="input-box">
                 <div class="base-info-name">新密码</div>
-                <input type="text" class="base-detail-name" placeholder="输入新密码">
+                <input type="text" class="base-detail-name" placeholder="输入新密码"/>
 
             </div>
             <div class="input-box">
                 <div class="base-info-name">确认密码</div>
-                <input type="text" class="base-detail-name" placeholder="请确认新密码">
+                <input type="text" class="base-detail-name" placeholder="请确认新密码"/>
 
             </div>
             <div class="onekey-rentail-wrap">

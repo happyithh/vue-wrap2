@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <!-- Add Pagination -->
-                 <img class="pic-classfiy" src="/static/images/icon/pic.png" alt="">
+                 <img class="pic-classfiy" src="/static/images/icon/pic.png" alt=""/>
                  <div class="swiper-pagination"></div>
              </div>
         <!--轮播图end-->
@@ -40,47 +40,47 @@
          <div class="infor-show">
            <div class="base-info">空间配套</div>
                 <div class="pic-icon">
-                <img src="/static/images/icon/wc.png" alt="">
+                <img src="/static/images/icon/wc.png" alt=""/>
                 <div class="pic-icon-exp">洗手间</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/dressing_room.png" alt="">
+                <img src="/static/images/icon/dressing_room.png" alt=""/>
                 <div class="pic-icon-exp">化妆间</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/rest.png" alt="">
+                <img src="/static/images/icon/rest.png" alt=""/>
                 <div class="pic-icon-exp">休息室</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/ceiling.png" alt="">
+                <img src="/static/images/icon/ceiling.png" alt=""/>
                 <div class="pic-icon-exp">吊点</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/air_conditioning.png" alt="">
+                <img src="/static/images/icon/air_conditioning.png" alt=""/>
                 <div class="pic-icon-exp">空调暖气</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/wifi.png" alt="">
+                <img src="/static/images/icon/wifi.png" alt=""/>
                 <div class="pic-icon-exp">Wi-Fi</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/parking.png" alt="">
+                <img src="/static/images/icon/parking.png" alt=""/>
                 <div class="pic-icon-exp">停车位</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/lift.png" alt="">
+                <img src="/static/images/icon/lift.png" alt=""/>
                 <div class="pic-icon-exp">货运电梯</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/led.png" alt="">
+                <img src="/static/images/icon/led.png" alt=""/>
                 <div class="pic-icon-exp">投影LED</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/video.png" alt="">
+                <img src="/static/images/icon/video.png" alt=""/>
                 <div class="pic-icon-exp">灯光音响</div>
             </div>
             <div class="pic-icon">
-                <img src="/static/images/icon/drink.png" alt="">
+                <img src="/static/images/icon/drink.png" alt=""/>
                 <div class="pic-icon-exp">餐饮</div>
             </div>
                
@@ -119,10 +119,11 @@
         <div class="infor-show infor-show-shadow">
            <div class="infor-price fl">
                <span>￥2000000元/天</span>
-               <span class="price-underline clearfix ">￥3500000元/天</span>
+               <p class="price-underline clearfix ">￥3500000元/天</p>
             </div>
-            <a href="" class="btn-onekey1 fr">一键询价</a>
-            
+             <router-link to="/form/askprice" class="back btn-onekey1 fr">
+                一键询价
+             </router-link>
         </div>
         </div>
         

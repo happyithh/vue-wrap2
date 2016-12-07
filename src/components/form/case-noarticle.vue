@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                 <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">案例文章</p>
@@ -88,7 +88,7 @@
     }
     .case-content .notice-tit{
         padding:20px 0;
-        font-size: .8rem;
+        font-size: 1rem;
         color:#666666;
         border-bottom: 1px solid #ffffff;
     }
@@ -113,7 +113,7 @@
         border: 1px solid #000000;
         padding:12px 8px;
         color: #999999;
-        font-size: .7rem;
+        font-size: .8rem;
     }
    
 </style>

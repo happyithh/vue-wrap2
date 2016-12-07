@@ -3,22 +3,23 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                 <router-link to="/form/collect" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">精选专题</p>
             </div>
             
         </header>
-        <div class="case-container">
-            <ul class="case-content" id='case-content' >
-                <a href=""><li v-for="casecontent in casecontents">{{casecontent.contentexp}}</li></a>
-            </ul>
-        </div>
-        
+        <router-link to="/" class="back">
+            <div class="case-container">
+                <ul class="case-content" id='case-content' >
+                    <a href=""><li v-for="casecontent in casecontents">{{casecontent.contentexp}}</li></a>
+                </ul>
+            </div>
+          </router-link>
     </div>
     
 </template>
@@ -74,7 +75,7 @@
     }
     .case-content li{
         padding:20px 15px;
-        font-size: .7rem;
+        font-size: .9rem;
         border-bottom: 1px solid #ffffff;
     }
 </style>
