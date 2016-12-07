@@ -9,32 +9,40 @@
                 </a>
             </div>
             <div class="fl center">
-                <p class="display-center">案例文章</p>
+                <p class="display-center">密码重置</p>
             </div>
             
+            
         </header>
-        <div class="case-container">
-            <ul class="case-content" id='case-content' >
-                <a href=""><li v-for="casecontent in casecontents">{{casecontent.contentexp}}</li></a>
-            </ul>
+        <div class="personal-box">
+            
+            <div class="input-box">
+                <div class="base-info-name">新密码</div>
+                <input type="text" class="base-detail-name" placeholder="输入新密码">
+
+            </div>
+            <div class="input-box">
+                <div class="base-info-name">确认密码</div>
+                <input type="text" class="base-detail-name" placeholder="请确认新密码">
+
+            </div>
+            <div class="onekey-rentail-wrap">
+                    <a href="" class="btn-onekey">提交</a>
+            </div>
         </div>
+        
         
     </div>
     
 </template>
 <script>
     import 'assets/css.css'
+    import 'assets/css/form.css'
     export default {
       
         data () {
             return {
-                casecontents:[
-                    {contentexp:'当超级IP遇到商业地产 魔兽成各大购物中心最火吸金'},
-                    {contentexp:'当超级IP遇到商业地产 魔兽成各大购物中心最火吸金王'},
-                    {contentexp:'当超级IP遇到商业地产 魔兽成各大购物中心最火吸金王'},
-                    {contentexp:'[TG BUS]Mini Cooper空降奥林匹克水上公园 云SPACE助奥运场馆振风采 云SPACE公关部'}
-                    
-                ]
+               
             }
         }
     }
@@ -67,14 +75,12 @@
     .input-box select option{
         background: #ffffff;
     }
-    .case-content{
-    width: 100%;
-    height: auto;
-    background:#f4f4f4;
+    .personal-box{
+        width: 100%;
+        height: auto;
+        padding:17px 15px 0;
+        
     }
-    .case-content li{
-        padding:20px 15px;
-        font-size: .7rem;
-        border-bottom: 1px solid #ffffff;
-    }
+    
+
 </style>

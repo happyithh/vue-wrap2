@@ -10,6 +10,7 @@
                 <div class="title-askprice">一键询价</div>
             </div> 
         </header>
+        
         <div class="list">
             <ul>
                 <li v-for='info in informations'class="ml">
@@ -126,11 +127,7 @@
         line-height: 50px;
         margin: 0 auto;
     }
-    
-    
-    
-
-    .list{
+.list{
         width:100%;
         background:#f4f4f4;
     }
