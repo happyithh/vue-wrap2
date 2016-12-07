@@ -35,6 +35,10 @@ window.router = new VueRouter({
             path: '/event',
             component: (resolve) => require(['./components/event/event'], resolve)
         },
+         {
+            path: '/article',
+            component: (resolve) => require(['./components/event/article'], resolve)
+        },
         {
             path: '/openshop',
             component: (resolve) => require(['./components/openshop/openshop'], resolve)
@@ -114,6 +118,10 @@ window.router = new VueRouter({
         {
             path: '/form/account',
             component: (resolve) => require(['./components/form/account'], resolve)
+        },
+        {
+            path: '/form/space-list',
+            component: (resolve) => require(['./components/form/space-list'], resolve)
         },
        
         

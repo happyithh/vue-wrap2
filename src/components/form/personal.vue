@@ -3,37 +3,37 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                 <router-link to="/form/personal-center" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">个人信息</p>
             </div>
             <div class="right fr">
-                <a class="btn-inquiry fr in" href="javascript:;">询价</a>
+                <a class="btn-inquiry fr in" href="javascript:;">保存</a>
             </div>
             
         </header>
         <div class="personal-box">
             <div class="img-box">
-               <a href=""> <img src="/static/images/test_logo.png" alt=""></a>
+               <a href=""> <img src="/static/images/test_logo.png" alt=""/></a>
             </div>
             
             <div class="input-box">
             <div class="base-info-name">您的称呼</div>
-            <input type="text" class="base-detail-name" placeholder="请输入您的称呼">
+            <input type="text" class="base-detail-name" placeholder="请输入您的称呼"/>
 
         </div>
         <div class="input-box">
             <div class="base-info-name">手机号</div>
-            <input type="text" class="base-detail-name" placeholder="请输入11位手机号">
+            <input type="text" class="base-detail-name" placeholder="请输入11位手机号"/>
 
         </div>
         <div class="input-box">
             <div class="base-info-name">公司名称</div>
-            <input type="text" class="base-detail-name" placeholder="请输入公司名称">
+            <input type="text" class="base-detail-name" placeholder="请输入公司名称"/>
 
         </div>
         </div>

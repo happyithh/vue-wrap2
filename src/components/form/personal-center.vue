@@ -3,17 +3,15 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <a href="" class="back">
+                 <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <p class="display-center">个人中心</p>
             </div>
-            <div class="right fr">
-                <a class="btn-inquiry fr in" href="javascript:;">询价</a>
-            </div>
+            
             
         </header>
         <div class="personal-box">
@@ -22,36 +20,38 @@
                <div class="person-name">张大春</div>
             </div>
            
-            <a href="">
+           <router-link to="/form/password" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
-                        <img class="fl mt" src="../../../static/images/icon/password.png" alt="">
+                        <img class="fl mt" src="/static/images/icon/password.png" alt=""/>
                         <div class="fl">密码设置</div>
                         <i class="icon-arrowright mt fr"></i>
                     </div>
                 </div>
-            </a>
-            <a href="">
+           </router-link>
+            <router-link to="/form/collect" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
-                        <img class="fl mt" src="../../../static/images/icon/collect.png" alt="">
+                        <img class="fl mt" src="/static/images/icon/collect.png" alt=""/>
                         <div class="fl">我的收藏</div>
                         <i class="icon-arrowright mt fr"></i>
                     </div>
                 </div>
-            </a>
-            <a href="">
+           </router-link>
+            <router-link to="/form/待写" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
-                        <img class="fl mt" src="../../../static/images/icon/feed_back.png" alt="">
+                        <img class="fl mt" src="/static/images/icon/feed_back.png" alt=""/>
                         <div class="fl">意见反馈</div>
                         <i class="icon-arrowright mt fr"></i>
                     </div>
                 </div>
-            </a>
-             <div class="onekey-rentail-wrap">
-                    <a href="" class="btn-onekey">提交</a>
-            </div>
+            </router-link>
+             <router-link to="/form/待写登录注册" class="back">
+                <div class="onekey-rentail-wrap">
+                        <a href="" class="btn-onekey">退出登录</a>
+                </div>
+            </router-link>
          </div>     
         
         
@@ -118,7 +118,7 @@
         line-height: 46px;
         border-bottom:1px solid #222222;
         overflow: hidden;
-        font-size: .8rem;
+        font-size: 1rem;
     }
 
     .infor-show i{

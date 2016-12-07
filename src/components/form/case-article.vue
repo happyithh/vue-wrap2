@@ -3,7 +3,7 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/" class="back">
+                <router-link to="/form/collect" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -74,7 +74,7 @@
     }
     .case-content li{
         padding:20px 15px;
-        font-size: .7rem;
+        font-size: .9rem;
         border-bottom: 1px solid #ffffff;
     }
 </style>
