@@ -197,6 +197,7 @@
             },
             getData(){
                 var self = this
+                self.$store.commit('loading',true);
                 $.ajax({
                     url: window.YUNAPI.home,
                     data: {
@@ -209,6 +210,7 @@
                         setTimeout(function () {
                             self.init();//调用轮播
                         },300)
+                        self.$store.commit('loading',false);
                     }
                 })
             }

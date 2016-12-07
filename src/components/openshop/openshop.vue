@@ -54,21 +54,24 @@
         <!--列表-star-->
         <div class="space-list">
             <ul>
-                <li v-for="item in places">
+                <li v-for="item in sites">
                     <a class="img" href="javascript:;">
-                        <img src="/static/images/test.png">
+                        <!--<img src="/static/images/test.png">-->
+
+                        <img class="lazy" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''">
                         <div class="price">
-                            <sup>￥</sup>30000 元/天<span>起</span>
+                            <!--<sup>￥</sup>30000 元/天<span>起</span>-->
+                            {{item.lower_price}}
                         </div>
                     </a>
                     <div class="text clearfix">
                         <div class="fl">
-                            <a class="title" href="javascript:;">骥海商业文化传播有限公司会议骥海商业文化传播有限公司会议</a>
+                            <a class="title" href="javascript:;">{{item.title}}</a>
                             <p>
-                                <span>最大容纳 200人</span>
-                                <span>面积 200㎡</span>
+                                <span>最大容纳 {{item.max_people}}人</span>
+                                <span>面积 {{item.max_size}}㎡</span>
                             </p>
-                            <p>地址 上海市 浦东新区｜陆家嘴</p>
+                            <p>地址 {{item.city_name}} {{item.district}}｜{{item.address}}</p>
                         </div>
                         <a class="fr btn-join" href="javascript:;">加入询价</a>
                     </div>
@@ -93,7 +96,7 @@
     export default {
         data () {
             return {
-                places: [1,2,3]
+                sites : []
             }
         },
         mounted () {
@@ -101,6 +104,8 @@
 
             //悬浮搜索导航
             self.headerSearchFixed();
+
+            self.getData()
         },
         methods:{
             //悬浮搜索导航
@@ -118,6 +123,27 @@
                         });
                     }
                 });
+            },
+            getData(){
+                var self = this
+                self.$store.commit('loading',true);
+                $.ajax({
+                    url: window.YUNAPI.openShop,
+                    data: {
+                        city_id: self.$store.state.city_id
+                    },
+                    success: function (data) {
+                        self.sites = data.sites
+
+                        setTimeout(function () {
+                            $("img.lazy").lazyload({
+                                effect : "fadeIn",
+                                placeholder : '/static/images/placeholder.jpg'
+                            });
+                            self.$store.commit('loading',false);
+                        },200)
+                    }
+                })
             }
         }
     }

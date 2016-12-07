@@ -55,14 +55,16 @@
                 </div>
             </div>
             <ul class="ip-cont">
-                <li v-for="item in iplisst">
+                <li v-for="item in ipProject">
                     <a class="img" href="javascript:;">
-                        <img src="/static/images/test.png">
+                        <!--<img src="/static/images/test.png">-->
+                        <img class="lazy" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+
                     </a>
                     <div class="cont">
                         <div class="title clearfix">
-                            <div class="price">预算 <span>¥</span> 10万-30万</div>
-                            国家地理经典影像盛宴路跑
+                            <div class="price">预算 <span>¥</span> {{item.budget_amount}}</div>
+                            {{item.title}}
                         </div>
                         <div class="tags clearfix">
                             <span>国家地理</span>
@@ -70,15 +72,18 @@
                             <span>路跑</span>
                         </div>
                         <div class="about">
-                            <span>类别 运动</span>
-                            <span>来源 美国</span>
-                            <span>空间面积 1000-3000㎡</span>
-                            <span>适用人群 跑酷爱好者</span>
+                            <span>类别 {{item.p_type}}</span>
+                            <span>来源 {{item.source}}</span>
+                            <span>空间面积 {{item.area}}㎡</span>
+                            <span>适用人群 {{item.applicable_people}}</span>
                         </div>
                         <div class="text">
-                            是继Playze与Tony合作有机农庄之后的第二个项目。多利有机屋旨在向上海市民展示他们的农庄产品及推广有机生活方式，为城市生活居民引入自然生活理念。
+                            {{item.p_notes}}
                         </div>
-                        <a class="btn-big" href="javascript:;">合作咨询</a>
+                        <!--<a class="btn-big" href="javascript:;">合作咨询</a>-->
+                        <router-link :to=" '/ip/consult?id='+item.id+'&title='+item.title" class="btn-big">
+                            合作咨询
+                        </router-link>
                     </div>
                 </li>
             </ul>
@@ -94,13 +99,16 @@
     export default {
         data () {
             return {
-                iplisst:[1,2,3]
+                iplisst:[1,2,3],
+                ipProject : []
             }
         },
         mounted () {
             var self = this;
 
             self.init();//调用轮播
+
+            self.getData()
 
             //ip文创关键词滚动
             var num=$('.ip-tags a').length;
@@ -123,6 +131,27 @@
 //                    freeMode: true
                 });
             },
+            getData(){
+                var self = this
+                self.$store.commit('loading',true);
+                $.ajax({
+                    url: window.YUNAPI.findIp,
+                    data: {
+                        city_id: self.$store.state.city_id
+                    },
+                    success: function (data) {
+                        self.ipProject = data.projects
+                        console.log(data)
+                        setTimeout(function () {
+                            $("img.lazy").lazyload({
+                                effect : "fadeIn",
+                                placeholder : '/static/images/placeholder.jpg'
+                            });
+                            self.$store.commit('loading',false);
+                        },200)
+                    }
+                })
+            }
         }
     }
 </script>

@@ -13,6 +13,7 @@
 <script>
     import Hello from './components/Hello'
     import 'assets/css.css';
+    import 'assets/css/weui-change.css';
 
     //    const host = "http://api.yunspace.com.cn/";
     const host = "http://172.16.0.141:3000/";
@@ -21,18 +22,19 @@
         host: host,
         cities: host + 'api/cities',
         home: host + 'api/index/wap_index',
-        homeSearch: host + 'api/tags/get_home_search',
+        openShop: host + 'api/sites/get_wap_retail',
+        findIp: host + 'api/projects/wap_ip_project',
+
         article: host + 'api/informations',
         articleTags: host + 'api/tags/get_information_tags',
         articleHot: host + 'api/informations/get_hot_recommend',
         articleKeyword: host + 'api/informations/get_keyword',
-        findIp: host + 'api/projects/ip_project',
+
         ipList: host + 'api/projects',
         active: host + 'api/activities',
         submitConsult: host + 'api/consults',
         submitHoldEvent: host + 'api/orders',
         sendPhoneCode: host + 'api/auth_codes/send_code',
-        openShop: host + 'api/informations/get_retail',
         SpaceList: host + 'api/spaces',
         SpaceDtl: host + 'api/spaces',
         placeDtl: host + 'api/sites',
@@ -70,12 +72,11 @@
         mounted () {
             var self = this;
             self.$store.commit('getSelectedCity');
-            self.$store.commit('loading',true);
+
             $.ajax({
                 url: window.YUNAPI.tags, context: document.body, success: function (data) {
                     self.$store.state.searchCondition = data;
                     self.$store.state.cities = data.cities
-                    self.$store.commit('loading',false);
                 }
             });
         },

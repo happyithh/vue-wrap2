@@ -52,7 +52,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/ip/ip'], resolve)
         },
         {
-            path: '/ip_advice',
+            path: '/ip/consult',
             component: (resolve) => require(['./components/ip/ip_advice'], resolve)
         },
         {
@@ -267,13 +267,79 @@ window.store = new Vuex.Store({
             }else{
                 state.city_id = 1
             }
+        },
+        back(){
+            router.back()
         }
     },
     actions : {
 
     }
 });
+window.isGetPhoneCode = false;
+window.GlobleFun = {
+    sendPhoneCode : function (phone,success,$ele) {
+        if(!phone){
+            $.toptip('请输入手机号',2000,'error');
+            return;
+        }
+        var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+        // console.log(mobile.test(mobile))
+        if(phone.length == 11 && mobile.test(phone)){
 
+        }else{
+
+            $.toptip('手机号格式不正确',2000,'error');
+            return;
+        }
+
+        if(isGetPhoneCode){
+            return
+        }
+        isGetPhoneCode = true
+        console.log(111)
+        $.ajax({
+            url: window.YUNAPI.sendPhoneCode,
+            data : {
+                phone : phone
+            },
+            success: function (data) {
+
+                var status = data.status == 1 ? 'success' : 'error';
+                $.toptip(data.message,2000,status);
+
+                if(data.status == 1){
+                    GlobleFun.codeTiming($ele)
+                }
+                isGetPhoneCode = false
+                if(typeof success == 'function'){
+                    success(data);
+                }
+            },
+            error : function () {
+                isGetPhoneCode = false
+            }
+        });
+    },
+    codeTiming : function ($ele) {
+        var time = 60;
+        var btn = $($ele);
+        btn.text('60s重新发送');
+        btn.attr('disabled',true);
+        var interval = setInterval(function () {
+            time -- ;
+            if(time < 0){
+                time == 60;
+                clearInterval(interval);
+                btn.text('发送验证码');
+                btn.attr('disabled',false);
+            }else{
+                btn.text(time+'s重新发送')
+            }
+
+        },1000)
+    }
+}
 window.APP = new Vue({
     store,
     render: h => h(App),

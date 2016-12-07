@@ -3,7 +3,7 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/" class="back">
+                <router-link to="/ip" class="back" >
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -20,19 +20,19 @@
             <div class="base--detail ml">
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的称呼</div>
-                    <input type="text" class="base-detail-name" placeholder="请输入您的真实姓名">
+                    <input type="text" v-model="consult.the_contact" class="base-detail-name" placeholder="请输入您的真实姓名">
 
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的联系方式</div>
-                    <input type="text" class="base-detail-name"placeholder="请输入您的11位手机号">
+                    <input type="text" v-model="consult.phone" class="base-detail-name"placeholder="请输入您的11位手机号">
 
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>短信验证码</div>
                     <div class="check-box">
-                        <input type="text" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码">
-                        <div  class="send-msg fr"><a href="">发送验证码</a></div>
+                        <input type="text" v-model="consult.auth_code" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码">
+                        <div  class="send-msg fr"><a href="javascript:;" @click="sendPhoneCode">发送验证码</a></div>
                     </div>
                 </div>
                 <div class="input-box">
@@ -40,14 +40,14 @@
                     <div class="triangle">
                         <input type="text" class="base-detail-name fl" placeholder="请选择目的地，城市">
                         <div class="triangle-right fr">
-                            <a href=""><div class="icon-triangedown icon-triangedown1"></div></a>
+                            <div class="icon-triangedown icon-triangedown1"></div>
                         </div>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>其他要求</div>
                     <div class="advise">
-                        <textarea placeholder="请填写更多的详细信息，帮助您快速找到合适的场所"> </textarea>
+                        <textarea v-model="consult.consulting_content" placeholder="请填写更多的详细信息，帮助您快速找到合适的场所"> </textarea>
                         <div class="font120">120字</div>
                     </div>
 
@@ -68,7 +68,26 @@
             return {
                 informations:[
                     {}
-                ]
+                ],
+                consult : {
+                    the_contact : '',
+                    phone : '',
+                    consulting_content : '',
+                    project_id : '',
+                    city_id : 1,
+                    code_token : '',
+                    auth_code : '',
+                    title : '',
+                },
+            }
+        },
+        methods:{
+            sendPhoneCode(e){
+                var self = this;
+                var success = function (data) {
+                    self.consult.code_token = data.data;
+                };
+                GlobleFun.sendPhoneCode(this.consult.phone,success,e.target)
             }
         }
     }
