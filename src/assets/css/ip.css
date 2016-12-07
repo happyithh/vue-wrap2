@@ -21,7 +21,7 @@
 .swiper-container .swiper-slide{
     background-color: #fff;
     /*height: 350px;*/
-    margin-right: 10px !important;
+    /*margin-right: 10px !important;*/
     position: relative;
 }
 .swiper-container .swiper-slide a{

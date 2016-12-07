@@ -21,18 +21,14 @@
             </div>
             <div class="co-brands-cont">
                 <div class="swiper-wrapper swiper-container">
-                    <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
+                    <div class="swiper-slide" v-for="item in ipBrand">
+                        <!--<img :src="/static/images/test_logo.png" alt="">-->
+                        <img class="lazy" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
                     </div>
-                    <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
-                    </div>
+                    <!--<div class="swiper-slide">-->
+                        <!--<img src="/static/images/test_logo.png" alt="">-->
+                    <!--</div>-->
+
                 </div>
             </div>
         </div>
@@ -100,13 +96,14 @@
         data () {
             return {
                 iplisst:[1,2,3],
-                ipProject : []
+                ipProject : [],
+                ipBrand : []
             }
         },
         mounted () {
             var self = this;
 
-            self.init();//调用轮播
+
 
             self.getData()
 
@@ -126,7 +123,7 @@
 //                    loop : true,
                     slidesPerView: 2.2,
                     paginationClickable: true,
-                    spaceBetween: 2,
+                    spaceBetween: 10,
                     autoplay: false
 //                    freeMode: true
                 });
@@ -141,13 +138,16 @@
                     },
                     success: function (data) {
                         self.ipProject = data.projects
+                        self.ipBrand = data.ip_brand
                         console.log(data)
                         setTimeout(function () {
+                            self.init();//调用轮播
                             $("img.lazy").lazyload({
                                 effect : "fadeIn",
                                 placeholder : '/static/images/placeholder.jpg'
                             });
                             self.$store.commit('loading',false);
+
                         },200)
                     }
                 })
