@@ -47,27 +47,27 @@
         <div class="ev-onekey-rentail-wrap">
             <h2>我们只做一件事 精耕线下场地</h2>
             <p>免收服务费，一站式搞定，低于市场价20%</p>
-            <a href="" class="btn-onekey">一键租场地</a>
+            <router-link to="/form/leasehold" class="btn-onekey">一键租场地</router-link>
         </div>
 
         <!--列表-star-->
         <div class="space-list">
             <ul>
-                <li v-for="item in places">
-                    <a class="img" href="javascript:;">
-                        <img src="/static/images/test.png">
+                <li v-for="item in venues">
+                    <router-link :to="'/event/'+item.site_id" class="img">
+                        <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
                         <div class="price">
-                            <sup>￥</sup>30000 元/天<span>起</span>
+                            {{item.special_price}}
                         </div>
-                    </a>
+                    </router-link>
                     <div class="text clearfix">
                         <div class="fl">
-                            <a class="title" href="javascript:;">骥海商业文化传播有限公司会议骥海商业文化传播有限公司会议</a>
+                            <router-link :to="'/event/'+item.site_id">{{item.site_name}}</router-link>
                             <p>
-                                <span>最大容纳 200人</span>
-                                <span>面积 200㎡</span>
+                                <span>最大容纳 {{item.site_max_people}}人</span>
+                                <span>面积 {{item.area}}㎡</span>
                             </p>
-                            <p>地址 上海市 浦东新区｜陆家嘴</p>
+                            <p>地址 {{item.city_name}} {{item.areas}}｜{{item.address}}</p>
                         </div>
                         <a class="fr btn-join" href="javascript:;">加入询价</a>
                     </div>
@@ -92,7 +92,7 @@
     export default {
         data () {
             return {
-                places: [1,2,3]
+                venues:[]
             }
         },
         mounted () {
@@ -100,6 +100,7 @@
 
             //悬浮搜索导航
             self.headerSearchFixed();
+            self.getData();
         },
         methods:{
             //悬浮搜索导航
@@ -117,6 +118,26 @@
                         });
                     }
                 });
+            },
+
+            getData(){
+                var self = this
+                $.ajax({
+                    url: window.YUNAPI.active,
+                    success: function (data) {
+                        console.log(data)
+                        self.venues=data.space_recommend;
+
+                        //移动端去价格单位
+//                        for(var i = 0; i < data.space_recommend.length; i++){
+//                            if(data.space_recommend[i].special_price=='面议'){
+//                                $('.space-list li:eq('+i+')').find('.price').find('sup').remove();
+//                            }else {
+//                                self.venues[i].special_price=data.space_recommend[i].special_price.toString().replace('￥','');
+//                            }
+//                        }
+                    }
+                })
             }
         }
     }

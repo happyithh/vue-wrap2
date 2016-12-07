@@ -30,43 +30,24 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">场地位置</div>
-                    <div class="tags clearfix">
+                    <div class="tags select clearfix">
                         <span class="active">不限</span>
                         <select>
                             <option>不限</option>
-                            <option>行政区1</option>
+                            <option>行政区nbjjj1</option>
                             <option>行政区2</option>
                         </select>
                         <select>
                             <option>不限</option>
-                            <option>市中心1</option>
-                            <option>市中心2</option>
+                            <option>商圈1</option>
+                            <option>商圈2</option>
                         </select>
                         <select>
                             <option>不限</option>
-                            <option>区中心1</option>
-                            <option>区中心2</option>
+                            <option>地铁1</option>
+                            <option>地铁2</option>
                         </select>
-                        <select>
-                            <option>不限</option>
-                            <option>社区中心1</option>
-                            <option>社区中心2</option>
-                        </select>
-                        <select>
-                            <option>不限</option>
-                            <option>学校1</option>
-                            <option>学校2</option>
-                        </select>
-                        <select>
-                            <option>不限</option>
-                            <option>交通枢纽1</option>
-                            <option>交通枢纽2</option>
-                        </select>
-                        <select>
-                            <option>不限</option>
-                            <option>商务区1</option>
-                            <option>商务区2</option>
-                        </select>
+                        <span>环线</span>
                     </div>
                 </div>
                 <div class="input-box">
@@ -91,10 +72,12 @@
                 <div class="input-box">
                     <div class="base-info-name">活动类型</div>
                     <div class="triangle">
-                        <input type="text" class="base-detail-name fl" placeholder="请选择活动类型">
-                        <div class="triangle-right fr">
-                            <a href=""><div class="icon-triangedown icon-triangedown1"></div></a>
-                        </div>
+                        <select>
+                            <option>不限</option>
+                            <option>活动类型</option>
+                            <option>活动类型</option>
+                            <option>活动类型</option>
+                        </select>
                     </div>
                 </div>
                 <div class="input-box">
@@ -192,7 +175,9 @@
         float: left;
         display: block;
         width: 25%;
-        padding: 10px 5px 11px;
+        height: 40px;
+        line-height: 20px;
+        padding: 10px 20px 10px 6px;
         text-align: center;
         background: #f4f4f4;
         color: #999;
@@ -201,5 +186,22 @@
         box-sizing: border-box;
         border-right: 1px solid #fff;
         border-radius: 0;
+        background-image: url("/static/images/icon/arrow_down.png");
+        background-repeat: no-repeat;
+        background-size: 0.66rem auto;
+        background-position: 88% 17px;
     }
+    .input-box .tags span{
+        height: 40px;
+        line-height: 20px;
+    }
+
+    @media screen and (min-width: 640px) {
+        .input-box .tags select,
+        .input-box .tags span{
+            height: 50px;
+            line-height: 30px;
+        }
+    }
+
 </style>
