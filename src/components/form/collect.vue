@@ -46,7 +46,6 @@
 <script>
     
     import 'assets/css.css'
-    import 'assets/css/collect.css'
     export default {
         name: 'home',
         data () {
@@ -90,6 +89,29 @@
     .input-box select option{
         background: #ffffff;
     }
+    .infor-show{
+        margin: 0 15px;
+        height: 46px;
+        line-height: 46px;
+        border-bottom:1px solid #222222;
+        overflow: hidden;
+        font-size: .8rem;
+    }
+
+    .infor-show i{
+        margin: 15px 10px;
+    }
+
+
+    .infor-show img{
+        margin-right: 15px;
+        width:15px;
+        height: 15px;
+    }
+    .mt{
+        margin-top:15px;
+    }
+
 
 
 </style>

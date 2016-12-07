@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="fl center">
-                <p class="display-center">案例文章</p>
+                <p class="display-center">精选专题</p>
             </div>
             
         </header>

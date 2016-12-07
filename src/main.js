@@ -75,6 +75,38 @@ window.router = new VueRouter({
             path: '/form/case-article',
             component: (resolve) => require(['./components/form/case-article'], resolve)
         },
+        {
+            path: '/form/case-noarticle',
+            component: (resolve) => require(['./components/form/case-noarticle'], resolve)
+        },
+        {
+            path: '/form/topics',
+            component: (resolve) => require(['./components/form/topics'], resolve)
+        },
+        {
+            path: '/form/personal',
+            component: (resolve) => require(['./components/form/personal'], resolve)
+        },
+        {
+            path: '/form/personal-center',
+            component: (resolve) => require(['./components/form/personal-center'], resolve)
+        },
+        {
+            path: '/form/password',
+            component: (resolve) => require(['./components/form/password'], resolve)
+        },
+        {
+            path: '/form/passwordreset',
+            component: (resolve) => require(['./components/form/passwordreset'], resolve)
+        },
+        {
+            path: '/form/passwordfind',
+            component: (resolve) => require(['./components/form/passwordfind'], resolve)
+        },
+        {
+            path: '/form/account',
+            component: (resolve) => require(['./components/form/account'], resolve)
+        },
        
         
     ]
