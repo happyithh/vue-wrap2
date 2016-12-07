@@ -159,6 +159,7 @@
     color:#999;
 }
 /*尺寸*/
+.input-box .size input{width: auto;}
 .input-box .size{
     border-bottom: 2px solid #222;
     padding: 15px 0 5px;

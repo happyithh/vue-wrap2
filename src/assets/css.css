@@ -45,6 +45,18 @@ input::-moz-placeholder { color:#999;} /* firefox 19+ */
 input:-ms-input-placeholder { color:#999;} /* ie */
 input:-moz-placeholder { color:#999;}
 
+select{
+    width: 100%;
+    border: none;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+}
+
 /*文字上下居中*/
 .display-center{
     display: -webkit-box;
