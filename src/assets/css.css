@@ -320,7 +320,7 @@ body .weui_dialog_ft{
     margin-top: 1.5rem;
 }
 body .weui_dialog_ft a{
-    color: #000;
+    color: #000 !important;
     font-size: 1.06rem;
 }
 body .weui_dialog_ft:after{

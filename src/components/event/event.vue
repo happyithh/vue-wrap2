@@ -55,14 +55,14 @@
             <ul>
                 <li v-for="item in venues">
                     <router-link :to="'/event/'+item.site_id" class="img">
-                        <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                        <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''" :title="item.site_name">
                         <div class="price">
                             {{item.special_price}}
                         </div>
                     </router-link>
                     <div class="text clearfix">
                         <div class="fl">
-                            <router-link :to="'/event/'+item.site_id">{{item.site_name}}</router-link>
+                            <h3><router-link :to="'/event/'+item.site_id">{{item.site_name}}</router-link></h3>
                             <p>
                                 <span>最大容纳 {{item.site_max_people}}人</span>
                                 <span>面积 {{item.area}}㎡</span>

@@ -22,16 +22,16 @@
             <div class="co-brands-cont">
                 <div class="swiper-wrapper swiper-container">
                     <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
+                        <img src="/static/images/test_logo.png" alt="logo" title="logo">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
+                        <img src="/static/images/test_logo.png" alt="logo" title="logo">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
+                        <img src="/static/images/test_logo.png" alt="logo" title="logo">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/static/images/test_logo.png" alt="">
+                        <img src="/static/images/test_logo.png" alt="logo" title="logo">
                     </div>
                 </div>
             </div>
@@ -60,10 +60,10 @@
                         <img src="/static/images/test.png">
                     </a>
                     <div class="cont">
-                        <div class="title clearfix">
+                        <h3 class="title clearfix">
                             <div class="price">预算 <span>¥</span> 10万-30万</div>
                             国家地理经典影像盛宴路跑
-                        </div>
+                        </h3>
                         <div class="tags clearfix">
                             <span>国家地理</span>
                             <span>互动</span>

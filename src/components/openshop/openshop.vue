@@ -63,7 +63,7 @@
                     </a>
                     <div class="text clearfix">
                         <div class="fl">
-                            <a class="title" href="javascript:;">骥海商业文化传播有限公司会议骥海商业文化传播有限公司会议</a>
+                            <h3><a class="title" href="javascript:;">骥海商业文化传播有限公司会议骥海商业文化传播有限公司会议</a></h3>
                             <p>
                                 <span>最大容纳 200人</span>
                                 <span>面积 200㎡</span>
