@@ -17,7 +17,7 @@
  input {
     width: 100%;
     margin-bottom: 10px;
-    font-size: .9rem;
+    
 }
 
 .base--detail {
@@ -82,14 +82,12 @@
     padding-bottom: 5px;
     text-align: center;
     line-height: 30px;
-    /*margin-top:-5px; */
     font-size: .7rem;
-
-}
-
-.input-box .send-msg a {
     color: #ffffff;
+
 }
+
+
 
 .submit {
     width: 100%;
@@ -102,12 +100,15 @@
     line-height: 40px;
 
 }
+select{
+     color: #999999;
+}
 
 .input-box textarea {
     width: 100%;
     height: 62px;
     resize: none;
-    font-size: .8rem;
+    font-size: .7rem;
 }
 
 .input-box .font120 {
@@ -146,7 +147,6 @@
 
 .red::-webkit-input-placeholder {
     color: red;
-    font-size: .8rem
 }
 
 /*内部标题*/
