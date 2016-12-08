@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">个人中心</p>
+                <h1 class="display-center">个人中心</h1>
             </div>
             
             

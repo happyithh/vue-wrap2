@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">一键租场地</p>
+                <h1 class="display-center">一键租场地</h1>
             </div>
             
         </header>

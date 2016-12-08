@@ -10,7 +10,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">我要找IP文创</p>
+                <h1 class="display-center">我要找IP文创</h1>
             </div>
         </header>
 

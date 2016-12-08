@@ -10,7 +10,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">我要开快闪店</p>
+                <h1 class="display-center">我要开快闪店</h1>
             </div>
             <div class="right fr">
                 <span class="numb fr">3</span>

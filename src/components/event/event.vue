@@ -10,7 +10,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">我要办活动</p>
+                <h1 class="display-center">我要办活动</h1>
             </div>
             <div class="right fr">
                 <a class="btn-inquiry in" href="/form/askprice">询价</a>

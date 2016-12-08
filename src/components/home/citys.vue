@@ -10,7 +10,7 @@
                     </router-link>
                 </div>
                 <div class="fl center">
-                    <p class="display-center">选择城市</p>
+                    <h1 class="display-center">选择城市</h1>
                 </div>
             </header>
 

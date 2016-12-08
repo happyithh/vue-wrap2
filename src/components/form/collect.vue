@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">我的收藏</p>
+                <h1 class="display-center">我的收藏</h1>
             </div>
             
         </header>

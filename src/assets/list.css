@@ -55,6 +55,10 @@
     margin-top: 15px;
     font-size: 0.93rem;
 }
+.space-list .text .btn-join.hv{
+    background:#f7c73f;
+    border: none;
+}
 .space-list .text .fl{
     width: 65%;
 }

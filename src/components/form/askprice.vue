@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">一键询价</p>
+                <h1 class="display-center">一键询价</h1>
             </div>
         </header>
         <div class="inquiry-list">

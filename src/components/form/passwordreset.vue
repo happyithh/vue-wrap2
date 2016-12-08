@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">密码重置</p>
+                <h1 class="display-center">密码重置</h1>
             </div>
             
             

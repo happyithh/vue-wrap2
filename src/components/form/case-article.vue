@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">案例文章</p>
+                <h1 class="display-center">案例文章</h1>
             </div>
             
         </header>

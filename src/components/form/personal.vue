@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">个人信息</p>
+                <h1 class="display-center">个人信息</h1>
             </div>
             <div class="right fr">
                 <a class="btn-inquiry fr in" href="javascript:;">保存</a>
