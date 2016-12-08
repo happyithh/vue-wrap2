@@ -7,6 +7,10 @@ header .display-center{
     position: relative;
    
 }
+.selectedtopic-cont h3{
+    font-size: 0.9rem;
+    padding: 10px 0;
+}
 .swiper-container{
     width: 100%;
     height: auto;
@@ -18,7 +22,6 @@ header .display-center{
     /*height: 350px;*/
     position: relative;
     /*margin: 0!important;*/
-     margin-right: 10px !important;
 }
 .swiper-container .swiper-slide a{
     display: block;
@@ -67,33 +70,27 @@ header .display-center{
     border-bottom:1px solid #222222;
     overflow: hidden;
 }
-.infor-show h1{
-    padding: 15px 0 10px 0px;
-    font-family:PingFangHK-Regular;
-    font-size:.9rem;
-    color:#000000;
-    line-height:.9rem;
-    text-align:left;
+.infor-show h2{
+    margin-top: 15px;
+    font-size:1rem;
+    line-height:1rem;
 }
 
 .base-info{
-    padding: 10px 0 10px 0px;
-    font-family:PingFangSC-Regular;
-    font-size:1rem;
+    margin: 15px 0 10px;
+    font-size:0.93rem;
     color:#999999;
-    line-height:.7rem;
+    line-height:1.35em;
     text-align:left;
     
 }
 .base-info-detail{
-    padding: 10px 0 10px 0px;
-    font-family:PingFangSC-Regular;
     font-size:.8rem;
     color:#999999;
-    letter-spacing:0;
-    line-height:.6rem;
-    text-align:left;
+    line-height:1.35em;
+    margin-bottom: 10px;
 }
+.base-info-detail.mj{margin-top: -5px;}
 .base-info-detail span sup{
     font-size: 8px;
 }
@@ -103,33 +100,30 @@ header .display-center{
 }
 
 .pic-icon{
-    padding: 15px 3px 15px 3px;
+    padding: 10px 3px;
     width:20%;
     float: left;
     text-align: center;
     }
 .pic-icon img{
-    width:15px;
-    height: 15px;
+    width: auto;
+    height: 1rem;
 }
 .pic-icon .pic-icon-exp{
-    font-size: 13px;
-    }
+    font-size: 0.8rem;
+}
 
 .pic-icon-expl{
     font-size: .9rem;
-    margin-bottom:18px; 
+    margin-bottom:15px;
 }
  .btn-onekey{
-    width: 45%;
+    width: 47%;
     height: 2.67rem;
     line-height: 2.68rem;
-    border-radius: 5px;
     background:#f7c73f;
     font-size: 1.07rem;
-    float: left;
     margin-top: 15px;
-    margin-right:5% ;
     margin-bottom: 15px;
     text-align: center;
 }
@@ -168,44 +162,77 @@ header .display-center{
     height: 22px;
 }
 .infor-show1{
-    margin: 0 15px;
+    margin: 15px 15px 0;
     overflow: hidden;
 }
 .infor-price{
     width: 50%;
     margin-top:17px; 
     color: red;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
 }
 .price-underline{
-    width: 100%;
-    height: 2.67rem;
     color:#999999;
     font-size: 16px;
     font-weight: bold;
     text-decoration: line-through;
 }
-.btn-onekey1{
-    width:45%;
-    height: 2.67rem;
-    line-height: 2.68rem;
-    border-radius: 5px;
-    background:#f7c73f;
-    font-size: 1.07rem;
-    float: left;
-    margin-top: 15px;
-    margin-right:5% ;
-    margin-bottom: 15px;
-    text-align: center;
-}
 .infor-show-shadow{
-    box-shadow: 0 0 4px 0 rgba(0,0,0,0.10);
-    
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.50);
+    margin: 0;
+    padding: 0 15px;
+    border: none;
 }
-
-
-
-
-
+.infor-show-shadow .btn-onekey{
+    width: 45%;
+}
+.infor-show-shadow.place{box-shadow: none;}
+.infor-show-shadow.place .btn-onekey{
+    width: 100%;
+}
+.base-info-adress{
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+.map-wrap{
+    height: 6.67rem;
+    margin: 10px 0 20px;
+}
+.map-wrap .base-info-map{
+    width: 100%;
+    height: 6.67rem;
+    background: #333;
+    position: absolute;
+    left:0;
+}
+/*场地其他空间*/
+.other-spaces li{
+    margin-bottom: 10px;
+    position: relative;
+}
+.other-spaces li .img{
+    width: 10rem;
+    width: 42%;
+}
+.other-spaces li .cont{
+    width: 58%;
+    padding-left: 12px;
+}
+.other-spaces li .cont .title{
+    width: 100%;
+    font-size: 0.9rem;
+    line-height: 1.35em;
+}
+.other-spaces li .cont p{
+    font-size: 0.7rem;
+    color: #666;
+}
+.other-spaces li .cont .price{
+    font-size: 0.9rem;
+    color:#e92332;
+    position: absolute;
+    left: 45%;
+    bottom: 2px;
+}
     

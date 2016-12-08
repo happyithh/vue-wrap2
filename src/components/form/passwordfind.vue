@@ -9,7 +9,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">找回密码</p>
+                <h1 class="display-center">找回密码</h1>
             </div>
             
             

@@ -200,6 +200,9 @@ header .center.p78{width: 78%;}
 header .center p{
     height: 100%;
 }
+header .center h1{
+    height: 100%;
+}
 header .back{
     display: block;
     height: 30px;

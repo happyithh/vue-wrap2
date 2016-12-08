@@ -72,6 +72,10 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/place/searchlist.vue'], resolve)
         },
         {
+            path: '/place/detail',
+            component: (resolve) => require(['./components/place/place_detail.vue'], resolve)
+        },
+        {
             path: '/form/leasehold',
             component: (resolve) => require(['./components/form/leasehold'], resolve)
         },

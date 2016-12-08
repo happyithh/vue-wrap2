@@ -10,7 +10,7 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <p class="display-center">场地列表</p>
+                <h1 class="display-center">场地列表</h1>
             </div>
             <div class="right fr">
                 <span class="numb fr">3</span>
