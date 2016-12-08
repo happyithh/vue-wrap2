@@ -48,7 +48,10 @@
         <div class="ev-onekey-rentail-wrap">
             <h2>打造未来商业移动的新体验</h2>
             <p>找到适合你的商业短租场地</p>
-            <a href="/openshop/form" class="btn-onekey">立即提交需求</a>
+            <!--<a href="/openshop/form" class="btn-onekey">立即提交需求</a>-->
+            <router-link to="/openshop/form" class="btn-onekey">
+                立即提交需求
+            </router-link>
         </div>
 
         <!--列表-star-->
