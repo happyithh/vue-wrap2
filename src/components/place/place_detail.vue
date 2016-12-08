@@ -146,6 +146,8 @@
             var self = this;
             self.init1();//调用轮播
             self.init2();//调用轮播
+
+            console.log(this.$route.params.id)
         },
         methods:{
             /*顶部轮播*/

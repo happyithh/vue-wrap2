@@ -60,7 +60,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/ip/ip_advice'], resolve)
         },
         {
-            path: '/space',
+            path: '/space/detail/:id',
             component: (resolve) => require(['./components/space/space-detail.vue'], resolve)
         },
         {
@@ -72,7 +72,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/place/searchlist.vue'], resolve)
         },
         {
-            path: '/place/detail',
+            path: '/place/detail/:id',
             component: (resolve) => require(['./components/place/place_detail.vue'], resolve)
         },
         {
@@ -127,8 +127,6 @@ window.router = new VueRouter({
             path: '/form/space-list',
             component: (resolve) => require(['./components/form/space-list'], resolve)
         },
-       
-        
     ]
 })
 

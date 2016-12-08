@@ -32,7 +32,7 @@
                     <div class="base-info-name"><span>*</span>短信验证码</div>
                     <div class="check-box">
                         <input type="text" v-model="consult.auth_code" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码">
-                        <div  class="send-msg fr"><a href="javascript:;" @click="sendPhoneCode">发送验证码</a></div>
+                        <a href="javascript:;" class="send-msg fr" @click="sendPhoneCode">发送验证码</a>
                     </div>
                 </div>
                 <!--<div class="input-box">-->
