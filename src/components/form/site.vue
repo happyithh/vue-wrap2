@@ -31,10 +31,13 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>场地类型</div>
                     <div class="triangle">
-                        <input type="text" class="base-detail-name fl" placeholder="请输入场地类型">
-                        <div class="triangle-right fr">
-                           <a href=""><div class="icon-triangedown icon-triangedown1"></div></a>
-                        </div>
+                        <select>
+                            <option>请输入场地类型</option>
+                            <option>场地类型</option>
+                            <option>场地类型</option>
+                            <option>场地类型</option>
+                            <option>场地类型</option>
+                        </select>
                     </div>
 
 
@@ -43,20 +46,14 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>场地地址</div>
                     <div class="triangle">
-                        <input type="text" class="base-detail-name fl" placeholder="请输入场地地址"/>
-                        <div class="triangle-right fr">
-                           <a href=""><div class="icon-triangedown icon-triangedown1"></div></a>
-                        </div>
+                         <select>
+                            <option>请输入场地地址</option>
+                            <option>场地地址</option>
+                            <option>场地地址</option>
+                            <option>场地地址</option>
+                            <option>场地地址</option>
+                        </select>
                     </div>
-
-                    <!--<select class="base-detail-name send-msg1 red">
-                        <option value="请选择目的地，城市">请选择目的地，城市</option>
-                        <option value="上海">上海</option>
-                        <option value="北京">北京</option>
-                        <option value="深圳">深圳</option>
-                        <option value="成都">成都</option>
-                    </select>-->
-
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>场地照片</div>
@@ -106,6 +103,7 @@
 
 </template>
 <script>
+    import 'assets/css.css'
     import 'assets/css/form.css'
     export default {
         name: 'home',
@@ -134,11 +132,7 @@
         color:#000000;
         text-align:left;
     }
-    .input-box select{
-        width: 100%;
-        background: #ffffff;
-
-    }
+    
     .up-photo .site-pic{
         width: 150px;
         height: 150px
@@ -148,6 +142,5 @@
     .input-box select option{
         background: #ffffff;
     }
-
-
+  
 </style>

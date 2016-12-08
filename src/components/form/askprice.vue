@@ -14,24 +14,8 @@
         </header>
         <div class="inquiry-list">
             <ul>
-                <!--<li class="clearfix">
-                    <div class="local-price"><strong>￥90000元/天</strong> 东方万国会议中心</div>
-                    <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 200人</div>
-                         <div class='max-square fl ml10'>面积 200人</div>
-                          <div class='add fl ml10'>地址 上海市 浦东新区 | 陆家嘴</div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <div class="local-price"><strong>￥30000元/天</strong> 深圳科兴科学园国际会议中心-深圳科学园国际会议中心</div>
-                    <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 200人</div>
-                         <div class='max-square fl ml10'>面积 200人</div>
-                          <div class='add fl ml10'>地址 上海市 浦东新区 | 陆家嘴</div>
-                    </div>
-                </li>-->
                 <li class="clearfix" v-for="item in recommendSite">
-                    <div class="local-price"><strong>￥{{item.market_price}}元/天</strong> {{item.title}}</div>
+                    <div class="local-price"><strong>{{item.lower_price}}</strong> {{item.title}}</div>
                     <div class="local-price-detail clearfix">
                         <div class='max-people fl ml10'>最大容纳 {{item.max_people}}人</div>
                          <div class='max-square fl ml10'>面积 {{item.max_size}}㎡</div>
@@ -71,7 +55,10 @@
         name: 'home',
         data () {
             return {
-                 recommendSite : [],//定义变量
+                recommendSite : [],//定义变量
+                phone:'',
+                password:'',
+                username:'',
 
             }
         },
@@ -94,13 +81,18 @@
             var self = this;
             self.getData()
         },
+        computed:{
+
+        },
         methods:{
             getData(){
                 var self = this
                 $.ajax({
                     url: window.YUNAPI.home,
                     data: {
-                        city_id: self.$store.state.city_id
+                        city_id: self.$store.state.city_id,
+                
+
                     },
                     success: function (data) {
                         console.log(data)
