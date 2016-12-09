@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container pbottom-37">
 
         <!--头部-->
         <header class="clearfix">
@@ -116,7 +116,7 @@
         </div>
 
         
-        <div class="infor-show infor-show-shadow">
+        <div class="infor-show infor-show-shadow fixed">
            <div class="infor-price fl">
                <span>￥2000000元/天</span>
                <p class="price-underline clearfix ">￥3500000元/天</p>

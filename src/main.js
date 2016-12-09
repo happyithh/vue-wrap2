@@ -36,7 +36,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/event/event'], resolve)
         },
          {
-            path: '/article',
+            path: '/article/:id',
             component: (resolve) => require(['./components/event/article'], resolve)
         },
         {
@@ -348,7 +348,11 @@ window.GlobleFun = {
             }
 
         },1000)
+    },
+    httpError(){
+
     }
+
 }
 window.APP = new Vue({
     store,
