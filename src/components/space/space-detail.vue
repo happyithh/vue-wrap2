@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container pbottom-37">
 
         <!--头部-->
         <header class="clearfix">
@@ -18,8 +18,8 @@
         <!--轮播图start-->
             <div class="selectedtopic-cont top-banner">
                 <div class="swiper-wrapper swiper-container">
-                    <div class="swiper-slide" v-for="item in topicOfSelect">
-                       <img src="/static/images/test.png" alt=""/>
+                    <div class="swiper-slide" v-for="item in spaceDtl.img_paths">
+                       <img :src="item.url_790_526" alt="首页banner图片01"/>
                     </div>
                 </div>
                 <!-- Add Pagination -->
@@ -27,23 +27,26 @@
                  <div class="swiper-pagination"></div>
              </div>
         <!--轮播图end-->
+       
         <!--信息展示开始-->
         <div class="infor-show">
-            <h2>中国金融信息中心-六楼展厅</h2>
+            <h2>{{spaceDtl.site_name}}</h2>
             <div class="base-info">基本信息</div>
-            <div class="base-info-detail"> 最大容量：<span>50人</span></div>
-            <div class="base-info-detail mj"> 空间面积：<span>150m<sup>2</sup></span></div>
-            <div class="base-info-detail"> 场地类型：<span>演讲会议</span></div>
-            <div class="base-info-detail"> 活动类型：<span>文体娱乐 | 会议会务 | 培训演讲</span></div>
-            <div class="base-info-detail"> 行业类型：<span>金融 | 奢侈品 | 消费品 | IT类 | 公益事业</span></div>
+            <div class="base-info-detail"> 最大容量：<span>{{spaceDtl.Max_seating_capacity}}人</span></div>
+            <div class="base-info-detail mj"> 空间面积<span>：{{
+            spaceDtl.area}}㎡</span></div>
+            <div class="base-info-detail"> 场地类型：<span>{{spaceDtl.site_type}}</span></div>
+            <div class="base-info-detail"> 活动类型：<span>{{spaceDtl.service_type}}</span></div>
+            <div class="base-info-detail"> 行业类型：<span>{{spaceDtl.industry_field}}</span></div>
         </div>
-         <div class="infor-show">
-           <div class="base-info">空间配套</div>
+         <div class="infor-show" >
+           <div class="base-info"  >空间配套</div>
+           
                 <div class="pic-icon">
                 <img src="/static/images/icon/wc.png" alt=""/>
-                <div class="pic-icon-exp">洗手间</div>
+                <div class="pic-icon-exp">{{spaceDtl.supporting_facilities}}</div>
             </div>
-            <div class="pic-icon">
+            <!--<div class="pic-icon">
                 <img src="/static/images/icon/dressing_room.png" alt=""/>
                 <div class="pic-icon-exp">化妆间</div>
             </div>
@@ -82,28 +85,32 @@
             <div class="pic-icon">
                 <img src="/static/images/icon/drink.png" alt=""/>
                 <div class="pic-icon-exp">餐饮</div>
-            </div>
+            </div>-->
                
         </div>
         <div class="infor-show">
-            <div class="base-info">基本信息</div>
-           <div class="pic-icon-exp pic-icon-expl">100人以内，12小时以内。超出100人，每人加收500元，最多允许超出150人。</div>
+            <div class="base-info">预定须知</div>
+           <div class="pic-icon-exp pic-icon-expl">{{spaceDtl.booking_notes}}</div>
             
         </div>
         <div class="infor-show">
             <div class="base-info">场地相关案例</div>
             <div class="selectedtopic-cont about-cases">
-                <div class="swiper-wrapper swiper-container">
-                    <div class="swiper-slide" v-for="item in topicOfSelect">
-                       <img src="/static/images/test.png" alt=""/>
-                       <h3>当超级IP遇到商业地产 魔兽成各大购物中心最火吸金王</h3>
+                 
+                    <div class="swiper-wrapper swiper-container">
+                        <div class="swiper-slide" v-for="item in spaceDtl.img_paths">
+                        <a href="../../article">
+                            <img src="/static/images/test.png" alt=""/>
+                            <h3>{{spaceDtl.relate_cases}}</h3>
+                         </a>
+                        </div>
                     </div>
-                </div>
+                
             </div>
         </div>  
          <div class="infor-show1">
-            <a href="" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
-            <a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
+            <a href="javascript:;" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
+            <a href="javascrip" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
             
         </div>
 
@@ -116,10 +123,10 @@
         </div>
 
         
-        <div class="infor-show infor-show-shadow">
+        <div class="infor-show infor-show-shadow fixed">
            <div class="infor-price fl">
-               <span>￥2000000元/天</span>
-               <p class="price-underline clearfix ">￥3500000元/天</p>
+               <span>{{spaceDtl.market_price_real}}{{spaceDtl.units}}</span>
+               <p class="price-underline clearfix ">{{spaceDtl.market_price}}</p>
             </div>
              <router-link to="/form/askprice" class="btn-onekey fr">
                 一键询价
@@ -143,9 +150,17 @@
     export default {
         data () {
             return {
-                topicOfSelect: [
-                    1,2,3,4
+                
+                phone: '',
+                password: '',
+                username: '',
+                activeTab:'空间详情',
+                spacesubs: [
+                    1, 2, 3, 4
                 ],
+                spaceDtl : [],
+                otherSpace : [],
+                
 
             }
         },
@@ -153,6 +168,7 @@
             var self = this;
             self.init1();//调用轮播
             self.init2();//调用轮播
+            this.getData();//调用数据
         },
         methods:{
             /*顶部轮播*/
@@ -188,7 +204,40 @@
 //                    freeMode: true
                 });
             },
-        }
+            
+            getData(){
+                var self = this;
+                self.$store.commit('loading',true);
+                $.get({
+                    url: window.YUNAPI.SpaceDtl +'/'+ this.$route.params.id,
+                    data : {},
+                    success: function (data) {
+                        self.spaceDtl = data.space;
+                        self.otherSpace = data.other_spaces
+                        self.$store.commit('loading',false);
+                        console.log(data)
+                    },
+                    error : function () {
+
+                    }
+                });
+            },
+            addInquiry : function (id,name) {
+//                LS.set('inquiry',[id,name])
+                this.$store.commit('inquiryChange',{id : id, name : name, type : 2});
+            }
+        },
+        watch:{
+            '$route':'getData'
+        },
+        computed : {
+            inquiryList () {
+                return this.$store.state.inquiryList
+            },
+            inquiryCount () {
+                return this.$store.state.inquiryCount
+            },
+        },
     }
 </script>
 

@@ -4,7 +4,7 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/" class="back">
+                <router-link to="/space/detail" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>

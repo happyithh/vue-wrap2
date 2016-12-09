@@ -18,27 +18,27 @@
             
             <div class="input-box">
                 <div class="base-info-name">手机号</div>
-                <input type="text" class="base-detail-name" placeholder="请输入11位手机号"/>
+                <input type="text"v-model='consult.phone' class="base-detail-name" placeholder="请输入11位手机号"/>
             </div>
             <div class="input-box">
                 <div class="base-info-name">短信验证码</div>
                 <div class="check-box">
-                    <input type="text" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码"/>
-                    <div  class="send-msg fr"><a href="">发送验证码</a></div>
+                    <input type="text" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码" v-model="consult.auth_code"/>
+                   <a href="javascript:;" class="send-msg fr" @click="sendPhoneCode">发送验证码</a>
                 </div>
              </div>
             <div class="input-box">
                 <div class="base-info-name">新密码</div>
-                <input type="text" class="base-detail-name" placeholder="输入新密码"/>
+                <input type="text" v-model="consult.password" class="base-detail-name" placeholder="输入新密码"/>
 
             </div>
             <div class="input-box">
                 <div class="base-info-name">确认密码</div>
-                <input type="text" class="base-detail-name" placeholder="请确认新密码"/>
+                <input type="text"v-model="consult.password_confirmation"  class="base-detail-name" placeholder="请确认新密码"/>
 
             </div>
             <div class="onekey-rentail-wrap">
-                    <a href="" class="btn-onekey">提交</a>
+                    <a href="javascript:;" class="btn-onekey" @click="submitConsult">提交</a>
             </div>
         </div>
         
@@ -50,11 +50,77 @@
     import 'assets/css.css'
     import 'assets/css/form.css'
     export default {
-      
+      name:'home',
         data () {
             return {
-               
+               consult:{
+                 phone:'',
+                 auth_code : '',
+                 password:'',
+                 password_confirmation:'',
+                 code_token : '',
+               },
             }
+        },
+        computed: {
+            personalData (){
+                return this.$store.state.personalData
+            },
+            loading(){
+                return this.$store.state.loading
+            },
+        },
+        methods:{
+            sendPhoneCode(e){
+                var self = this;
+                var success = function (data) {
+                    self.consult.code_token = data.data;
+                };
+                GlobleFun.sendPhoneCode(this.consult.phone,success,e.target)
+            },
+            submitConsult : function () {
+                var self = this;
+                if(!self.consult.phone){
+                    $.toptip('手机号不能为空!',2000,'error');
+                    return;
+                }
+                if(!self.consult.auth_code){
+                    $.toptip('验证码不能为空!',2000,'error');
+                    return;
+                }
+                if(!self.consult.code_token){
+                    $.toptip('请先获取验证码!',2000,'error');
+                    return;
+                }
+                if(!self.consult.password==self.consult.password_confirmation){
+                    $.toptip('两次密码不相同',2000,'error');
+                    return;
+                }
+                
+                $.post({
+                    url: window.YUNAPI.authPassword,
+                    data : self.consult,
+                    success: function (data) {
+                        var status = data.status == 1 ? 'success' : 'error';
+
+                        if(data.status == 1){
+                            $.alert({
+                                title: '提交成功',
+                                text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
+                                onOK: function () {
+                                    router.back()
+                                }
+                            });
+                        }else{
+                            $.toptip(data.message,2000,status);
+                        }
+
+                    },
+                    error : function () {
+
+                    }
+                });
+            },
         }
     }
            

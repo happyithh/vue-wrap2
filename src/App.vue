@@ -50,6 +50,7 @@
         spaceDtlOnly: host + 'api/spaces/detail',
         changeCollect: host + 'api/follows',
         articleZan: host + 'api/informations/add_like_amount',
+        authPassword:host + 'api/auth/password',
     };
 
     export default {

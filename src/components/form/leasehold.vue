@@ -16,22 +16,22 @@
 
        
         <!--表单填写-->
-        <form class="ifrom"  id='submit-demand'>
+        <form class="ifrom"  id='submit-consult'>
            <div class="base--detail ml">
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的称呼</div>
-                    <input type="text" class="base-detail-name red" v-model='demand.contact' placeholder="请输入您的真实姓名"/>
+                    <input type="text" class="base-detail-name red" v-model='consult.contact' placeholder="请输入您的真实姓名"/>
                    
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的联系方式</div>
-                    <input type="text" class="base-detail-name red" v-model='demand.phone' placeholder="请输入您的11位手机号"/>
+                    <input type="text" class="base-detail-name red" v-model='consult.phone' placeholder="请输入您的11位手机号"/>
                     <!--<div class="warning"><i class="icons icon-warningbg"></i>请输入正确的11位手机号码</div>-->
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>短信验证码</div>
                     <div class="check-box">
-                        <input type="text" class="base-detail-name send-msg1 fl red " v-model='demand.auth_code' placeholder="请输入6位验证码"/>
+                        <input type="text" class="base-detail-name send-msg1 fl red " v-model='consult.auth_code' placeholder="请输入6位验证码"/>
                         <div  class="send-msg fr" id="sendCode" @click="sendPhoneCode">发送验证码</div>
                     </div>
                     
@@ -40,7 +40,7 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动城市</div>
                     <div class="triangle">
-                        <select v-model="demand.order_city">
+                        <select v-model="consult.order_city">
                             <option v-for="item in searchCondition.cities":label="item.name":value="item.id">请选择目的地，城市</option>
                             <!--<option>上海</option>
                             <option>北京</option>
@@ -52,7 +52,7 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动人数</div>
                     <div class="triangle">
-                        <select v-model="demand.number_of_activities">
+                        <select v-model="consult.number_of_activities">
                             <option v-for="(value,key) in searchCondition.activity_people":label="value":value="key"></option>
                            
                         </select>
@@ -71,7 +71,7 @@
                     <div class="base-info-name"><span>*</span>活动类型</div>
                     
                     <div class="triangle">
-                        <select v-model="demand.activity_type">
+                        <select v-model="consult.activity_type">
                           <option v-for="(value,key) in searchCondition.activity_type":label="value":value="key"></option>
                         </select>
 
@@ -82,13 +82,13 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>其他要求</div>
                     <div class="advise">
-                        <textarea v-model='demand. activities_required' placeholder="请填写更多的详细信息，帮助您快速找到合适的场所"> </textarea>
+                        <textarea v-model='consult. activities_required' placeholder="请填写更多的详细信息，帮助您快速找到合适的场所"> </textarea>
                        <div class="font120">120字</div>
                     </div>
                     
                 </div>
                 <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" class="btn-onekey " @click="submitHoldEvent">提交</a>
+                    <a href="javascript:;" class="btn-onekey " @click="submitConsult">提交</a>
                 </div>
             </div>
            
@@ -101,36 +101,16 @@
         name: 'home',
         data () {
           return {
-                loginerror: '',
-                //是否记住密码
-                remember_paw: 1,
-                login_height: 500,
-                peoplenumbs: [
-                    111,222
-                ],
-                subjects:[
-                    1,2,3
-                ],
-                shownumbs: 0,
-                showtype: 0,
-                showcitys: 0,
-                showstate: 0,
-                showcooper:0,
-                demand : {
-                    phone : '',
-                    contact : '',
-                    order_city : 1,
-                    number_of_activities : "50",
-                    time : ['',''],
-                    user_id : 1,
-                    activity_type : 0,
-                    auth_code : '',
-                    activities_required : '',
-                    code_token : '',
-                    s_time:'',
-                    e_time:'',
-                    ip_city:'上海'
-                }
+                consult:{
+                    contact:'',
+                    phone:'',
+                    auth_code:'验证码',
+                    code_token:'token',
+                    order_city:'活动城市',
+                    number_of_activities:'活动人数',
+                    activity_type:'类型',
+                    activities_required:'其他要求',
+                    }
 
             }
        
@@ -149,113 +129,75 @@
                 self.$parent.loading = false;
             },300)
 
-            $('.pop-sucess').click(function () {
-                $.modal({
-                    title: "提交成功",
-                    text: "客服专员将尽快联系你，请耐心等待！<br>客服热线：400-056-0599",
-                    buttons: [
-                        { text: "关闭", onClick: function(){ console.log(1)} },
-
-                    ]
-                });
-            })
-            $(function() {
-
-                window.submitDemand = $("#submit-demand").validate({
-                    debug: false,
-                    errorElement: "div",
-                    errorPlacement: function(error, element) {
-                        error.addClass('warning').appendTo(element.parent("li"));
-                        error.parent('li').addClass('war')
-                    },
-                    success : function (e) {
-                        e.parents('li').removeClass('war');
-                        e.parents('li').find('.warning').remove();
-                    },
-                    rules : {
-                        phone : {
-                            required : true,
-//                            minlength : 11,
-                            // 自定义方法：校验手机号在数据库中是否存在
-                            // checkPhoneExist : true,
-                            isMobile : true
-                        },
-                    }
-                })
-            })
-            if(typeof this.$route.query.activity_type != 'undefined'){
-                this.demand.activity_type = this.$route.query.activity_type * 1
-            }
-            if(typeof this.$route.query.number_of_activities != 'undefined'){
-                this.demand.number_of_activities = this.$route.query.number_of_activities
-            }
+           
         },
         methods: {
-            //获取活动人数、类型
-            submitHoldEvent : function () {
-                 
+             sendPhoneCode(e){
                 var self = this;
-
-                if(!this.personalData.uid){ // 本地验证是否登陆
-                     console.log(1);
-                    this.$parent.showForm.login = true//?
-                   
-                    return
-                }
-
-                var isValid = $("#submit-demand").valid();
-
-                var sd = new Date(self.demand.time[0]);
-                var ed = new Date(self.demand.time[1]);
-                self.demand.s_time = sd.getFullYear() + '-' + (sd.getMonth() + 1) + '-' + sd.getDate() ;
-                self.demand.e_time = ed.getFullYear() + '-' + (ed.getMonth() + 1) + '-' + ed.getDate() ;
-
-                //验证是否登陆
-                self.demand.uid = this.personalData.uid
-                self.demand['access-token'] = this.personalData.access_token
-                self.demand.client= this.personalData.client
-
-                if(isValid){
-                    self.$parent.loading = true;
-                    $.post({
-                        url: window.YUNAPI.submitHoldEvent,
-                        data : self.demand,
-                        success: function (data) {
-
-                            self.$parent.loading = false;
-                            if (data.status == 1){
-                                self.$message({
-                                    message: data.message,
-                                    type: 'success'
-                                });
-//                                for( var key in self.demand){ // 提交成功清空数据
-//                                    self.demand[key] = ''
-//                                }
-                                router.push('/event')
-
-                            }else{
-                                self.$message({
-                                    message: data.message,
-                                    type: 'error'
-                                });
-                            }
-
-                        },
-                        error : function () {
-
-                        }
-                    });
-                }
+                var success = function (data) {
+                    self.consult.code_token = data.data;
+                };
+                GlobleFun.sendPhoneCode(this.consult.phone,success,e.target)
             },
-                sendPhoneCode : function () {
-                    var self = this;
-                    var success = function (data) {
-                        if (data.status == 1){
-                            self.demand.code_token = data.data;
+            submitConsult : function () {
+                var self = this;
+                if(!self.consult.the_contact){
+                    $.toptip('姓名不能为空!',2000,'error');
+                    return;
+                }
+                if(!self.consult.phone){
+                    $.toptip('手机号不能为空!',2000,'error');
+                    return;
+                }
+                if(!self.consult.auth_code){
+                    $.toptip('验证码不能为空!',2000,'error');
+                    return;
+                }
+                if(!self.consult.code_token){
+                    $.toptip('请先获取验证码!',2000,'error');
+                    return;
+                }
+                if(!self.consult.order_city){
+                    $.toptip('请先获取活动城市!',2000,'error');
+                    return;
+                }
+                if(!self.consult.number_of_activities){
+                    $.toptip('请先获取活动人数!',2000,'error');
+                    return;
+                }
+                if(!self.consult.activity_type){
+                    $.toptip('请先获取活动类型!',2000,'error');
+                    return;
+                }
+                if(!self.consult.consulting_content){
+                    $.toptip('其他要求不能为空!',2000,'error');
+                    return;
+                }
+                   $.post({
+                    url: window.YUNAPI.createBooking,
+                    data : self.consult,
+                    success: function (data) {
+                        var status = data.status == 1 ? 'success' : 'error';
+
+                        if(data.status == 1){
+                            $.alert({
+                                title: '提交成功',
+                                text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
+                                onOK: function () {
+                                    router.back()
+                                }
+                            });
+                        }else{
+                            $.toptip(data.message,2000,status);
                         }
-                    };
-                    GlobleFun.sendPhoneCode(self.demand.phone,success,'#sendCode');
-                },
+
+                    },
+                    error : function () {
+
+                    }
+                });
+            },
+               
 
         },
     }
