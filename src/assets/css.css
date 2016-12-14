@@ -8,7 +8,7 @@ address, caption, cite, code, dfn, em, strong, th, var {
     font-style:normal; font-weight:normal;
 }
 ol,ul,li { list-style:none; }
-input, textarea, select, button { font-size:14px; outline: none;border: none;display: inline-block;font-family: "PingFangHK-Thin", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif!important;}
+input, textarea, select, button { font-size:18px; outline: none;border: none;display: inline-block;font-family: "PingFangHK-Thin", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif!important;}
 a{ color:#000; text-decoration:none;display: block;}
 a,button{
     transition: all .5s;
@@ -56,6 +56,7 @@ select{
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/
     padding-right: 14px;
 }
+
 
 /*文字上下居中*/
 .display-center{

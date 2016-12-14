@@ -3,7 +3,7 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                 <router-link to="/" class="back">
+                 <router-link to="/order/Login" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -18,17 +18,21 @@
             
             <div class="input-box">
                 <div class="base-info-name">手机号</div>
-                <input type="text" class="base-detail-name" placeholder="请输入11位手机号"/>
+                <input type="text" class="base-detail-name"v-model='consult.mobile' placeholder="请输入11位手机号"/>
             </div>
              <div class="input-box">
                 <div class="base-info-name">短信验证码</div>
                 <div class="check-box">
-                    <input type="text" class="base-detail-name send-msg1 fl red " placeholder="请输入6位验证码"/>
-                    <div  class="send-msg fr"><a href="">40 S</a></div>
+                    <input type="text" class="base-detail-name send-msg1 fl red "v-model='consult.auth_code' placeholder="请输入6位验证码"/>
+                    <a href="javascript:;"class="send-msg fr"@click='sendPhoneCode'>发送验证码</a>
                 </div>
              </div>
             <div class="onekey-rentail-wrap">
-                    <a href="" class="btn-onekey">下一步</a>
+                <!--<router-link to="/" class="back">
+                    <i class="icons icon-arrowleft white"></i>
+                    返回
+                </router-link>-->
+                    <a href='javascript:;' class="btn-onekey"@click='authPassword'>下一步</a>
             </div>
         </div>
         
@@ -37,17 +41,56 @@
     
 </template>
 <script>
+
     import 'assets/css.css'
     import 'assets/css/form.css'
     export default {
       
         data () {
             return {
-               
+               consult:{
+                auth_code : '',
+                code_token : '',
+                mobile:'',
+                },
             }
-        }
+        },
+        methods:{
+            sendPhoneCode(e){
+                //console.log($(".base-detail-name").val())
+                window.localStorage.setItem("moble",$(".base-detail-name").val());
+                var self = this;
+                var success = function (data) {
+                    self.consult.code_token = data.data;
+                };
+                GlobleFun.sendPhoneCode(this.consult.mobile,success,e.target)
+            },
+       
+            authPassword : function (data) {
+                var self = this;
+                    if(!self.consult.mobile){
+                        $.toptip('手机号不能为空!',2000,'error');
+                        return;
+                    }
+                    if(!self.consult.code_token){
+                        $.toptip('请先获取验证码!',2000,'error');
+                        return;
+                    }
+                    if(!self.consult.auth_code){
+                        $.toptip('验证码不能为空!',2000,'error');
+                        return;
+                    }
+                    if(self.consult.auth_code.length<6){
+                        $.toptip('验证码错误!',2000,'error');
+                        return;
+                    }
+                    if(self.consult.auth_code&&self.consult.code_token){
+                        window.location.href='/form/passwordreset';
+                    }
+             }
+         }
     }
-           
+       
     
 </script>
 <style scoped>
@@ -82,6 +125,7 @@
         padding:17px 15px 0;
         
     }
+    
     
 
 </style>

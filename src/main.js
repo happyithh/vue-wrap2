@@ -61,7 +61,7 @@ window.router = new VueRouter({
         },
         {
             path: '/space/detail/:id',
-            component: (resolve) => require(['./components/space/space-detail.vue'], resolve)
+            component: (resolve) => require(['./components/space/space-detail'], resolve)
         },
         {
             path: '/place',
@@ -86,6 +86,10 @@ window.router = new VueRouter({
         {
             path: '/form/collect',
             component: (resolve) => require(['./components/form/collect'], resolve)
+        },
+        {
+            path: '/form/suggestion',
+            component: (resolve) => require(['./components/form/suggestion'], resolve)
         },
         {
             path: '/form/case-article',
@@ -120,13 +124,23 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/form/passwordfind'], resolve)
         },
         {
-            path: '/form/account',
-            component: (resolve) => require(['./components/form/account'], resolve)
+            path: '/form/RegForm',
+            component: (resolve) => require(['./components/form/RegForm'], resolve)
         },
         {
             path: '/form/space-list',
             component: (resolve) => require(['./components/form/space-list'], resolve)
         },
+        
+        {
+            path: '/order/Login',
+            component: (resolve) => require(['./components/order/Login'], resolve)
+        },
+         {
+            path: '/order/checkCodeLogin',
+            component: (resolve) => require(['./components/order/checkCodeLogin'], resolve)
+        },
+        
     ]
 })
 

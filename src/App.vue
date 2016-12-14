@@ -16,7 +16,7 @@
     import 'assets/css/weui-change.css';
 
     //    const host = "http://api.yunspace.com.cn/";
-    const host = "http://172.16.0.141:3000/";
+    const host = "http://172.16.141:3000/";
 
     window.YUNAPI = {
         host: host,
@@ -50,7 +50,10 @@
         spaceDtlOnly: host + 'api/spaces/detail',
         changeCollect: host + 'api/follows',
         articleZan: host + 'api/informations/add_like_amount',
-        authPassword:host + 'api/auth/password',
+        authPassword: host + 'api/auth/password',
+        createRetail: host+'api/demands/create_retail',
+        checkCode:host+'api/auth_codes/check_code',
+       
     };
 
     export default {
@@ -75,7 +78,9 @@
             self.$store.commit('getSelectedCity');
 
             $.ajax({
-                url: window.YUNAPI.tags, context: document.body, success: function (data) {
+                url: window.YUNAPI.tags,
+                context: document.body,
+                success: function (data) {
                     self.$store.state.searchCondition = data;
                     self.$store.state.cities = data.cities
                 }

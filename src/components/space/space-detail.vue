@@ -42,75 +42,38 @@
          <div class="infor-show" >
            <div class="base-info"  >空间配套</div>
            
-                <div class="pic-icon">
-                <img src="/static/images/icon/wc.png" alt=""/>
-                <div class="pic-icon-exp">{{spaceDtl.supporting_facilities}}</div>
+                <div class="pic-icon" v-for="item in arrSort">
+                <!--<img src="/static/images/icon/wc.png" alt=""/>-->
+                <img :src="'/static/images/assort/'+assortList[item]+'.png'" alt=""/>
+                <div class="pic-icon-exp">{{item}}</div>
             </div>
-            <!--<div class="pic-icon">
-                <img src="/static/images/icon/dressing_room.png" alt=""/>
-                <div class="pic-icon-exp">化妆间</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/rest.png" alt=""/>
-                <div class="pic-icon-exp">休息室</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/ceiling.png" alt=""/>
-                <div class="pic-icon-exp">吊点</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/air_conditioning.png" alt=""/>
-                <div class="pic-icon-exp">空调暖气</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/wifi.png" alt=""/>
-                <div class="pic-icon-exp">Wi-Fi</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/parking.png" alt=""/>
-                <div class="pic-icon-exp">停车位</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/lift.png" alt=""/>
-                <div class="pic-icon-exp">货运电梯</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/led.png" alt=""/>
-                <div class="pic-icon-exp">投影LED</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/video.png" alt=""/>
-                <div class="pic-icon-exp">灯光音响</div>
-            </div>
-            <div class="pic-icon">
-                <img src="/static/images/icon/drink.png" alt=""/>
-                <div class="pic-icon-exp">餐饮</div>
-            </div>-->
-               
+           
         </div>
         <div class="infor-show">
             <div class="base-info">预定须知</div>
            <div class="pic-icon-exp pic-icon-expl">{{spaceDtl.booking_notes}}</div>
             
         </div>
+        <!--场地详情相关案例数据-->
         <div class="infor-show">
             <div class="base-info">场地相关案例</div>
             <div class="selectedtopic-cont about-cases">
                  
                     <div class="swiper-wrapper swiper-container">
-                        <div class="swiper-slide" v-for="item in spaceDtl.img_paths">
-                        <a href="../../article">
-                            <img src="/static/images/test.png" alt=""/>
-                            <h3>{{spaceDtl.relate_cases}}</h3>
-                         </a>
+                        <div class="swiper-slide"  v-for="item in placeDtl">
+                            <router-link :to="item.img_paths.url ? item.img_paths.url : '/article/' + item.id">
+                            <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_420_300'] : ''">
+
+                            <h3>{{item.title}}</h3>
+                        </router-link>
                         </div>
                     </div>
                 
             </div>
         </div>  
-         <div class="infor-show1">
+         <div class="infor-show1 fixed">
             <a href="javascript:;" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
-            <a href="javascrip" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
+            <a href="javascript:;" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
             
         </div>
 
@@ -123,12 +86,12 @@
         </div>
 
         
-        <div class="infor-show infor-show-shadow fixed">
+        <div class="infor-show infor-show-shadow">
            <div class="infor-price fl">
                <span>{{spaceDtl.market_price_real}}{{spaceDtl.units}}</span>
                <p class="price-underline clearfix ">{{spaceDtl.market_price}}</p>
             </div>
-             <router-link to="/form/askprice" class="btn-onekey fr">
+             <router-link to="/form/askprice"id='aksprice' class="btn-onekey fr">
                 一键询价
              </router-link>
         </div>
@@ -151,16 +114,26 @@
         data () {
             return {
                 
-                phone: '',
-                password: '',
-                username: '',
-                activeTab:'空间详情',
+                 assortList: {
+                    '卫生间':'wc',
+                    '化妆间':'dressing_room',
+                    '休息室':'rest',
+                    '空调暖气':'air_conditioning',
+                    '网络WIFI':'wifi',
+                    '投影LED':'led',
+                    '灯光音响':'video',
+                    '空间吊点':'ceiling',
+                    '停车泊位':'parking',
+                    '货运电梯':'lift',
+                    '餐饮':'drink'
+                },
+                arrSort:[],
                 spacesubs: [
                     1, 2, 3, 4
                 ],
                 spaceDtl : [],
                 otherSpace : [],
-                
+                placeDtl : [],
 
             }
         },
@@ -169,6 +142,7 @@
             self.init1();//调用轮播
             self.init2();//调用轮播
             this.getData();//调用数据
+            this.getCase();//调用case
         },
         methods:{
             /*顶部轮播*/
@@ -204,18 +178,53 @@
 //                    freeMode: true
                 });
             },
+            isLogig:function(){
+                $("#aksprice").click=function(){
+                         alert('1');
+                }
+                   
+                
+            },
+
             
             getData(){
                 var self = this;
+               
                 self.$store.commit('loading',true);
                 $.get({
                     url: window.YUNAPI.SpaceDtl +'/'+ this.$route.params.id,
+                    //  url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
+               
                     data : {},
                     success: function (data) {
+                        //  console.log(data);
+                        // self.placeDtl = data.site
                         self.spaceDtl = data.space;
-                        self.otherSpace = data.other_spaces
+                        self.otherSpace = data.other_spaces;
+                        //场地配套
+                        if(self.spaceDtl.facilities){
+                            self.arrSort=self.spaceDtl.facilities.split(',');
+                        }
                         self.$store.commit('loading',false);
-                        console.log(data)
+                        // console.log(data)
+                    },
+                    error : function () {
+
+                    }
+                });
+            },
+            getCase(){
+                var self = this;
+                self.$store.commit('loading',true);
+                $.get({
+                    // url: window.YUNAPI.SpaceDtl +'/'+ this.$route.params.id,
+                    url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
+                    data : {},
+                    success: function (data) {
+                        //  console.log(data);
+                        self.placeDtl = data.relate_cases; 
+                        self.$store.commit('loading',false);
+                       
                     },
                     error : function () {
 

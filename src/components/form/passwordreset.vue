@@ -3,7 +3,7 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                 <router-link to="/" class="back">
+                 <router-link to="/form/passwordfind" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -18,16 +18,16 @@
             
             <div class="input-box">
                 <div class="base-info-name">新密码</div>
-                <input type="text" class="base-detail-name" placeholder="输入新密码"/>
+                <input type="password" class="base-detail-name" v-model='consult.password' placeholder="输入新密码"/>
 
             </div>
             <div class="input-box">
                 <div class="base-info-name">确认密码</div>
-                <input type="text" class="base-detail-name" placeholder="请确认新密码"/>
+                <input type="password" class="base-detail-name"v-model='consult.password_confirmation' placeholder="请确认新密码"/>
 
             </div>
             <div class="onekey-rentail-wrap">
-                    <a href="" class="btn-onekey">提交</a>
+                    <a href="javascript:;" class="btn-onekey"@click='authPassword'>提交</a>
             </div>
         </div>
         
@@ -42,8 +42,64 @@
       
         data () {
             return {
-               
+               consult:{
+                // type:'sms',
+                password:'',
+                // mobile:'',
+                password_confirmation:'',
+                
+               },
             }
+        },
+         methods:{
+            sendPhoneCode(e){
+                var self = this;
+              
+                var success = function (data) {
+                    self.consult.code_token = data.data;
+                };
+                GlobleFun.sendPhoneCode(this.consult.mobile,success,e.target)
+            },
+            authPassword : function () {
+                var self = this;
+                    if(!self.consult.password){
+                        $.toptip('请输入新密码',2000,'error');
+                        return;
+                    }
+                    if(self.consult.password.length<6){
+                        $.toptip('新密码不能少于6位',2000,'error');
+                        return;
+                    }
+                    if(!self.consult.password_confirmation){
+                        $.toptip('请确认新密码',2000,'error');
+                        return;
+                    }
+                   
+                    if(self.consult.password!=self.consult.password_confirmation){
+                        $.toptip('两次密码不相同',2000,'error');
+                        return;
+                    }
+                     $.post({
+                        // type:'put',
+                        url: window.YUNAPI.authPassword,
+                        data : self.consult,
+                        success: function (data) {
+                            var status = data.status == 1 ? 'success' : 'error';
+
+                            if(data.status == 1){
+                                $.location.href='';
+                            }else{
+                                $.toptip(data.message,2000,status);
+                            }
+
+                        },
+                        error : function () {
+
+                        }
+                    });
+                
+            },
+           
         }
     }
            

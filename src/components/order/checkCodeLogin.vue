@@ -3,13 +3,13 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                 <router-link to="/form/personal-center" class="back">
+                 <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
             </div>
             <div class="fl center">
-                <h1 class="display-center">密码设置</h1>
+                <h1 class="display-center">验证码</h1>
             </div>
             
             
@@ -18,27 +18,31 @@
             
             <div class="input-box">
                 <div class="base-info-name">手机号</div>
-                <input type="text"v-model='consult.mobile' class="base-detail-name" placeholder="请输入11位手机号"/>
+                <input type="text" class="base-detail-name" v-model='consult.mobile' placeholder="请输入11位手机号"/>
+
             </div>
-            <div class="input-box">
+           <div class="input-box">
                 <div class="base-info-name">短信验证码</div>
                 <div class="check-box">
-                    <input type="text" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码" v-model="consult.auth_code"/>
-                   <a href="javascript:;" class="send-msg fr" @click="sendPhoneCode">发送验证码</a>
+                    <input type="text" class="base-detail-name send-msg1 fl red "v-model='consult.auth_code' placeholder="请输入6位验证码"/>
+                    <a href="javascript:;"class="send-msg fr"@click='sendPhoneCode'>发送验证码</a>
                 </div>
              </div>
-            <div class="input-box">
-                <div class="base-info-name">新密码</div>
-                <input type="password" v-model="consult.password" class="base-detail-name" placeholder="输入新密码"/>
-
+            <div class="remeberBox clearfix">
+                <div class="fl checkBox"@click='checked'>
+                    <input class="fl " type="checkbox" />
+                    <p class="fl">记住我</p>
+                </div>
+                <div class="forgetBox fl"><a href="/form/passwordfind">忘记密码？</a></div>
             </div>
-            <div class="input-box">
-                <div class="base-info-name">确认密码</div>
-                <input type="password"v-model="consult.password_confirmation"  class="base-detail-name" placeholder="请确认新密码"/>
-
+            <div class="onekey-rentail-wrap clearfix">
+                    <a href="javascript:;" class="btn-onekey"@click='login'>登录</a>
             </div>
-            <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" class="btn-onekey" @click="authPassword">提交</a>
+            <div class="remeberBox clearfix">
+                <div class="fl checkBox">
+                    <p><a href="/form/RegForm">创建账号</a></p>
+                </div>
+                <div class="forgetBox fl"><a href="/order/checkCodeLogin">改用验证码登录</a></div>
             </div>
         </div>
         
@@ -50,44 +54,36 @@
     import 'assets/css.css'
     import 'assets/css/form.css'
     export default {
-      name:'home',
+      
         data () {
             return {
-               consult:{
-                type:'sms',
-                auth_code : '',
-                code_token : '',
-                password:'',
-                mobile:'',
-                password_confirmation:'',
-                
+                consult:{
+                    auth_code:'',
+                    code_token:'',
+                    mobile:'',
+                    sign_in_type:'sms',
                },
             }
         },
-        computed: {
-            personalData (){
-                return this.$store.state.personalData
+         methods:{
+             checked:function(){
+                    var self = this;
+                    $(self).hasClass("checkedBox")? $(self).removeClass("checkedBox"):$(self).addClass("checkedBox");
             },
-            loading(){
-                return this.$store.state.loading
-            },
-        },
-        methods:{
+            
             sendPhoneCode(e){
                 var self = this;
-              
                 var success = function (data) {
                     self.consult.code_token = data.data;
                 };
                 GlobleFun.sendPhoneCode(this.consult.mobile,success,e.target)
             },
-            authPassword : function () {
+            login : function () {
                 var self = this;
-                    if(!self.consult.mobile){
-                        $.toptip('手机号不能为空!',2000,'error');
+                if(!self.consult.mobile){
+                        $.toptip('请输入手机号',2000,'error');
                         return;
                     }
-                    
                     if(!self.consult.code_token){
                         $.toptip('请先获取验证码!',2000,'error');
                         return;
@@ -96,32 +92,25 @@
                         $.toptip('验证码不能为空!',2000,'error');
                         return;
                     }
-                    if(!self.consult.password){
-                        $.toptip('请输入新密码且不少于6位',2000,'error');
+                    if(self.consult.auth_code.length<6){
+                        $.toptip('验证码错误!',2000,'error');
                         return;
                     }
-                    if(!self.consult.password_confirmation){
-                        $.toptip('请确认新密码',2000,'error');
-                        return;
-                    }
-                   
-                    if(!self.consult.password==self.consult.password_confirmation){
-                        $.toptip('两次密码不相同',2000,'error');
-                        return;
-                    }
-                     $.ajax({
-                        type:'put',
-                        url: window.YUNAPI.authPassword,
+                    $.post({
+                        // type:'put',
+                        url: window.YUNAPI.login,
                         data : self.consult,
                         success: function (data) {
                             var status = data.status == 1 ? 'success' : 'error';
 
                             if(data.status == 1){
-                                $.alert({
-                                    title: '提交成功',
-                                    text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
+                               $.alert({
+                                    title: '登录成功',
+                                    // text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                     onOK: function () {
-                                        router.back()
+                                        // router.back()
+                                        window.location.href='/';
+                                        // setTimeout('',5000)
                                     }
                                 });
                             }else{
@@ -173,6 +162,43 @@
         padding:17px 15px 0;
         
     }
+    .remeberBox{
+        width:100%;
+        height:50px;
+        font-size:.9rem;
+       color: #999999;
+    }
+    .remeberBox a{
+        color: #999999;
+    }
+    .checkBox, .forgetBox{
+        margin-top: 10px;
+        width:50%;
+        height: 50px;
+
+    }
+    .checkBox input{
+        width:20px;
+        height:20px;
+        border: 1px solid #999999;
+    }
+    .checkedBox {
+        background: url('/static/images/icon/selected.png');
+     }
+    .checkBox p{ 
+         margin-left: 10px;
+         font-size: .9rem;
+    }
+    .forgetBox{
+        text-align: right;
+    }
+    .onekey-rentail-wrap{
+        padding:0;
+    }
+   
+    
+    
+
     
 
 </style>

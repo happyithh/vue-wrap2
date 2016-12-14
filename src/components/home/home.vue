@@ -18,7 +18,7 @@
                 <div class="logo"><img src="/static/images/logo.png"></div>
             </div>
             <div class="right fr">
-                <a class="in" href="javascript:;">登录/注册</a>
+                <a class="in" href="/order/Login">登录/注册</a>
             </div>
         </header>
 

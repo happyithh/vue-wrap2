@@ -38,7 +38,7 @@
                     </div>
                 </div>
            </router-link>
-            <router-link to="/form/待写" class="back">
+            <router-link to="/form/suggestion" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
                         <img class="fl mt" src="/static/images/icon/feed_back.png" alt=""/>

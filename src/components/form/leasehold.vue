@@ -32,7 +32,7 @@
                     <div class="base-info-name"><span>*</span>短信验证码</div>
                     <div class="check-box">
                         <input type="text" class="base-detail-name send-msg1 fl red " v-model='consult.auth_code' placeholder="请输入6位验证码"/>
-                        <div  class="send-msg fr" id="sendCode" @click="sendPhoneCode">发送验证码</div>
+                       <a href="javascript:;" class="send-msg fr" @click="sendPhoneCode">发送验证码</a>
                     </div>
                     
                    
@@ -41,11 +41,8 @@
                     <div class="base-info-name"><span>*</span>活动城市</div>
                     <div class="triangle">
                         <select v-model="consult.order_city">
-                            <option v-for="item in searchCondition.cities":label="item.name":value="item.id">请选择目的地，城市</option>
-                            <!--<option>上海</option>
-                            <option>北京</option>
-                            <option>深圳</option>
-                            <option>成都</option>-->
+                            <option value="">请选择目的地，城市</option>
+                            <option v-for="item in searchCondition.cities":value="item.id">{{item.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -53,6 +50,7 @@
                     <div class="base-info-name"><span>*</span>活动人数</div>
                     <div class="triangle">
                         <select v-model="consult.number_of_activities">
+                             <option value="">请选择活动人数</option>
                             <option v-for="(value,key) in searchCondition.activity_people":label="value":value="key"></option>
                            
                         </select>
@@ -64,7 +62,7 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动时间</div>
-                    <input type="text" class="base-detail-name" placeholder="请选择日期范围"/>
+                    <input type="text" class="base-detail-name"id='my-input' v-model="consult.time" placeholder="请选择日期范围"/>
                    
                 </div>
                 <div class="input-box">
@@ -72,6 +70,7 @@
                     
                     <div class="triangle">
                         <select v-model="consult.activity_type">
+                             <option value="">请选择活动类型</option>
                           <option v-for="(value,key) in searchCondition.activity_type":label="value":value="key"></option>
                         </select>
 
@@ -82,13 +81,13 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>其他要求</div>
                     <div class="advise">
-                        <textarea v-model='consult. activities_required' placeholder="请填写更多的详细信息，帮助您快速找到合适的场所"> </textarea>
+                        <textarea v-model='consult.activities_required' placeholder="请填写更多的详细信息，帮助您快速找到合适的场所"> </textarea>
                        <div class="font120">120字</div>
                     </div>
                     
                 </div>
                 <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" class="btn-onekey " @click="submitConsult">提交</a>
+                    <a href="javascript:;" class="btn-onekey " @click="inquiryContent">提交</a >
                 </div>
             </div>
            
@@ -104,18 +103,24 @@
                 consult:{
                     contact:'',
                     phone:'',
-                    auth_code:'验证码',
-                    code_token:'token',
-                    order_city:'活动城市',
-                    number_of_activities:'活动人数',
-                    activity_type:'类型',
-                    activities_required:'其他要求',
+                    auth_code:'',
+                    code_token:'',
+                    time : ['',''],
+                    order_city:'',
+                    number_of_activities:'',
+                    activity_type:'',
+                    activities_required:'',
+                    s_time:'time[0]',
+                    e_time:'time[1]',
                     }
 
             }
        
         },
          computed : {
+            cities (){
+                return this.$store.state.cities
+            },
             searchCondition (){
                 return this.$store.state.searchCondition
             },
@@ -128,10 +133,11 @@
             setTimeout(function () {
                 self.$parent.loading = false;
             },300)
-
+        
            
         },
         methods: {
+            
              sendPhoneCode(e){
                 var self = this;
                 var success = function (data) {
@@ -139,9 +145,10 @@
                 };
                 GlobleFun.sendPhoneCode(this.consult.phone,success,e.target)
             },
-            submitConsult : function () {
+                 
+            inquiryContent : function () {
                 var self = this;
-                if(!self.consult.the_contact){
+                if(!self.consult.contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
                 }
@@ -149,14 +156,15 @@
                     $.toptip('手机号不能为空!',2000,'error');
                     return;
                 }
-                if(!self.consult.auth_code){
-                    $.toptip('验证码不能为空!',2000,'error');
-                    return;
-                }
                 if(!self.consult.code_token){
                     $.toptip('请先获取验证码!',2000,'error');
                     return;
                 }
+                if(!self.consult.auth_code){
+                    $.toptip('验证码不能为空!',2000,'error');
+                    return;
+                }
+                
                 if(!self.consult.order_city){
                     $.toptip('请先获取活动城市!',2000,'error');
                     return;
@@ -165,21 +173,26 @@
                     $.toptip('请先获取活动人数!',2000,'error');
                     return;
                 }
+                if(!self.consult.time){
+                    $.toptip('请选择时间!',2000,'error');
+                    return;
+                }
                 if(!self.consult.activity_type){
                     $.toptip('请先获取活动类型!',2000,'error');
                     return;
                 }
-                if(!self.consult.consulting_content){
+                if(!self.consult.activities_required){
                     $.toptip('其他要求不能为空!',2000,'error');
                     return;
                 }
                    $.post({
-                    url: window.YUNAPI.createBooking,
+                    url: window.YUNAPI.inquiryContent,
                     data : self.consult,
                     success: function (data) {
                         var status = data.status == 1 ? 'success' : 'error';
-
+                         console.log(self.consult.time)
                         if(data.status == 1){
+                           
                             $.alert({
                                 title: '提交成功',
                                 text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
