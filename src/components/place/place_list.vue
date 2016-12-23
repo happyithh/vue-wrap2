@@ -119,7 +119,7 @@
                 $.ajax({
                     url: window.YUNAPI.placeDtl,
                     success: function (data) {
-                        //console.log(data.sites)
+                        console.log(data.sites)
                         self.places = data.sites
                     }
                 })

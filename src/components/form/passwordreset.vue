@@ -14,8 +14,7 @@
             
             
         </header>
-        <div class="personal-box">
-            
+        
             <div class="input-box">
                 <div class="base-info-name">新密码</div>
                 <input type="password" class="base-detail-name" v-model='consult.password' placeholder="输入新密码"/>
@@ -27,7 +26,7 @@
 
             </div>
             <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" class="btn-onekey"@click='authPassword'>提交</a>
+                    <a class="btn-onekey"@click='authPassword'>提交</a>
             </div>
         </div>
         
@@ -47,9 +46,18 @@
                 password:'',
                 // mobile:'',
                 password_confirmation:'',
-                
+
+                mobile:'',
                },
             }
+        },
+        computed:{
+             personalData (){
+                return this.$store.state.personalData
+            },
+        },
+        mounted(){
+             this.consult.mobile = this.personalData.mobile
         },
          methods:{
             sendPhoneCode(e){
@@ -60,6 +68,10 @@
                 };
                 GlobleFun.sendPhoneCode(this.consult.mobile,success,e.target)
             },
+             getPersonalData(data){
+                this.$store.commit('getPersonalData',data)
+            // router.replace('/')
+            }, 
             authPassword : function () {
                 var self = this;
                     if(!self.consult.password){
@@ -82,12 +94,25 @@
                      $.post({
                         // type:'put',
                         url: window.YUNAPI.authPassword,
-                        data : self.consult,
+                        //data : self.consult,
+                        
                         success: function (data) {
+                           // console.log(self.consult)
+                           // data=self.consult;
+                            data:self.consult;
+                            console.log(data)
+                           // console.log( data==self.consult)
                             var status = data.status == 1 ? 'success' : 'error';
-
                             if(data.status == 1){
-                                $.location.href='';
+                                $.alert({
+                                    title: '密码设置成功',
+                                    text: '请重新登录',
+                                    onOK: function () {
+                                         router.replace('/order/Login')
+                                        setTimeout('',5000)
+                                    },
+                                
+                                });
                             }else{
                                 $.toptip(data.message,2000,status);
                             }

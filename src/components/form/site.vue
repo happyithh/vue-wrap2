@@ -113,6 +113,26 @@
                     {}
                 ]
             }
+        },
+         methods:{
+                collectList : function(){
+                    var self = this;
+                        $.get({
+                            // type:'put',
+                            url: window.YUNAPI.collection+'.json',
+                        data : GlobleFun.objConcat(this.$store.getters.validationData,{
+                                followable_type:'Space',
+                                page:1,
+                                i_types:40
+                            }
+                                ),
+                            success: function (data,status,xhr) {
+                                console.log(data)
+                            }   
+                        });
+                    
+                
+            },
         }
     }
 

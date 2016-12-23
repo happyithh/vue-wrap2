@@ -3,7 +3,7 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/" class="back">
+                <router-link to="/space/detail/1" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -14,39 +14,39 @@
         </header>
         <div class="inquiry-list">
             <ul>
-                <li class="clearfix" v-for="item in recommendSite">
-                    <div class="local-price"><strong>{{item.lower_price}}</strong> {{item.title}}</div>
+                <li class="clearfix" v-for="item in inquiryList">
+                    <div class="local-price"><strong>{{item[0]}}元/天</strong> {{item[1]}}</div>
                     <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 {{item.max_people}}人</div>
-                         <div class='max-square fl ml10'>面积 {{item.max_size}}㎡</div>
-                          <div class='add fl ml10'>地址 {{item.address}}</div>
+                        <div class='max-people fl ml10'>最大容纳 {{item[3]}}人</div>
+                         <div class='max-square fl ml10'>面积 {{item[4]}}㎡</div>
+                          <div class='add fl ml10'>地址 {{item[5]}}</div>
                     </div>
                 </li>
             </ul>
         </div>
         <!--表单填写-->
-        <div class="ifrom">
+        <form class="ifrom">
             <div class="base-info-tit">基本信息</div>
             <div class="base--detail">
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的称呼</div>
-                    <input type="text" class="base-detail-name" placeholder="请输入您的真实姓名"/>
+                    <input type="text" v-model='consult.contact' class="base-detail-name" placeholder="请输入您的真实姓名"/>
 
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>您的联系方式</div>
-                    <input type="text" class="base-detail-name" placeholder="请输入您的11位手机号"/>
+                    <input type="text" v-model='consult.phone' class="base-detail-name" placeholder="请输入您的11位手机号"/>
 
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>邮箱</div>
-                    <input type="text" class="base-detail-name" placeholder="请填写您的邮箱地址"/>
+                    <input type="text" v-model='consult.email' class="base-detail-name" placeholder="请填写您的邮箱地址"/>
                 </div>
                <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" class="btn-onekey pop-sucess">提交</a>
+                    <a href="javascript:;" class="btn-onekey pop-sucess" @click='createInquiry'>提交</a>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 <script>
@@ -56,52 +56,97 @@
         data () {
             return {
                 recommendSite : [],//定义变量
+                inquiryListChange : {},
+                inquiryList:[],
+                area:'',
+                address:'',
+                consult:{
+                    email:'',
+                    access_token:'',
+                    uid:'',
+                  
+                },
+                Max_seating_capacity:'',
+                site_name:'',
+                
+                market_price_real:'',
+                
+                contact:'',
                 phone:'',
-                password:'',
-                username:'',
 
             }
-        },
-        mounted () {
-            var self = this;
-
-            $('.pop-sucess').click(function () {
-                $.modal({
-                    title: "提交成功",
-                    text: "客服专员将尽快联系你，请耐心等待！<br>客服热线：400-056-0599",
-                    buttons: [
-                        { text: "关闭", onClick: function(){ console.log(1)} },
-
-                    ]
-                });
-            })
-
-        },
-         mounted () {
-            var self = this;
-            self.getData()
         },
         computed:{
+            inquiryList () {
+                console.log(this.$store.getters.inquiryList)
+                return this.$store.getters.inquiryList
+            },
+            personalData (){
+                return this.$store.state.personalData
+            }
 
         },
+        mounted(){
+            //获取 询价 列表
+            var e = {}
+            for( var i in this.inquiryList){
+                e[i] = true
+            }
+            this.inquiryListChange = e;
+        },
+        // },
         methods:{
-            getData(){
-                var self = this
-                $.ajax({
-                    url: window.YUNAPI.home,
-                    data: {
-                        city_id: self.$store.state.city_id,
-                
+           
+            createInquiry : function () {
+                var self = this;
+                if(!self.consult.contact){
+                    $.toptip('姓名不能为空!',2000,'error');
+                    return;
+                }
+                if(!self.consult.phone){
+                    $.toptip('手机号不能为空!',2000,'error');
+                    return;
+                }
+                 if(!self.consult.email){
+                    $.toptip('邮箱地址不能为空!',2000,'error');
+                    return;
+                }
+                var self = this;
+                $.post({
+                    url: 'http://api.yunspace.com.cn/api/users/1/demands',
+                    //data : self.consult,
+                    data : self.$store.getters.validationData,
+                    success: function (data,status,xhr) {
+                        console.log(self.$store.getters.validationData)
+                        var status = data.status == 1 ? 'success' : 'error';
+                        if(data.status == 1){
+                           
+                            $.alert({
+                                title: '提交成功',
+                                text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
+                                onOK: function () {
+                                    router.back()
+                                }
+                            });
+                        }else{
+                            $.toptip(data.message,2000,status);
+                        }
 
                     },
-                    success: function (data) {
-                        console.log(data)
-                        self.recommendSite = data.home_recommend_site
-                        
-                        
+                     getPersonalData(data){
+                            this.$store.commit('getPersonalData',data)
+                        // router.replace('/')
+                    }, 
+                    error : function () {
+
                     }
-                })
-            }
+                });
+           
+            
+                
+                
+                  
+            },
         }
     }
            
@@ -111,7 +156,7 @@
     .inquiry-list li{
         background: #f4f4f4;
         padding: 15px;
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid #ffffff;
     }
     .local-price{
         font-size: 0.9rem;
@@ -122,7 +167,7 @@
     }
     .local-price-detail{
         font-size: 0.8rem;
-        color: #666;
+        color: #666666;
     }
     .local-price-detail .fl{
         margin-right: 10px;

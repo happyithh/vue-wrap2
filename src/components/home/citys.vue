@@ -79,6 +79,7 @@
             })
         },
         methods: {
+          
             cityChange(id){
                 this.$store.commit('cityChange',id)
                 router.replace('/')

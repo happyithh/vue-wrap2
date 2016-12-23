@@ -62,8 +62,8 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动时间</div>
-                    <input type="text" class="base-detail-name"id='my-input' v-model="consult.time" placeholder="请选择日期范围"/>
-                   
+                    <input type="text" readonly  class="base-detail-name data_time weui_input" id='s_input'  v-model="consult.s_time" placeholder="开始时间" />
+                    <input type="text" readonly class="base-detail-name data_time weui_input" id='e_input' v-model="consult.e_time" placeholder="结束时间" />
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动类型</div>
@@ -81,6 +81,7 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>其他要求</div>
                     <div class="advise">
+                        
                         <textarea v-model='consult.activities_required' placeholder="请填写更多的详细信息，帮助您快速找到合适的场所"> </textarea>
                        <div class="font120">120字</div>
                     </div>
@@ -105,13 +106,13 @@
                     phone:'',
                     auth_code:'',
                     code_token:'',
-                    time : ['',''],
+                  
                     order_city:'',
                     number_of_activities:'',
                     activity_type:'',
                     activities_required:'',
-                    s_time:'time[0]',
-                    e_time:'time[1]',
+                    s_time:'',
+                    e_time:'',
                     }
 
             }
@@ -130,22 +131,30 @@
         },
           mounted () {
             var self = this;
+            $('#s_input').calendar({});
+            $('#e_input').calendar({});
             setTimeout(function () {
                 self.$parent.loading = false;
             },300)
-        
-           
         },
         methods: {
-            
-             sendPhoneCode(e){
+            sendPhoneCode(e){
                 var self = this;
                 var success = function (data) {
                     self.consult.code_token = data.data;
                 };
                 GlobleFun.sendPhoneCode(this.consult.phone,success,e.target)
             },
-                 
+            getStartData:function(){
+                $('#s_input').calendar({
+                    
+                });
+            },
+            getEndData:function(){
+                $('#e_input').calendar({
+                    
+                });
+            },
             inquiryContent : function () {
                 var self = this;
                 if(!self.consult.contact){
@@ -173,10 +182,14 @@
                     $.toptip('请先获取活动人数!',2000,'error');
                     return;
                 }
-                if(!self.consult.time){
-                    $.toptip('请选择时间!',2000,'error');
-                    return;
-                }
+                // if(!self.consult.s_time){
+                //     $.toptip('请选择开始时间!',2000,'error');
+                //     return;
+                // }
+                // if(!self.consult.e_time){
+                //     $.toptip('请选择结束时间!',2000,'error');
+                //     return;
+                // }
                 if(!self.consult.activity_type){
                     $.toptip('请先获取活动类型!',2000,'error');
                     return;
@@ -190,7 +203,7 @@
                     data : self.consult,
                     success: function (data) {
                         var status = data.status == 1 ? 'success' : 'error';
-                         console.log(self.consult.time)
+                         console.log(self.consult)
                         if(data.status == 1){
                            
                             $.alert({
@@ -250,5 +263,10 @@
 .warning .icon-warningbg{
     margin-top: 6px;
 }
-
+.data_time{
+    width: 49%;
+}
+.weui_input{
+    font-size:.9rem;
+}
 </style>

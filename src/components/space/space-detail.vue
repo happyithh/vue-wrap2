@@ -91,9 +91,9 @@
                <span>{{spaceDtl.market_price_real}}{{spaceDtl.units}}</span>
                <p class="price-underline clearfix ">{{spaceDtl.market_price}}</p>
             </div>
-             <router-link to="/form/askprice"id='aksprice' class="btn-onekey fr">
-                一键询价
-             </router-link>
+            <a id='aksprice'@click="addInquiry(spaceDtl.id,[spaceDtl.market_price_real,spaceDtl.site_name,spaceDtl.units,spaceDtl.Max_seating_capacity,spaceDtl.area,spaceDtl.address])" class="btnjoin btn-onekey fr"
+                                       href="/form/askprice"> 一键询价
+            </a>
         </div>
     </div>
     <!--信息展示结束-->
@@ -178,16 +178,7 @@
 //                    freeMode: true
                 });
             },
-            isLogig:function(){
-                $("#aksprice").click=function(){
-                         alert('1');
-                }
-                   
-                
-            },
-
-            
-            getData(){
+           getData(){
                 var self = this;
                
                 self.$store.commit('loading',true);
@@ -232,9 +223,9 @@
                 });
             },
             addInquiry : function (id,name) {
-//                LS.set('inquiry',[id,name])
+              // LS.set('inquiry',[id,name])
                 this.$store.commit('inquiryChange',{id : id, name : name, type : 2});
-            }
+             }
         },
         watch:{
             '$route':'getData'

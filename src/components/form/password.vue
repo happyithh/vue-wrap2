@@ -96,8 +96,12 @@
                         $.toptip('验证码不能为空!',2000,'error');
                         return;
                     }
-                    if(!self.consult.password){
-                        $.toptip('请输入新密码且不少于6位',2000,'error');
+                    if(self.consult.auth_code.length<6){
+                        $.toptip('验证码错误',2000,'error');
+                        return;
+                    }
+                    if(self.consult.password.length<6){
+                        $.toptip('新密码不少于6位',2000,'error');
                         return;
                     }
                     if(!self.consult.password_confirmation){
@@ -105,7 +109,7 @@
                         return;
                     }
                    
-                    if(!self.consult.password==self.consult.password_confirmation){
+                    if(self.consult.password!=self.consult.password_confirmation){
                         $.toptip('两次密码不相同',2000,'error');
                         return;
                     }
@@ -114,14 +118,14 @@
                         url: window.YUNAPI.authPassword,
                         data : self.consult,
                         success: function (data) {
+                            console.log(data)
                             var status = data.status == 1 ? 'success' : 'error';
-
                             if(data.status == 1){
                                 $.alert({
-                                    title: '提交成功',
-                                    text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
+                                    title: '修改成功',
+                                    text: '请重新登录',
                                     onOK: function () {
-                                        router.back()
+                                        window.location.href='/'
                                     }
                                 });
                             }else{

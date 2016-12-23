@@ -58,9 +58,24 @@
                     password:'',
                     mobile:'',
                },
+               personalDataChange:''
+              
             }
         },
+         computed: {
+           personalData (){
+                return this.$store.state.personalData
+            },
+            loading(){
+                return this.$store.state.loading
+            },
+//         
+        },
          methods:{
+             personalDataChange(id){
+                this.$store.commit('personalDataChange',id)
+                // router.replace('/')
+            },
             sendPhoneCode(e){
                 var self = this;
               
@@ -69,6 +84,7 @@
                 };
                 GlobleFun.sendPhoneCode(this.consult.mobile,success,e.target)
             },
+           
             login : function () {
                 var self = this;
                 if(!self.consult.mobile){
@@ -83,30 +99,45 @@
                         // type:'put',
                         url: window.YUNAPI.login,
                         data : self.consult,
-                        success: function (data) {
+                        success: function (data,status,xhr) {
+                            console.log(self.consult)
+                            console.log(data)
                             var status = data.status == 1 ? 'success' : 'error';
 
                             if(data.status == 1){
+                                
                                $.alert({
                                     title: '登录成功',
                                     // text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                     onOK: function () {
-                                        // router.back()
-                                        window.location.href='/';
+                                         router.replace('/')
                                         setTimeout('',5000)
-                                    }
+                                    },
+                                
                                 });
+                                data.data.access_token = xhr.getResponseHeader('access-token');
+                                data.data.client = xhr.getResponseHeader('client');
+                                self.$store.commit('personalDataChange',data.data);//保存个人信息
+                                router.replace(self.$route.path);  // 刷新页面
+                                console.log(xhr.getResponseHeader('access-token'),111)
+                                console.log(xhr.getResponseHeader('client'),222)
+                              
+                                // self.$store.commit('personalDataChange',data.data)
                             }else{
                                 $.toptip(data.message,2000,status);
                             }
 
                         },
-                        error : function () {
+                       error : function () {
 
                         }
                     });
+                    
                 
             },
+
+        //记住密码
+        rememberPassword(){}
            
         }
     }

@@ -122,7 +122,7 @@
                             var status = data.status == 1 ? 'success' : 'error';
 
                             if(data.status == 1){
-                                $.location.href='';
+                                window.location.href='';
                             }else{
                                 $.toptip(data.message,2000,status);
                             }

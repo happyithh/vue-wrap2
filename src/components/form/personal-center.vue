@@ -16,8 +16,8 @@
         </header>
         <div class="personal-box">
             <div class="img-box">
-               <a href=""><img src="/static/images/test_logo.png" alt=""></a>
-               <div class="person-name">张大春</div>
+               <a href="/form/personal"><img src="/static/images/test_logo.png" alt=""></a>
+               <div class="person-name" v-text='personalData.name'></div>
             </div>
            
            <router-link to="/form/password" class="back">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
            </router-link>
-            <router-link to="/form/suggestion" class="back">
+            <router-link to="/form/FeedBack" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
                         <img class="fl mt" src="/static/images/icon/feed_back.png" alt=""/>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </router-link>
-             <router-link to="/form/待写登录注册" class="back">
+             <router-link to="/order/Login" class="back">
                 <div class="onekey-rentail-wrap">
                         <a href="" class="btn-onekey">退出登录</a>
                 </div>
@@ -62,13 +62,26 @@
     import 'assets/css.css'
     import 'assets/css/form.css'
     export default {
-      
         data () {
             return {
                
             }
+        },
+        computed:{
+            personalData (){
+                return this.$store.state.personalData
+            }
+        },
+
+        methods:{
+            
+            getPersonalData(data){
+                this.$store.commit('getPersonalData',data)
+            // router.replace('/')
+            }, 
         }
     }
+    
            
     
 </script>

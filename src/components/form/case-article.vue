@@ -15,7 +15,11 @@
         </header>
         <div class="case-container">
             <ul class="case-content" id='case-content' >
-                <a href=""><li v-for="casecontent in casecontents">{{casecontent.contentexp}}</li></a>
+                <li v-for="item in casecontents">
+                    <router-link :to="'/article/' + item.id">
+                        {{item.title}}
+                    </router-link>
+                </li>
             </ul>
         </div>
         
@@ -29,13 +33,41 @@
         data () {
             return {
                 casecontents:[
-                    {contentexp:'当超级IP遇到商业地产 魔兽成各大购物中心最火吸金'},
-                    {contentexp:'当超级IP遇到商业地产 魔兽成各大购物中心最火吸金王'},
-                    {contentexp:'当超级IP遇到商业地产 魔兽成各大购物中心最火吸金王'},
-                    {contentexp:'[TG BUS]Mini Cooper空降奥林匹克水上公园 云SPACE助奥运场馆振风采 云SPACE公关部'}
-                    
+                    {
+                         contentexp:'',
+                    }
                 ]
-            }
+                   
+                }
+            },     
+        mounted(){
+            var self = this;
+            self.collectList()//调用数据
+           // console.log(this.$store.getters.validationData)
+           // console.log(GlobleFun.objConcat(this.$store.getters.validationData,{page:1,order_id:222}))
+        },
+        methods:{
+            collectList : function(){
+                var self = this;
+                    $.get({
+                        // type:'put',
+                        url: window.YUNAPI.collection+'.json',
+                        data : GlobleFun.objConcat(this.$store.getters.validationData,{
+                            followable_type:'Article',
+                            page:1,
+                            i_types:40
+                        }
+                            ),
+                        success: function (data,){
+                        //console.log(data);
+                         //console.log(self.casecontents)
+                       self.casecontents= data.follows ;
+
+                        }   
+                    });
+                    
+                
+            },
         }
     }
            

@@ -55,7 +55,16 @@
                 },
             }
         },
+        computed:{
+              personalData (){
+                return this.$store.state.personalData
+            },
+        },
         methods:{
+            personalDataChange(id){
+                this.$store.commit('personalDataChange',id)
+                // router.replace('/')
+            },
             sendPhoneCode(e){
                 //console.log($(".base-detail-name").val())
                 window.localStorage.setItem("moble",$(".base-detail-name").val());
@@ -85,7 +94,8 @@
                         return;
                     }
                     if(self.consult.auth_code&&self.consult.code_token){
-                        window.location.href='/form/passwordreset';
+                         router.replace('/form/passwordreset')
+                         //window.location.href='/form/passwordreset';
                     }
              }
          }

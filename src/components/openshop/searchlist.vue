@@ -22,30 +22,26 @@
                 <div class="input-box">
                     <div class="base-info-name">区域范围</div>
                     <div class="tags clearfix">
-                        <span class="active">不限</span>
-                        <span>市中心</span>
-                        <span>区中心</span>
-                        <span>社区中心</span>
-                        <span>学校</span>
-                        <span>交通枢纽</span>
-                        <span>商务区</span>
-                    </div>
+                        <span  v-bind:class="{'active': position == item}" @click="positionChange(item)" v-for="item in searchCondition.position">{{item}}</span>
+                     </div>
                 </div>
-                <div class="input-box">
-                    <div class="base-info-name">行政区域</div>
+               <div class="input-box">
+                    <div class="base-info-name"><span>*</span>行政区域</div>
+                    
                     <div class="triangle">
-                        <input type="text" class="base-detail-name fl" placeholder="请选择行政区域">
-                        <div class="triangle-right fr">
-                            <a href=""><div class="icon-triangedown icon-triangedown1"></div></a>
-                        </div>
+                        <select v-model="consult.business_district">
+                            <option value=""placeholder='请选择行政区域'>请选择行政区域</option>
+                            <option v-for="(value,key) in searchCondition.business_district":label="value.name":value="key"></option>
+                        </select>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">场地类型</div>
                     <div class="tags clearfix">
-                        <span>不限</span>
-                        <span>秀场展馆</span>
-                        <span>商业广场</span>
+                        <!--<span class="active">不限</span>-->
+                        <span v-bind:class="{'active': activity_type == item}"  @click="activityTypeChange(item)"
+                        v-for="item in searchCondition.activity_type">{{item}}</span>
+                        <!--<span>商业广场</span>
                         <span>艺术馆画廊</span>
                         <span>星级酒店</span>
                         <span>影院剧院</span>
@@ -55,47 +51,47 @@
                         <span>艺术馆画廊</span>
                         <span>星级酒店</span>
                         <span>影院剧院</span>
-                        <span>咖啡馆书店</span>
+                        <span>咖啡馆书店</span>-->
                     </div>
                 </div>
+               
                 <div class="input-box">
-                    <div class="base-info-name">价格</div>
+                    <div class="base-info-name"><span>*</span>价格</div>
+                    
                     <div class="triangle">
-                        <input type="text" class="base-detail-name fl" placeholder="请选择价格">
-                        <div class="triangle-right fr">
-                            <a href=""><div class="icon-triangedown icon-triangedown1"></div></a>
-                        </div>
+                        <select v-model="consult.budget_amount">
+                            <option value=""placeholder='请选择价格'>请选择价格</option>
+                            <option v-for="(value,key) in searchCondition.budget_amount":label="value":value="key"></option>
+                        </select>
                     </div>
                 </div>
                 <div class="input-box">
-                    <div class="base-info-name">落位区域</div>
+                    <div class="base-info-name">落位地区</div>
                     <div class="tags clearfix">
-                        <span class="active">不限</span>
-                        <span>室内</span>
-                        <span>室外</span>
-                    </div>
+                        <span  v-bind:class="{'active': position == item}" @click="positionChange(item)" v-for="item in searchCondition.retail">{{item}}</span>
+                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">可用面积</div>
                     <div class="tags area clearfix">
-                        <span class="active">不限</span>
-                        <span>小于200m²</span>
-                        <span>200-500m²</span>
-                        <span>800-1000m²</span>
-                        <span>1000-2000m²</span>
-                        <span>2000m²以上</span>
+                         <!--<span class="active">不限</span>-->
+                        <span v-bind:class="{'active': area_size == item}"  @click="areaSizeChange(item)"
+                         v-for="item in searchCondition.area_size">{{item}}</span>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">空间层高</div>
                     <div class="triangle">
-                        <input style="width: 120px" type="text" class="base-detail-name" placeholder="请输入层高">
+                        <select v-model="consult.storey" class="storeyList">
+                             <option value=""placeholder='请输入'>请输入</option>
+                           <option v-for="(value,key) in searchCondition.storey":label="value":value="key"></option>
+                        </select>
                         <span>米 以上</span>
                     </div>
                 </div>
 
                 <div class="onekey-rentail-wrap">
-                    <a href="" class="btn-onekey">搜索</a>
+                    <a href="javascript:;" class="btn-onekey" @click='tags'>搜索</a>
                 </div>
             </div>
         </form>
@@ -106,24 +102,85 @@
 <script>
     import 'assets/css/event.css'
     import 'assets/css/form.css'
+    import 'assets/css.css'
 
     export default {
         data () {
             return {
-
+                consult:{
+                    activity_type:'',
+                    storey:'',
+                    budget_amount:'',
+                   
+                },
             }
         },
         mounted () {
             var self = this;
-
-
+            this.tags();//调用数据
+         },
+        computed:{
+           searchCondition (){
+                return this.$store.state.searchCondition
+            },
+            personalData (){
+                return this.$store.state.personalData
+            },
+            position(){
+                return this.$store.state.position
+            },
+            activity_type(){
+                return this.$store.state.activity_type
+            },
+            area_size(){
+                return this.$store.state.area_size
+            }
         },
         methods:{
+            positionChange(item){
+                this.$store.commit('positionChange',item)
+            },
+            activityTypeChange(item){
+              
+                this.$store.commit('activityTypeChange',item)
+            },
+             areaSizeChange(item){
+              
+                this.$store.commit('areaSizeChange',item)
+            },
+           
+            tags : function () {
+               
+                var self = this;
+                //console.log(self.consult)
+                $.get({
+                    url: window.YUNAPI.tags,
+                    data : self.consult,
+                    success: function (data) {
+                        var status = data.status == 1 ? 'success' : 'error';
+                        if(data.status == 1){
+                           $.alert({
+                                title: '111',
+                                
+                               
+                            });
+                        }else{
+                            $.toptip(data.message,2000,status);
+                        }
+
+                    },
+                    error : function () {
+
+                    }
+                });
+            },
         }
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.storeyList{
+    width:25%;
+ }
 </style>

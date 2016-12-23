@@ -13,32 +13,19 @@
             </div>
         </header>
         <div class="inquiry-list">
-            <ul>
-                <li class="clearfix">
-                    <div class="local-price"><strong>￥90000元/天</strong> 东方万国会议中心</div>
-                    <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 200人</div>
-                         <div class='max-square fl ml10'>面积 200人</div>
-                          <div class='add fl ml10'>地址 上海市 浦东新区 | 陆家嘴</div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <div class="local-price"><strong>￥30000元/天</strong> 深圳科兴科学园国际会议中心-深圳科学园国际会议中心</div>
-                    <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 200人</div>
-                         <div class='max-square fl ml10'>面积 200人</div>
-                          <div class='add fl ml10'>地址 上海市 浦东新区 | 陆家嘴</div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <div class="local-price"><strong>￥90000元/天</strong> 东方万国会议中心</div>
-                    <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 200人</div>
-                         <div class='max-square fl ml10'>面积 200人</div>
-                          <div class='add fl ml10'>地址 上海市 浦东新区 | 陆家嘴</div>
-                    </div>
+            <ul >
+                <li class="clearfix" v-for='item in spaceList'>
+                    <router-link :to="item.special_url ? item.special_url : '/article/' + item.id">
+                        <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.name}}</div>
+                        <div class="local-price-detail clearfix">
+                            <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人</div>
+                            <div class='max-square fl ml10'>面积{{item.area}}㎡</div><br/>
+                            <div class='add fl ml10'>地址 {{item.address}}</div>
+                        </div>
+                    </router-link>
                 </li>
             </ul>
+
         </div>
         <!--表单填写-->
         
@@ -50,28 +37,43 @@
         name: 'home',
         data () {
             return {
-
+                spaceList:[]
             }
+
+            
         },
-        mounted () {
+         mounted(){
             var self = this;
-
-            $('.pop-sucess').click(function () {
-                $.modal({
-                    title: "提交成功",
-                    text: "客服专员将尽快联系你，请耐心等待！<br>客服热线：400-056-0599",
-                    buttons: [
-                        { text: "关闭", onClick: function(){ console.log(1)} },
-
-                    ]
-                });
-            })
-
+            self.collectList()//调用数据
+            //console.log(this.$store.getters.validationData)
+           // console.log(GlobleFun.objConcat(this.$store.getters.validationData,{page:1,order_id:222}))
         },
+      
         methods:{
+            collectList : function(){
+                var self = this;
+                    $.get({
+                        // type:'put',
+                        url: window.YUNAPI.collection+'.json',
+                        data : GlobleFun.objConcat(this.$store.getters.validationData,{
+                            followable_type:'Space',
+                            page:1,
+                            i_types:40
+                        }
+                            ),
+                        success: function (data) {
+                            //console.log(data.follows)
+                            self.spaceList=data.follows
+                            //console.log(self.spaceList)
+                        }   
+                    });
+                    
+                
+            },
+        }
 
         }
-    }
+    
            
     
 </script>

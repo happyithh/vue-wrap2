@@ -70,6 +70,10 @@
                     var self = this;
                     $(self).hasClass("checkedBox")? $(self).removeClass("checkedBox"):$(self).addClass("checkedBox");
             },
+             personalDataChange(id){
+                this.$store.commit('personalDataChange',id)
+                // router.replace('/')
+            },
             
             sendPhoneCode(e){
                 var self = this;
@@ -100,7 +104,7 @@
                         // type:'put',
                         url: window.YUNAPI.login,
                         data : self.consult,
-                        success: function (data) {
+                        success: function (data,status,xhr) {
                             var status = data.status == 1 ? 'success' : 'error';
 
                             if(data.status == 1){
@@ -108,11 +112,14 @@
                                     title: '登录成功',
                                     // text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                     onOK: function () {
-                                        // router.back()
-                                        window.location.href='/';
-                                        // setTimeout('',5000)
+                                        //router.back('/')
+                                         window.location.href='/';
+                                        setTimeout('',5000)
                                     }
                                 });
+                                data.data.access_token = xhr.getResponseHeader('access-token');
+                                data.data.client = xhr.getResponseHeader('client');
+                                self.$store.commit('personalDataChange',data.data)
                             }else{
                                 $.toptip(data.message,2000,status);
                             }

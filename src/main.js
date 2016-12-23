@@ -88,8 +88,8 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/form/collect'], resolve)
         },
         {
-            path: '/form/suggestion',
-            component: (resolve) => require(['./components/form/suggestion'], resolve)
+            path: '/form/FeedBack',
+            component: (resolve) => require(['./components/form/FeedBack'], resolve)
         },
         {
             path: '/form/case-article',
@@ -105,7 +105,7 @@ window.router = new VueRouter({
         },
         {
             path: '/form/personal',
-            component: (resolve) => require(['./components/form/personal'], resolve)
+            component: (resolve) => require(['./components/form/personal-info'], resolve)
         },
         {
             path: '/form/personal-center',
@@ -149,9 +149,28 @@ window.store = new Vuex.Store({
         cdVisible : false,
         cities:{},
         city_id : 1,
+        activity_type:'',
+        area_size:'',
+        facitilies:{},
         selected_id : 1,
         searchCondition : {
-            space_type : ''
+            type:'',
+            retail:'',
+            passenger_flow:'',
+            space_type : '',
+            budget_amount:'',
+            area_size:'',
+            storey:'',
+            position:'',
+            cities:'',
+            group:'',
+            space_type:'',
+            areas:'',
+            duration:'',
+            business_district:{
+                city_id:1,
+                name:''
+            }
         },
         loading : false,
         elDialog : {
@@ -166,12 +185,15 @@ window.store = new Vuex.Store({
             q : {
                 site_site_type_eq : '',
                 title_or_keyword_cont : ''
+                
             }
         },
+        position:'',
         inquiryCount : '',
         inquiryList: [],
         personalData : {
-            uid:''
+            uid:'',
+            client:''
         },
         pageSize : 12
     },
@@ -188,6 +210,7 @@ window.store = new Vuex.Store({
             return LS.get('inquiry');
         },
         validationData(state){
+            //console.log(state)
             if(typeof state.personalData.client == 'undefined'){
                 return {}
             }
@@ -205,6 +228,10 @@ window.store = new Vuex.Store({
                 return 1
             }
         },
+        objConcat(a,b){
+            return $.extend({}, a,b);
+        },
+       
 
 
     },
@@ -230,23 +257,23 @@ window.store = new Vuex.Store({
 
             if(typeof values === 'object'){
 
-                if(values.type == 1){ // -1 减 , 1 加
+                // if(values.type == 1){ // -1 减 , 1 加
 
-                    state.inquiryList[values.id] = values.name
+                //     state.inquiryList[values.id] = values.name
 
-                }
-                if(values.type == -1){
-                    // 对象方式
-                    // for(var i=0;i<state.inquiryList.length;i++)
-                    // {
-                    //     var id = state.inquiryList[i].id;
-                    //     if(value.id==id)
-                    //     {
-                    //         state.inquiryList.splice(i,1);
-                    //     }
-                    // }
-                    delete state.inquiryList[values.id]
-                }
+                // }
+                // if(values.type == -1){
+                //     // 对象方式
+                //     // for(var i=0;i<state.inquiryList.length;i++)
+                //     // {
+                //     //     var id = state.inquiryList[i].id;
+                //     //     if(value.id==id)
+                //     //     {
+                //     //         state.inquiryList.splice(i,1);
+                //     //     }
+                //     // }
+                //     delete state.inquiryList[values.id]
+                // }
 
                 if(values.type === 2){
                     if(state.inquiryList[values.id]){
@@ -292,6 +319,27 @@ window.store = new Vuex.Store({
                 state.city_id = 1
             }
         },
+        positionChange(state,item){
+            if(item){
+                state.position = item
+            }else{
+                state.position = ""
+            }
+        },
+         activityTypeChange(state,item){
+            if(item){
+                state.activity_type = item
+            }else{
+                state.activity_type = ""
+            }
+        },
+         areaSizeChange(state,item){
+            if(item){
+                state.area_size = item
+            }else{
+                state.area_size = ""
+            }
+        },
         back(){
             router.back()
         }
@@ -302,7 +350,10 @@ window.store = new Vuex.Store({
 });
 window.isGetPhoneCode = false;
 window.GlobleFun = {
-    sendPhoneCode : function (phone,success,$ele) {
+        objConcat(a,b){
+            return $.extend({}, a,b);
+        },
+        sendPhoneCode : function (phone,success,$ele) {
         if(!phone){
             $.toptip('请输入手机号',2000,'error');
             return;
@@ -321,7 +372,7 @@ window.GlobleFun = {
             return
         }
         isGetPhoneCode = true
-        console.log(111)
+        // console.log(111)
         $.ajax({
             url: window.YUNAPI.sendPhoneCode,
             data : {
@@ -368,9 +419,19 @@ window.GlobleFun = {
     }
 
 }
+
 window.APP = new Vue({
     store,
     render: h => h(App),
     router: router
-
 }).$mount('#app');
+
+function countProperties (obj) { // 计算对象长度
+    var count = 0;
+    for (var property in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, property)) {
+            count++;
+        }
+    }
+    return count;
+}

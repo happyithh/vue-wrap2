@@ -16,8 +16,11 @@
          <router-link to="/form/space-list" class="back">
             <div class="infor-show">
                 <div class="collect-line">
-                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt=""/>
-                    <div class="fl">场地空间</div>
+                    <img class="fl mt" src="/static/images/icon/collect_hv.png" alt=""/>
+                    <router-link to="/form/space-list" class="back fl">
+                        场地空间
+                    </router-link>
+                    <!--<div class="fl">场地空间</div>-->
                     <i class="icon-arrowright mt fr"></i>
                 </div>
             </div>
@@ -25,8 +28,11 @@
          <router-link to="/form/case-article" class="back">
             <div class="infor-show">
                 <div class="collect-line">
-                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt=""/>
-                    <div class="fl">案例文章</div>
+                    <img class="fl mt" src="/static/images/icon/collect_hv.png" alt=""/>
+                    <router-link to="/form/case-article" class="back fl">
+                        文章案例
+                    </router-link>
+                    <!--<div class="fl">场地空间</div>-->
                     <i class="icon-arrowright mt fr"></i>
                 </div>
             </div>
@@ -34,8 +40,11 @@
          <router-link to="/form/topics" class="back">
             <div class="infor-show">
                 <div class="collect-line">
-                    <img class="fl mt" src="../../../static/images/icon/collect_hv.png" alt=""/>
-                    <div class="fl">精选专题</div>
+                    <img class="fl mt" src="/static/images/icon/collect_hv.png" alt=""/>
+                    <router-link to="/form/topics" class="back fl">
+                        精选专题
+                    </router-link>
+                    <!--<div class="fl">场地空间</div>-->
                     <i class="icon-arrowright mt fr"></i>
                 </div>
             </div>
@@ -54,7 +63,8 @@
                     {}
                 ]
             }
-        }
+        },
+      
     }
            
     

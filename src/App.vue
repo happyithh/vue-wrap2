@@ -16,7 +16,7 @@
     import 'assets/css/weui-change.css';
 
     //    const host = "http://api.yunspace.com.cn/";
-    const host = "http://172.16.141:3000/";
+    const host = "http://172.16.145/";
 
     window.YUNAPI = {
         host: host,
@@ -32,6 +32,7 @@
 
         ipList: host + 'api/projects',
         active: host + 'api/activities',
+        activeForm: host + 'api/activities/activities_form',
         submitConsult: host + 'api/consults',
         submitHoldEvent: host + 'api/orders',
         sendPhoneCode: host + 'api/auth_codes/send_code',
@@ -39,12 +40,12 @@
         SpaceDtl: host + 'api/spaces',
         placeDtl: host + 'api/sites',
         feedBack: host + 'api/feedback',
-        inquiry: host + 'api/orders/create_inquiry',
+        inquiry: host + 'api/demands/create_inquiry',
         collection: host + 'api/follows',
         login: host + 'api/auth/sign_in',
         register: host + 'api/auth',
         tags: host + 'api/tags/all_tags',
-        createInquiry: host + 'api/orders/create_inquiry',
+        createInquiry: host + 'api/demands/create_inquiry',
         createBooking: host + 'api/orders/create_booking',
         inquiryContent: host + 'api/demands/',
         spaceDtlOnly: host + 'api/spaces/detail',
@@ -53,6 +54,8 @@
         authPassword: host + 'api/auth/password',
         createRetail: host+'api/demands/create_retail',
         checkCode:host+'api/auth_codes/check_code',
+        personalInfo:host+'api/users/update',
+        consultTags:host+'api/tags/get_consult_tags'
        
     };
 
@@ -76,7 +79,7 @@
         mounted () {
             var self = this;
             self.$store.commit('getSelectedCity');
-
+            self.$store.commit('getPersonalData');
             $.ajax({
                 url: window.YUNAPI.tags,
                 context: document.body,

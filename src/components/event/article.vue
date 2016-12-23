@@ -4,7 +4,7 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/space/detail" class="back">
+                <router-link to="/form/case-article" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -15,28 +15,27 @@
             
         </header>
         <div class="imgbox">
-            <img src="/static/images/test.png" alt=""/>
+            <!--<img src="/static/images/test.png" alt=""/>-->
+            <img :src="article.img_paths.length > 0 ? article.img_paths[0]['url_400_267']: ''" alt=""/>
+             
         </div>
         <div class="container-box">
             <div class="img-detail">
-                <h1>当超级IP遇到商业地产 魔兽成各大购物中心最火吸金王</h1>
+                <h1>{{article.title}}</h1>
                 <div class="person-info clearfix">
-                    <div class="fl">发布人:张大春 <span>2016-09-16</span></div>
-                    <div class="fr"><img src="/static/images/icon/skim.png" alt=""/> 233 </div>
+                    <div class="fl">发布人:{{article.creation_people}} <span>&nbsp;&nbsp;{{article.created_at}}</span></div>
+                    <div class="fr"><img src="/static/images/icon/skim.png" alt=""/> {{article.viewed}} </div>
                 </div>
             </div>
             <div class="op-title">空间详情</div>
-            <p>Mini Cooper为了突破如今国内驾校应试型培训的弊端，为品牌客户量身打造了“少年驾驶训练营”，旨在通过趣味性的实境体验培养驾驶者良好的道路素养。经过云Space推荐，训练营场地最终确定为顺义奥林匹克水上公园，这座建设规划面积约162.59公顷，总建筑面积约3.2万方米的公园以开阔的场地条件满足了多辆轿车试驾的需求，更以其绰约优美的独特水岸风情为活动平添一道亮丽的风景。</p>
-            <p>赛前风光赛后闲置是众多赛事场馆的真实写照，众多由一流设计师量身打造、硬件设施一流、地理位置优越的场馆往往在赛后因宣传、线上流量、线下渠道等资源配置不到位而面临尴尬的困境。放眼全球，游泳池变身污水池，皮划艇场馆干涸，垒球场遭废弃，满目荒凉的场馆比比皆是，场馆的赛后使用正成为全球城市规划设计争相关注的焦点。云SPACE商业空间短租平台首先通过平台互联网渠道的强势流量导入，盘活闲置体育场资源，提升使用率，目标是协助中国体育馆业进入商业活动时代，为体育场馆实现收支平衡甚至盈余。以鸟巢为例，今年以来已经在主场、附场以及南广场等主要活动场地上演了各类赛事、演出、驻场秀等各类活动70余场次。</p>
-            <div class="imgbox imgboxp">
-                <img src="/static/images/test.png" alt=""/>
-            </div>
-            <div class="img-detail">
-                <p>Mini Cooper为了突破如今国内驾校应试型培训的弊端，为品牌客户量身打造了“少年驾驶训练营”，旨在通过趣味性的实境体验培养驾驶者良好的道路素养。经过云Space推荐，训练营场地最终确定为顺义奥林匹克水上公园，这座建设规划面积约162.59公顷，总建筑面积约3.2万方米的公园以开阔的场地条件满足了多辆轿车试驾的需求，更以其绰约优美的独特水岸风情为活动平添一道亮丽的风景。</p>
-            </div>
+           <p v-html="article.details"></p>
+            
             <div class="infor-show1">
-                <a href="" class="btn-onekey1"><img src="/static/images/icon/share.png" alt="">分享</a>
-                <a href="" class="btn-onekey1"><img src="/static/images/icon/collect_hv.png" alt="">收藏</a>
+                <a href="javascript:;" class="btn-onekey1"><img src="/static/images/icon/share.png" alt="">分享</a>
+                <a @click="changeCollect"class="btn-onekey1" :class=" article.follow == true ? 'fr collect current' : 'fr collect' ">
+                    <img src="/static/images/icon/collect.png" alt="">
+                    收藏
+                </a>
                 
             </div>
         </div>
@@ -53,14 +52,80 @@
     export default {
         data () {
             return {
-                places: [1,2,3]
+                places: [1,2,3],
+                article : {
+                    img_paths : []
+                },
+                 ccurt: false,
+            }
+        },
+        computed : {
+            personalData (){
+                return this.$store.state.personalData
             }
         },
         mounted () {
-            var self = this;
-
+           var self = this;
+            $.ajax({
+                url: window.YUNAPI.article + "/" + this.$route.params.id, 
+                context: document.body, 
+                success: function (data) {
+//                    self.cities = data.cities;
+                    self.article = data.information;
+                    // console.log(self.article.img_paths[0])
+                    //console.log(data);
+                    self.$parent.loading = false;
+                }
+            });
         },
+
+       
         methods:{
+            //获取收藏
+            collectcurt : function () {
+                    this.ccurt = !this.ccurt
+            },
+            changeCollect(){
+                var self = this;
+                if( this.changeCollectPromise && this.changeCollectPromise.state() == 'pending'){
+                   return
+                }
+                if(!self.personalData.id){
+                    console.log(1111)
+                    $.alert({
+                        title: '请先登录',
+                        // text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
+                        onOK: function () {
+                                router.replace('/order/login')
+                            setTimeout('',5000)
+                        },
+                    
+                    });
+                }
+                self.changeCollectPromise = $.post({
+                    url: window.YUNAPI.changeCollect,
+//                    data : {
+//                        user_id : self.personalData.id,
+//                        followable_type : 'Site',
+//                        followable_id : self.placeDtl.id
+//                    },
+                    data : GlobleFun.objConcat(self.$store.getters.validationData,{
+                        user_id : self.personalData.id,
+                        followable_type : 'Article',
+                        followable_id : self.article.id
+                    }),
+                    success: function (data) {
+                        console.log(self.article.follow)
+                        if(data.status == 1){
+                            self.article.follow = !self.article.follow
+                        }
+                        // GlobleFun.httpMessage(data)
+                    },
+                    error : function () {
+
+                    }
+                });
+            },
          
         }
     }
@@ -72,6 +137,9 @@
         width: 100%;
         height: 250px;
         
+    }
+    .container{
+        overflow-x:hidden; 
     }
     .container-box{
         margin:15px;

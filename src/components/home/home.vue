@@ -18,7 +18,7 @@
                 <div class="logo"><img src="/static/images/logo.png"></div>
             </div>
             <div class="right fr">
-                <a class="in" href="/order/Login">登录/注册</a>
+                <a class="in" @click="toggleLoginForm" v-text=" typeof personalData.name != 'undefined' ? personalData.name : '注册/登录' " ></a>
             </div>
         </header>
 
@@ -70,7 +70,7 @@
         <div class="space-list home">
             <div class="list-title clearfix">
                 <h2 class="fl">场地推荐</h2>
-                <a class="fr more" href="javascript:;">查看所有<span class="icon icon-arrowright"></span></a>
+                <a class="fr more" href="/place">查看所有<span class="icon icon-arrowright"></span></a>
             </div>
             <ul>
                 <li v-for="item in recommendSite">
@@ -146,6 +146,7 @@
                 }
                 return cities
             },
+            
             personalData (){
                 return this.$store.state.personalData
             },
@@ -177,6 +178,24 @@
             self.getData()
         },
         methods:{
+             toggleLoginForm: function () {
+                //  console.log(data)
+                // this.personalData=data                
+                if(this.personalData.uid){
+                    console.log(this.personalData.uid)
+                    router.push('/form/personal-center') //已登陆 跳到个人页面
+                }else{
+                    console.log(this.personalData.uid)
+                     router.push('/order/login')
+                    // this.$parent.$data.showForm.login = !this.$parent.$data.showForm.login
+                }
+
+            },
+             getPersonalData(data){
+                 console.log(data)
+                this.$store.commit('getPersonalData',data)
+                // router.replace('/')
+            },
             /*轮播*/
             init : function () {
                 var citySelectionSwiper = new Swiper('.selectedtopic-cont', {
@@ -204,7 +223,6 @@
                         city_id: self.$store.state.city_id
                     },
                     success: function (data) {
-                        console.log(data)
                         self.recommendSite = data.home_recommend_site
                         self.citySpecial = data.home_city_special
                         setTimeout(function () {
