@@ -3,13 +3,13 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                 <router-link to="/" class="back">
+                 <router-link to="/order/Login" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
             </div>
             <div class="fl center">
-                <h1 class="display-center">验证码</h1>
+                <h1 class="display-center">验证码登录</h1>
             </div>
             
             
@@ -112,8 +112,7 @@
                                     title: '登录成功',
                                     // text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                     onOK: function () {
-                                        //router.back('/')
-                                         window.location.href='/';
+                                        router.replace('/')
                                         setTimeout('',5000)
                                     }
                                 });

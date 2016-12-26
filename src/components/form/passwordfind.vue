@@ -28,11 +28,12 @@
                 </div>
              </div>
             <div class="onekey-rentail-wrap">
-                <!--<router-link to="/" class="back">
-                    <i class="icons icon-arrowleft white"></i>
-                    返回
-                </router-link>-->
-                    <a href='javascript:;' class="btn-onekey"@click='authPassword'>下一步</a>
+                <!--<router-link to="/form/passwordreset" class="back">-->
+                 <a href='javascript:;' class="btn-onekey"@click='authPassword'>下一步</a>
+                    <!--<i class="icons icon-arrowleft white"></i>
+                    返回-->
+                <!--</router-link>-->
+                   
             </div>
         </div>
         
@@ -52,22 +53,23 @@
                 auth_code : '',
                 code_token : '',
                 mobile:'',
-                },
+              },
             }
+            personalDataChange:''
         },
         computed:{
-              personalData (){
+           personalData (){
                 return this.$store.state.personalData
-            },
+            }    
+        },
+        mounted(){
+            // var self = this;
+            // self.$store.commit('getPersonalData')
         },
         methods:{
-            personalDataChange(id){
-                this.$store.commit('personalDataChange',id)
-                // router.replace('/')
-            },
-            sendPhoneCode(e){
+          sendPhoneCode(e){
                 //console.log($(".base-detail-name").val())
-                window.localStorage.setItem("moble",$(".base-detail-name").val());
+                //window.localStorage.setItem("moble",$(".base-detail-name").val());
                 var self = this;
                 var success = function (data) {
                     self.consult.code_token = data.data;
@@ -90,13 +92,39 @@
                         return;
                     }
                     if(self.consult.auth_code.length<6){
-                        $.toptip('验证码错误!',2000,'error');
+                        $.toptip('请输入正确的验证码!',2000,'error');
                         return;
                     }
-                    if(self.consult.auth_code&&self.consult.code_token){
-                         router.replace('/form/passwordreset')
-                         //window.location.href='/form/passwordreset';
-                    }
+
+                    LS.set('changePasswordData',self.consult)
+                    router.push('/form/passwordreset')
+                    // $.ajax({
+                    //     type:'put',
+                    //     url: window.YUNAPI.authPassword,
+                    //     data : self.consult,
+                    //     //data:self.$store.getters.validationData,
+                    //     //data : GlobleFun.objConcat(self.$store.getters.validationData,{
+                           
+                    //    // }
+                    //      //   ),
+                    //     success: function (data,status,xhr) {
+                    //         console.log(data)
+                    //        var status = data.status == 1 ? 'success' : 'error';
+                    //         if(data.status == 1){
+                    //             data.data.access_token = xhr.getResponseHeader('access-token');
+                    //             data.data.client = xhr.getResponseHeader('client');
+                    //             self.$store.commit('personalDataChange',data.data);//保存个人信息
+                    //             //this.$store.commit('getPersonalData',data)
+                    //         }else{
+                    //             $.toptip(data.message,2000,status);
+                    //         }
+                         
+                    //     },
+                        
+                    //    error : function () {
+
+                    //     }
+                    // });
              }
          }
     }

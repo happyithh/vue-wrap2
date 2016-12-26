@@ -82,6 +82,29 @@
         margin-top: 7px;
         margin-bottom:20px; 
     }
+    .list-ul {
+        overflow: hidden
+        }
+        
+    .list-li {
+        /*line-height: 60px;*/
+        border-bottom: 1px solid #fcfcfc;
+        position: relative;
+        /*padding: 0 12px;*/
+        color: #666;
+        background: #f2f2f2;
+        -webkit-transform: translateX(0px);
+        }
+        
+        .btn {
+        position: absolute;
+        top: 0;
+        right: -80px;
+        text-align: center;
+        background: red;
+        color: #fff;
+        width: 80px
+        }
     .up-photo-text span{
         font-size:.6rem;
         color:#000000;

@@ -125,7 +125,8 @@
                                     title: '修改成功',
                                     text: '请重新登录',
                                     onOK: function () {
-                                        window.location.href='/'
+                                        router.replace('/')
+                                        //window.location.href='/'
                                     }
                                 });
                             }else{

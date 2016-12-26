@@ -14,7 +14,8 @@
             
             
         </header>
-        
+        <div class="personal-box">
+            
             <div class="input-box">
                 <div class="base-info-name">新密码</div>
                 <input type="password" class="base-detail-name" v-model='consult.password' placeholder="输入新密码"/>
@@ -26,7 +27,7 @@
 
             </div>
             <div class="onekey-rentail-wrap">
-                    <a class="btn-onekey"@click='authPassword'>提交</a>
+                    <a href="javascript:;" class="btn-onekey"@click='authPassword'>提交</a>
             </div>
         </div>
         
@@ -42,13 +43,12 @@
         data () {
             return {
                consult:{
-                // type:'sms',
+                type:'sms',
                 password:'',
-                // mobile:'',
                 password_confirmation:'',
-
                 mobile:'',
                },
+               personalDataChange:'',
             }
         },
         computed:{
@@ -57,23 +57,22 @@
             },
         },
         mounted(){
-             this.consult.mobile = this.personalData.mobile
-        },
+             this.$store.commit('getPersonalData');
+         },
          methods:{
             sendPhoneCode(e){
                 var self = this;
-              
                 var success = function (data) {
                     self.consult.code_token = data.data;
                 };
                 GlobleFun.sendPhoneCode(this.consult.mobile,success,e.target)
             },
-             getPersonalData(data){
-                this.$store.commit('getPersonalData',data)
-            // router.replace('/')
+             personalDataChange(data){
+                this.$store.commit('personalDataChange',data)
             }, 
             authPassword : function () {
                 var self = this;
+                 console.log(self.$store.state.personalData)
                     if(!self.consult.password){
                         $.toptip('请输入新密码',2000,'error');
                         return;
@@ -91,18 +90,25 @@
                         $.toptip('两次密码不相同',2000,'error');
                         return;
                     }
-                     $.post({
-                        // type:'put',
+
+                    var dataOne = GlobleFun.objConcat(this.$store.getters.validationData,{
+                           password:self.consult.password,
+                           password_confirmation:self.consult.password_confirmation,
+                           moblie:self.consult.moblie,
+                           type:"sms"
+                            }
+                        )
+
+                    GlobleFun.objConcat()
+                     $.ajax({
+                        type:'put',
                         url: window.YUNAPI.authPassword,
-                        //data : self.consult,
-                        
-                        success: function (data) {
-                           // console.log(self.consult)
-                           // data=self.consult;
-                            data:self.consult;
+                        data : GlobleFun.objConcat(dataOne,LS.get('changePasswordData')),
+                        success: function (data,status,xhr) {
                             console.log(data)
-                           // console.log( data==self.consult)
-                            var status = data.status == 1 ? 'success' : 'error';
+                            self.consult.moblie =self.$store.state.personalData.mobile;
+                            console.log(self.consult)
+                           var status = data.status == 1 ? 'success' : 'error';
                             if(data.status == 1){
                                 $.alert({
                                     title: '密码设置成功',
@@ -113,6 +119,12 @@
                                     },
                                 
                                 });
+                                data.data.access_token = xhr.getResponseHeader('access-token');
+                                data.data.client = xhr.getResponseHeader('client');
+                                self.$store.commit('personalDataChange',data.data);//保存个人信息
+                                // console.log(xhr.getResponseHeader('access-token'),111)
+                                // console.log(xhr.getResponseHeader('client'),222)
+                                LS.remove('changePasswordData')
                             }else{
                                 $.toptip(data.message,2000,status);
                             }

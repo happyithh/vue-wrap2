@@ -85,47 +85,31 @@
             collectcurt : function () {
                     this.ccurt = !this.ccurt
             },
-            changeCollect(){
+            changeCollect(e,type,id){
                 var self = this;
-                if( this.changeCollectPromise && this.changeCollectPromise.state() == 'pending'){
-                   return
-                }
-                if(!self.personalData.id){
-                    console.log(1111)
-                    $.alert({
-                        title: '请先登录',
-                        // text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
-                        onOK: function () {
-                                router.replace('/order/login')
-                            setTimeout('',5000)
-                        },
-                    
-                    });
-                }
-                self.changeCollectPromise = $.post({
+                $.post({
                     url: window.YUNAPI.changeCollect,
 //                    data : {
 //                        user_id : self.personalData.id,
-//                        followable_type : 'Site',
-//                        followable_id : self.placeDtl.id
+//                        followable_type : 'Space',
+//                        followable_id : self.spaceDtl.id
 //                    },
                     data : GlobleFun.objConcat(self.$store.getters.validationData,{
                         user_id : self.personalData.id,
-                        followable_type : 'Article',
-                        followable_id : self.article.id
+                        followable_type : type,
+                        followable_id : id
                     }),
                     success: function (data) {
-                        console.log(self.article.follow)
+                        //console.log(1)
                         if(data.status == 1){
-                            self.article.follow = !self.article.follow
+                            $(e.target).toggleClass('icon-collect-hv')
                         }
-                        // GlobleFun.httpMessage(data)
                     },
                     error : function () {
 
                     }
                 });
-            },
+            }
          
         }
     }
@@ -137,6 +121,9 @@
         width: 100%;
         height: 250px;
         
+    }
+    .icon-collect-hv{
+        background: url('/static/images/icon/collect_hv')
     }
     .container{
         overflow-x:hidden; 
@@ -175,22 +162,31 @@
         padding:0 20px;
     }
     .btn-onekey1{
-    width:45%;
-    height: 2.67rem;
-    line-height: 2.68rem;
-    border-radius: 5px;
-    background:#f7c73f;
-    font-size: 1.07rem;
-    float: left;
-    margin-top: 15px;
-    margin-right:5% ;
-    margin-bottom: 15px;
-    text-align: center;
+        /*position:relative;*/
+        height: 2.67rem;
+        width:45%;
+        line-height: 2.68rem;
+        border-radius: 5px;
+        background:#f7c73f;
+        font-size: 1.07rem;
+        float: left;
+        margin-top: 15px;
+        margin-right:5% ;
+        margin-bottom: 15px;
+        text-align: center;
 }
+    .hv{
+        /*position: absolute;*/
+        z-index: 10;
+        background: url('/static/images/icon/collect_hv');
+        
+    }
+    
     .infor-show1{
         margin: 0 15px;
         overflow: hidden;
     }
+    
     .btn-onekey1 img{
     width: 20px;
     height: 20px;

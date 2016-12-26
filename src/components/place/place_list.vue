@@ -56,14 +56,17 @@
                     </router-link>
                     <div class="text clearfix">
                         <div class="fl">
-                            <h3><router-link :to="'/event/'+item.site_id" class="title">{{item.title}}</router-link></h3>
+                            <h3><router-link :to="'/article/'+item.site_id" class="title">{{item.title}}</router-link></h3>
                             <p>
                                 <span>最大容纳 {{item.max_people}}人</span>
                                 <span>面积 {{item.max_size}}㎡</span>
                             </p>
                             <p>地址 {{item.city_name}} {{item.district}}｜{{item.address}}</p>
                         </div>
-                        <a class="fr btn-join" href="javascript:;">加入询价</a>
+                        <a @click="addInquiry(spacesub.id,spacesub.name)" class="btn-join fr"
+                                       v-bind:class=" {'hv' : inquiryList.hasOwnProperty(spacesub.id)}" href="javascript:;"
+                                        v-text="inquiryList.hasOwnProperty(spacesub.id) ? '已加入询价' : '加入询价' ">
+                        <!--<a class="fr btn-join" href="javascript:;">加入询价</a>-->
                     </div>
                 </li>
             </ul>
@@ -96,6 +99,14 @@
             self.headerSearchFixed();
             self.getData();
         },
+        computed:{
+            inquiryCount () {
+                return this.$store.state.inquiryCount
+            },
+            inquiryList () {
+                return this.$store.state.inquiryList
+            }
+        },
         methods:{
             //悬浮搜索导航
             headerSearchFixed:function () {
@@ -123,7 +134,11 @@
                         self.places = data.sites
                     }
                 })
-            }
+            },
+            addInquiry : function (id,name) {
+//                LS.set('inquiry',[id,name])
+                this.$store.commit('inquiryChange',{id : id, name : name, type : 2});
+            },
         }
     }
 </script>

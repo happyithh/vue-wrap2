@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import LS from 'assets/Libs/store.min'
 import Vuex from 'vuex'
 import configRouter from './config_router.js'
-
+//import  CellSwipe  from 'mint-ui';
+//Vue.component(CellSwipe.name, Cell);
 Vue.use(VueRouter);
 Vue.use(Vuex);
 window.LS = LS
@@ -193,7 +194,7 @@ window.store = new Vuex.Store({
         inquiryList: [],
         personalData : {
             uid:'',
-            client:''
+            
         },
         pageSize : 12
     },

@@ -73,7 +73,7 @@
         </div>  
          <div class="infor-show1 fixed">
             <a href="javascript:;" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
-            <a href="javascript:;" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
+            <a href="javascript:;" @click='btn' class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
             
         </div>
 
@@ -178,9 +178,30 @@
 //                    freeMode: true
                 });
             },
-           getData(){
+          
+            btn : function(){
                 var self = this;
-               
+                    $.post({
+                        //type:'post',
+                        url: window.YUNAPI.collection,
+                        data : GlobleFun.objConcat(self.$store.getters.validationData,{
+                            followable_type:'Space',
+                            followable_id:'ID',    
+                        }
+                            ),
+                        success: function (data){
+                            console.log(1)
+                        //console.log(data);
+                         //console.log(self.casecontents)
+                       self.casecontents= data.follows ;
+
+                        }   
+                    });
+                    
+                
+            },
+            getData(){
+                var self = this;
                 self.$store.commit('loading',true);
                 $.get({
                     url: window.YUNAPI.SpaceDtl +'/'+ this.$route.params.id,

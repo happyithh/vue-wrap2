@@ -15,7 +15,7 @@
     import 'assets/css.css';
     import 'assets/css/weui-change.css';
 
-    //    const host = "http://api.yunspace.com.cn/";
+    //const host = "http://api.yunspace.com.cn/";
     const host = "http://172.16.145/";
 
     window.YUNAPI = {
@@ -29,7 +29,7 @@
         articleTags: host + 'api/tags/get_information_tags',
         articleHot: host + 'api/informations/get_hot_recommend',
         articleKeyword: host + 'api/informations/get_keyword',
-
+        logout:host+'/api/auth/sign_out',
         ipList: host + 'api/projects',
         active: host + 'api/activities',
         activeForm: host + 'api/activities/activities_form',
@@ -40,7 +40,7 @@
         SpaceDtl: host + 'api/spaces',
         placeDtl: host + 'api/sites',
         feedBack: host + 'api/feedback',
-        inquiry: host + 'api/demands/create_inquiry',
+        inquiry: host + 'api/users/1/demands',
         collection: host + 'api/follows',
         login: host + 'api/auth/sign_in',
         register: host + 'api/auth',
@@ -56,6 +56,7 @@
         checkCode:host+'api/auth_codes/check_code',
         personalInfo:host+'api/users/update',
         consultTags:host+'api/tags/get_consult_tags'
+       
        
     };
 

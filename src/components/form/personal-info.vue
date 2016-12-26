@@ -25,7 +25,7 @@
             
             <div class="input-box">
                 <div class="base-info-name">您的称呼</div>
-                <input type="text" class="base-detail-name" v-model='order.name' placeholder="请输入您的称呼"/>
+                <input type="text" class="base-detail-name" v-model='order.nickname' placeholder="请输入您的称呼"/>
 
             </div>
             <div class="input-box">
@@ -52,7 +52,7 @@
         data () {
             return {
                 order:{
-                    name:'',
+                    nickname:'',
                     moblie:'',
                     company_name:''
                 }
@@ -61,14 +61,20 @@
 
         },
         computed:{
-            //  personalData (){
-            //     return this.$store.state.personalData
-            // }
+            personalData (){
+                return this.$store.state.personalData
+            },
         },
+        mounted(){
+             this.$store.commit('getPersonalData');
+         },
         methods:{
+            personalDataChange(data){
+                this.$store.commit('personalDataChange',data)
+            }, 
             personalInfo(data){
                 var self=this;
-                if(!self.order.name){
+                if(!self.order.nickname){
                         $.toptip('请输入您的称呼',2000,'error');
                         return;
                     }
@@ -76,31 +82,34 @@
                         $.toptip('请输入您的手机号',2000,'error');
                         return;
                     }
-                    // if(!self.company){
-                    //     $.toptip('请输入公司名称',2000,'error');
-                    //     return;
-                    // }
-                $.get({
+                     if(!self.order.company_name){
+                        $.toptip('请输入您的公司名称',2000,'error');
+                        return;
+                    }
+                   
+                $.ajax({
+                    type:'put',
                     url: window.YUNAPI.personalInfo,
-                    data: self.$store.getters.validationData,
-                    // data:GlobleFun.objConcat(this.$store.getters.validationData,{page:1,order_id:222}),
-                    success : function (data) {
-                       // data.order=self.$store.state.personalData;
-                        console.log(data)
+                    data:GlobleFun.objConcat(self.$store.getters.validationData,
+                    {nickname:self.order.nickname,company_name:self.order.company_name,moblie:self.order.moblie,}),
+                    success : function (data,status,xhr) {
+                       //console.log(data)
+                        data.data.access_token = xhr.getResponseHeader('access-token');
+                        data.data.client = xhr.getResponseHeader('client');
+                        self.$store.commit('personalDataChange',data.data);//保存个人信息
                         $.alert({
                             title: '保存成功',
                             text: '',
                             onOK: function () {
-                                
-                                window.location.href='../form/personal-center';
+                               router.replace('../form/personal-center')
+                               
                             }
                         });
+                        
+                       // router.replace(self.$route.path);  // 刷新页面
                         self.$parent.loading = false;
                     },
-                     getPersonalData(data){
-                            this.$store.commit('getPersonalData',data)
-                        // router.replace('/')
-                    }, 
+                     
                 });
             }
         }

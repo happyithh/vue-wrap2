@@ -16,8 +16,10 @@
         </header>
         <div class="personal-box">
             <div class="img-box">
-               <a href="/form/personal"><img src="/static/images/test_logo.png" alt=""></a>
-               <div class="person-name" v-text='personalData.name'></div>
+               <router-link to="/form/personal" class="back">
+                    <img src="/static/images/test_logo.png" alt="">
+                </router-link>
+               <div class="person-name" v-text='personalData.nickname'></div>
             </div>
            
            <router-link to="/form/password" class="back">
@@ -47,11 +49,11 @@
                     </div>
                 </div>
             </router-link>
-             <router-link to="/order/Login" class="back">
+             <div class="back">
                 <div class="onekey-rentail-wrap">
-                        <a href="" class="btn-onekey">退出登录</a>
+                        <a class="btn-onekey" @click='logout'>退出登录</a>
                 </div>
-            </router-link>
+            </div>
          </div>     
         
         
@@ -72,18 +74,13 @@
                 return this.$store.state.personalData
             }
         },
-
         methods:{
-            
-            getPersonalData(data){
-                this.$store.commit('getPersonalData',data)
-            // router.replace('/')
-            }, 
+             logout(){
+                this.$store.commit('personalDataChange',{});//保存个人信息
+                router.replace('/')
+            }
         }
     }
-    
-           
-    
 </script>
 <style scoped>
     .red::-webkit-input-placeholder { color: #999999; }

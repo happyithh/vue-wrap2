@@ -128,15 +128,15 @@
                 <div class="input-box">
                     <div class="base-info-name">装置尺寸</div>
                     <div class="size first">
-                        <input type="text" class="base-detail-name" placeholder="长＊高＊宽 40*50*80">
+                        <input type="text" class="base-detail-name" placeholder="长＊高＊宽 40*50*80" v-model='consult.size'>
                         <span>/m</span>
                     </div>
                     <div class="size">
-                        <input type="text" class="base-detail-name" placeholder="用电功率 10-100">
+                        <input type="text" class="base-detail-name" placeholder="用电功率 10-100"v-model='consult.watt'>
                         <span>/w</span>
                     </div>
                     <div class="size">
-                        <input type="text" class="base-detail-name" placeholder="上下水 10-100">
+                        <input type="text" class="base-detail-name" placeholder="上下水 10-100"v-model='consult.stere'>
                         <span>/m³</span>
                     </div>
                 </div>
@@ -177,14 +177,14 @@
                     storey:'',
                     space_type:'',
                     budget_amount:'',
-                    access_token:'_UVbn1Ds9ecf8LCTpJqALg',
-                    uid:'13127808798',
-                    client:'KdNLbJGdabQ-oxfXiTv5bw',
                     phone:'',
                     contact:'',
                     company:'',
                     order_city:'',
                     activities_required:"",
+                    stere:'',
+                    size:'',
+                    watt:'',
                     cities:'',
                     areas:'',
                     duration:'',
@@ -192,7 +192,9 @@
                     passenger_flow:'',
 
                 },
-                consultTags : {},
+                consultTags : {
+                    
+                },
                  spaceDtl : [],
                
                 
@@ -240,6 +242,7 @@
                     success: function (data) {
                         // console.log(data);
                         self.consultTags = data
+                        self.consult.activities_required= self.consult.size+' '+ self.consult.watt+' '+ self.consult.stere
                         var status = data.status == 1 ? 'success' : 'error';
                         if(data.status == 1){
                             $.alert({
@@ -250,8 +253,7 @@
                         }else{
                             $.toptip(data.message,2000,status);
                         }
-
-                    },
+                     },
                     error : function () {
 
                     }
@@ -315,13 +317,7 @@
         },
         
      },
-
-    
-      
-                
-        
-    
-    }
+  }
 
 
 </script>

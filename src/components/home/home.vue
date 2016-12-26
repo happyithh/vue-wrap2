@@ -18,7 +18,7 @@
                 <div class="logo"><img src="/static/images/logo.png"></div>
             </div>
             <div class="right fr">
-                <a class="in" @click="toggleLoginForm" v-text=" typeof personalData.name != 'undefined' ? personalData.name : '注册/登录' " ></a>
+                <a class="in" @click="toggleLoginForm" v-text=" typeof personalData.nickname != 'undefined' ? personalData.nickname : '注册/登录' " ></a>
             </div>
         </header>
 
@@ -56,11 +56,14 @@
             <div class="selectedtopic-cont">
                 <div class="swiper-wrapper swiper-container">
                     <div class="swiper-slide" v-for="item in citySpecial">
-                        <a href="javascript:;" target="_blank">
-                            <!--<img src="/static/images/test.png" alt="">-->
-                            <img class="lazy" :title="item.title" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
-                            <p>{{item.title}}</p>
-                        </a>
+                        <a :href="item.special_url ? item.special_url : '/article/' + item.id">
+                        <!--<router-link :to="'/article/'+item.id">-->
+                            <!--<a href="javascript:;" target="_blank">-->
+                                <!--<img src="/static/images/test.png" alt="">-->
+                                <img class="lazy" :title="item.title" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                                <p>{{item.title}}</p>
+                            </a>
+                            <!--</router-link>-->
                     </div>
                 </div>
             </div>
@@ -74,13 +77,15 @@
             </div>
             <ul>
                 <li v-for="item in recommendSite">
-                    <a class="img" href="javascript:;">
-                        <!--<img src="/static/images/test.png">-->
-                        <img class="lazy" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''" >
-                        <!--<div class="price">-->
-                            <!--<sup>￥</sup>{{}} 元/天<span>起</span>-->
-                        <!--</div>-->
-                    </a>
+                    <router-link :to="'/space/detail/'+item.id">
+                        <a class="img" href="javascript:;">
+                            <!--<img src="/static/images/test.png">-->
+                            <img class="lazy" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''" >
+                            <!--<div class="price">-->
+                                <!--<sup>￥</sup>{{}} 元/天<span>起</span>-->
+                            <!--</div>-->
+                        </a>
+                    </router-link>
                     <div class="text">
                         <h3><a class="title" href="javascript:;">{{item.title}}</a></h3>
                         <p>
@@ -175,6 +180,7 @@
         },
         mounted () {
             var self = this;
+             this.$store.commit('getPersonalData')
             self.getData()
         },
         methods:{
@@ -182,20 +188,20 @@
                 //  console.log(data)
                 // this.personalData=data                
                 if(this.personalData.uid){
-                    console.log(this.personalData.uid)
+                    //console.log(this.personalData.uid)
                     router.push('/form/personal-center') //已登陆 跳到个人页面
                 }else{
                     console.log(this.personalData.uid)
                      router.push('/order/login')
-                    // this.$parent.$data.showForm.login = !this.$parent.$data.showForm.login
+                    //this.$parent.$data.showForm.login = !this.$parent.$data.showForm.login
                 }
 
             },
-             getPersonalData(data){
-                 console.log(data)
-                this.$store.commit('getPersonalData',data)
-                // router.replace('/')
-            },
+            //  getPersonalData(data){
+            //      console.log(data)
+                
+            //     // router.replace('/')
+            // },
             /*轮播*/
             init : function () {
                 var citySelectionSwiper = new Swiper('.selectedtopic-cont', {

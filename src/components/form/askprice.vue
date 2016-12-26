@@ -15,7 +15,8 @@
         <div class="inquiry-list">
             <ul>
                 <li class="clearfix" v-for="item in inquiryList">
-                    <div class="local-price"><strong>{{item[0]}}元/天</strong> {{item[1]}}</div>
+                    <div class="local-price">
+                        <strong>{{item[0]}}元/天</strong> {{item[1]}}</div>
                     <div class="local-price-detail clearfix">
                         <div class='max-people fl ml10'>最大容纳 {{item[3]}}人</div>
                          <div class='max-square fl ml10'>面积 {{item[4]}}㎡</div>
@@ -61,16 +62,11 @@
                 area:'',
                 address:'',
                 consult:{
-                    email:'',
-                    access_token:'',
-                    uid:'',
-                  
+                    contact:''
                 },
                 Max_seating_capacity:'',
                 site_name:'',
-                
                 market_price_real:'',
-                
                 contact:'',
                 phone:'',
 
@@ -82,7 +78,8 @@
                 return this.$store.getters.inquiryList
             },
             personalData (){
-                return this.$store.state.personalData
+                var personalData = this.$store.state.personalData
+                return personalData
             }
 
         },
@@ -93,12 +90,30 @@
                 e[i] = true
             }
             this.inquiryListChange = e;
+
+            var self = this;
+
+            setTimeout(function () {
+                if(self.personalData.name){
+                    self.consult.phone = self.personalData.mobile
+                    self.consult.contact = self.personalData.name
+                    self.consult.email = self.personalData.email
+                }
+            },300)
         },
         // },
         methods:{
            
             createInquiry : function () {
                 var self = this;
+                var inquirys = LS.get('inquiry')
+                var ids = []
+
+                for( var i in inquirys){
+                    ids.push(i)
+                }
+                self.consult.space_ids = ids
+                console.log(ids)
                 if(!self.consult.contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
@@ -113,11 +128,11 @@
                 }
                 var self = this;
                 $.post({
-                    url: 'http://api.yunspace.com.cn/api/users/1/demands',
+                    url: window.YUNAPI.inquiry,
                     //data : self.consult,
-                    data : self.$store.getters.validationData,
+                    data : GlobleFun.objConcat(self.$store.getters.validationData,self.consult),
                     success: function (data,status,xhr) {
-                        console.log(self.$store.getters.validationData)
+                        //console.log(self.$store.getters.validationData)
                         var status = data.status == 1 ? 'success' : 'error';
                         if(data.status == 1){
                            
@@ -131,12 +146,11 @@
                         }else{
                             $.toptip(data.message,2000,status);
                         }
+                        // data.data.access_token = xhr.getResponseHeader('access-token');
+                        // data.data.client = xhr.getResponseHeader('client');
+                        // self.$store.commit('personalDataChange',data.data);//保存个人信息
 
                     },
-                     getPersonalData(data){
-                            this.$store.commit('getPersonalData',data)
-                        // router.replace('/')
-                    }, 
                     error : function () {
 
                     }

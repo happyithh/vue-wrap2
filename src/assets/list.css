@@ -26,6 +26,11 @@
 .space-list .text{
     padding: 10px 15px 15px;
 }
+.btn-join.hv{
+    background:#e92332;
+    color: #fff;
+    border-color: #e92332;
+}
 .space-list .text .title{
     font-size: 0.93rem;
     line-height: 1.35em;
