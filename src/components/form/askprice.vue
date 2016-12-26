@@ -128,7 +128,7 @@
                 }
                 var self = this;
                 $.post({
-                    url: window.YUNAPI.inquiry,
+                    url: window.YUNAPI.inquiryContent,
                     //data : self.consult,
                     data : GlobleFun.objConcat(self.$store.getters.validationData,self.consult),
                     success: function (data,status,xhr) {
