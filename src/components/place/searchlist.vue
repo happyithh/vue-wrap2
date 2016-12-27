@@ -32,26 +32,25 @@
                     <div class="tags select clearfix">
                         <span class="active">不限</span>
                         <select v-model="urlData.business_district">
-                            <!--<option>不限</option>-->
+                            <option>不限</option>
                             <option :value="item.id" v-for="item in searchCondition.business_district">{{item.name}}</option>
                         </select>
                         <select>
                             <option>不限</option>
-                            <option>商圈1</option>
-                            <option>商圈2</option>
+                            <option :value="value" v-for="(key,value) in searchCondition.city_business">{{key}}</option>
                         </select>
                         <select>
                             <option>不限</option>
-                            <option>地铁1</option>
-                            <option>地铁2</option>
+                            <!--<option>地铁1</option>-->
+                            <!--<option>地铁2</option>-->
                         </select>
-                        <span>环线</span>
+                        <span>不限</span>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">场地类型</div>
-                    <div class="tags clearfix">
-                        <span :data-id="value" v-for="(value,key) in searchCondition.space_type">{{key}}</span>
+                    <div class="tags clearfix placeType">
+                        <span @click="toggleActive($event)" :data-id="value" v-for="(value,key) in searchCondition.space_type">{{key}}</span>
                     </div>
                 </div>
 
@@ -65,8 +64,8 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">容纳人数</div>
-                    <div class="tags clearfix">
-                        <span :data-id="key" v-for="(value,key) in searchCondition.search_people">{{value}}</span>
+                    <div class="tags clearfix people">
+                        <span :data-id="key" v-for="(value,key) in searchCondition.search_people" @click="singleActive($event)">{{value}}</span>
                     </div>
                 </div>
                 <div class="input-box">
@@ -88,15 +87,15 @@
                 <div class="input-box">
                     <div class="base-info-name">落位区域</div>
                     <div class="tags clearfix">
-                        <span class="active">不限</span>
-                        <span :data-id="key" v-for="(value,key) in searchCondition.position">{{value}}</span>
+                        <span class="active buxian" @click="singleActive($event)">不限</span>
+                        <span :data-id="key" v-for="(value,key) in searchCondition.position" @click="toggleActive($event)">{{value}}</span>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">配套服务</div>
-                    <div class="tags area clearfix">
-                        <span class="active">不限</span>
-                        <span :data-id="key" v-for="(value,key) in searchCondition.facitilies">{{value}}</span>
+                    <div class="tags arrSort clearfix">
+                        <span class="active buxian" @click="singleActive($event)">不限</span>
+                        <span :data-id="value" v-for="(value,key) in searchCondition.facitilies" @click="toggleActive($event)">{{value}}</span>
                     </div>
                 </div>
                 <div class="input-box">
@@ -108,7 +107,7 @@
                 </div>
 
                 <div class="onekey-rentail-wrap">
-                    <a href="" class="btn-onekey">搜索</a>
+                    <a href="javascript:;" class="btn-onekey" @click="getData">搜索</a>
                 </div>
             </div>
         </form>
@@ -153,6 +152,13 @@
                         spaces_height_gteq:'',
                     }
                 },
+                arrSort:[],
+                stringArrSort:[],
+                arrArea:[],
+                stringArrArea:[],
+                arrPlaceType:[],//场地类型
+                stringArrPlaceType:[],
+
                 default:[],
             }
         },
@@ -190,41 +196,56 @@
 
         },
         methods:{
+            //多选
+            toggleActive(e){
+                if($(e.target).text()=='不限'){
+                    if($(e.target).hasClass('active')){
+                        $(e.target).removeClass('active');
+                    }else{
+                        $(e.target).addClass('buxian active');
+                        $(e.target).siblings().removeClass('active');
+                    }
+                }else {
+                    $(e.target).parent().find('.buxian').removeClass('active');
+                    $(e.target).toggleClass('active');
+                }
+            },
+            //单选
+            singleActive(e){
+                if($(e.target).hasClass('active')){
+                    $(e.target).removeClass('active');
+                }else {
+                    $(e.target).addClass('active');
+                    $(e.target).siblings().removeClass('active')
+                }
+            },
             getData(){
                 var self= this;
-                if( this.placeMore && this.placeMore.state() == 'pending'){
-                    return
-                }
                 self.$store.commit('loading',true);
-                //落位区域-分割
-                self.stringArrArea=self.arrArea.join(',');
-                //配套服务-分割
+
+                //配套服务
+                $('.arrSort span.active').each(function () {
+                    self.arrSort.push($(this).data('id'));
+                });
                 self.stringArrSort=self.arrSort.join(',');
 
-                //urlData.tags值(配套服务+活动类型)
+                //配套服务+活动类型(urlData.tags值)
                 if(self.stringArrSort){
                     self.stringArrSort=self.stringArrSort+','
                 }
+                console.log(self.stringArrSort,999);
                 self.urlData.tags = self.stringArrSort
                         +self.urlData.business_circle;
+
                 //落位区域值
+                self.stringArrArea=self.arrArea.join(',');
                 self.urlData.spaces_through_three_areas_cont = self.stringArrArea
 
                 //空间层高值
-                self.urlData.q.spaces_height_gteq = $('.space-height .ipt-height').val();
-                $('.space-height .ipt-height').val('');  //清零
+                self.urlData.q.spaces_height_gteq = $('.triangle .ipt-height').val();
+                $('.triangle .ipt-height').val('');  //清零
 
-                //搜索 容纳人数
-                if(self.searchData.search_people){
-                    var search_people = self.searchData.search_people.split('-')
-                    self.urlData.q.spaces_Max_seating_capacity_gteq = search_people[0]
-                    self.urlData.q.spaces_Max_seating_capacity_lteq = search_people[1]
-                }else{
-                    self.urlData.q.spaces_Max_seating_capacity_lteq = ''
-                    self.urlData.q.spaces_Max_seating_capacity_lteq = ''
-                }
-
-                //搜索 预算范围
+                //预算范围
                 if(self.searchData.budget_amount){
                     var budget_amount = self.searchData.budget_amount.split('-')
                     self.urlData.q.spaces_market_price_gteq = budget_amount[0]
@@ -234,7 +255,7 @@
                     self.urlData.q.spaces_market_price_lteq = ''
                 }
 
-                //搜索 面积限制
+                //面积限制
                 if(self.searchData.area_size){
                     var area_size = self.searchData.area_size.split('-')
                     self.urlData.q.spaces_area_gteq = area_size[0]
@@ -244,12 +265,34 @@
                     self.urlData.q.spaces_area_lteq = ''
                 }
 
+                //场地类型
+                $('.placeType span.active').each(function () {
+                    self.arrPlaceType.push($(this).data('id'));
+                });
+                self.stringArrPlaceType = self.arrPlaceType.join(',')
 
-                self.placeMore = $.ajax({
+                //容纳人数
+                if($('.people span').hasClass('active')){
+                    var search_people = $('.people span.active').data('id').split('-');
+                    self.urlData.q.spaces_Max_seating_capacity_gteq = search_people[0]
+                    self.urlData.q.spaces_Max_seating_capacity_lteq = search_people[1]
+
+                    if($('.people span.active').text()=='不限'){
+                        self.urlData.q.spaces_Max_seating_capacity_lteq = ''
+                        self.urlData.q.spaces_Max_seating_capacity_lteq = ''
+                    }
+                }else{
+                    self.urlData.q.spaces_Max_seating_capacity_lteq = ''
+                    self.urlData.q.spaces_Max_seating_capacity_lteq = ''
+                }
+
+
+                $.ajax({
                     url: window.YUNAPI.host + 'api/sites/search',
                     data : self.urlData,
                     success: function (data) {
                         //console.log(data)
+
                     }
                 });
 
