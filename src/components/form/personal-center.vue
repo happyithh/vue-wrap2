@@ -79,6 +79,7 @@
                 this.$store.commit('personalDataChange',{});//保存个人信息
                 router.replace('/')
             }
+            
         }
     }
 </script>

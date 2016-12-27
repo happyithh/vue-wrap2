@@ -96,7 +96,7 @@
                        //console.log(data)
                         data.data.access_token = xhr.getResponseHeader('access-token');
                         data.data.client = xhr.getResponseHeader('client');
-                        self.$store.commit('personalDataChange',data.data);//保存个人信息
+                        //self.$store.commit('personalDataChange',data.data);//保存个人信息
                         $.alert({
                             title: '保存成功',
                             text: '',

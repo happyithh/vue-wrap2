@@ -32,7 +32,7 @@
 
                 <!--了解更多-->
                 <div class="see-more">
-                    <a href="">
+                    <a href="http://www.yunspace.com.cn/m/city_collaborate">
                         <img src="/static/images/icon/friends.png">
                         <p>城市合伙人</p>
                         <p class="see-more-btn">了解更多</p>

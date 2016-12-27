@@ -31,13 +31,13 @@
                     <p class="fl">记住我</p>
                 </div>
                 <div class="forgetBox fl">
-                    <router-link to="/order/checkCodeLogin" class="back">
+                    <router-link to="/form/passwordfind" class="back">
                         <a href="javascrpit:;">忘记密码</a>
                     </router-link>
                 </div>
             </div>
             <div class="onekey-rentail-wrap clearfix">
-                    <a href="javascript:;" class="btn-onekey"@click='login'>登录</a>
+                    <a href="javascript:;" class="btn-onekey" @click='login'>登录</a>
             </div>
             <div class="remeberBox clearfix">
                 <div class="fl checkBox">
