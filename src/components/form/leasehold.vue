@@ -3,7 +3,7 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/" class="back">
+                <router-link to="/event" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -40,7 +40,7 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动城市</div>
                     <div class="triangle">
-                        <select v-model="consult.order_city">
+                        <select v-model="consult.ip_city">
                             <option value="">请选择目的地，城市</option>
                             <option v-for="item in searchCondition.cities":value="item.id">{{item.name}}</option>
                         </select>
@@ -62,8 +62,8 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动时间</div>
-                    <input type="text" readonly  class="base-detail-name data_time weui_input" id='s_input'  v-model="consult.s_time" placeholder="开始时间" />
-                    <input type="text" readonly class="base-detail-name data_time weui_input" id='e_input' v-model="consult.e_time" placeholder="结束时间" />
+                    <input type="text" readonly  class="base-detail-name data_time weui_input" id='s_input'@click='getStartTimeData' v-model="consult.s_time" placeholder="开始时间" />
+                    <input type="text" readonly class="base-detail-name data_time weui_input" id='e_input' @click='getEndTimeData' v-model="consult.e_time" placeholder="结束时间" />
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动类型</div>
@@ -106,15 +106,14 @@
                     phone:'',
                     auth_code:'',
                     code_token:'',
-                  
-                    order_city:'',
+                    ip_city:'',
                     number_of_activities:'',
                     activity_type:'',
                     activities_required:'',
                     s_time:'',
                     e_time:'',
                     }
-
+               
             }
        
         },
@@ -129,15 +128,29 @@
                 return this.$store.state.personalData
             }
         },
-          mounted () {
+          mounted(){
             var self = this;
             $('#s_input').calendar({});
             $('#e_input').calendar({});
+            // self.getStartTimeData();
+            // self.getEndTimeData();
             setTimeout(function () {
                 self.$parent.loading = false;
             },300)
         },
         methods: {
+            getStartTimeData:function(){
+                this.consult.s_time=$('#s_input').val();
+                // $('#s_input').val()=this.consult.s_time;
+                console.log( $('#s_input').val())
+                console.log(this.consult.s_time)
+            },
+
+            getEndTimeData:function(){
+                this.consult.e_time=$('#e_input').val();
+                console.log( $('#e_input').val())
+                console.log(this.consult.e_time)
+            },
             sendPhoneCode(e){
                 var self = this;
                 var success = function (data) {
@@ -156,7 +169,7 @@
                 });
             },
             inquiryContent : function () {
-                var self = this;
+                var self=this
                 if(!self.consult.contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
@@ -174,7 +187,7 @@
                     return;
                 }
                 
-                if(!self.consult.order_city){
+                if(!self.consult.ip_city){
                     $.toptip('请先获取活动城市!',2000,'error');
                     return;
                 }
@@ -182,14 +195,14 @@
                     $.toptip('请先获取活动人数!',2000,'error');
                     return;
                 }
-                // if(!self.consult.s_time){
-                //     $.toptip('请选择开始时间!',2000,'error');
-                //     return;
-                // }
-                // if(!self.consult.e_time){
-                //     $.toptip('请选择结束时间!',2000,'error');
-                //     return;
-                // }
+                if(!self.consult.s_time){
+                    $.toptip('请选择开始时间!',2000,'error');
+                    return;
+                }
+                if(!self.consult.e_time){
+                    $.toptip('请选择结束时间!',2000,'error');
+                    return;
+                }
                 if(!self.consult.activity_type){
                     $.toptip('请先获取活动类型!',2000,'error');
                     return;
@@ -200,17 +213,16 @@
                 }
                    $.post({
                     url: window.YUNAPI.inquiryContent,
-                    data : self.consult,
+                    data :  GlobleFun.objConcat(self.$store.getters.validationData,self.consult),
                     success: function (data) {
                         var status = data.status == 1 ? 'success' : 'error';
-                         console.log(self.consult)
+                        //console.log(self.consult)
                         if(data.status == 1){
-                           
-                            $.alert({
+                           $.alert({
                                 title: '提交成功',
                                 text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                 onOK: function () {
-                                    router.back()
+                                    router.back('/')
                                 }
                             });
                         }else{

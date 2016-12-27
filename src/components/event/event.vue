@@ -125,7 +125,7 @@
                 $.ajax({
                     url: window.YUNAPI.active,
                     success: function (data) {
-                        console.log(data)
+                        //console.log(data)
                         self.venues=data.space_recommend;
 
                         //移动端去价格单位

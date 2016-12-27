@@ -4,7 +4,7 @@
         <!--头部-->
         <header class="clearfix">
             <div class="fl left p20">
-                <router-link to="/" class="back">
+                <router-link to="/openshop" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -65,12 +65,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="input-box">
+                <!--<div class="input-box">
                     <div class="base-info-name">落位地区</div>
                     <div class="tags clearfix">
-                        <span  v-bind:class="{'active': position == item}" @click="positionChange(item)" v-for="item in searchCondition.retail">{{item}}</span>
+                        <span  v-bind:class="{'active': retail == item}" @click="retailChange(item)" v-for="item in searchCondition.retail">{{item}}</span>
                      </div>
-                </div>
+                </div>-->
                 <div class="input-box">
                     <div class="base-info-name">可用面积</div>
                     <div class="tags area clearfix">
@@ -111,13 +111,16 @@
                     activity_type:'',
                     storey:'',
                     budget_amount:'',
-                   
+                    retail:'',
                 },
             }
         },
         mounted () {
             var self = this;
             this.tags();//调用数据
+            if($(".tags").hasClass("active")){
+                alert("包含class a");
+            }
          },
         computed:{
            searchCondition (){
@@ -134,7 +137,11 @@
             },
             area_size(){
                 return this.$store.state.area_size
-            }
+            },
+            // retailChange(){
+            //     return this.$store.state.retail
+            //     //console.log(this.$store.state.retail)
+            // }
         },
         methods:{
             positionChange(item){
@@ -144,11 +151,32 @@
               
                 this.$store.commit('activityTypeChange',item)
             },
-             areaSizeChange(item){
+            areaSizeChange(item){
               
                 this.$store.commit('areaSizeChange',item)
             },
-           
+            // retailChange(item){
+            //     this.$store.commit('retailChange',item)
+            // },
+           retailSearch:function(){
+                $.get({
+                    url: window.YUNAPI.retailSearch,
+                    data : self.consult,
+                    success: function (data) {
+                       var status = data.status == 1 ? 'success' : 'error';
+                        console.log(self.consult)
+                        if(data.status == 1){
+                           
+                        }else{
+                            $.toptip(data.message,2000,status);
+                        }
+
+                    },
+                    error : function () {
+
+                    }
+                });
+           },
             tags : function () {
                
                 var self = this;
