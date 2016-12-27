@@ -40,14 +40,14 @@
             </div>
             <div class="ip-tags-wrap">
                 <div class="ip-tags clearfix">
-                    <a class="current" href="javascript:;">全部</a>
-                    <a href="javascript:;">动漫</a>
-                    <a href="javascript:;">卡通</a>
-                    <a href="javascript:;">游戏</a>
-                    <a href="javascript:;">市集</a>
-                    <a href="javascript:;">动漫</a>
-                    <a href="javascript:;">卡通</a>
-                    <a href="javascript:;">游戏</a>
+                    <a :class="{ 'current':  !chooseType}" @click="typeChange('')" href="javascript:;">全部</a>
+                    <a :class="{ 'current': key == chooseType}" @click="typeChange(key)" v-for="(key,value) in ipType" href="javascript:;">{{value}}</a>
+                    <!--<a href="javascript:;">卡通</a>-->
+                    <!--<a href="javascript:;">游戏</a>-->
+                    <!--<a href="javascript:;">市集</a>-->
+                    <!--<a href="javascript:;">动漫</a>-->
+                    <!--<a href="javascript:;">卡通</a>-->
+                    <!--<a href="javascript:;">游戏</a>-->
                 </div>
             </div>
             <ul class="ip-cont">
@@ -97,21 +97,15 @@
             return {
                 iplisst:[1,2,3],
                 ipProject : [],
-                ipBrand : []
+                ipBrand : [],
+                ipType :[],
+                chooseType :''
             }
         },
         mounted () {
             var self = this;
-
-
-
+            self.$store.commit('loading',true);
             self.getData()
-
-            //ip文创关键词滚动
-            var num=$('.ip-tags a').length;
-            var ipAwidth=$('.ip-tags a').outerWidth();
-
-            $('.ip-tags').width(num*ipAwidth+30);
         },
         methods:{
             /*轮播*/
@@ -130,15 +124,25 @@
             },
             getData(){
                 var self = this
-                self.$store.commit('loading',true);
+//
                 $.ajax({
                     url: window.YUNAPI.findIp,
                     data: {
-                        city_id: self.$store.state.city_id
+                        city_id: self.$store.state.city_id,
+                        p_type:self.chooseType
                     },
                     success: function (data) {
                         self.ipProject = data.projects
-                        self.ipBrand = data.ip_brand
+
+                        if(self.ipBrand.length <= 0){
+                            self.ipBrand = data.ip_brand
+                        }
+
+                        if(self.ipType.length > 0){
+
+                        }else{
+                            self.ipType = data.ip_type
+                        }
                         console.log(data)
                         setTimeout(function () {
                             self.init();//调用轮播
@@ -148,9 +152,19 @@
                             });
                             self.$store.commit('loading',false);
 
+                            //ip文创关键词滚动
+                            var num=$('.ip-tags a').length;
+                            var ipAwidth=$('.ip-tags a').outerWidth();
+
+                            $('.ip-tags').width(num*ipAwidth+40);
+
                         },200)
                     }
                 })
+            },
+            typeChange(type){
+                this.chooseType = type
+                this.getData()
             }
         }
     }

@@ -85,11 +85,11 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/form/site'], resolve)
         },
         {
-            path: '/form/collect',
+            path: '/form/personal/collect',
             component: (resolve) => require(['./components/form/collect'], resolve)
         },
         {
-            path: '/form/FeedBack',
+            path: '/form/personal/FeedBack',
             component: (resolve) => require(['./components/form/FeedBack'], resolve)
         },
         {
@@ -113,7 +113,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/form/personal-center'], resolve)
         },
         {
-            path: '/form/password',
+            path: '/form/personal/password',
             component: (resolve) => require(['./components/form/password'], resolve)
         },
         {
@@ -415,7 +415,7 @@ window.GlobleFun = {
         },1000)
     },
     httpError(){
-
+        $.toptip('网络链接失败!',2000,'error');
     },
     httpMessage(data,successMsg,errorMessage){
 
@@ -432,10 +432,7 @@ window.GlobleFun = {
             return
         }
         if(!urlData.user_id){
-            APP.$message({
-                message: '请先登录!',
-                type: 'warning'
-            });
+            $.toptip('请先登录!',2000,'error');
             return
         }
         self.changeCollectPromise = $.post({
@@ -446,12 +443,7 @@ window.GlobleFun = {
                 success(data)
             },
             error : function () {
-                if(!urlData.user_id){
-                    APP.$message({
-                        message: '网络链接失败!',
-                        type: 'warning'
-                    });
-                }
+                GlobleFun.httpError()
             }
         });
     },

@@ -122,7 +122,7 @@
         <div class="infor-show1">
             <a href="" class="fl btn-onekey"><i class="icon icon-share"></i>分享</a>
             <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
-            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey" :class=" {'hv':placeDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey" :class=" {'hv': placeDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
 
 
         </div>
@@ -245,6 +245,7 @@
                         self.spaces = data.site_spaces
                         self.relate_topics = data.relate_topics
                         self.relate_articles = data.relate_articles
+                        self.placeDtl.follow = (self.placeDtl.follow == true)
 
                         //场地配套
                         if(self.placeDtl.facilities){

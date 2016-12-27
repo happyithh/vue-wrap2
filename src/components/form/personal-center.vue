@@ -22,7 +22,7 @@
                <div class="person-name" v-text='personalData.nickname'></div>
             </div>
            
-           <router-link to="/form/password" class="back">
+           <router-link to="/form/personal/password" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
                         <img class="fl mt" src="/static/images/icon/password.png" alt=""/>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
            </router-link>
-            <router-link to="/form/collect" class="back">
+            <router-link to="/form/personal/collect" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
                         <img class="fl mt" src="/static/images/icon/collect.png" alt=""/>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
            </router-link>
-            <router-link to="/form/FeedBack" class="back">
+            <router-link to="/form/personal/FeedBack" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
                         <img class="fl mt" src="/static/images/icon/feed_back.png" alt=""/>
