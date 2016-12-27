@@ -62,8 +62,8 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动时间</div>
-                    <input type="text" readonly  class="base-detail-name data_time weui_input" id='s_input'@click='getStartTimeData' v-model="consult.s_time" placeholder="开始时间" />
-                    <input type="text" readonly class="base-detail-name data_time weui_input" id='e_input' @click='getEndTimeData' v-model="consult.e_time" placeholder="结束时间" />
+                    <input type="text" readonly  class="base-detail-name data_time weui_input" id='s_input' v-model="consult.s_time" placeholder="开始时间" />
+                    <input type="text" readonly class="base-detail-name data_time weui_input" id='e_input' v-model="consult.e_time" placeholder="结束时间" />
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动类型</div>
@@ -132,26 +132,12 @@
             var self = this;
             $('#s_input').calendar({});
             $('#e_input').calendar({});
-            // self.getStartTimeData();
-            // self.getEndTimeData();
             setTimeout(function () {
                 self.$parent.loading = false;
             },300)
         },
         methods: {
-            getStartTimeData:function(){
-                this.consult.s_time=$('#s_input').val();
-                // $('#s_input').val()=this.consult.s_time;
-                console.log( $('#s_input').val())
-                console.log(this.consult.s_time)
-            },
-
-            getEndTimeData:function(){
-                this.consult.e_time=$('#e_input').val();
-                console.log( $('#e_input').val())
-                console.log(this.consult.e_time)
-            },
-            sendPhoneCode(e){
+           sendPhoneCode(e){
                 var self = this;
                 var success = function (data) {
                     self.consult.code_token = data.data;
@@ -195,14 +181,14 @@
                     $.toptip('请先获取活动人数!',2000,'error');
                     return;
                 }
-                if(!self.consult.s_time){
-                    $.toptip('请选择开始时间!',2000,'error');
-                    return;
-                }
-                if(!self.consult.e_time){
-                    $.toptip('请选择结束时间!',2000,'error');
-                    return;
-                }
+                // if(!self.consult.s_time){
+                //     $.toptip('请选择开始时间!',2000,'error');
+                //     return;
+                // }
+                // if(!self.consult.e_time){
+                //     $.toptip('请选择结束时间!',2000,'error');
+                //     return;
+                // }
                 if(!self.consult.activity_type){
                     $.toptip('请先获取活动类型!',2000,'error');
                     return;
@@ -213,8 +199,12 @@
                 }
                    $.post({
                     url: window.YUNAPI.inquiryContent,
-                    data :  GlobleFun.objConcat(self.$store.getters.validationData,self.consult),
                     success: function (data) {
+                        self.consult.s_time=$('#s_input').val();
+                        self.consult.e_time=$('#e_input').val();
+                        console.log(self.consult.s_time)
+                        console.log(self.consult.e_time)
+                        data :  GlobleFun.objConcat(self.$store.getters.validationData,self.consult,)
                         var status = data.status == 1 ? 'success' : 'error';
                         //console.log(self.consult)
                         if(data.status == 1){

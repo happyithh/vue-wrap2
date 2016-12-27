@@ -36,11 +36,11 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">设置密码</div>
-                    <input type="text" v-model='consult.password' class="base-detail-name"placeholder="输入密码"/>
+                    <input type="password" v-model='consult.password' class="base-detail-name"placeholder="输入密码"/>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">确认密码</div>
-                    <input type="text"v-model='consult.password_confirmation' class="base-detail-name"placeholder="输入密码"/>
+                    <input type="password"v-model='consult.password_confirmation' class="base-detail-name"placeholder="输入密码"/>
                 </div>
                 <div class="onekey-rentail-wrap">
                     <a href="javascript:;" class="btn-onekey" @click='register'>提交</a>

@@ -18,7 +18,7 @@
                 <div class="logo"><img src="/static/images/logo.png"></div>
             </div>
             <div class="right fr">
-                <a class="in" @click="toggleLoginForm" v-text=" typeof personalData.nickname != 'undefined' ? personalData.nickname : '注册/登录' " ></a>
+                <a class="in" @click="toggleLoginForm" v-text=" typeof personalData.name != 'undefined' ? personalData.name : '注册/登录' " ></a>
             </div>
         </header>
 

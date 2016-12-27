@@ -23,7 +23,7 @@
             </div>
             <div class="input-box">
                 <div class="base-info-name">密码</div>
-                <input type="text" class="base-detail-name"v-model='consult.password' placeholder="请输入登录密码"/>
+                <input type="password" class="base-detail-name"v-model='consult.password' placeholder="请输入登录密码"/>
             </div>
             <div class="remeberBox clearfix">
                 <div class="fl checkBox">

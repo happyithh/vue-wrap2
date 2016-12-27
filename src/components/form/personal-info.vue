@@ -25,7 +25,7 @@
             
             <div class="input-box">
                 <div class="base-info-name">您的称呼</div>
-                <input type="text" class="base-detail-name" v-model='order.nickname' placeholder="请输入您的称呼"/>
+                <input type="text" class="base-detail-name" v-model='order.name' placeholder="请输入您的称呼"/>
 
             </div>
             <div class="input-box">
@@ -52,7 +52,7 @@
         data () {
             return {
                 order:{
-                    nickname:'',
+                    name:'',
                     moblie:'',
                     company_name:''
                 }
@@ -74,7 +74,7 @@
             }, 
             personalInfo(data){
                 var self=this;
-                if(!self.order.nickname){
+                if(!self.order.name){
                         $.toptip('请输入您的称呼',2000,'error');
                         return;
                     }
@@ -91,7 +91,7 @@
                     type:'put',
                     url: window.YUNAPI.personalInfo,
                     data:GlobleFun.objConcat(self.$store.getters.validationData,
-                    {nickname:self.order.nickname,company_name:self.order.company_name,moblie:self.order.moblie,}),
+                    {name:self.order.name,company_name:self.order.company_name,moblie:self.order.moblie,}),
                     success : function (data,status,xhr) {
                        //console.log(data)
                         data.data.access_token = xhr.getResponseHeader('access-token');
