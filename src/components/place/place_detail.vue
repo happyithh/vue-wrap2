@@ -40,7 +40,7 @@
 
             <div class="base-info">基本信息</div>
             <div class="base-info-detail"> 最大容量：<span>{{placeDtl.max_people}}人</span></div>
-            <div class="base-info-detail mj"> 空间面积：<span>{{placeDtl.max_size}}m<sup>2</sup></span></div>
+            <div class="base-info-detail"> 空间面积：<span>{{placeDtl.max_size}}㎡</span></div>
             <div class="base-info-detail"> 场地类型：<span>{{placeDtl.site_type}}</span></div>
             <div class="base-info-detail"> 活动类型：<span>{{placeDtl.service_type}}</span></div>
             <div class="base-info-detail"> 行业类型：<span>{{placeDtl.industry_field}}</span></div>
@@ -120,9 +120,9 @@
             <!--</div>-->
         </div>
         <div class="infor-show1">
-            <a href="" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
+            <a href="" class="fl btn-onekey"><i class="icon icon-share"></i>分享</a>
             <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
-            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey" :class=" {'hv':placeDtl.follow }"><img src="/static/images/icon/collect.png" alt="">收藏</a>
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey" :class=" {'hv':placeDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
 
 
         </div>

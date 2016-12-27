@@ -49,7 +49,7 @@
             <ul>
                 <li v-for="item in places">
                     <router-link :to="'/place/detail/'+item.id" class="img">
-                        <img :title="item.title" :src="item.site_pictures.length > 0 ? item.site_pictures[0]['url_400_267'] : ''">
+                        <img class="lazy" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_400_267'] : ''">
                         <div class="price">
                             {{item.lower_price}}
                         </div>
@@ -124,14 +124,26 @@
                     }
                 });
             },
+            init : function () {
+                $("img.lazy").lazyload({
+                    effect : "fadeIn",
+                    placeholder : '/static/images/placeholder.jpg'
+                });
+            },
 
             getData(){
                 var self = this;
+                self.$store.commit('loading',true);
                 $.ajax({
                     url: window.YUNAPI.placeDtl,
                     success: function (data) {
                         console.log(data.sites)
                         self.places = data.sites
+
+                        setTimeout(function () {
+                            self.init();//调用轮播
+                            self.$store.commit('loading',false);
+                        },300)
                     }
                 })
             },
