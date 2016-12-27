@@ -48,7 +48,7 @@
         <div class="space-list">
             <ul>
                 <li v-for="item in places">
-                    <router-link :to="'/place/'+item.id" class="img">
+                    <router-link :to="'/place/detail/'+item.id" class="img">
                         <img :title="item.title" :src="item.site_pictures.length > 0 ? item.site_pictures[0]['url_400_267'] : ''">
                         <div class="price">
                             {{item.lower_price}}
@@ -63,10 +63,10 @@
                             </p>
                             <p>地址 {{item.city_name}} {{item.district}}｜{{item.address}}</p>
                         </div>
-                        <a @click="addInquiry(spacesub.id,spacesub.name)" class="btn-join fr"
-                                       v-bind:class=" {'hv' : inquiryList.hasOwnProperty(spacesub.id)}" href="javascript:;"
-                                        v-text="inquiryList.hasOwnProperty(spacesub.id) ? '已加入询价' : '加入询价' ">
-                        <!--<a class="fr btn-join" href="javascript:;">加入询价</a>-->
+                        <!--<a @click="addInquiry(spacesub.id,spacesub.name)" class="btn-join fr"-->
+                                       <!--v-bind:class=" {'hv' : inquiryList.hasOwnProperty(spacesub.id)}" href="javascript:;"-->
+                                        <!--v-text="inquiryList.hasOwnProperty(spacesub.id) ? '已加入询价' : '加入询价' ">-->
+                        <a class="fr btn-join" href="javascript:;">加入询价</a>
                     </div>
                 </li>
             </ul>

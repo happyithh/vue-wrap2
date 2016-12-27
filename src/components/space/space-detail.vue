@@ -33,7 +33,7 @@
             <h2>{{spaceDtl.site_name}}</h2>
             <div class="base-info">基本信息</div>
             <div class="base-info-detail"> 最大容量：<span>{{spaceDtl.Max_seating_capacity}}人</span></div>
-            <div class="base-info-detail mj"> 空间面积<span>：{{
+            <div class="base-info-detail"> 空间面积<span>：{{
             spaceDtl.area}}㎡</span></div>
             <div class="base-info-detail"> 场地类型：<span>{{spaceDtl.site_type}}</span></div>
             <div class="base-info-detail"> 活动类型：<span>{{spaceDtl.service_type}}</span></div>
@@ -72,9 +72,8 @@
             </div>
         </div>  
          <div class="infor-show1 fixed">
-            <a href="javascript:;" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
-            <a href="javascript:;" @click='btn' class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
-            
+            <a href="javascript:;" class="fl btn-onekey"><i class="icon icon-share"></i>分享</a>
+            <a href="javascript:;" @click='btn' class="fr btn-onekey"><i class="icon icon-collection"></i>收藏</a>
         </div>
 
        <!--电话-->
