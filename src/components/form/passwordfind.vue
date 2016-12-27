@@ -98,33 +98,7 @@
 
                     LS.set('changePasswordData',self.consult)
                     router.push('/form/passwordreset')
-                    // $.ajax({
-                    //     type:'put',
-                    //     url: window.YUNAPI.authPassword,
-                    //     data : self.consult,
-                    //     //data:self.$store.getters.validationData,
-                    //     //data : GlobleFun.objConcat(self.$store.getters.validationData,{
-                           
-                    //    // }
-                    //      //   ),
-                    //     success: function (data,status,xhr) {
-                    //         console.log(data)
-                    //        var status = data.status == 1 ? 'success' : 'error';
-                    //         if(data.status == 1){
-                    //             data.data.access_token = xhr.getResponseHeader('access-token');
-                    //             data.data.client = xhr.getResponseHeader('client');
-                    //             self.$store.commit('personalDataChange',data.data);//保存个人信息
-                    //             //this.$store.commit('getPersonalData',data)
-                    //         }else{
-                    //             $.toptip(data.message,2000,status);
-                    //         }
-                         
-                    //     },
-                        
-                    //    error : function () {
-
-                    //     }
-                    // });
+                    
              }
          }
     }

@@ -55,8 +55,8 @@
         createRetail: host+'api/demands/create_retail',
         checkCode:host+'api/auth_codes/check_code',
         personalInfo:host+'api/users/update',
-        consultTags:host+'api/tags/get_consult_tags'
-       
+        consultTags:host+'api/tags/get_consult_tags',
+        retailSearch:host+'api/spaces/retail_search'
        
     };
 

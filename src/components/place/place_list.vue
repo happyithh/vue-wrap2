@@ -63,10 +63,10 @@
                             </p>
                             <p>地址 {{item.city_name}} {{item.district}}｜{{item.address}}</p>
                         </div>
-                        <a @click="addInquiry(spacesub.id,spacesub.name)" class="btn-join fr"
+                        <!--<a @click="addInquiry(spacesub.id,spacesub.name)" class="btn-join fr"
                                        v-bind:class=" {'hv' : inquiryList.hasOwnProperty(spacesub.id)}" href="javascript:;"
-                                        v-text="inquiryList.hasOwnProperty(spacesub.id) ? '已加入询价' : '加入询价' ">
-                        <!--<a class="fr btn-join" href="javascript:;">加入询价</a>-->
+                                        v-text="inquiryList.hasOwnProperty(spacesub.id) ? '已加入询价' : '加入询价' ">-->
+                        <a class="fr btn-join" href="javascript:;">加入询价</a>
                     </div>
                 </li>
             </ul>

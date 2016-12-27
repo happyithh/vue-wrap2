@@ -341,6 +341,13 @@ window.store = new Vuex.Store({
                 state.area_size = ""
             }
         },
+        // retailChange(state,item){
+        //     if(item){
+        //         state.retail = item
+        //     }else{
+        //         state.retail = ""
+        //     }
+        // },
         back(){
             router.back()
         }

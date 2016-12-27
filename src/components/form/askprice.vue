@@ -3,7 +3,7 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/space/detail/1" class="back">
+                <router-link to="/space/detail/11" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -44,7 +44,7 @@
                     <input type="text" v-model='consult.email' class="base-detail-name" placeholder="请填写您的邮箱地址"/>
                 </div>
                <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" class="btn-onekey pop-sucess" @click='createInquiry'>提交</a>
+                    <a href="javascript:;" class="submit pop-sucess" @click='createInquiry'>提交</a>
                 </div>
             </div>
         </form>
@@ -79,7 +79,7 @@
             },
             personalData (){
                 var personalData = this.$store.state.personalData
-                return personalData
+               return personalData
             }
 
         },
