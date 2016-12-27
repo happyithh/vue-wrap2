@@ -1,5 +1,5 @@
 <template>
-    <div class="container pbottom-37">
+    <div class="container">
 
         <!--头部-->
         <header class="clearfix">
@@ -121,7 +121,9 @@
         </div>
         <div class="infor-show1">
             <a href="" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
-            <a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
+            <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey" :class=" {'hv':placeDtl.follow }"><img src="/static/images/icon/collect.png" alt="">收藏</a>
+
 
         </div>
 
@@ -134,11 +136,11 @@
         </div>
 
 
-        <div class="infor-show-shadow place fixed">
-            <router-link to="/form/askprice" class="btn-onekey">
-                一键询价
-            </router-link>
-        </div>
+        <!--<div class="infor-show-shadow place fixed">-->
+            <!--<router-link to="/form/askprice" class="btn-onekey">-->
+                <!--一键询价-->
+            <!--</router-link>-->
+        <!--</div>-->
     </div>
     <!--信息展示结束-->
 
@@ -179,6 +181,17 @@
                     '餐饮':'drink'
                 },
                 arrSort:[]
+            }
+        },
+        computed : {
+            inquiryList () {
+                return this.$store.state.inquiryList
+            },
+            inquiryCount () {
+                return this.$store.state.inquiryCount
+            },
+            personalData (){
+                return this.$store.state.personalData
             }
         },
         mounted () {
@@ -268,6 +281,21 @@
 
                 },self.placeDtl.city_name);
             },
+            changeCollect(){
+                var self = this
+                var data = GlobleFun.objConcat(self.$store.getters.validationData, {
+                    user_id: self.personalData.id,
+                    followable_type: 'Site',
+                    followable_id: self.placeDtl.id
+                })
+                var success = function (data) {
+                    if(data.status == 1){
+                        self.placeDtl.follow = !self.placeDtl.follow
+                    }
+                };
+
+                GlobleFun.changeCollect(data,success)
+            }
         }
     }
 </script>

@@ -16,11 +16,11 @@
             <ul>
                 <li class="clearfix" v-for="item in inquiryList">
                     <div class="local-price">
-                        <strong>{{item[0]}}元/天</strong> {{item[1]}}</div>
+                        <strong>{{item.market_price}}</strong> {{item.name}}</div>
                     <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 {{item[3]}}人</div>
-                         <div class='max-square fl ml10'>面积 {{item[4]}}㎡</div>
-                          <div class='add fl ml10'>地址 {{item[5]}}</div>
+                        <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人</div>
+                         <div class='max-square fl ml10'>面积 {{item.area}}㎡</div>
+                          <div class='add fl ml10'>地址 {{item.address}}</div>
                     </div>
                 </li>
             </ul>
@@ -74,8 +74,7 @@
         },
         computed:{
             inquiryList () {
-                console.log(this.$store.getters.inquiryList)
-                return this.$store.getters.inquiryList
+                return this.$store.state.inquiryList
             },
             personalData (){
                 var personalData = this.$store.state.personalData

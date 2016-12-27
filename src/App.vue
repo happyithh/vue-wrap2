@@ -81,6 +81,7 @@
             var self = this;
             self.$store.commit('getSelectedCity');
             self.$store.commit('getPersonalData');
+            this.$store.commit('inquiryChange');
             $.ajax({
                 url: window.YUNAPI.tags,
                 context: document.body,

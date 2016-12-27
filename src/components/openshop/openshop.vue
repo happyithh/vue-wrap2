@@ -13,8 +13,8 @@
                 <h1 class="display-center">我要开快闪店</h1>
             </div>
             <div class="right fr">
-                <span class="numb fr">3</span>
-                <a class="btn-inquiry fr in" href="/form/askprice">询价</a>
+                <span class="numb fr">{{inquiryCount}}</span>
+                <router-link class="btn-inquiry fr in" to ="/form/askprice">询价</router-link>
             </div>
         </header>
 
@@ -32,8 +32,8 @@
                 </router-link>
             </div>
             <div class="right fr">
-                <span class="numb fr">3</span>
-                <a class="btn-inquiry fr in" href="/form/askprice">询价</a>
+                <span class="numb fr">{{inquiryCount}}</span>
+                <router-link class="btn-inquiry fr in" to="/form/askprice">询价</router-link>
             </div>
         </header>
 
@@ -76,7 +76,11 @@
                             </p>
                             <p>地址 {{item.city_name}} {{item.district}}｜{{item.address}}</p>
                         </div>
-                        <a class="fr btn-join" href="javascript:;">加入询价</a>
+                        <!--<a class="fr btn-join" href="javascript:;">加入询价</a>-->
+                        <a @click="addInquiry(item)" class="fr btn-join"
+                           v-bind:class=" {'hv' : inquiryList.hasOwnProperty(item.id)}" href="javascript:;"
+                           v-text="inquiryList.hasOwnProperty(item.id) ? '已加入询价' : '加入询价' ">
+                        </a>
                     </div>
                 </li>
             </ul>
@@ -109,6 +113,17 @@
             self.headerSearchFixed();
 
             self.getData()
+        },
+        computed : {
+            inquiryList () {
+                return this.$store.state.inquiryList
+            },
+            inquiryCount () {
+                return this.$store.state.inquiryCount
+            },
+            personalData (){
+                return this.$store.state.personalData
+            }
         },
         methods:{
             //悬浮搜索导航
@@ -147,6 +162,18 @@
                         },200)
                     }
                 })
+            },
+            addInquiry(item){
+                var self = this
+                console.log(item)
+                this.$store.commit('inquiryChange',{id : item.id, name : {
+                    market_price : item.market_price,
+                    address : item.address,
+                    name : item.name,
+                    area : item.area,
+                    Max_seating_capacity : item.Max_seating_capacity,
+                    id : item.id
+                }, type : 2});
             }
         }
     }

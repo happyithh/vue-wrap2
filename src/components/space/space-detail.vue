@@ -73,8 +73,8 @@
         </div>  
          <div class="infor-show1 fixed">
             <a href="javascript:;" class="fl btn-onekey"><img src="/static/images/icon/share.png" alt="">分享</a>
-            <a href="javascript:;" @click='btn' class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>
-            
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey" :class=" {'hv':spaceDtl.follow }"><img src="/static/images/icon/collect.png" alt="">收藏</a>
+
         </div>
 
        <!--电话-->
@@ -91,8 +91,9 @@
                <span>{{spaceDtl.market_price_real}}{{spaceDtl.units}}</span>
                <p class="price-underline clearfix ">{{spaceDtl.market_price}}</p>
             </div>
-            <a id='aksprice'@click="addInquiry(spaceDtl.id,[spaceDtl.market_price_real,spaceDtl.site_name,spaceDtl.units,spaceDtl.Max_seating_capacity,spaceDtl.area,spaceDtl.address])" class="btnjoin btn-onekey fr"
-                                       href="/form/askprice"> 一键询价
+            <a id='aksprice' @click="addInquiry" class="btnjoin btn-onekey fr"
+                                       href="javascript:;"
+               v-text="inquiryList.hasOwnProperty(spaceDtl.id) ? '已加入询价' : '一键询价' "> 一键询价
             </a>
         </div>
     </div>
@@ -135,6 +136,17 @@
                 otherSpace : [],
                 placeDtl : [],
 
+            }
+        },
+        computed : {
+            inquiryList () {
+                return this.$store.state.inquiryList
+            },
+            inquiryCount () {
+                return this.$store.state.inquiryCount
+            },
+            personalData (){
+                return this.$store.state.personalData
             }
         },
         mounted () {
@@ -207,7 +219,7 @@
                     url: window.YUNAPI.SpaceDtl +'/'+ this.$route.params.id,
                     //  url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
                
-                    data : {},
+                    data : self.$store.getters.validationData,
                     success: function (data) {
                         //  console.log(data);
                         // self.placeDtl = data.site
@@ -243,22 +255,39 @@
                     }
                 });
             },
-            addInquiry : function (id,name) {
+            addInquiry : function () {
               // LS.set('inquiry',[id,name])
-                this.$store.commit('inquiryChange',{id : id, name : name, type : 2});
-             }
+                var self = this
+                this.$store.commit('inquiryChange',{id : self.spaceDtl.id, name : {
+                    market_price : self.spaceDtl.market_price,
+                    address : self.spaceDtl.address,
+                    name : self.spaceDtl.name,
+                    area : self.spaceDtl.area,
+                    Max_seating_capacity : self.spaceDtl.Max_seating_capacity,
+                    id : self.spaceDtl.id
+                }, type : 1});
+                router.push('/form/askprice')
+             },
+            changeCollect(){
+                var self = this
+                var data = GlobleFun.objConcat(self.$store.getters.validationData, {
+                            user_id: self.personalData.id,
+                            followable_type: 'Space',
+                            followable_id: self.spaceDtl.id
+                        })
+                var success = function (data) {
+                     if(data.status == 1){
+                         self.spaceDtl.follow = !self.spaceDtl.follow
+                     }
+                };
+
+                GlobleFun.changeCollect(data,success)
+            }
         },
         watch:{
             '$route':'getData'
         },
-        computed : {
-            inquiryList () {
-                return this.$store.state.inquiryList
-            },
-            inquiryCount () {
-                return this.$store.state.inquiryCount
-            },
-        },
+
     }
 </script>
 

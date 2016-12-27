@@ -35,10 +35,10 @@
                         <span class="icon hold-event"></span>
                         <p>我要办活动</p>
                     </router-link>
-                    <router-link to="/openshop">
-                        <span class="icon openshop"></span>
-                        <p>我要开快闪店</p>
-                    </router-link>
+                    <!--<router-link to="/openshop">-->
+                        <!--<span class="icon openshop"></span>-->
+                        <!--<p>我要开快闪店</p>-->
+                    <!--</router-link>-->
                     <router-link to="/ip">
                         <span class="icon ip"></span>
                         <p>我要找IP文创</p>
@@ -77,7 +77,7 @@
             </div>
             <ul>
                 <li v-for="item in recommendSite">
-                    <router-link :to="'/space/detail/'+item.id">
+                    <router-link :to="'/place/detail/'+item.id">
                         <a class="img" href="javascript:;">
                             <!--<img src="/static/images/test.png">-->
                             <img class="lazy" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''" >
@@ -347,7 +347,8 @@
     .banner-cont>a{
         display: block;
         float: left;
-        width: 33.33%;
+        /*width: 33.33%;*/
+        width: 50%;
         height: 50px;
         overflow: hidden;
         color: #000;

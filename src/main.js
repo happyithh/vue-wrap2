@@ -258,25 +258,17 @@ window.store = new Vuex.Store({
 
             if(typeof values === 'object'){
 
-                // if(values.type == 1){ // -1 减 , 1 加
+                if(values.type == -1){
+                    delete state.inquiryList[values.id]
+                }
 
-                //     state.inquiryList[values.id] = values.name
+                if(values.type == 1){ // -1 减 , 1 加
 
-                // }
-                // if(values.type == -1){
-                //     // 对象方式
-                //     // for(var i=0;i<state.inquiryList.length;i++)
-                //     // {
-                //     //     var id = state.inquiryList[i].id;
-                //     //     if(value.id==id)
-                //     //     {
-                //     //         state.inquiryList.splice(i,1);
-                //     //     }
-                //     // }
-                //     delete state.inquiryList[values.id]
-                // }
+                    state.inquiryList[values.id] = values.name
 
-                if(values.type === 2){
+                }
+
+                if(values.type === 2){ // 2为toggle
                     if(state.inquiryList[values.id]){
                         delete state.inquiryList[values.id]
                     }else{
@@ -417,7 +409,45 @@ window.GlobleFun = {
     },
     httpError(){
 
-    }
+    },
+    httpMessage(data,successMsg,errorMessage){
+
+        if(data.status == 1){
+            $.toptip(successMsg || data.message,2000,'success');
+        }else{
+            $.toptip(errorMessage || data.message,2000,'error');
+        }
+    },
+    changeCollectPromise : '',
+    changeCollect(urlData,success,error){
+        var self = this;
+        if( this.changeCollectPromise && this.changeCollectPromise.state() == 'pending'){
+            return
+        }
+        if(!urlData.user_id){
+            APP.$message({
+                message: '请先登录!',
+                type: 'warning'
+            });
+            return
+        }
+        self.changeCollectPromise = $.post({
+            url: window.YUNAPI.changeCollect,
+            data : urlData,
+            success: function (data) {
+                GlobleFun.httpMessage(data)
+                success(data)
+            },
+            error : function () {
+                if(!urlData.user_id){
+                    APP.$message({
+                        message: '网络链接失败!',
+                        type: 'warning'
+                    });
+                }
+            }
+        });
+    },
 
 }
 

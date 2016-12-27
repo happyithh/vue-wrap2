@@ -54,7 +54,7 @@
         <div class="space-list">
             <ul>
                 <li v-for="item in venues">
-                    <router-link :to="'/event/'+item.site_id" class="img">
+                    <router-link :to="'/place/detail/'+item.site_id" class="img">
                         <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''" :title="item.site_name">
                         <div class="price">
                             {{item.special_price}}
@@ -69,7 +69,7 @@
                             </p>
                             <p>地址 {{item.city_name}} {{item.areas}}｜{{item.address}}</p>
                         </div>
-                        <a class="fr btn-join" href="javascript:;">加入询价</a>
+                        <!--<a class="fr btn-join" href="javascript:;">加入询价</a>-->
                     </div>
                 </li>
             </ul>
