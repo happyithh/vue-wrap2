@@ -15,8 +15,8 @@
     import 'assets/css.css';
     import 'assets/css/weui-change.css';
 
-    //const host = "http://api.yunspace.com.cn/";
-    const host = "http://172.16.145/";
+    const host = "http://api.yunspace.com.cn/";
+    //const host = "http://172.16.145/";
 
     window.YUNAPI = {
         host: host,
