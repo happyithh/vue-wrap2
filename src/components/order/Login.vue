@@ -23,7 +23,7 @@
             </div>
             <div class="input-box">
                 <div class="base-info-name">密码</div>
-                <input type="text" class="base-detail-name"v-model='consult.password' placeholder="请输入登录密码"/>
+                <input type="password" class="base-detail-name"v-model='consult.password' placeholder="请输入登录密码"/>
             </div>
             <div class="remeberBox clearfix">
                 <div class="fl checkBox">
@@ -31,13 +31,13 @@
                     <p class="fl">记住我</p>
                 </div>
                 <div class="forgetBox fl">
-                    <router-link to="/order/checkCodeLogin" class="back">
+                    <router-link to="/form/passwordfind" class="back">
                         <a href="javascrpit:;">忘记密码</a>
                     </router-link>
                 </div>
             </div>
             <div class="onekey-rentail-wrap clearfix">
-                    <a href="javascript:;" class="btn-onekey"@click='login'>登录</a>
+                    <a href="javascript:;" class="btn-onekey" @click='login'>登录</a>
             </div>
             <div class="remeberBox clearfix">
                 <div class="fl checkBox">

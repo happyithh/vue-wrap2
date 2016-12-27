@@ -19,7 +19,7 @@
                <router-link to="/form/personal" class="back">
                     <img src="/static/images/test_logo.png" alt="">
                 </router-link>
-               <div class="person-name" v-text='personalData.nickname'></div>
+               <div class="person-name" v-text='personalData.name'></div>
             </div>
            
            <router-link to="/form/personal/password" class="back">
@@ -79,6 +79,7 @@
                 this.$store.commit('personalDataChange',{});//保存个人信息
                 router.replace('/')
             }
+            
         }
     }
 </script>

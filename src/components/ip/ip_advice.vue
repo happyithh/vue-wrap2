@@ -32,7 +32,7 @@
                     <div class="base-info-name"><span>*</span>短信验证码</div>
                     <div class="check-box">
                         <input type="text" v-model="consult.auth_code" class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码">
-                        <a href="javascript:;" class="send-msg fr" @click="sendPhoneCode">发送验证码</a>
+                        <button type='button' class="send-msg fr" @click="sendPhoneCode">发送验证码</button>
                     </div>
                 </div>
                 <!--<div class="input-box">-->
@@ -65,7 +65,7 @@
 
                 </div>
                 <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" @click="submitConsult" class="btn-onekey">提交</a>
+                    <button type="button" @click="submitConsult" class="btn-onekey">提交</button>
                 </div>
             </div>
 

@@ -62,7 +62,7 @@ window.router = new VueRouter({
         },
         {
             path: '/space/detail/:id',
-            component: (resolve) => require(['./components/space/space-detail'], resolve)
+            component: (resolve) => require(['./components/space/space-detail.vue'], resolve)
         },
         {
             path: '/place',

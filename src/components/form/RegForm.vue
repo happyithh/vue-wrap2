@@ -31,16 +31,16 @@
                     <div class="base-info-name">短信验证码</div>
                     <div class="check-box">
                         <input type="text" v-model='consult.auth_code' class="base-detail-name send-msg1 fl" placeholder="请输入6位验证码"/>
-                      <a href="javascript:;"class="send-msg fr" @click='sendPhoneCode'>获取验证码</a>
+                        <button type="button" class="send-msg fr"@click='sendPhoneCode'>发送验证码</button>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">设置密码</div>
-                    <input type="text" v-model='consult.password' class="base-detail-name"placeholder="输入密码"/>
+                    <input type="password" v-model='consult.password' class="base-detail-name"placeholder="输入密码"/>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">确认密码</div>
-                    <input type="text"v-model='consult.password_confirmation' class="base-detail-name"placeholder="输入密码"/>
+                    <input type="password"v-model='consult.password_confirmation' class="base-detail-name"placeholder="输入密码"/>
                 </div>
                 <div class="onekey-rentail-wrap">
                     <a href="javascript:;" class="btn-onekey" @click='register'>提交</a>
@@ -122,7 +122,7 @@
                             var status = data.status == 1 ? 'success' : 'error';
 
                             if(data.status == 1){
-                                window.location.href='';
+                                router.replace('/order/Login')
                             }else{
                                 $.toptip(data.message,2000,status);
                             }

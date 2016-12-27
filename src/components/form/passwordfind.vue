@@ -24,7 +24,7 @@
                 <div class="base-info-name">短信验证码</div>
                 <div class="check-box">
                     <input type="text" class="base-detail-name send-msg1 fl red "v-model='consult.auth_code' placeholder="请输入6位验证码"/>
-                    <a href="javascript:;"class="send-msg fr"@click='sendPhoneCode'>发送验证码</a>
+                    <button class="send-msg fr"@click='sendPhoneCode'>发送验证码</button>
                 </div>
              </div>
             <div class="onekey-rentail-wrap">
