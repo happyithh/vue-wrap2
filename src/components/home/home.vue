@@ -73,7 +73,7 @@
         <div class="space-list home">
             <div class="list-title clearfix">
                 <h2 class="fl">场地推荐</h2>
-                <a class="fr more" href="/place">查看所有<span class="icon icon-arrowright"></span></a>
+                <router-link class="fr more" to="/place">查看所有<span class="icon icon-arrowright"></span></router-link>
             </div>
             <ul>
                 <li v-for="item in recommendSite">
@@ -104,12 +104,12 @@
                 <p>场地咨询热线</p>
                 <p>400-056-0599</p>
             </a>
-            <a href="">
+            <a href="http://www.yunspace.com.cn/m/sitejoin">
                 <img src="/static/images/icon/jiameng.png">
                 <p>场地加盟</p>
                 <p class="see-more-btn">了解更多</p>
             </a>
-            <a href="">
+            <a href="http://www.yunspace.com.cn/m/city_collaborate">
                 <img src="/static/images/icon/friends.png">
                 <p>城市合伙人</p>
                 <p class="see-more-btn">了解更多</p>
