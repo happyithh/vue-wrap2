@@ -63,9 +63,9 @@
                             {{item.title}}
                         </div>
                         <div class="tags clearfix">
-                            <span>国家地理</span>
-                            <span>互动</span>
-                            <span>路跑</span>
+                            <span v-for="s in item.keywords">{{s}}</span>
+                            <!--<span>互动</span>-->
+                            <!--<span>路跑</span>-->
                         </div>
                         <div class="about">
                             <span>类别 {{item.p_type}}</span>
@@ -143,7 +143,10 @@
                         }else{
                             self.ipType = data.ip_type
                         }
-                        console.log(data)
+
+                        for(var i in self.ipProject){
+                            self.ipProject[i].keywords = self.ipProject[i].keyword.split(',')
+                        }
                         setTimeout(function () {
                             self.init();//调用轮播
                             $("img.lazy").lazyload({
@@ -197,6 +200,8 @@
         /*height: 350px;*/
         margin-right: 10px !important;
         position: relative;
+        height: calc(30vw - 10px);
+        overflow: hidden;
     }
     .swiper-container .swiper-slide a{
         display: block;

@@ -78,16 +78,20 @@
             <ul>
                 <li v-for="item in recommendSite">
                     <router-link :to="'/place/detail/'+item.id">
-                        <a class="img" href="javascript:;">
+
                             <!--<img src="/static/images/test.png">-->
                             <img class="lazy" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''" >
                             <!--<div class="price">-->
                                 <!--<sup>￥</sup>{{}} 元/天<span>起</span>-->
                             <!--</div>-->
-                        </a>
+
                     </router-link>
                     <div class="text">
-                        <h3><a class="title" href="javascript:;">{{item.title}}</a></h3>
+                        <h3>
+                            <router-link class="title" :to="'/place/detail/'+item.id">
+                                {{item.title}}
+                            </router-link>
+                        </h3>
                         <p>
                             <span>最大容纳 {{item.max_people}}人</span>
                             <span>面积 {{item.max_size}}㎡</span>

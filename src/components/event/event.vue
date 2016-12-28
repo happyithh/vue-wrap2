@@ -54,21 +54,21 @@
         <!--列表-star-->
         <div class="space-list">
             <ul>
-                <li v-for="item in venues">
-                    <router-link :to="'/place/detail/'+item.site_id" class="img">
-                        <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''" :title="item.site_name">
+                <li v-for="item in sites">
+                    <router-link :to="'/place/detail/'+item.id" class="img">
+                        <img class="lazy"  v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_400_267'] : ''" :title="item.site_name">
                         <div class="price">
-                            {{item.special_price}}
+                            {{item.lower_price}}
                         </div>
                     </router-link>
                     <div class="text clearfix">
                         <div class="fl">
-                            <h3><router-link :to="'/place/detail/'+item.site_id">{{item.site_name}}</router-link></h3>
+                            <h3><router-link :to="'/place/detail/'+item.site_id">{{item.title}}</router-link></h3>
                             <p>
-                                <span>最大容纳 {{item.site_max_people}}人</span>
-                                <span>面积 {{item.area}}㎡</span>
+                                <span>最大容纳 {{item.max_people}}人</span>
+                                <span>面积 {{item.max_size}}㎡</span>
                             </p>
-                            <p>地址 {{item.city_name}} {{item.areas}}｜{{item.address}}</p>
+                            <p>地址 {{item.city_name}} {{item.district}}｜{{item.address}}</p>
                         </div>
                         <!--<a class="fr btn-join" href="javascript:;">加入询价</a>-->
                     </div>
@@ -93,7 +93,8 @@
     export default {
         data () {
             return {
-                venues:[]
+                venues:[],
+                sites:[]
             }
         },
         mounted () {
@@ -139,6 +140,14 @@
                     success: function (data) {
                         //console.log(data)
                         self.venues=data.space_recommend;
+                        self.sites = data.site_recommend;
+
+                        setTimeout(function () {
+                            $("img.lazy").lazyload({
+                                effect : "fadeIn",
+                                placeholder : '/static/images/placeholder.jpg'
+                            });
+                        },200)
                     }
                 })
             }
