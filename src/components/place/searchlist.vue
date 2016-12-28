@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="onekey-rentail-wrap">
-                    <a href="javascript:;" class="btn-onekey" @click="getData">搜索</a>
+                    <a href="javascript:;" @click="getData" class="btn-onekey">搜索</a>
                 </div>
             </div>
         </form>
@@ -190,10 +190,13 @@
                 }
                 return s
             },
+            placeSearchCondition(){
+                return this.$store.state.placeSearchCondition;
+            }
         },
         mounted () {
             var self = this;
-
+            //console.log(self.placeSearchCondition);
         },
         methods:{
             //多选
@@ -233,7 +236,7 @@
                 if(self.stringArrSort){
                     self.stringArrSort=self.stringArrSort+','
                 }
-                console.log(self.stringArrSort,999);
+                //console.log(self.stringArrSort,999);
                 self.urlData.tags = self.stringArrSort
                         +self.urlData.business_circle;
 
@@ -270,6 +273,8 @@
                     self.arrPlaceType.push($(this).data('id'));
                 });
                 self.stringArrPlaceType = self.arrPlaceType.join(',')
+                self.urlData.q.site_type_eq = self.stringArrPlaceType
+
 
                 //容纳人数
                 if($('.people span').hasClass('active')){
@@ -286,15 +291,16 @@
                     self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                 }
 
-
-                $.ajax({
-                    url: window.YUNAPI.host + 'api/sites/search',
-                    data : self.urlData,
-                    success: function (data) {
-                        //console.log(data)
-
-                    }
-                });
+                self.$store.commit('placeSearchConditionChange',self.urlData);
+                router.back();  //返回上一页
+//                $.ajax({
+//                    url: window.YUNAPI.host + 'api/sites/search',
+//                    data : self.urlData,
+//                    success: function (data) {
+//                        console.log(data)
+//
+//                    }
+//                });
 
             },
         }

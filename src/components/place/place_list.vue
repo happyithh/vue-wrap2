@@ -27,19 +27,19 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <router-link to="place/search" class="search-input-wrap clearfix">
+                <router-link to="/place/search" class="search-input-wrap clearfix">
                     <input type="text" placeholder="搜索" readonly="readonly">
                 </router-link>
             </div>
             <div class="right fr">
-                <span class="numb fr">3</span>
+                <span class="numb fr">{{inquiryCount}}</span>
                 <a class="btn-inquiry fr in" href="/form/askprice">询价</a>
             </div>
         </header>
 
         <!--搜索框-->
         <div class="search-input-wrap-bg">
-            <router-link to="place/search" class="search-input-wrap clearfix">
+            <router-link to="/place/search" class="search-input-wrap clearfix">
                 <input type="text" placeholder="搜索" readonly="readonly">
             </router-link>
         </div>
@@ -105,6 +105,9 @@
             },
             inquiryList () {
                 return this.$store.state.inquiryList
+            },
+            placeSearchCondition(){
+                return this.$store.state.placeSearchCondition;
             }
         },
         methods:{
@@ -135,11 +138,11 @@
                 var self = this;
                 self.$store.commit('loading',true);
                 $.ajax({
-                    url: window.YUNAPI.placeDtl,
+                    url: window.YUNAPI.placeList,
+                    data: self.placeSearchCondition,
                     success: function (data) {
-                        console.log(data.sites)
+//                        console.log(data,22222)
                         self.places = data.sites
-
                         setTimeout(function () {
                             self.init();//调用轮播
                             self.$store.commit('loading',false);

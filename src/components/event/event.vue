@@ -4,7 +4,7 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                 <a onclick='router.back()' class="back">
+                <a onclick="router.back()" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </a>
@@ -13,7 +13,8 @@
                 <h1 class="display-center">我要办活动</h1>
             </div>
             <div class="right fr">
-                <a class="btn-inquiry in" href="/form/askprice">询价</a>
+                <span class="numb fr">{{inquiryCount}}</span>
+                <router-link class="btn-inquiry in" to="/form/askprice">询价</router-link>
             </div>
         </header>
 
@@ -26,13 +27,13 @@
                 </router-link>
             </div>
             <div class="fl center">
-                <router-link to="/place" class="search-input-wrap clearfix">
+                <router-link to="/place/search" class="search-input-wrap clearfix">
                     <input type="text" placeholder="搜索" readonly="readonly">
                 </router-link>
             </div>
             <div class="right fr">
-                <span class="numb fr">3</span>
-                <a class="btn-inquiry fr in" href="/form/askprice">询价</a>
+                <span class="numb fr">{{inquiryCount}}</span>
+                <router-link class="btn-inquiry fr in" to="/form/askprice">询价</router-link>
             </div>
         </header>
 
@@ -62,7 +63,7 @@
                     </router-link>
                     <div class="text clearfix">
                         <div class="fl">
-                            <h3><router-link :to="'/event/'+item.site_id">{{item.site_name}}</router-link></h3>
+                            <h3><router-link :to="'/place/detail/'+item.site_id">{{item.site_name}}</router-link></h3>
                             <p>
                                 <span>最大容纳 {{item.site_max_people}}人</span>
                                 <span>面积 {{item.area}}㎡</span>
@@ -102,6 +103,17 @@
             self.headerSearchFixed();
             self.getData();
         },
+        computed : {
+            inquiryList () {
+                return this.$store.state.inquiryList
+            },
+            inquiryCount () {
+                return this.$store.state.inquiryCount
+            },
+            personalData (){
+                return this.$store.state.personalData
+            }
+        },
         methods:{
             //悬浮搜索导航
             headerSearchFixed:function () {
@@ -127,15 +139,6 @@
                     success: function (data) {
                         //console.log(data)
                         self.venues=data.space_recommend;
-
-                        //移动端去价格单位
-//                        for(var i = 0; i < data.space_recommend.length; i++){
-//                            if(data.space_recommend[i].special_price=='面议'){
-//                                $('.space-list li:eq('+i+')').find('.price').find('sup').remove();
-//                            }else {
-//                                self.venues[i].special_price=data.space_recommend[i].special_price.toString().replace('￥','');
-//                            }
-//                        }
                     }
                 })
             }
