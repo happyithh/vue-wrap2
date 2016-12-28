@@ -42,7 +42,11 @@
                 <div class="fl checkBox">
                     <p><a href="/form/RegForm">创建账号</a></p>
                 </div>
-                <div class="forgetBox fl"><a href="/order/checkCodeLogin">改用验证码登录</a></div>
+                <div class="forgetBox fl">
+                    <router-link to="/order/Login">
+                        <a href="javascrpit:;">改用密码登录</a>
+                    </router-link>
+                </div>
             </div>
         </div>
         

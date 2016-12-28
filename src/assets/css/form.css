@@ -110,6 +110,7 @@
     height: 62px;
     resize: none;
     font-size: .7rem;
+    padding:10px;
 }
 
 .input-box .font120 {
@@ -144,6 +145,17 @@
     font-size: 1.07rem;
     margin-top: 15px;
     text-align: center;
+}
+input[type='checkbox'] {
+  /*display: none;*/
+}
+label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  /*position: relative;*/
+  /*background: url('www.chitanda.me/images/blank.png');*/
+  -webkit-transition: background 0.5s linear;
 }
 
 .red::-webkit-input-placeholder {
@@ -183,7 +195,6 @@
     font-size: 0.7rem;
     margin-bottom: 10px;
     box-sizing: border-box;
-
     border-right: 1px solid #fff;
     overflow: hidden;
     text-overflow: ellipsis;

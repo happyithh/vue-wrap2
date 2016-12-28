@@ -27,7 +27,7 @@
             </div>
             <div class="remeberBox clearfix">
                 <div class="fl checkBox">
-                    <input class="fl" type="checkbox"/>
+                    <input class="fl" v-model="checked" type="checkbox" id='checkbox'/>
                     <p class="fl">记住我</p>
                 </div>
                 <div class="forgetBox fl">
@@ -64,6 +64,7 @@
       
         data () {
             return {
+                checked:true,
                 consult:{
                     password:'',
                     mobile:'',
@@ -81,6 +82,8 @@
             },
 //         
         },
+         //记住密码
+        rememberPassword(){},
          methods:{
              personalDataChange(id){
                 this.$store.commit('personalDataChange',id)
@@ -190,12 +193,12 @@
         width:100%;
         height:50px;
         font-size:.9rem;
-       color: #999999;
+        color: #999999;
     }
     .remeberBox a{
         color: #999999;
     }
-    .checkBox, .forgetBox{
+   .checkBox, .forgetBox{
         margin-top: 10px;
         width:50%;
         height: 50px;
@@ -216,6 +219,7 @@
     .onekey-rentail-wrap{
         padding:0;
     }
+    
     
 
     
