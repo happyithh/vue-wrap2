@@ -3,7 +3,7 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/form/collect" class="back">
+                <router-link to="/form/personal/collect" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>

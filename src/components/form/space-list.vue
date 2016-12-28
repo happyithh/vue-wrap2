@@ -3,7 +3,7 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/form/collect" class="back">
+                <router-link to="/form/personal/collect" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
                 </router-link>
@@ -15,7 +15,7 @@
         <div class="inquiry-list">
             <ul >
                 <li class="clearfix" v-for='item in spaceList'>
-                    <router-link :to="item.special_url ? item.special_url : '/article/' + item.id">
+                    <router-link :to="item.special_url ? item.special_url : '/space/detail/' + item.id">
                         <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.name}}</div>
                         <div class="local-price-detail clearfix">
                             <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人</div>

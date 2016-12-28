@@ -72,8 +72,8 @@
             </div>
         </div>  
          <div class="infor-show1 fixed">
-            <a href="javascript:;" class="fl btn-onekey"><i class="icon icon-share"></i>分享</a>
-            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey" :class=" {'hv':spaceDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
+            <a href="javascript:;" class="fl btn-onekey1"><i class="icon icon-share"></i>分享</a>
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv':spaceDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
 
         </div>
 

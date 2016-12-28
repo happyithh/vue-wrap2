@@ -15,7 +15,7 @@
         </header>
         <template>
             <div class="feedback">
-                <h1>感谢您的意见和反馈，我们会努力优化、提高体验，感谢您的支持！</h1>
+                <h1>感谢您的意见和反馈，我们会努力优化，提高体验，感谢您的支持！</h1>
                 <textarea v-model="FeedbackText" class="feedbackText" rows="22" placeholder="请填写具体内容帮助我们了解您的意见和建议"></textarea>
                 <a @click="getFeedbackText" class="fl btn-onekey  js-feedback-btn">提交</a>
             </div>
@@ -46,19 +46,21 @@
         getFeedbackText(){
             var self=this;
             var FeedbackText = $('.feedbackText').val();
-            if(FeedbackText.length< 3){
-                console.log(111111)
-                // return false;
-            }
+            // if(FeedbackText.length< 1){
+            //     console.log(111111)
+            //     // return false;
+            // }
             $.post({
                 url: window.YUNAPI.feedBack,
                 data:{
-                    user_id: 1,
+                    user_id: self.personalData.id,
                     content: self.FeedbackText
                 },
+                //data:GlobleFun.objConcat(self.$store.getters.validationData,FeedbackText),
                 success : function (data) {
                     if(FeedbackText==''){
-                        console.log("aaaaa")
+                        $.toptip('请填写意见内容',2000,'error');
+                        return;
 
                     }else{
                         $.alert({
@@ -86,6 +88,7 @@
         margin: 20px 15px;
     }
     textarea{
+        padding:10px;
         text-indent: 0px;
         width:100%;
         height:280px;

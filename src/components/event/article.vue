@@ -81,6 +81,9 @@
 
        
         methods:{
+             back(){
+                router.back();
+            },
             //获取收藏
             collectcurt : function () {
                     this.ccurt = !this.ccurt

@@ -465,3 +465,6 @@ function countProperties (obj) { // 计算对象长度
     }
     return count;
 }
+function back(){
+    loation.href=histroy.go(-1);
+}

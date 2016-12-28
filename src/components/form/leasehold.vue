@@ -135,6 +135,13 @@
             setTimeout(function () {
                 self.$parent.loading = false;
             },300)
+             setTimeout(function () {
+                if(self.personalData.name){
+                    self.consult.phone = self.personalData.mobile
+                    self.consult.contact = self.personalData.name
+                    self.consult.email = self.personalData.email
+                }
+            },300)
         },
         methods: {
            sendPhoneCode(e){
