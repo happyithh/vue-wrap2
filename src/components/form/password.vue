@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                 <router-link to="/form/personal-center" class="back">
+                  <a onclick='router.back()' class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </router-link>
+                </a>
             </div>
             <div class="fl center">
                 <h1 class="display-center">密码设置</h1>
@@ -123,7 +123,7 @@
                             if(data.status == 1){
                                 $.alert({
                                     title: '修改成功',
-                                    text: '请重新登录',
+                                    // text: '请重新登录',
                                     onOK: function () {
                                         router.replace('/')
                                         //window.location.href='/'
