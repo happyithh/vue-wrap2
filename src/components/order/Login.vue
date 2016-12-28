@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                 <router-link to="/" class="back">
+                 <a onclick='router.back()' class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </router-link>
+                </a>
             </div>
             <div class="fl center">
                 <h1 class="display-center">登录/注册</h1>
@@ -27,7 +27,7 @@
             </div>
             <div class="remeberBox clearfix">
                 <div class="fl checkBox">
-                    <input class="fl" v-model="checked" type="checkbox" id='checkbox'/>
+                    <input class="fl" v-model="isRememberPhone" type="checkbox"  @click='remember()'/>
                     <p class="fl">记住我</p>
                 </div>
                 <div class="forgetBox fl">
@@ -64,7 +64,7 @@
       
         data () {
             return {
-                checked:true,
+                isRememberPhone : false,
                 consult:{
                     password:'',
                     mobile:'',
@@ -82,9 +82,24 @@
             },
 //         
         },
-         //记住密码
-        rememberPassword(){},
+        mounted(){
+             var self = this;
+             self.consult.mobile = LS.get('loginPhone')
+        },
+         
          methods:{
+             remember:function(){
+                var self = this;
+                if(self.isRememberPhone){ // 是否记住手机号
+                    // self.isRememberPhone=!self.isRememberPhone;
+                    LS.remove('loginPhone')
+                    console.log(self.consult.mobile)
+                }else{
+                    LS.set('loginPhone',self.consult.mobile)
+                     // LS.set('loginPhone',self.consult.mobile)
+                     
+                }
+             },
              personalDataChange(id){
                 this.$store.commit('personalDataChange',id)
                 // router.replace('/')
@@ -148,10 +163,6 @@
                     
                 
             },
-
-        //记住密码
-        rememberPassword(){}
-           
         }
     }
            

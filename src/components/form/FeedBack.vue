@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/form/personal-center" class="back">
+                 <a onclick='router.back()' class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </router-link>
+                </a>
             </div>
             <div class="fl center">
                 <h1 class="display-center">意见反馈</h1>

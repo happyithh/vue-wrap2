@@ -18,9 +18,9 @@
                     <router-link :to="item.special_url ? item.special_url : '/space/detail/' + item.id">
                         <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.name}}</div>
                         <div class="local-price-detail clearfix">
-                            <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人</div>
-                            <div class='max-square fl ml10'>面积{{item.area}}㎡</div><br/>
-                            <div class='add fl ml10'>地址 {{item.address}}</div>
+                            <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人 面积{{item.area}}㎡ 地址 {{item.address}}</div>
+                            <div class='max-square fl ml10'></div>
+                            <div class='add fl ml10'></div>
                         </div>
                     </router-link>
                 </li>
@@ -32,7 +32,8 @@
     </div>
 </template>
 <script>
-    import 'assets/css/form.css'
+    import 'assets/css/form.css';
+    // import CellSwipe from 'mint-ui'
     export default {
         name: 'home',
         data () {

@@ -109,7 +109,7 @@ window.router = new VueRouter({
             component: (resolve) => require(['./components/form/personal-info'], resolve)
         },
         {
-            path: '/form/personal-center',
+            path: '/form/aboutMe',
             component: (resolve) => require(['./components/form/personal-center'], resolve)
         },
         {

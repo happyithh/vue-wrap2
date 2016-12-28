@@ -15,7 +15,7 @@
     import 'assets/css.css';
     import 'assets/css/weui-change.css';
 
-    //const host = "http://api.yunspace.com.cn/";
+    // const host = "http://api.yunspace.com.cn/";
     const host = "http://172.16.0.145/";
 
     window.YUNAPI = {
@@ -58,7 +58,7 @@
         personalInfo:host+'api/users/update',
         consultTags:host+'api/tags/get_consult_tags',
         retailSearch:host+'api/spaces/retail_search'
-       
+
     };
 
     export default {
@@ -83,7 +83,7 @@
             self.$store.commit('getSelectedCity');
             self.$store.commit('getPersonalData');
             this.$store.commit('inquiryChange');
-            $.ajax({
+          $.ajax({
                 url: window.YUNAPI.tags,
                 context: document.body,
                 success: function (data) {

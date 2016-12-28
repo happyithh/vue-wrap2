@@ -184,7 +184,7 @@
         },
         mounted () {
             var self = this;
-             this.$store.commit('getPersonalData')
+            this.$store.commit('getPersonalData')
             self.getData()
         },
         methods:{
@@ -193,7 +193,7 @@
                 // this.personalData=data                
                 if(this.personalData.uid){
                     //console.log(this.personalData.uid)
-                    router.push('/form/personal-center') //已登陆 跳到个人页面
+                    router.push('/form/aboutMe') //已登陆 跳到个人页面
                 }else{
                     console.log(this.personalData.uid)
                      router.push('/order/login')

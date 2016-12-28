@@ -3,10 +3,10 @@
         <!--header部分-->
         <header class="clearfix">
             <div class="left fl">
-                <router-link to="/event" class="back">
+                 <a onclick='router.back()' class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </router-link>
+                </a>
             </div>
             <div class="fl center">
                 <h1 class="display-center">一键租场地</h1>
@@ -62,8 +62,8 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动时间</div>
-                    <input type="text" readonly  class="base-detail-name data_time weui_input" id='s_input' v-model="consult.s_time" placeholder="开始时间" />
-                    <input type="text" readonly class="base-detail-name data_time weui_input" id='e_input' v-model="consult.e_time" placeholder="结束时间" />
+                    <input type="text" readonly  class="base-detail-name data_time weui_input" id='s_input' placeholder="开始时间" />
+                    <input type="text" readonly class="base-detail-name data_time weui_input" id='e_input' placeholder="结束时间" />
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动类型</div>
@@ -132,6 +132,7 @@
             var self = this;
             $('#s_input').calendar({});
             $('#e_input').calendar({});
+           
             setTimeout(function () {
                 self.$parent.loading = false;
             },300)
@@ -139,7 +140,6 @@
                 if(self.personalData.name){
                     self.consult.phone = self.personalData.mobile
                     self.consult.contact = self.personalData.name
-                    self.consult.email = self.personalData.email
                 }
             },300)
         },
@@ -188,14 +188,6 @@
                     $.toptip('请先获取活动人数!',2000,'error');
                     return;
                 }
-                // if(!self.consult.s_time){
-                //     $.toptip('请选择开始时间!',2000,'error');
-                //     return;
-                // }
-                // if(!self.consult.e_time){
-                //     $.toptip('请选择结束时间!',2000,'error');
-                //     return;
-                // }
                 if(!self.consult.activity_type){
                     $.toptip('请先获取活动类型!',2000,'error');
                     return;
@@ -206,15 +198,19 @@
                 }
                    $.post({
                     url: window.YUNAPI.inquiryContent,
+                    data :  GlobleFun.objConcat(self.$store.getters.validationData,self.consult,{
+                            e_time:$('#s_input').val(),
+                            s_time:$('#e_input').val()}),
                     success: function (data) {
                         self.consult.s_time=$('#s_input').val();
                         self.consult.e_time=$('#e_input').val();
                         console.log(self.consult.s_time)
                         console.log(self.consult.e_time)
-                        data :  GlobleFun.objConcat(self.$store.getters.validationData,self.consult,)
+                        console.log(self.$store.getters.validationData);
                         var status = data.status == 1 ? 'success' : 'error';
                         //console.log(self.consult)
                         if(data.status == 1){
+                           
                            $.alert({
                                 title: '提交成功',
                                 text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
