@@ -30,7 +30,7 @@
              </div>
             <div class="remeberBox clearfix">
                 <div class="fl checkBox"@click='checked'>
-                    <input class="fl " type="checkbox" />
+                    <input class="fl " v-model="isRememberPhone" type="checkbox" @click='remember()'/>
                     <p class="fl">记住我</p>
                 </div>
                 <div class="forgetBox fl"><a href="/form/passwordfind">忘记密码？</a></div>
@@ -61,7 +61,9 @@
       
         data () {
             return {
+                isRememberPhone : false,
                 consult:{
+                    
                     auth_code:'',
                     code_token:'',
                     mobile:'',
@@ -78,6 +80,18 @@
                 this.$store.commit('personalDataChange',id)
                 // router.replace('/')
             },
+            remember:function(){
+                var self = this;
+                if(self.isRememberPhone){ // 是否记住手机号
+                    // self.isRememberPhone=!self.isRememberPhone;
+                    LS.remove('loginPhone')
+                    console.log(self.consult.mobile)
+                }else{
+                    LS.set('loginPhone',self.consult.mobile)
+                     // LS.set('loginPhone',self.consult.mobile)
+                     
+                }
+             },
             
             sendPhoneCode(e){
                 var self = this;

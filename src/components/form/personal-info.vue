@@ -25,17 +25,17 @@
             
             <div class="input-box">
                 <div class="base-info-name">您的称呼</div>
-                <input type="text" class="base-detail-name" v-model='order.name' placeholder="请输入您的称呼"/>
+                <input type="text" class="base-detail-name" v-model='personalData.name' placeholder="请输入您的称呼"/>
 
             </div>
             <div class="input-box">
                 <div class="base-info-name">手机号</div>
-                <input type="text" class="base-detail-name"v-model='order.moblie' placeholder="请输入11位手机号"/>
+                <input type="text" class="base-detail-name"v-model='order.moblie' placeholder="请输入11位手机号" disabled/>
 
             </div>
             <div class="input-box">
                 <div class="base-info-name">公司名称</div>
-                <input type="text" class="base-detail-name"v-model='order.company_name' placeholder="请输入公司名称"/>
+                <input type="text" class="base-detail-name"v-model='order.company_name' placeholder="请输入公司名称"disabled/>
 
             </div>
         </form>
@@ -66,15 +66,24 @@
             },
         },
         mounted(){
-             this.$store.commit('getPersonalData');
+            var self=this
+            //self.$store.commit('getPersonalData');
+            setTimeout(function () {
+                if(self.personalData.name){
+                    self.order.moblie = self.personalData.mobile
+                    self.order.name = self.personalData.name
+                    self.order.company_name = self.personalData.company_name
+                }
+            },300)
          },
         methods:{
-            personalDataChange(data){
-                this.$store.commit('personalDataChange',data)
-            }, 
+           
+            // personalDataChange(data){
+            //     this.$store.commit('personalDataChange',data)
+            // }, 
             personalInfo(data){
                 var self=this;
-                if(!self.order.name){
+                if(!self.personalData.name){
                         $.toptip('请输入您的称呼',2000,'error');
                         return;
                     }
@@ -91,17 +100,17 @@
                     type:'put',
                     url: window.YUNAPI.personalInfo,
                     data:GlobleFun.objConcat(self.$store.getters.validationData,
-                    {name:self.order.name,company_name:self.order.company_name,moblie:self.order.moblie,}),
+                    {name:self.personalData.name,company_name:self.order.company_name,moblie:self.order.moblie,}),
                     success : function (data,status,xhr) {
                        //console.log(data)
                         data.data.access_token = xhr.getResponseHeader('access-token');
                         data.data.client = xhr.getResponseHeader('client');
-                        //self.$store.commit('personalDataChange',data.data);//保存个人信息
+                        self.$store.commit('personalDataChange',data.data);//保存个人信息
                         $.alert({
                             title: '保存成功',
                             text: '',
                             onOK: function () {
-                               router.replace('../form/personal-center')
+                               router.replace('../form/aboutMe')
                                
                             }
                         });

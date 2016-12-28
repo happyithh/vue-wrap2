@@ -180,7 +180,7 @@
         },
         mounted () {
             var self = this;
-             this.$store.commit('getPersonalData')
+            this.$store.commit('getPersonalData')
             self.getData()
         },
         methods:{
