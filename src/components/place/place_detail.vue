@@ -19,7 +19,9 @@
         <div class="selectedtopic-cont top-banner">
             <div class="swiper-wrapper swiper-container">
                 <div class="swiper-slide" v-for="item in placeDtl.site_pictures">
-                    <img :src="item.url_790_526" alt=""/>
+                    <!--<img :src="item.url_790_526" alt=""/>-->
+                    <img class="lazy" :title="item.url_790_526"
+                         v-bind:data-original="item.url_790_526"/>
                 </div>
             </div>
             <!-- Add Pagination -->
@@ -71,8 +73,7 @@
         </div>
         <div class="infor-show">
             <div class="base-info">场地介绍</div>
-            <div class="pic-icon-exp pic-icon-expl">{{placeDtl.brand_story}}</div>
-
+            <div class="pic-icon-exp pic-icon-expl" v-html="placeDtl.brand_story"></div>
         </div>
         <div class="infor-show">
             <div class="base-info">场地其他空间</div>
@@ -238,7 +239,7 @@
                 //self.$store.commit('loading',true);
                 $.get({
                     url: window.YUNAPI.placeDtl + '/' + this.$route.params.id,
-                    //data: self.$store.getters.validationData,
+                    data: self.$store.getters.validationData,
                     success: function (data) {
                         self.placeDtl = data.site
                         console.log(data.site)
@@ -257,6 +258,13 @@
                             self.init2();//调用轮播
                             self.initMap();//调用地图
                         },300)
+
+                        setTimeout(function () {
+                            $("img.lazy").lazyload({
+                                effect : "fadeIn",
+                                placeholder : '/static/images/placeholder.jpg'
+                            });
+                        },400)
                     },
                     error: function () {
                         GlobleFun.httpError()

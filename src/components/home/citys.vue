@@ -19,7 +19,7 @@
                     <div class="title">定位城市</div>
                     <div class="wrap clearfix">
                         <i class="fl icon-position"></i>
-                        <input class="fl city" type="text" value="上海市" readonly="readonly" onfocus="this.blur()">
+                        <input class="fl city" type="text" v-model="geoCity" readonly="readonly" onfocus="this.blur()">
                     </div>
                 </div>
                 <div class="select-city">
@@ -51,7 +51,8 @@
         data () {
             return {
                 places: [1, 2, 3],
-                transitionName: 'slide-left'
+                transitionName: 'slide-left',
+                geoCity : '正在定位...'
             }
         },
         computed: {
@@ -77,6 +78,19 @@
             $('.container').css({
                 'min-height':$(window).height()
             })
+
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function(r){
+                if(this.getStatus() == BMAP_STATUS_SUCCESS){
+//            var mk = new BMap.Marker(r.point);
+//            map.addOverlay(mk);
+//            map.panTo(r.point);
+                    self.geoCity = r.address.city
+                }
+                else {
+                    alert('failed'+this.getStatus());
+                }
+            },{enableHighAccuracy: true})
         },
         methods: {
           

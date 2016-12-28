@@ -151,8 +151,8 @@ input[type='checkbox'] {
 }
 label {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  /*width: 15px;*/
+  /*height: 15px;*/
   /*position: relative;*/
   /*background: url('www.chitanda.me/images/blank.png');*/
   -webkit-transition: background 0.5s linear;

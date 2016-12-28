@@ -19,8 +19,10 @@
         <form class="personal-box">
             <div class="img-box">
                <!--<a href=""> <img src="/static/images/test_logo.png" alt=""/></a>-->
-               <label  for="xFile"><img src="/static/images/test_logo.png" alt=""/></label>
-               <input type="file" id='xFile'accept="images/*"/>
+
+               <!--<input type="file" id='xFile'accept="images/*"/>-->
+                <input type="file" @change="previewImg($event,'#thubm')" id='xFile'>
+                <label  for="xFile"><img id="thubm" src="/static/images/test_logo.png" alt=""/></label>
             </div>
             
             <div class="input-box">
@@ -47,6 +49,7 @@
 <script>
     import 'assets/css.css'
     import 'assets/css/form.css'
+
     export default {
       
         data () {
@@ -120,6 +123,52 @@
                     },
                      
                 });
+            },
+            previewImg(input,obj) {
+                input = input.target
+                if(input.files && input.files[0]) {
+                    var reader = new FileReader(),
+                            img = new Image();
+                    reader.onload = function (e) {
+                        if(input.files[0].size>800000){//图片大于300kb则压缩
+                            img.src = e.target.result;
+                            img.onload=function(){
+                                $(obj).attr('src', compress(img));
+                            }
+                        }else{
+                            $(obj).attr('src', e.target.result);
+                        }
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                    return 1;
+                }
+            },
+            compress(img) {
+                var initSize = img.src.length;
+                var width = img.width;
+                var height = img.height;
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext('2d');
+                //如果图片大于四百万像素，计算压缩比并将大小压至400万以下
+                var ratio;
+                if ((ratio = width * height / 4000000)>1) {
+                    ratio = Math.sqrt(ratio);
+                    width /= ratio;
+                    height /= ratio;
+                }else {
+                    ratio = 1;
+                }
+                canvas.width = width;
+                canvas.height = height;
+                //铺底色
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, width, height);
+                //进行最小压缩
+                var ndata = canvas.toDataURL("image/jpeg", 0.1);
+                console.log(ndata.length)
+                canvas.width = canvas.height = 0;
+                return ndata;
             }
         }
     }
