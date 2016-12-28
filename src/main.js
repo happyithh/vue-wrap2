@@ -196,6 +196,9 @@ window.store = new Vuex.Store({
             uid:'',
             
         },
+        placeSearchCondition:{
+
+        },
         pageSize : 12
     },
     getters: {
@@ -332,6 +335,9 @@ window.store = new Vuex.Store({
             }else{
                 state.area_size = ""
             }
+        },
+        placeSearchConditionChange(state,value){
+            state.placeSearchCondition = value
         },
         // retailChange(state,item){
         //     if(item){

@@ -39,6 +39,7 @@
         SpaceList: host + 'api/spaces',
         SpaceDtl: host + 'api/spaces',
         placeDtl: host + 'api/sites',
+        placeList: host + 'api/sites/search',
         feedBack: host + 'api/feedback',
         inquiry: host + 'api/users/1/demands',
         collection: host + 'api/follows',
