@@ -11,7 +11,7 @@
             </div>
             <div class="fl center p78">
                 <div class="search-input-wrap lg clearfix">
-                    <input type="text" placeholder="商圈／地标／机场／火车站／场地名">
+                    <input type="text" placeholder="商圈／地标／机场／火车站／场地名" v-model='urlData.q.keyword' @keyup.enter="getData">
                 </div>
             </div>
         </header>
@@ -22,29 +22,33 @@
                 <div class="input-box">
                     <div class="base-info-name">城市</div>
                     <div class="triangle">
-                        <select v-model="urlData.city_id">
+                        <select v-model="urlData.city_id" @change="placePositionScreen">
                             <option :value="item.id" v-for="item in searchCondition.cities">{{item.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">场地位置</div>
-                    <div class="tags select clearfix">
-                        <span class="active">不限</span>
-                        <select v-model="urlData.business_district">
-                            <option>不限</option>
-                            <option :value="item.id" v-for="item in searchCondition.business_district">{{item.name}}</option>
+                    <div class="tags select placePosition clearfix">
+                        <!--<span class="active buxian">不限</span>-->
+                        <select v-model="urlData.q.district_name_eq">
+                            <option value="">不限</option>
+                            <option v-for="item in arrAdmArea">{{item.name}}</option>
                         </select>
-                        <select>
-                            <option>不限</option>
-                            <option :value="value" v-for="(key,value) in searchCondition.city_business">{{key}}</option>
+                        <select v-model="searchData.business_district">
+                            <option value="">不限</option>
+                            <option v-for="item in arrBusinessDistrict">{{item}}</option>
                         </select>
-                        <select>
-                            <option>不限</option>
-                            <!--<option>地铁1</option>-->
-                            <!--<option>地铁2</option>-->
-                        </select>
-                        <span>不限</span>
+                        <!--<select>-->
+                            <!--<option>不限</option>-->
+                            <!--&lt;!&ndash;<option>地铁1</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option>地铁2</option>&ndash;&gt;-->
+                        <!--</select>-->
+                        <!--<select>-->
+                            <!--<option>不限</option>-->
+                            <!--&lt;!&ndash;<option>环线1</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option>环线2</option>&ndash;&gt;-->
+                        <!--</select>-->
                     </div>
                 </div>
                 <div class="input-box">
@@ -86,7 +90,7 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">落位区域</div>
-                    <div class="tags clearfix">
+                    <div class="tags clearfix arrArea">
                         <span class="active buxian" @click="singleActive($event)">不限</span>
                         <span :data-id="key" v-for="(value,key) in searchCondition.position" @click="toggleActive($event)">{{value}}</span>
                     </div>
@@ -128,19 +132,18 @@
                     budget_amount : '',
                     area_size : '',
                     search_people:'',
+                    business_district:'',   //商圈
                 },
-                searchKeyword : '',   //搜索关键词
                 selectSearchReady : false,
                 urlData : {
                     page : 1,
                     city_id : '',
-                    tags:'',             //配套服务
+                    tags:'',             //配套服务+活动类型+商圈
                     business_circle:'',  //活动类型
                     spaces_through_three_areas_cont: '',//落位区域
-                    business_district:'',   //行政区域
                     q : {
-                        keyword: self.searchKeyword,
-                        district_name_eq:'',
+                        keyword: '',
+                        district_name_eq:'',  //行政区域
                         site_type_eq:'',
                         spaces_market_price_gteq:'',
                         spaces_market_price_lteq:'',
@@ -159,6 +162,9 @@
                 arrPlaceType:[],//场地类型
                 stringArrPlaceType:[],
 
+                arrAdmArea:[],      //行政区域
+                arrBusinessDistrict:[],   //商圈
+
                 default:[],
             }
         },
@@ -174,8 +180,7 @@
                     },300)
                 }
                 if(s.cities){
-                    var l=s.cities.length-1;
-                    if(s.cities[l].name!=='不限'){
+                    if(s.cities[0].name!=='不限'){
                         s.cities.unshift({name:'不限',id:''})
                         setTimeout(function () {
                             self.selectSearchReady = true
@@ -196,7 +201,6 @@
         },
         mounted () {
             var self = this;
-            //console.log(self.placeSearchCondition);
         },
         methods:{
             //多选
@@ -222,6 +226,23 @@
                     $(e.target).siblings().removeClass('active')
                 }
             },
+
+            //场地位置筛选
+            placePositionScreen(){
+                var self = this
+                $.ajax({
+                    url: window.YUNAPI.host+'api/tags/get_city_business',
+                    data : {
+                        city_id:self.urlData.city_id
+                    },
+                    success: function (data) {
+//                        console.log(data,88)
+                        self.arrAdmArea=data.city_district  //行政区域
+                        self.arrBusinessDistrict=data.city_business  //商圈
+                    }
+                });
+            },
+
             getData(){
                 var self= this;
                 self.$store.commit('loading',true);
@@ -232,15 +253,22 @@
                 });
                 self.stringArrSort=self.arrSort.join(',');
 
-                //配套服务+活动类型(urlData.tags值)
+                //配套服务+活动类型+商圈(urlData.tags值)
                 if(self.stringArrSort){
                     self.stringArrSort=self.stringArrSort+','
                 }
-                //console.log(self.stringArrSort,999);
+                if(self.searchData.business_district){
+                    self.searchData.business_district=self.searchData.business_district+','
+                }
+//                console.log(self.urlData.business_circle,1,self.searchData.business_district,2)
                 self.urlData.tags = self.stringArrSort
-                        +self.urlData.business_circle;
+                        +self.urlData.business_circle          //活动类型
+                        +self.searchData.business_district;    //商圈
 
                 //落位区域值
+                $('.arrArea span.active').each(function () {
+                    self.arrArea.push($(this).data('id'));
+                });
                 self.stringArrArea=self.arrArea.join(',');
                 self.urlData.spaces_through_three_areas_cont = self.stringArrArea
 
