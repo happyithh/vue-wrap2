@@ -28,7 +28,7 @@
             </div>
             <div class="fl center">
                 <router-link to="/place/search" class="search-input-wrap clearfix">
-                    <input type="text" placeholder="搜索" readonly="readonly">
+                    <input type="text" placeholder="搜索" readonly="readonly" :value="placeSearchCondition.q.keyword">
                 </router-link>
             </div>
             <div class="right fr">
@@ -40,7 +40,7 @@
         <!--搜索框-->
         <div class="search-input-wrap-bg">
             <router-link to="/place/search" class="search-input-wrap clearfix">
-                <input type="text" placeholder="搜索" readonly="readonly">
+                <input type="text" placeholder="搜索" readonly="readonly" :value="placeSearchCondition.q.keyword">
             </router-link>
         </div>
 
@@ -98,6 +98,7 @@
             //悬浮搜索导航
             self.headerSearchFixed();
             self.getData();
+
         },
         computed:{
             inquiryCount () {

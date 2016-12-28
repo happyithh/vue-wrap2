@@ -197,7 +197,7 @@ window.store = new Vuex.Store({
             
         },
         placeSearchCondition:{
-
+            q:{}
         },
         pageSize : 12
     },
