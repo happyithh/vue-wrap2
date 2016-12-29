@@ -35,7 +35,7 @@
                             <option value="">不限</option>
                             <option v-for="item in arrAdmArea">{{item.name}}</option>
                         </select>
-                        <select v-model="searchData.business_district">
+                        <select v-model="urlData.business_district">
                             <option value="">不限</option>
                             <option v-for="item in arrBusinessDistrict">{{item}}</option>
                         </select>
@@ -54,7 +54,7 @@
                 <div class="input-box">
                     <div class="base-info-name">场地类型</div>
                     <div class="tags clearfix placeType">
-                        <span @click="toggleActive($event)" :data-id="value" v-for="(value,key) in searchCondition.space_type">{{key}}</span>
+                        <span :class="{ active : placeSearchCondition.arrPlaceType.indexOf(value * 1) >= 0 }" @click="toggleActive($event)" :data-id="value" v-for="(value,key) in searchCondition.space_type">{{key}}</span>
                     </div>
                 </div>
 
@@ -69,13 +69,13 @@
                 <div class="input-box">
                     <div class="base-info-name">容纳人数</div>
                     <div class="tags clearfix people">
-                        <span :data-id="key" v-for="(value,key) in searchCondition.search_people" @click="singleActive($event)">{{value}}</span>
+                        <span :data-id="key" v-for="(value,key) in searchCondition.search_people" @click="singleActive($event)" :class="{active : placeSearchCondition.search_people == key}">{{value}}</span>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">预算范围</div>
                     <div class="triangle">
-                        <select v-model="searchData.budget_amount">
+                        <select v-model="urlData.budget_amount">
                             <option :value="key" v-for="(value,key) in searchCondition.budget_amount">{{value}}</option>
                         </select>
                     </div>
@@ -83,7 +83,7 @@
                 <div class="input-box">
                     <div class="base-info-name">面积范围</div>
                     <div class="triangle">
-                        <select v-model="searchData.area_size">
+                        <select v-model="urlData.area_size">
                             <option :value="key" v-for="(value,key) in searchCondition.area_size">{{value}}</option>
                         </select>
                     </div>
@@ -92,20 +92,20 @@
                     <div class="base-info-name">落位区域</div>
                     <div class="tags clearfix arrArea">
                         <span class="active buxian" @click="singleActive($event)">不限</span>
-                        <span :data-id="key" v-for="(value,key) in searchCondition.position" @click="toggleActive($event)">{{value}}</span>
+                        <span :data-id="key" v-for="(value,key) in searchCondition.position" @click="toggleActive($event)" :class="{ active : placeSearchCondition.arrArea.indexOf(value) >= 0 }">{{value}}</span>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">配套服务</div>
                     <div class="tags arrSort clearfix">
                         <span class="active buxian" @click="singleActive($event)">不限</span>
-                        <span :data-id="value" v-for="(value,key) in searchCondition.facitilies" @click="toggleActive($event)">{{value}}</span>
+                        <span :data-id="value" v-for="(value,key) in searchCondition.facitilies" @click="toggleActive($event)" :class="{ active : placeSearchCondition.arrSort.indexOf(value) >= 0 }">{{value}}</span>
                     </div>
                 </div>
                 <div class="input-box">
                     <div class="base-info-name">空间层高</div>
                     <div class="triangle">
-                        <input style="width: 120px" type="number" class="base-detail-name ipt-height" placeholder="请输入层高">
+                        <input style="width: 120px" type="number" class="base-detail-name ipt-height" v-model="urlData.q.spaces_height_gteq" placeholder="请输入层高">
                         <span>米 以上</span>
                     </div>
                 </div>
@@ -136,7 +136,15 @@
                 },
                 selectSearchReady : false,
                 urlData : {
-                    
+                    budget_amount : '',         //预算范围
+                    area_size : '',
+                    search_people:'',
+                    business_district:'',       //商圈
+                    arrSort:[],                 //配套服务
+                    arrArea:[],                 //落位区域
+                    arrPlaceType:[],            //场地类型
+                    business_circle_new:'',     //活动类型
+                    //以上保存数据用
 
                     page : 1,
                     city_id : '',
@@ -157,15 +165,15 @@
                         spaces_height_gteq:'',
                     }
                 },
-                arrSort:[],
-                stringArrSort:[],
-                arrArea:[],
-                stringArrArea:[],
-                arrPlaceType:[],//场地类型
-                stringArrPlaceType:[],
 
-                arrAdmArea:[],      //行政区域
-                arrBusinessDistrict:[],   //商圈
+                stringSort:[],              //配套服务
+
+                stringArea:[],              //落位区域
+
+                stringPlaceType:[],         //场地类型
+
+                arrAdmArea:[],              //行政区域
+                arrBusinessDistrict:[],     //商圈
 
                 default:[],
             }
@@ -184,8 +192,13 @@
                         $('.placeType span').each(function () {
                             var ee=$(this);
                             if(ee.text()=='不限'){
+                                if(ee.siblings().hasClass('active')){
+                                    $('.placeType').prepend('<span class="buxian">不限</span>');
+                                }else {
+                                    $('.placeType').prepend('<span class="active buxian">不限</span>');
+                                }
                                 $('.placeType').find(ee).remove();
-                                $('.placeType').prepend('<span class="active buxian">不限</span>');
+
                                 $('.placeType span.buxian').on('click',function () {
                                     self.singleActiveB($(this));
                                 });
@@ -202,8 +215,13 @@
                         $('.people span').each(function () {
                             var ee = $(this);
                             if (ee.text() == '不限') {
+
+                                if(ee.siblings().hasClass('active')){
+                                    $('.people').prepend('<span class="buxian">不限</span>');
+                                }else {
+                                    $('.people').prepend('<span class="active buxian">不限</span>');
+                                }
                                 $('.people').find(ee).remove();
-                                $('.people').prepend('<span class="active buxian">不限</span>');
 
                                 $('.people span.buxian').on('click', function () {
                                     self.singleActiveB($(this));
@@ -241,7 +259,7 @@
             if(s.q.keyword){   //关键词
                 self.urlData.q.keyword = s.q.keyword;
             }
-            if(s.city_id){     //城市
+            if(s.city_id){     //城市 +行政区域、商圈
                 self.urlData.city_id = s.city_id
                 $.ajax({
                     url: window.YUNAPI.host+'api/tags/get_city_business',
@@ -256,13 +274,42 @@
                         if(s.q.district_name_eq){     //行政区域
                             self.urlData.q.district_name_eq = s.q.district_name_eq
                         }
-                        if(s.q.district_name_eq){     //商圈
-                            self.urlData.q.district_name_eq = s.q.district_name_eq
+                        //console.log(s.business_district,1)
+                        if(s.business_district){     //商圈
+                            self.urlData.business_district = s.business_district
                         }
                     }
                 });
-
             }
+            if(s.business_circle_new){     //活动类型
+                self.urlData.business_circle = s.business_circle_new;
+            }
+            if(s.budget_amount){           //预算范围
+                self.urlData.budget_amount = s.budget_amount;
+            }
+            if(s.area_size){               //面积范围
+                self.urlData.area_size = s.area_size;
+            }
+            if(s.arrArea){                 //落位区域值
+                //如果默认选择的有数据，去掉不限的选中样式
+                $('.arrArea span.active').each(function () {
+                    if($(this).text() == '不限'){
+                        $(this).removeClass('active');
+                    }
+                });
+            }
+            if(s.arrArea){                 //配套服务
+                //如果默认选择的有数据，去掉不限的选中样式
+                $('.arrSort span.active').each(function () {
+                    if($(this).text() == '不限'){
+                        $(this).removeClass('active');
+                    }
+                });
+            }
+            if(s.q.spaces_height_gteq){   //空间层高
+                self.urlData.q.spaces_height_gteq = s.q.spaces_height_gteq;
+            }
+
 
         },
         methods:{
@@ -308,7 +355,6 @@
                         city_id:self.urlData.city_id
                     },
                     success: function (data) {
-//                        console.log(data,88)
                         self.arrAdmArea=data.city_district  //行政区域
                         self.arrBusinessDistrict=data.city_business  //商圈
                     }
@@ -321,36 +367,42 @@
 
                 //配套服务
                 $('.arrSort span.active').each(function () {
-                    self.arrSort.push($(this).data('id'));
+                    self.urlData.arrSort.push($(this).data('id'));
                 });
-                self.stringArrSort=self.arrSort.join(',');
+                self.stringSort=self.urlData.arrSort.join(',');
 
                 //配套服务+活动类型+商圈(urlData.tags值)
-                if(self.stringArrSort){
-                    self.stringArrSort=self.stringArrSort+','
+                if(self.stringSort){
+                    self.stringSort=self.stringSort+','
                 }
-                if(self.searchData.business_district){
-                    self.searchData.business_district=self.searchData.business_district+','
+//                if(self.urlData.business_district){
+//                    self.urlData.business_district=self.urlData.business_district+','
+//                }
+
+                self.urlData.business_circle_new = self.urlData.business_circle  //活动类型（保存数据用）
+                if(self.urlData.business_circle){    //活动类型
+                    self.urlData.business_circle = self.urlData.business_circle+','
                 }
-//                console.log(self.urlData.business_circle,1,self.searchData.business_district,2)
-                self.urlData.tags = self.stringArrSort
+
+                self.urlData.tags = self.stringSort
                         +self.urlData.business_circle          //活动类型
-                        +self.searchData.business_district;    //商圈
+                        +self.urlData.business_district;    //商圈
+
 
                 //落位区域值
                 $('.arrArea span.active').each(function () {
-                    self.arrArea.push($(this).data('id'));
+                    self.urlData.arrArea.push($(this).data('id'));
                 });
-                self.stringArrArea=self.arrArea.join(',');
-                self.urlData.spaces_through_three_areas_cont = self.stringArrArea
+                self.stringArea=self.urlData.arrArea.join(',');
+                self.urlData.spaces_through_three_areas_cont = self.stringArea
 
                 //空间层高值
                 self.urlData.q.spaces_height_gteq = $('.triangle .ipt-height').val();
-                $('.triangle .ipt-height').val('');  //清零
+//                $('.triangle .ipt-height').val('');  //清零
 
                 //预算范围
-                if(self.searchData.budget_amount){
-                    var budget_amount = self.searchData.budget_amount.split('-')
+                if(self.urlData.budget_amount){
+                    var budget_amount = self.urlData.budget_amount.split('-')
                     self.urlData.q.spaces_market_price_gteq = budget_amount[0]
                     self.urlData.q.spaces_market_price_lteq = budget_amount[1]
                 }else{
@@ -359,8 +411,8 @@
                 }
 
                 //面积限制
-                if(self.searchData.area_size){
-                    var area_size = self.searchData.area_size.split('-')
+                if(self.urlData.area_size){
+                    var area_size = self.urlData.area_size.split('-')
                     self.urlData.q.spaces_area_gteq = area_size[0]
                     self.urlData.q.spaces_area_lteq = area_size[1]
                 }else{
@@ -370,10 +422,10 @@
 
                 //场地类型
                 $('.placeType span.active').each(function () {
-                    self.arrPlaceType.push($(this).data('id'));
+                    self.urlData.arrPlaceType.push($(this).data('id'));
                 });
-                self.stringArrPlaceType = self.arrPlaceType.join(',')
-                self.urlData.q.site_type_eq = self.stringArrPlaceType
+                self.stringPlaceType = self.urlData.arrPlaceType.join(',')
+                self.urlData.q.site_type_eq = self.stringPlaceType
 
 
                 //容纳人数
@@ -383,6 +435,7 @@
                         self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                         self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                     }else {
+                        self.urlData.search_people = $('.people span.active').data('id')  //容纳人数 保存数据用
                         var search_people = $('.people span.active').data('id').split('-');
                         //console.log(search_people,22)
 
@@ -394,22 +447,12 @@
                     self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                     self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                 }
-
                 self.$store.commit('placeSearchConditionChange',self.urlData);
 
                 if(self.placeSearchCondition){//之前提交的数据
                     self.urlData=self.placeSearchCondition
                 }
                 router.back();  //返回上一页
-//                $.ajax({
-//                    url: window.YUNAPI.host + 'api/sites/search',
-//                    data : self.urlData,
-//                    success: function (data) {
-//                        console.log(data)
-//
-//                    }
-//                });
-
             },
         }
     }
