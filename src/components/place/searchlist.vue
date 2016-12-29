@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container hvfixed">
 
         <!--头部-->
         <header class="clearfix">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <div class="onekey-rentail-wrap">
+                <div class="onekey-rentail-wrap fixed">
                     <a href="javascript:;" @click="getData" class="btn-onekey">搜索</a>
                 </div>
             </div>
@@ -136,6 +136,8 @@
                 },
                 selectSearchReady : false,
                 urlData : {
+                    
+
                     page : 1,
                     city_id : '',
                     tags:'',             //配套服务+活动类型+商圈
@@ -173,10 +175,41 @@
             searchCondition (){
                 var s = this.$store.state.searchCondition
                 var self = this
-                if(s.space_type){
+                if(s.space_type){   //场地类型
                     s.space_type['不限'] = ''
                     setTimeout(function () {
                         self.selectSearchReady = true
+
+                        //不限 前置
+                        $('.placeType span').each(function () {
+                            var ee=$(this);
+                            if(ee.text()=='不限'){
+                                $('.placeType').find(ee).remove();
+                                $('.placeType').prepend('<span class="active buxian">不限</span>');
+                                $('.placeType span.buxian').on('click',function () {
+                                    self.singleActiveB($(this));
+                                });
+                            }
+                        });
+                    },300)
+
+                }
+                if(s.search_people){  //容纳人数
+
+                    setTimeout(function () {
+                        self.selectSearchReady = true
+                        //不限 前置
+                        $('.people span').each(function () {
+                            var ee = $(this);
+                            if (ee.text() == '不限') {
+                                $('.people').find(ee).remove();
+                                $('.people').prepend('<span class="active buxian">不限</span>');
+
+                                $('.people span.buxian').on('click', function () {
+                                    self.singleActiveB($(this));
+                                });
+                            }
+                        });
                     },300)
                 }
                 if(s.cities){
@@ -192,7 +225,9 @@
                     setTimeout(function () {
                         self.selectSearchReady = true
                     },300)
+
                 }
+
                 return s
             },
             placeSearchCondition(){
@@ -201,6 +236,34 @@
         },
         mounted () {
             var self = this;
+            var s = self.$store.state.placeSearchCondition
+
+            if(s.q.keyword){   //关键词
+                self.urlData.q.keyword = s.q.keyword;
+            }
+            if(s.city_id){     //城市
+                self.urlData.city_id = s.city_id
+                $.ajax({
+                    url: window.YUNAPI.host+'api/tags/get_city_business',
+                    data : {
+                        city_id:self.urlData.city_id
+                    },
+                    success: function (data) {
+//                        console.log(data,88)
+                        self.arrAdmArea=data.city_district  //行政区域
+                        self.arrBusinessDistrict=data.city_business  //商圈
+
+                        if(s.q.district_name_eq){     //行政区域
+                            self.urlData.q.district_name_eq = s.q.district_name_eq
+                        }
+                        if(s.q.district_name_eq){     //商圈
+                            self.urlData.q.district_name_eq = s.q.district_name_eq
+                        }
+                    }
+                });
+
+            }
+
         },
         methods:{
             //多选
@@ -224,6 +287,15 @@
                 }else {
                     $(e.target).addClass('active');
                     $(e.target).siblings().removeClass('active')
+                }
+            },
+            //单选(循环含不限)
+            singleActiveB(e){
+                if(e.hasClass('active')){
+                    e.removeClass('active');
+                }else {
+                    e.siblings().removeClass('active')
+                    e.addClass('active');
                 }
             },
 
@@ -306,20 +378,28 @@
 
                 //容纳人数
                 if($('.people span').hasClass('active')){
-                    var search_people = $('.people span.active').data('id').split('-');
-                    self.urlData.q.spaces_Max_seating_capacity_gteq = search_people[0]
-                    self.urlData.q.spaces_Max_seating_capacity_lteq = search_people[1]
 
                     if($('.people span.active').text()=='不限'){
                         self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                         self.urlData.q.spaces_Max_seating_capacity_lteq = ''
+                    }else {
+                        var search_people = $('.people span.active').data('id').split('-');
+                        //console.log(search_people,22)
+
+                        self.urlData.q.spaces_Max_seating_capacity_gteq = search_people[0]
+                        self.urlData.q.spaces_Max_seating_capacity_lteq = search_people[1]
                     }
+
                 }else{
                     self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                     self.urlData.q.spaces_Max_seating_capacity_lteq = ''
                 }
 
                 self.$store.commit('placeSearchConditionChange',self.urlData);
+
+                if(self.placeSearchCondition){//之前提交的数据
+                    self.urlData=self.placeSearchCondition
+                }
                 router.back();  //返回上一页
 //                $.ajax({
 //                    url: window.YUNAPI.host + 'api/sites/search',
