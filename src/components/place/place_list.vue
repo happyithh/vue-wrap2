@@ -4,10 +4,10 @@
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
-                 <a onclick='router.back()' class="back">
+                <router-link to="/" class="back">
                     <i class="icons icon-arrowleft white"></i>
                     返回
-                </a>
+                </router-link>
             </div>
             <div class="fl center">
                 <h1 class="display-center">场地列表</h1>

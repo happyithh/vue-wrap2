@@ -254,61 +254,8 @@
         },
         mounted () {
             var self = this;
-            var s = self.$store.state.placeSearchCondition
 
-            if(s.q.keyword){   //关键词
-                self.urlData.q.keyword = s.q.keyword;
-            }
-            if(s.city_id){     //城市 +行政区域、商圈
-                self.urlData.city_id = s.city_id
-                $.ajax({
-                    url: window.YUNAPI.host+'api/tags/get_city_business',
-                    data : {
-                        city_id:self.urlData.city_id
-                    },
-                    success: function (data) {
-//                        console.log(data,88)
-                        self.arrAdmArea=data.city_district  //行政区域
-                        self.arrBusinessDistrict=data.city_business  //商圈
-
-                        if(s.q.district_name_eq){     //行政区域
-                            self.urlData.q.district_name_eq = s.q.district_name_eq
-                        }
-                        //console.log(s.business_district,1)
-                        if(s.business_district){     //商圈
-                            self.urlData.business_district = s.business_district
-                        }
-                    }
-                });
-            }
-            if(s.business_circle_new){     //活动类型
-                self.urlData.business_circle = s.business_circle_new;
-            }
-            if(s.budget_amount){           //预算范围
-                self.urlData.budget_amount = s.budget_amount;
-            }
-            if(s.area_size){               //面积范围
-                self.urlData.area_size = s.area_size;
-            }
-            if(s.arrArea){                 //落位区域值
-                //如果默认选择的有数据，去掉不限的选中样式
-                $('.arrArea span.active').each(function () {
-                    if($(this).text() == '不限'){
-                        $(this).removeClass('active');
-                    }
-                });
-            }
-            if(s.arrArea){                 //配套服务
-                //如果默认选择的有数据，去掉不限的选中样式
-                $('.arrSort span.active').each(function () {
-                    if($(this).text() == '不限'){
-                        $(this).removeClass('active');
-                    }
-                });
-            }
-            if(s.q.spaces_height_gteq){   //空间层高
-                self.urlData.q.spaces_height_gteq = s.q.spaces_height_gteq;
-            }
+            self.holdData();
 
 
         },
@@ -452,8 +399,75 @@
                 if(self.placeSearchCondition){//之前提交的数据
                     self.urlData=self.placeSearchCondition
                 }
-                router.back();  //返回上一页
+                router.push('/place');  //返回上一页
             },
+
+            holdData(){
+                var self = this;
+                var s = self.$store.state.placeSearchCondition
+
+                if(s.q.keyword){   //关键词
+                    self.urlData.q.keyword = s.q.keyword;
+                }
+                if(s.city_id){     //城市 +行政区域、商圈
+                    self.urlData.city_id = s.city_id
+                    $.ajax({
+                        url: window.YUNAPI.host+'api/tags/get_city_business',
+                        data : {
+                            city_id:self.urlData.city_id
+                        },
+                        success: function (data) {
+//                        console.log(data,88)
+                            self.arrAdmArea=data.city_district  //行政区域
+                            self.arrBusinessDistrict=data.city_business  //商圈
+
+                            if(s.q.district_name_eq){     //行政区域
+                                self.urlData.q.district_name_eq = s.q.district_name_eq
+                            }
+                            //console.log(s.business_district,1)
+                            if(s.business_district){     //商圈
+                                self.urlData.business_district = s.business_district
+                            }
+                        }
+                    });
+                }
+                if(s.business_circle_new){     //活动类型
+                    self.urlData.business_circle = s.business_circle_new;
+                }
+                if(s.budget_amount){           //预算范围
+                    self.urlData.budget_amount = s.budget_amount;
+                }
+                if(s.area_size){               //面积范围
+                    self.urlData.area_size = s.area_size;
+                }
+                if(s.arrArea){                 //落位区域值
+                    //如果默认选择的有数据，去掉不限的选中样式
+                    var areaLength = $('.arrArea span.active').length-1;
+                    if(!(areaLength=1 && $('.arrArea span.active').text() == '不限')){
+                        $('.arrArea span.active').each(function () {
+                            //console.log(areaLength,55);
+                            if($(this).text() == '不限'){
+                                $(this).removeClass('active');
+                            }
+                        });
+                    }
+
+                }
+                if(s.arrArea){                 //配套服务
+                    //如果默认选择的有数据，去掉不限的选中样式
+                    var sortLength = $('.arrSort span.active').length-1;
+                    if(!(sortLength=1 && $('.arrSort span.active').text() == '不限')) {
+                        $('.arrSort span.active').each(function () {
+                            if ($(this).text() == '不限') {
+                                $(this).removeClass('active');
+                            }
+                        });
+                    }
+                }
+                if(s.q.spaces_height_gteq){   //空间层高
+                    self.urlData.q.spaces_height_gteq = s.q.spaces_height_gteq;
+                }
+            }
         }
     }
 </script>

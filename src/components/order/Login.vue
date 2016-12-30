@@ -223,7 +223,8 @@
     }
     .checkBox input:checked{
         background-image: url(/static/images/icon/selected.png);
-        background-size:cover; 
+        background-size:cover;
+        border: none;
     }
     .checkBox p{
          margin-left: 10px;

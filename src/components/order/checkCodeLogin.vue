@@ -188,7 +188,8 @@
     }
     .checkBox input:checked{
         background-image: url(/static/images/icon/selected.png);
-        background-size:cover; 
+        background-size:cover;
+        border: none;
     }
     .personal-box{
         width: 100%;
