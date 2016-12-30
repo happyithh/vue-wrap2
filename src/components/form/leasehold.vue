@@ -40,7 +40,7 @@
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动城市</div>
                     <div class="triangle">
-                        <select v-model="consult.ip_city">
+                        <select v-model="consult.order_city">
                             <option value="">请选择目的地，城市</option>
                             <option v-for="item in searchCondition.cities":value="item.id">{{item.name}}</option>
                         </select>
@@ -106,14 +106,15 @@
                     phone:'',
                     auth_code:'',
                     code_token:'',
-                    ip_city:'',
+                    order_city:'',
+                    source:'一键租场地',
                     number_of_activities:'',
                     activity_type:'',
                     activities_required:'',
                     s_time:'',
                     e_time:'',
-                    }
-               
+                    },
+                 
             }
        
         },
@@ -132,7 +133,6 @@
             var self = this;
             $('#s_input').calendar({});
             $('#e_input').calendar({});
-           
             setTimeout(function () {
                 self.$parent.loading = false;
             },300)
@@ -155,6 +155,7 @@
                 $('#s_input').calendar({
                     
                 });
+                 
             },
             getEndData:function(){
                 $('#e_input').calendar({
@@ -163,6 +164,9 @@
             },
             inquiryContent : function () {
                 var self=this
+                self.consult.s_time=$('#s_input').val();
+                console.log( self.consult.s_time)
+                self.consult.e_time=$('#e_input').val();
                 if(!self.consult.contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
@@ -180,7 +184,7 @@
                     return;
                 }
                 
-                if(!self.consult.ip_city){
+                if(!self.consult.order_city){
                     $.toptip('请先获取活动城市!',2000,'error');
                     return;
                 }
@@ -196,21 +200,14 @@
                     $.toptip('其他要求不能为空!',2000,'error');
                     return;
                 }
-                   $.post({
+                 $.post({
                     url: window.YUNAPI.inquiryContent,
-                    data :  GlobleFun.objConcat(self.$store.getters.validationData,self.consult,{
-                            e_time:$('#s_input').val(),
-                            s_time:$('#e_input').val()}),
+                    data :  GlobleFun.objConcat(self.$store.getters.validationData,self.consult,),
                     success: function (data) {
-                        self.consult.s_time=$('#s_input').val();
-                        self.consult.e_time=$('#e_input').val();
-                        console.log(self.consult.s_time)
-                        console.log(self.consult.e_time)
-                        console.log(self.$store.getters.validationData);
                         var status = data.status == 1 ? 'success' : 'error';
                         //console.log(self.consult)
                         if(data.status == 1){
-                           
+                          
                            $.alert({
                                 title: '提交成功',
                                 text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',

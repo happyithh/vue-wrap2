@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import LS from 'assets/libs/store'
 import Vuex from 'vuex'
 import configRouter from './config_router.js'
+import Mint from 'mint-ui';
+Vue.use(Mint);
 //import  CellSwipe  from 'mint-ui';
 //Vue.component(CellSwipe.name, Cell);
 Vue.use(VueRouter);
@@ -442,6 +444,7 @@ window.GlobleFun = {
         }
         if(!urlData.user_id){
             $.toptip('请先登录!',2000,'error');
+            router.push('/order/Login')
             return
         }
         self.changeCollectPromise = $.post({

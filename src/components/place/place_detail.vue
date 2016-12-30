@@ -48,7 +48,7 @@
             <div class="base-info-detail"> 行业类型：<span>{{placeDtl.industry_field}}</span></div>
         </div>
         <div class="infor-show">
-            <div class="base-info">场地配套</div>
+            <div class="base-info2">场地配套</div>
             <div class="pic-icon" v-for="item in arrSort">
                 <img :src="'/static/images/assort/'+assortList[item]+'.png'" alt=""/>
                 <div class="pic-icon-exp">{{item}}</div>
@@ -72,11 +72,11 @@
 
         </div>
         <div class="infor-show">
-            <div class="base-info">场地介绍</div>
+            <div class="base-info2">场地介绍</div>
             <div class="pic-icon-exp pic-icon-expl" v-html="placeDtl.brand_story"></div>
         </div>
         <div class="infor-show">
-            <div class="base-info">场地其他空间</div>
+            <div class="base-info2">场地其他空间</div>
             <ul class="pic-icon-exp other-spaces">
                 <li class="clearfix" v-for="item in spaces">
                     <router-link :to="'/space/detail/'+item.id" class="clearfix">
@@ -97,7 +97,7 @@
 
         </div>
         <div class="infor-show">
-            <div class="base-info">场地相关案例</div>
+            <div class="base-info2">场地相关案例</div>
             <div class="selectedtopic-cont about-cases">
                 <div class="swiper-wrapper swiper-container">
                     <div class="swiper-slide" v-for="item in relate_topics">
@@ -198,7 +198,7 @@
         mounted () {
             var self = this;
 
-            self.getData()//调用数据
+            self.getData()//调用数据5
         },
         methods:{
             /*顶部轮播*/

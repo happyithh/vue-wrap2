@@ -219,6 +219,11 @@
         width:20px;
         height:20px;
         border: 1px solid #999999;
+        -webkit-appearance: none;
+    }
+    .checkBox input:checked{
+        background-image: url(/static/images/icon/selected.png);
+        background-size:cover; 
     }
     .checkBox p{
          margin-left: 10px;

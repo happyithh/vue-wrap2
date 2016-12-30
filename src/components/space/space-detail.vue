@@ -18,7 +18,7 @@
         <!--轮播图start-->
             <div class="selectedtopic-cont top-banner">
                 <div class="swiper-wrapper swiper-container">
-                    <div class="swiper-slide" v-for="item in spaceDtl.img_paths">
+                    <div class="swiper-slide" v-for="item in site.site_pictures">
                        <img :src="item.url_790_526" alt="首页banner图片01"/>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
         <!--信息展示开始-->
         <div class="infor-show">
             <h2>{{spaceDtl.site_name}}</h2>
-            <div class="base-info">基本信息</div>
+            <div class="base-info1">基本信息</div>
             <div class="base-info-detail"> 最大容量：<span>{{spaceDtl.Max_seating_capacity}}人</span></div>
             <div class="base-info-detail"> 空间面积<span>：{{
             spaceDtl.area}}㎡</span></div>
@@ -40,7 +40,7 @@
             <div class="base-info-detail"> 行业类型：<span>{{spaceDtl.industry_field}}</span></div>
         </div>
          <div class="infor-show" >
-           <div class="base-info"  >空间配套</div>
+           <div class="base-info2"  >空间配套</div>
            
                 <div class="pic-icon" v-for="item in arrSort">
                 <!--<img src="/static/images/icon/wc.png" alt=""/>-->
@@ -50,16 +50,15 @@
            
         </div>
         <div class="infor-show">
-            <div class="base-info">预定须知</div>
+            <div class="base-info2">预定须知</div>
            <div class="pic-icon-exp pic-icon-expl">{{spaceDtl.booking_notes}}</div>
             
         </div>
         <!--场地详情相关案例数据-->
-        <div class="infor-show">
-            <div class="base-info">场地相关案例</div>
-            <div class="selectedtopic-cont about-cases">
-                 
-                    <div class="swiper-wrapper swiper-container">
+        <div class="infor-show clearfix">
+            <div class="base-info2">场地相关案例</div>
+            <div class="selectedtopic-cont1 about-cases">
+                  <div class="swiper-wrapper swiper-container">
                         <div class="swiper-slide"  v-for="item in placeDtl">
                             <router-link :to="item.img_paths.url ? item.img_paths.url : '/article/' + item.id">
                             <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_420_300'] : ''">
@@ -68,15 +67,16 @@
                         </router-link>
                         </div>
                     </div>
-                
             </div>
         </div>  
-         <div class="infor-show1 fixed">
-            <a href="javascript:;" class="fl btn-onekey1"><i class="icon icon-share"></i>分享</a>
-            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv':spaceDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
+        <!--收藏与分享-->
+         <div class="infor-show1">
+            <a href="" class="fl btn-onekey1"><i class="icon icon-share"></i>分享</a>
+            <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': placeDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
+
 
         </div>
-
        <!--电话-->
         <div class="tel-wrap">
             <a href="tel:400-056-0599" class="event-tel clearfix">
@@ -91,9 +91,9 @@
                <span>{{spaceDtl.market_price_real}}{{spaceDtl.units}}</span>
                <p class="price-underline clearfix ">{{spaceDtl.market_price}}</p>
             </div>
-            <a id='aksprice' @click="addInquiry" class="btnjoin btn-onekey fr"
+            <a id='aksprice' @click="addInquiry" class="btnjoin btn-onekey1 fr"
                                        href="javascript:;"
-               v-text="inquiryList.hasOwnProperty(spaceDtl.id) ? '已加入询价' : '一键询价' "> 一键询价
+               v-text="inquiryList.hasOwnProperty(spaceDtl.id) ? '已加入询价' : '一键询价' ">
             </a>
         </div>
     </div>
@@ -132,6 +132,7 @@
                 spacesubs: [
                     1, 2, 3, 4
                 ],
+                site:{},
                 spaceDtl : [],
                 otherSpace : [],
                 placeDtl : [],
@@ -151,14 +152,15 @@
         },
         mounted () {
             var self = this;
-            self.init1();//调用轮播
-            self.init2();//调用轮播
-            this.getData();//调用数据
-            this.getCase();//调用case
+            // self.init1();//调用轮播
+            // self.init2();//调用轮播
+            self.getData();//调用数据
+            self.getCase();//调用case
+           
         },
         methods:{
             /*顶部轮播*/
-            init1 : function () {
+             init1 : function () {
                 var citySelectionSwiper = new Swiper('.top-banner', {
                     pagination: '.swiper-pagination',
                     //    nextButton: '.citysubject .btnright',
@@ -183,7 +185,7 @@
                         return current + ' / ' + total;
                     },
 //                    loop : true,
-                    slidesPerView: 1.2,
+                    slidesPerView: 1,
                     paginationClickable: true,
                     spaceBetween: 10,
                     autoplay: false
@@ -191,28 +193,7 @@
                 });
             },
           
-            btn : function(){
-                var self = this;
-                    $.post({
-                        //type:'post',
-                        url: window.YUNAPI.collection,
-                        data : GlobleFun.objConcat(self.$store.getters.validationData,{
-                            followable_type:'Space',
-                            followable_id:'ID',    
-                        }
-                            ),
-                        success: function (data){
-                            console.log(1)
-                        //console.log(data);
-                         //console.log(self.casecontents)
-                       self.casecontents= data.follows ;
-
-                        }   
-                    });
-                    
-                
-            },
-            getData(){
+           getData(){
                 var self = this;
                 self.$store.commit('loading',true);
                 $.get({
@@ -221,7 +202,7 @@
                
                     data : self.$store.getters.validationData,
                     success: function (data) {
-                        //  console.log(data);
+                         console.log(data);
                         // self.placeDtl = data.site
                         self.spaceDtl = data.space;
                         self.otherSpace = data.other_spaces;
@@ -229,6 +210,17 @@
                         if(self.spaceDtl.facilities){
                             self.arrSort=self.spaceDtl.facilities.split(',');
                         }
+                         setTimeout(function () {
+                            self.init1();//调用轮播
+                            self.init2();//调用轮播
+                        },300)
+
+                        setTimeout(function () {
+                            $("img.lazy").lazyload({
+                                effect : "fadeIn",
+                                placeholder : '/static/images/placeholder.jpg'
+                            });
+                        },400)
                         self.$store.commit('loading',false);
                         // console.log(data)
                     },
@@ -245,8 +237,10 @@
                     url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
                     data : {},
                     success: function (data) {
-                        //  console.log(data);
-                        self.placeDtl = data.relate_cases; 
+                         //console.log(data);
+                        self.placeDtl = data.relate_cases;
+                        self.site=data.site;
+                        //console.log( self.site) 
                         self.$store.commit('loading',false);
                        
                     },
@@ -258,7 +252,8 @@
             addInquiry : function () {
               // LS.set('inquiry',[id,name])
                 var self = this
-                this.$store.commit('inquiryChange',{id : self.spaceDtl.id, name : {
+                 
+                self.$store.commit('inquiryChange',{id : self.spaceDtl.id, name : {
                     market_price : self.spaceDtl.market_price,
                     address : self.spaceDtl.address,
                     name : self.spaceDtl.name,
@@ -266,21 +261,36 @@
                     Max_seating_capacity : self.spaceDtl.Max_seating_capacity,
                     id : self.spaceDtl.id
                 }, type : 1});
+               
                 router.push('/form/askprice')
              },
+            
             changeCollect(){
                 var self = this
+               
+                // if(follows){
+                //     console.log(1111)
+                        
+                //     }else{
+                //         router.push('/order/Login') 
+                       
+                //     }
                 var data = GlobleFun.objConcat(self.$store.getters.validationData, {
                             user_id: self.personalData.id,
                             followable_type: 'Space',
                             followable_id: self.spaceDtl.id
                         })
+                        console.log(data)
                 var success = function (data) {
                      if(data.status == 1){
                          self.spaceDtl.follow = !self.spaceDtl.follow
-                     }
-                };
+                     }else{
+                        // console.log(1111)
+                        // $.toptip(data.message,2000,status);
+                        router.push('/order/Login')
 
+                    }
+                };
                 GlobleFun.changeCollect(data,success)
             }
         },
@@ -293,5 +303,20 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.selectedtopic-cont1{
+    position: relative;
+    margin-bottom: 20px;
+    max-height: calc(75vw);
+}
+.swiper-container .swiper-slide{
+    width: 100%!important;
+}
+.selectedtopic-cont1 img{
+    width:300px;
+    height: 300px;
 
+}
+/*.swiper-slide-prev{
+     width: 100%!important;
+}*/
 </style>
