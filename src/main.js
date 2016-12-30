@@ -197,7 +197,10 @@ window.store = new Vuex.Store({
             
         },
         placeSearchCondition:{
-            q:{}
+            q:{},
+            arrPlaceType:[],
+            arrArea:[],
+            arrSort:[]
         },
         pageSize : 12
     },
