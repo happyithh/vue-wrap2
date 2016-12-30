@@ -17,7 +17,7 @@
         <div class="personal-box">
             <div class="img-box">
                <router-link to="/form/personal" class="back">
-                    <img src="/static/images/test_logo.png" alt="">
+                   <img :src="personalData.host + personalData.head_portrait.thumb.url" alt=""/>
                 </router-link>
                <div class="person-name" v-text='personalData.name'></div>
             </div>

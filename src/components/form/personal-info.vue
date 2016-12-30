@@ -22,7 +22,7 @@
 
                <!--<input type="file" id='xFile'accept="images/*"/>-->
                 <input type="file" @change="previewImg($event,'#thubm')" id='xFile'>
-                <label  for="xFile"><img id="thubm" src="/static/images/test_logo.png" alt=""/></label>
+                <label  for="xFile"><img id="thubm" :src="personalData.host + personalData.head_portrait.thumb.url" alt=""/></label>
                 <input id="avatarBase64" type="hidden" v-model="avatarBase64">
             </div>
             
@@ -88,6 +88,7 @@
             // }, 
             personalInfo(data){
                 var self=this;
+                self.$store.commit('loading',true);
                 if(!self.personalData.name){
                         $.toptip('请输入您的称呼',2000,'error');
                         return;
@@ -124,6 +125,7 @@
 
                                 }
                             });
+                            self.$store.commit('loading',false);
                         }
 
                         if(data.status == -5){
@@ -134,8 +136,10 @@
 
                         
                        // router.replace(self.$route.path);  // 刷新页面
-                        self.$parent.loading = false;
                     },
+                    error(){
+                        self.$store.commit('loading',false);
+                    }
                      
                 });
             },
