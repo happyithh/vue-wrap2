@@ -195,8 +195,7 @@
                     //console.log(this.personalData.uid)
                     router.push('/form/aboutMe') //已登陆 跳到个人页面
                 }else{
-                    console.log(this.personalData.uid)
-                     router.push('/order/login')
+                    router.push('/order/login')
                     //this.$parent.$data.showForm.login = !this.$parent.$data.showForm.login
                 }
 

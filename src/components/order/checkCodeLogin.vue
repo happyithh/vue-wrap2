@@ -180,6 +180,16 @@
     .input-box select option{
         background: #ffffff;
     }
+    .checkBox input{
+        width:20px;
+        height:20px;
+        border: 1px solid #999999;
+        -webkit-appearance: none;
+    }
+    .checkBox input:checked{
+        background-image: url(/static/images/icon/selected.png);
+        background-size:cover; 
+    }
     .personal-box{
         width: 100%;
         height: auto;
