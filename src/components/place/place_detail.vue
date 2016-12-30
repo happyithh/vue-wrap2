@@ -242,7 +242,6 @@
                     data: self.$store.getters.validationData,
                     success: function (data) {
                         self.placeDtl = data.site
-                        console.log(data.site)
                         self.spaces = data.site_spaces
                         self.relate_topics = data.relate_topics
                         self.relate_articles = data.relate_articles

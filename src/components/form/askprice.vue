@@ -41,7 +41,7 @@
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>邮箱</div>
-                    <input type="text" v-model='consult.email' class="base-detail-name" placeholder="请填写您的邮箱地址"/>
+                    <input type="email" v-model='consult.email' class="base-detail-name" placeholder="请填写您的邮箱地址"/>
                 </div>
                <div class="onekey-rentail-wrap">
                     <a href="javascript:;" class="submit pop-sucess" @click='createInquiry'>提交</a>
@@ -62,7 +62,9 @@
                 area:'',
                 address:'',
                 consult:{
-                    contact:''
+                    contact:'',
+                    email:'',
+                    phone:''
                 },
                 Max_seating_capacity:'',
                 site_name:'',
@@ -89,9 +91,7 @@
                 e[i] = true
             }
             this.inquiryListChange = e;
-
             var self = this;
-
             setTimeout(function () {
                 if(self.personalData.name){
                     self.consult.phone = self.personalData.mobile
@@ -102,17 +102,23 @@
         },
         // },
         methods:{
-           
-            createInquiry : function () {
+           createInquiry : function () {
                 var self = this;
                 var inquirys = LS.get('inquiry')
                 var ids = []
-
                 for( var i in inquirys){
                     ids.push(i)
                 }
                 self.consult.space_ids = ids
-                console.log(ids)
+                // console.log(self.consult.space_ids.length)
+                if(self.consult.space_ids.length==0){
+                    // console.log(self.consult.space_ids.length==0)
+                    $.toptip('请先添加询价空间!',2000,'error');
+                      setTimeout(function () {
+                       router.back() 
+            },1500)
+                    return;     
+                }
                 if(!self.consult.contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
@@ -125,6 +131,7 @@
                     $.toptip('邮箱地址不能为空!',2000,'error');
                     return;
                 }
+                
                 var self = this;
                 $.post({
                     url: window.YUNAPI.inquiryContent,

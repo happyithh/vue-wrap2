@@ -32,11 +32,12 @@
             
             <div class="infor-show1">
                 <a href="javascript:;" class="btn-onekey1"><img src="/static/images/icon/share.png" alt="">分享</a>
-                <a @click="changeCollect"class="btn-onekey1" :class=" article.follow == true ? 'fr collect current' : 'fr collect' ">
+                <!--<a @click="changeCollect"class="btn-onekey1" :class=" article.follow == true ? 'fr collect current' : 'fr collect' ">
                     <img src="/static/images/icon/collect.png" alt="">
                     收藏
-                </a>
-                
+                </a>-->
+                 <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>收藏</a>
+
             </div>
         </div>
 
@@ -47,7 +48,7 @@
 
 <script>
   
-   
+    import 'assets/css.css'
 
     export default {
         data () {
@@ -84,34 +85,24 @@
              back(){
                 router.back();
             },
-            //获取收藏
-            collectcurt : function () {
-                    this.ccurt = !this.ccurt
-            },
-            changeCollect(e,type,id){
-                var self = this;
-                $.post({
-                    url: window.YUNAPI.changeCollect,
-//                    data : {
-//                        user_id : self.personalData.id,
-//                        followable_type : 'Space',
-//                        followable_id : self.spaceDtl.id
-//                    },
-                    data : GlobleFun.objConcat(self.$store.getters.validationData,{
-                        user_id : self.personalData.id,
-                        followable_type : type,
-                        followable_id : id
-                    }),
-                    success: function (data) {
-                        //console.log(1)
-                        if(data.status == 1){
-                            $(e.target).toggleClass('icon-collect-hv')
-                        }
-                    },
-                    error : function () {
-
+            // //获取收藏
+            // collectcurt : function () {
+            //         this.ccurt = !this.ccurt
+            // },
+          changeCollect(){
+                var self = this
+                var data = GlobleFun.objConcat(self.$store.getters.validationData, {
+                    user_id: self.personalData.id,
+                    followable_type: 'Article',
+                    followable_id: self.article.id
+                })
+                var success = function (data) {
+                    if(data.status == 1){
+                        self.article.follow = !self.article.follow
                     }
-                });
+                };
+
+                GlobleFun.changeCollect(data,success)
             }
          
         }
@@ -157,6 +148,18 @@
         margin: 15px 0;
         color: #999999;
     }
+    .infor-show1 .icon{
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        margin-right: 10px;
+        margin-top: -4px;
+        background-repeat: no-repeat;
+        background-position: center;
+}
+.icon-collection{
+    background-image: url("/static/images/icon/collect.png");
+}
     .container-box p{
         margin:15px 0;
         font-size: .9rem;
@@ -178,13 +181,6 @@
         margin-bottom: 15px;
         text-align: center;
 }
-    .hv{
-        /*position: absolute;*/
-        z-index: 10;
-        background: url('/static/images/icon/collect_hv');
-        
-    }
-    
     .infor-show1{
         margin: 0 15px;
         overflow: hidden;
@@ -195,5 +191,8 @@
     height: 20px;
     padding-right:10px; 
 
+}
+.infor-show1 .btn-onekey1.hv .icon-collection{
+    background-image: url("/static/images/icon/collect_hv.png");
 }
 </style>
