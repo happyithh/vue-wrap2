@@ -23,6 +23,7 @@
                <!--<input type="file" id='xFile'accept="images/*"/>-->
                 <input type="file" @change="previewImg($event,'#thubm')" id='xFile'>
                 <label  for="xFile"><img id="thubm" src="/static/images/test_logo.png" alt=""/></label>
+                <input id="avatarBase64" type="hidden" v-model="avatarBase64">
             </div>
             
             <div class="input-box">
@@ -57,8 +58,9 @@
                 order:{
                     name:'',
                     moblie:'',
-                    company_name:''
-                }
+                    company_name:'',
+                },
+                avatarBase64:''
                 
             }
 
@@ -102,21 +104,34 @@
                 $.ajax({
                     type:'put',
                     url: window.YUNAPI.personalInfo,
-                    data:GlobleFun.objConcat(self.$store.getters.validationData,
-                    {name:self.personalData.name,company_name:self.order.company_name,moblie:self.order.moblie,}),
+                    data:GlobleFun.objConcat(self.$store.getters.validationData, {
+                        name:self.personalData.name,
+                        company_name:self.order.company_name,
+                        moblie:self.order.moblie,
+                        head_portrait:self.avatarBase64
+                    }),
                     success : function (data,status,xhr) {
                        //console.log(data)
-                        data.data.access_token = xhr.getResponseHeader('access-token');
-                        data.data.client = xhr.getResponseHeader('client');
-                        self.$store.commit('personalDataChange',data.data);//保存个人信息
-                        $.alert({
-                            title: '保存成功',
-                            text: '',
-                            onOK: function () {
-                               router.replace('../form/aboutMe')
-                               
-                            }
-                        });
+                        if(data.status == 1){
+                            data.data.access_token = xhr.getResponseHeader('access-token');
+                            data.data.client = xhr.getResponseHeader('client');
+                            self.$store.commit('personalDataChange',data.data);//保存个人信息
+                            $.alert({
+                                title: '保存成功',
+                                text: '',
+                                onOK: function () {
+                                    router.replace('../form/aboutMe')
+
+                                }
+                            });
+                        }
+
+                        if(data.status == -5){
+                            $.toptip(data.message,2000,'error');
+                            self.$store.commit('personalDataChange',{});//保存个人信息
+                            router.replace('/');
+                        }
+
                         
                        // router.replace(self.$route.path);  // 刷新页面
                         self.$parent.loading = false;
@@ -125,6 +140,7 @@
                 });
             },
             previewImg(input,obj) {
+                var self = this
                 input = input.target
                 if(input.files && input.files[0]) {
                     var reader = new FileReader(),
@@ -138,6 +154,7 @@
                         }else{
                             $(obj).attr('src', e.target.result);
                         }
+                        self.avatarBase64 =  $(obj).attr('src')
                     }
                     reader.readAsDataURL(input.files[0]);
                     return 1;
