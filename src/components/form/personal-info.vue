@@ -38,7 +38,7 @@
             </div>
             <div class="input-box">
                 <div class="base-info-name">公司名称</div>
-                <input type="text" class="base-detail-name"v-model='order.company_name' placeholder="请输入公司名称"disabled/>
+                <input type="text" class="base-detail-name"v-model='order.company_name' placeholder="请输入公司名称"/>
 
             </div>
         </form>
@@ -142,6 +142,7 @@
             previewImg(input,obj) {
                 var self = this
                 input = input.target
+                console.log(input)
                 if(input.files && input.files[0]) {
                     var reader = new FileReader(),
                             img = new Image();

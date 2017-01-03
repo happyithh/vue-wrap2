@@ -16,11 +16,7 @@
         <div class="case-container">
             <ul class="case-content" id='case-content' >
                 <li v-for="item in casecontents">
-                    <!--<router-link :to="'/article/' + item.id">
-                        {{item.title}}
-                    </router-link>-->
-                    <!--<li class="clearfix" v-for='item in spaceList'>-->
-                    <mt-cell-swipe style="text-align: left" :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('确认删除？') } ]">
+                   <mt-cell-swipe style="text-align: left" :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('确认删除？') } ]">
                         <router-link  :to="item.special_url ? item.special_url : '/Article/' + item.id">
                             {{item.title}}
                         </router-link>
@@ -120,7 +116,7 @@
         margin-bottom:20px; 
     }
     .list-ul {
-        overflow: hidden
+        overflow: hidden;
         }
         
     .list-li {
@@ -181,9 +177,20 @@
          line-height: 1.2!important;
     }
     
-    .mint-cell .mint-cell-swipe .mint-cell-wrapper{
-    background:#999999;
-    padding: 0!important;
-    border: none;
+   /*.case-content .mint-cell-wrapper{
+        background:#999999;
+        padding: 0!important;
+        border: none;
+    }*/
+</style>
+<style>
+    .mint-cell-title {
+        -webkit-box-flex: 0;
+        -ms-flex: 0;
+        flex: 0;
+    }
+    .mint-cell-wrapper{
+        padding: 0;
+        background-image: none;
     }
 </style>

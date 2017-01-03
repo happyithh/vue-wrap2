@@ -31,7 +31,6 @@
             <ul >
                 <li class="clearfix" v-for='item in spaceList'>
                 <mt-cell-swipe :right="[{content: '删除', style: { background: 'red', color: '#fff' },handler: () =>deleteData('确认删除？')}]">
-                <!--<li class="clearfix" v-for='item in spaceList'>-->
                     <router-link :to="item.special_url ? item.special_url : '/space/detail/' + item.id">
                         <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.name}}</div>
                         <div class="local-price-detail clearfix">
@@ -238,11 +237,22 @@
          line-height: 1.2!important;
     }
     
-    .mint-cell .mint-cell-swipe .mint-cell-wrapper{
-    background:#999999;
-    padding: 0!important;
-    border: none;
+    .mint-cell-wrapper{
+        background:#999999;
+        padding: 0!important;
+        border: none;
     }
 
    
+</style>
+<style>
+    .mint-cell-title {
+        -webkit-box-flex: 0;
+        -ms-flex: 0;
+        flex: 0;
+    }
+    .mint-cell-wrapper{
+        padding: 0;
+        background-image: none;
+    }
 </style>
