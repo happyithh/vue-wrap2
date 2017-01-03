@@ -30,15 +30,7 @@
          <div class="inquiry-list">
             <ul >
                 <li class="clearfix" v-for='item in spaceList'>
-        <mt-cell-swipe
-        :right="[
-            {
-            content: '删除',
-            style: { background: 'red', color: '#fff' },
-            handler: () =>deleteData('确认删除？')
-            }
-        ]">
-                <!--<li class="clearfix" v-for='item in spaceList'>-->
+                <mt-cell-swipe :right="[{content: '删除', style: { background: 'red', color: '#fff' },handler: () =>deleteData('确认删除？')}]">
                     <router-link :to="item.special_url ? item.special_url : '/space/detail/' + item.id">
                         <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.name}}</div>
                         <div class="local-price-detail clearfix">
@@ -59,7 +51,7 @@
                 <li class="clearfix" v-for='item in placeList'>
                 <mt-cell-swipe :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deletePlaceData('确认删除？') } ]">
                 <!--<li class="clearfix" v-for='item in spaceList'>-->
-                    <router-link :to="item.special_url ? item.special_url : '/space/detail/' + item.id">
+                    <router-link :to="item.special_url ? item.special_url : '/place/detail/' + item.id">
                         <div class="local-price"><strong>{{item.lower_price}}{{item.units}}</strong> {{item.title}}</div>
                         <div class="local-price-detail clearfix">
                             <div class='max-people fl ml10'>最大容纳 {{item.max_people}}人 面积{{item.max_size}}㎡ 地址 {{item.address}}</div>
@@ -164,31 +156,25 @@
             },
             deleteData:function(){
                 var self = this;
-                console.log( self)
-                    $.post({
+               $.post({
                         // type:'put',
                         url: window.YUNAPI.collection,
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Space',
-                            followable_id: self.spaceList.id, 
-                        }
+                            followable_id: self.spaceList[0].id, 
+                            //  console.log(data)
+                        },
+                       
                             ),
                         success: function (data) {
-
-                            // $('li').remove();
-                            // console.log(data)
-                            // console.log(self.$el.children[1].children[0].children[0].attributes.uid)
-                            // console.log(self)
-                           // console.log(self.spaceList.id)
-                            // self.spaceList=data.follows
-                            //console.log(self.spaceList)
+                             self.collectList()
+                            console.log(self.spaceList)
                         }   
                     });
             },
             deletePlaceData:function(){
                  var self = this;
-                 console.log($(this))
-                    $.post({
+                 $.post({
                         // type:'put',
                         url: window.YUNAPI.collection,
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
@@ -251,11 +237,22 @@
          line-height: 1.2!important;
     }
     
-    mint-cell mint-cell-swipe .mint-cell-wrapper{
-    background:#999999;
-    padding: 0!important;
-    border: none;
+    .mint-cell-wrapper{
+        background:#999999;
+        padding: 0!important;
+        border: none;
     }
 
    
+</style>
+<style>
+    .mint-cell-title {
+        -webkit-box-flex: 0;
+        -ms-flex: 0;
+        flex: 0;
+    }
+    .mint-cell-wrapper{
+        padding: 0;
+        background-image: none;
+    }
 </style>

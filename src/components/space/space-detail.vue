@@ -1,6 +1,5 @@
 <template>
     <div class="container pbottom-37">
-
         <!--头部-->
         <header class="clearfix">
             <div class="left fl">
@@ -12,13 +11,12 @@
             <div class="fl center">
                 <h1 class="display-center">空间详情</h1>
             </div>
-            
         </header>
         <!--头部end-->
         <!--轮播图start-->
             <div class="selectedtopic-cont top-banner">
                 <div class="swiper-wrapper swiper-container">
-                    <div class="swiper-slide" v-for="item in site.site_pictures">
+                    <div class="swiper-slide" v-for="item in spaceDtl.img_paths">
                        <img :src="item.url_790_526" alt="首页banner图片01"/>
                     </div>
                 </div>
@@ -27,8 +25,7 @@
                  <div class="swiper-pagination"></div>
              </div>
         <!--轮播图end-->
-       
-        <!--信息展示开始-->
+       <!--信息展示开始-->
         <div class="infor-show">
             <h2>{{spaceDtl.site_name}}</h2>
             <div class="base-info1">基本信息</div>
@@ -41,9 +38,7 @@
         </div>
          <div class="infor-show" >
            <div class="base-info2"  >空间配套</div>
-           
                 <div class="pic-icon" v-for="item in arrSort">
-                <!--<img src="/static/images/icon/wc.png" alt=""/>-->
                 <img :src="'/static/images/assort/'+assortList[item]+'.png'" alt=""/>
                 <div class="pic-icon-exp">{{item}}</div>
             </div>
@@ -59,7 +54,7 @@
             <div class="base-info2">场地相关案例</div>
             <div class="selectedtopic-cont1 about-cases">
                   <div class="swiper-wrapper swiper-container">
-                        <div class="swiper-slide"  v-for="item in placeDtl">
+                        <div class="swiper-slide"  v-for="item in relate_topics">
                             <router-link :to="item.img_paths.url ? item.img_paths.url : '/article/' + item.id">
                             <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_420_300'] : ''">
 
@@ -73,9 +68,7 @@
          <div class="infor-show1">
             <a href="javascript:;" class="fl btn-onekey1"><i class="icon icon-share"></i>分享</a>
             <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
-            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': placeDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
-
-
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': spaceDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
         </div>
        <!--电话-->
         <div class="tel-wrap">
@@ -84,8 +77,7 @@
                 <p class="fr">场地咨询热线：400-056-0599</p>
             </a>
         </div>
-
-        
+        <!--一键询价固定悬浮-->
         <div class="infor-show infor-show-shadow">
            <div class="infor-price fl">
                <span>{{spaceDtl.market_price_real}}{{spaceDtl.units}}</span>
@@ -115,7 +107,7 @@
         data () {
             return {
                 
-                 assortList: {
+                assortList: {
                     '卫生间':'wc',
                     '化妆间':'dressing_room',
                     '休息室':'rest',
@@ -133,6 +125,7 @@
                     1, 2, 3, 4
                 ],
                 site:{},
+                relate_topics:'',
                 spaceDtl : [],
                 otherSpace : [],
                 placeDtl : [],
@@ -152,11 +145,8 @@
         },
         mounted () {
             var self = this;
-            // self.init1();//调用轮播
-            // self.init2();//调用轮播
             self.getData();//调用数据
-            self.getCase();//调用case
-           
+            
         },
         methods:{
             /*顶部轮播*/
@@ -193,28 +183,25 @@
                 });
             },
           
-           getData(){
+            getData(){
                 var self = this;
                 self.$store.commit('loading',true);
                 $.get({
                     url: window.YUNAPI.SpaceDtl +'/'+ this.$route.params.id,
                     //  url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
-               
                     data : self.$store.getters.validationData,
                     success: function (data) {
-                         console.log(data);
-                        // self.placeDtl = data.site
                         self.spaceDtl = data.space;
                         self.otherSpace = data.other_spaces;
+                        self.relate_topics = data.relate_topics
                         //场地配套
                         if(self.spaceDtl.facilities){
                             self.arrSort=self.spaceDtl.facilities.split(',');
                         }
-                         setTimeout(function () {
+                        setTimeout(function () {
                             self.init1();//调用轮播
                             self.init2();//调用轮播
                         },300)
-
                         setTimeout(function () {
                             $("img.lazy").lazyload({
                                 effect : "fadeIn",
@@ -222,37 +209,16 @@
                             });
                         },400)
                         self.$store.commit('loading',false);
-                        // console.log(data)
                     },
                     error : function () {
 
                     }
                 });
             },
-            getCase(){
-                var self = this;
-                self.$store.commit('loading',true);
-                $.get({
-                    // url: window.YUNAPI.SpaceDtl +'/'+ this.$route.params.id,
-                    url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
-                    data : {},
-                    success: function (data) {
-                         //console.log(data);
-                        self.placeDtl = data.relate_cases;
-                        self.site=data.site;
-                        //console.log( self.site) 
-                        self.$store.commit('loading',false);
-                       
-                    },
-                    error : function () {
-
-                    }
-                });
-            },
+            
             addInquiry : function () {
               // LS.set('inquiry',[id,name])
                 var self = this
-                 
                 self.$store.commit('inquiryChange',{id : self.spaceDtl.id, name : {
                     market_price : self.spaceDtl.market_price,
                     address : self.spaceDtl.address,
@@ -261,26 +227,22 @@
                     Max_seating_capacity : self.spaceDtl.Max_seating_capacity,
                     id : self.spaceDtl.id
                 }, type : 1});
-               
+            //    if(self.personal.id==''){
+            //         $.toptip('请先登录!',2000,'error');
+            //             setTimeout(function(){
+            //                 router.push('/form/askprice')
+            //             },1000)
+            //     }
                 router.push('/form/askprice')
              },
-            
             changeCollect(){
                 var self = this
-               
-                // if(follows){
-                //     console.log(1111)
-                        
-                //     }else{
-                //         router.push('/order/Login') 
-                       
-                //     }
                 var data = GlobleFun.objConcat(self.$store.getters.validationData, {
                             user_id: self.personalData.id,
                             followable_type: 'Space',
                             followable_id: self.spaceDtl.id
                         })
-                        console.log(data)
+                        // console.log(data)
                 var success = function (data) {
                      if(data.status == 1){
                          self.spaceDtl.follow = !self.spaceDtl.follow
@@ -288,7 +250,6 @@
                         // console.log(1111)
                         // $.toptip(data.message,2000,status);
                         router.push('/order/Login')
-
                     }
                 };
                 GlobleFun.changeCollect(data,success)
@@ -316,7 +277,4 @@
     height: 300px;
 
 }
-/*.swiper-slide-prev{
-     width: 100%!important;
-}*/
 </style>

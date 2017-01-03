@@ -16,9 +16,11 @@
         <div class="case-container">
             <ul class="case-content" id='case-content' >
                 <li v-for="item in casecontents">
-                    <router-link :to="'/article/' + item.id">
-                        {{item.title}}
-                    </router-link>
+                   <mt-cell-swipe style="text-align: left" :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('确认删除？') } ]">
+                        <router-link  :to="item.special_url ? item.special_url : '/Article/' + item.id">
+                            {{item.title}}
+                        </router-link>
+                    </mt-cell-swipe>
                 </li>
             </ul>
         </div>
@@ -28,6 +30,9 @@
 </template>
 <script>
     import 'assets/css.css'
+    import Vue from 'vue'
+    import { CellSwipe } from 'mint-ui';
+    Vue.component(CellSwipe.name);
     export default {
       
         data () {
@@ -36,6 +41,18 @@
                     {
                          contentexp:'',
                     }
+                ],
+                rightButtons : [
+                    {
+                        content: 'Mark as Unread',
+                        style: { background: 'lightgray', color: '#fff' }
+                    },
+                    {
+                        content: 'Delete',
+                        style: { background: 'red', color: '#fff' },
+                        handler: () => this.deleteData('delete')
+                    }
+                   
                 ]
                    
                 }
@@ -54,7 +71,7 @@
                         url: window.YUNAPI.collection+'.json',
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Article',
-                            page:1,
+                            followable_id: self.casecontents.id,
                             i_types:40
                         }
                             ),
@@ -65,8 +82,24 @@
 
                         }   
                     });
-                    
-                
+             },
+             deleteData:function(){
+                var self = this;
+               $.post({
+                        // type:'put',
+                        url: window.YUNAPI.collection,
+                        data : GlobleFun.objConcat(this.$store.getters.validationData,{
+                            followable_type:'Article',
+                            followable_id: self.casecontents[0].id, 
+                            //  console.log(data)
+                        },
+                       
+                            ),
+                        success: function (data) {
+                             self.collectList()
+                            console.log(self.casecontents)
+                        }   
+                    });
             },
         }
     }
@@ -83,7 +116,7 @@
         margin-bottom:20px; 
     }
     .list-ul {
-        overflow: hidden
+        overflow: hidden;
         }
         
     .list-li {
@@ -128,8 +161,36 @@
     background:#f4f4f4;
     }
     .case-content li{
-        padding:20px 15px;
+        width: 100%;
         font-size: .9rem;
+        text-align: left;
         border-bottom: 1px solid #ffffff;
+    }
+    .mint-cell{
+        background: #f4f4f4;
+        padding:15px;
+        width:100%;
+        border: none;
+       
+    }
+    .mint-cell a{
+         line-height: 1.2!important;
+    }
+    
+   /*.case-content .mint-cell-wrapper{
+        background:#999999;
+        padding: 0!important;
+        border: none;
+    }*/
+</style>
+<style>
+    .mint-cell-title {
+        -webkit-box-flex: 0;
+        -ms-flex: 0;
+        flex: 0;
+    }
+    .mint-cell-wrapper{
+        padding: 0;
+        background-image: none;
     }
 </style>
