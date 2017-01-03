@@ -121,7 +121,7 @@
             <!--</div>-->
         </div>
         <div class="infor-show1">
-            <a href="" class="fl btn-onekey1"><i class="icon icon-share"></i>分享</a>
+            <a href="javascript:;" class="fl btn-onekey1"><i class="icon icon-share"></i>分享</a>
             <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
             <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': placeDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
 

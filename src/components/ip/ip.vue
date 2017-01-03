@@ -145,7 +145,9 @@
                         }
 
                         for(var i in self.ipProject){
-                            self.ipProject[i].keywords = self.ipProject[i].keyword.split(',')
+                            if(self.ipProject[i].keyword){
+                                self.ipProject[i].keywords = self.ipProject[i].keyword.split(',')
+                            }
                         }
                         setTimeout(function () {
                             self.init();//调用轮播
