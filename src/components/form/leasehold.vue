@@ -34,8 +34,6 @@
                         <input type="text" class="base-detail-name send-msg1 fl red " v-model='consult.auth_code' placeholder="请输入6位验证码"/>
                        <button type="button" class="send-msg fr" @click="sendPhoneCode">发送验证码</button>
                     </div>
-                    
-                   
                 </div>
                 <div class="input-box">
                     <div class="base-info-name"><span>*</span>活动城市</div>

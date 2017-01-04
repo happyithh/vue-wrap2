@@ -32,12 +32,8 @@
             
             <div class="infor-show1">
                 <a href="javascript:;" class="btn-onekey1"><img src="/static/images/icon/share.png" alt="">分享</a>
-                <!--<a @click="changeCollect"class="btn-onekey1" :class=" article.follow == true ? 'fr collect current' : 'fr collect' ">
-                    <img src="/static/images/icon/collect.png" alt="">
-                    收藏
-                </a>-->
-                 <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>收藏</a>
-
+                <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>收藏</a>
+                
             </div>
         </div>
 
@@ -57,7 +53,7 @@
                 article : {
                     img_paths : []
                 },
-                 ccurt: false,
+                //  follow: false,
             }
         },
         computed : {
@@ -66,31 +62,31 @@
             }
         },
         mounted () {
-           var self = this;
-            $.ajax({
-                url: window.YUNAPI.article + "/" + this.$route.params.id, 
-                context: document.body, 
-                success: function (data) {
-//                    self.cities = data.cities;
-                    self.article = data.information;
-                    // console.log(self.article.img_paths[0])
-                    //console.log(data);
-                    self.$parent.loading = false;
-                }
-            });
+            var self = this;
+            self.getData();
         },
 
        
         methods:{
-             back(){
+            back(){
                 router.back();
             },
-            // //获取收藏
-            // collectcurt : function () {
-            //         this.ccurt = !this.ccurt
-            // },
-          changeCollect(){
+            getData(){
+                 var self = this;
+                $.ajax({
+                    url: window.YUNAPI.article + "/" + this.$route.params.id, 
+                        data: self.$store.getters.validationData,
+                    success: function (data) {
+                        self.article = data.information;
+                        self.article.follow = (self.article.follow == true)
+                        // console.log( data.information )
+                        self.$parent.loading = false;
+                    }
+                });
+            },
+            changeCollect(){
                 var self = this
+                console.log(self)
                 var data = GlobleFun.objConcat(self.$store.getters.validationData, {
                     user_id: self.personalData.id,
                     followable_type: 'Article',
@@ -99,7 +95,7 @@
                 var success = function (data) {
                     if(data.status == 1){
                         self.article.follow = !self.article.follow
-                    }
+                     }
                 };
 
                 GlobleFun.changeCollect(data,success)

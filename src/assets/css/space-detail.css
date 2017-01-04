@@ -142,6 +142,10 @@
     
    
 }
+.base-info1{
+    font-size: .8rem;
+    padding: 3px 0;
+}
 .event-tel{
     display: block;
     text-align: center;

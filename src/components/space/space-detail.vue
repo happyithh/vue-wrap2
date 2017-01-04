@@ -238,10 +238,10 @@
             changeCollect(){
                 var self = this
                 var data = GlobleFun.objConcat(self.$store.getters.validationData, {
-                            user_id: self.personalData.id,
-                            followable_type: 'Space',
-                            followable_id: self.spaceDtl.id
-                        })
+                    user_id: self.personalData.id,
+                    followable_type: 'Space',
+                    followable_id: self.spaceDtl.id
+                })
                         // console.log(data)
                 var success = function (data) {
                      if(data.status == 1){
@@ -264,17 +264,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.selectedtopic-cont1{
-    position: relative;
-    margin-bottom: 20px;
-    max-height: calc(75vw);
-}
-.swiper-container .swiper-slide{
-    width: 100%!important;
-}
-.selectedtopic-cont1 img{
-    width:300px;
-    height: 300px;
 
-}
 </style>

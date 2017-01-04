@@ -67,7 +67,7 @@
                             title: '提交成功',
                             text: '感谢您的宝贵意见，我们会更加努力优化!<br>客服热线 : 400-056-0599',
                             onOK: function () {
-                                router.replace('/form/personal-center')
+                                router.replace('/form/aboutMe')
                                 //window.location.href='../form/personal-center';
                             }
                         });

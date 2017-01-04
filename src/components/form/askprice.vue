@@ -18,9 +18,9 @@
                     <div class="local-price">
                         <strong>{{item.market_price}}</strong> {{item.name}}</div>
                     <div class="local-price-detail clearfix">
-                        <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人</div>
-                         <div class='max-square fl ml10'>面积 {{item.area}}㎡</div>
-                          <div class='add fl ml10'>地址 {{item.address}}</div>
+                        <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人面积 {{item.area}}㎡ 地址 {{item.address}}</div>
+                         <!--<div class='max-square fl ml10'>{{item.city_name}} {{item.district}}|{{item.address}}</div>
+                          <div class='add fl ml10'></div>-->
                     </div>
                 </li>
             </ul>
@@ -39,9 +39,12 @@
                     <input type="text" v-model='consult.phone' class="base-detail-name" placeholder="请输入您的11位手机号"/>
 
                 </div>
-                <div class="input-box">
-                    <div class="base-info-name"><span>*</span>邮箱</div>
-                    <input type="email" v-model='consult.email' class="base-detail-name" placeholder="请填写您的邮箱地址"/>
+               <div class="input-box">
+                    <div class="base-info-name"><span>*</span>短信验证码</div>
+                    <div class="check-box">
+                        <input type="text" class="base-detail-name send-msg1 fl red " v-model='consult.auth_code' placeholder="请输入6位验证码"/>
+                       <button type="button" class="send-msg fr" @click="sendPhoneCode">发送验证码</button>
+                    </div>
                 </div>
                <div class="onekey-rentail-wrap">
                     <a href="javascript:;" class="submit pop-sucess" @click='createInquiry'>提交</a>
@@ -58,13 +61,13 @@
             return {
                 recommendSite : [],//定义变量
                 inquiryListChange : {},
-                inquiryList:[],
+                // inquiryList:[],
                 area:'',
                 address:'',
                 consult:{
                     contact:'',
-                    email:'',
-                    phone:''
+                    phone:'',
+                    auth_code:''
                 },
                 Max_seating_capacity:'',
                 site_name:'',
@@ -102,6 +105,13 @@
         },
         // },
         methods:{
+             sendPhoneCode(e){
+                var self = this;
+                var success = function (data) {
+                   self.consult.code_token = data.data;
+                };
+                GlobleFun.sendPhoneCode(this.consult.phone,success,e.target)
+            },
            createInquiry : function () {
                 var self = this;
                 var inquirys = LS.get('inquiry')
@@ -110,12 +120,10 @@
                     ids.push(i)
                 }
                 self.consult.space_ids = ids
-                // console.log(self.consult.space_ids.length)
                 if(self.consult.space_ids.length==0){
-                    // console.log(self.consult.space_ids.length==0)
                     $.toptip('请先添加询价空间!',2000,'error');
                       setTimeout(function () {
-                       router.back() 
+                       router.back('/place') 
             },1500)
                     return;     
                 }
@@ -127,11 +135,6 @@
                     $.toptip('手机号不能为空!',2000,'error');
                     return;
                 }
-                 if(!self.consult.email){
-                    $.toptip('邮箱地址不能为空!',2000,'error');
-                    return;
-                }
-                
                 var self = this;
                 $.post({
                     url: window.YUNAPI.inquiryContent,
@@ -146,7 +149,7 @@
                                 title: '提交成功',
                                 text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                 onOK: function () {
-                                    router.back()
+                                    router.back('/place')
                                 }
                             });
                         }else{

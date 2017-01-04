@@ -453,6 +453,7 @@ window.GlobleFun = {
             success: function (data) {
                 GlobleFun.httpMessage(data)
                 success(data)
+                // console.log(data)
             },
             error : function () {
                 GlobleFun.httpError()

@@ -13,6 +13,18 @@
             </div>
             
         </header>
+       
+        <!--<div class="case-container">
+            <ul class="case-content" id='case-content' >
+                <li>
+                   <mt-cell-swipe style="text-align: left" :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('确认删除？') } ]">
+                        <router-link  to=''>
+                            aaaaaaaaaaa
+                        </router-link>
+                    </mt-cell-swipe>
+                </li>
+            </ul>
+        </div>-->
         <div class="case-container">
             <ul class="case-content" id='case-content' >
                 <li v-for="item in casecontents">
@@ -24,7 +36,6 @@
                 </li>
             </ul>
         </div>
-        
     </div>
     
 </template>
@@ -37,11 +48,7 @@
       
         data () {
             return {
-                casecontents:[
-                    {
-                         contentexp:'',
-                    }
-                ],
+                casecontents:[{}],
                 rightButtons : [
                     {
                         content: 'Mark as Unread',
@@ -54,9 +61,8 @@
                     }
                    
                 ]
-                   
-                }
-            },     
+            }
+        },     
         mounted(){
             var self = this;
             self.collectList()//调用数据
@@ -67,39 +73,35 @@
             collectList : function(){
                 var self = this;
                     $.get({
-                        // type:'put',
                         url: window.YUNAPI.collection+'.json',
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Article',
-                            followable_id: self.casecontents.id,
-                            i_types:40
-                        }
-                            ),
-                        success: function (data,){
-                        //console.log(data);
-                         //console.log(self.casecontents)
-                       self.casecontents= data.follows ;
-
+                            i_types:40,
+                            page:1
+                        }),
+                        success: function (data){
+                            console.log(data);
+                            self.casecontents= data.follows ;
                         }   
                     });
              },
-             deleteData:function(){
+             deleteData:function(){  
                 var self = this;
                $.post({
-                        // type:'put',
-                        url: window.YUNAPI.collection,
-                        data : GlobleFun.objConcat(this.$store.getters.validationData,{
-                            followable_type:'Article',
-                            followable_id: self.casecontents[0].id, 
-                            //  console.log(data)
-                        },
-                       
-                            ),
-                        success: function (data) {
-                             self.collectList()
-                            console.log(self.casecontents)
-                        }   
-                    });
+                    // type:'put',
+                    url: window.YUNAPI.collection,
+                    data : GlobleFun.objConcat(this.$store.getters.validationData,{
+                        followable_type:'Article',
+                        followable_id: self.casecontents[0].id, 
+                        //  console.log(data)
+                    },
+                    
+                        ),
+                    success: function (data) {
+                            self.collectList()
+                        console.log(self.casecontents)
+                    }   
+                });
             },
         }
     }
@@ -184,6 +186,9 @@
     }*/
 </style>
 <style>
+    .mint-cell .mint-cell-swipe{
+        width:120%;
+    }
     .mint-cell-title {
         -webkit-box-flex: 0;
         -ms-flex: 0;
@@ -192,5 +197,10 @@
     .mint-cell-wrapper{
         padding: 0;
         background-image: none;
+    }
+    .mint-cell-right {
+    position: absolute;
+    height: 100%;
+    right: -2px;
     }
 </style>

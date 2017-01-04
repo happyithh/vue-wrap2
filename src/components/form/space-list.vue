@@ -122,7 +122,6 @@
             collectList : function(){
                 var self = this;
                     $.get({
-                        // type:'put',
                         url: window.YUNAPI.collection+'.json',
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Space',
@@ -130,6 +129,7 @@
                         }
                             ),
                         success: function (data) {
+                            // console.log(data)
                             self.spaceList=data.follows
                         }   
                     });
@@ -255,4 +255,10 @@
         padding: 0;
         background-image: none;
     }
+.mint-cell-swipe-button {
+    height: 100%;
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 80px;
+}
 </style>

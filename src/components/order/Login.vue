@@ -128,8 +128,8 @@
                         url: window.YUNAPI.login,
                         data : self.consult,
                         success: function (data,status,xhr) {
-                            console.log(self.consult)
-                            console.log(data)
+                            // console.log(self.consult)
+                            // console.log(data)
                             var status = data.status == 1 ? 'success' : 'error';
 
                             if(data.status == 1){
@@ -147,8 +147,8 @@
                                 data.data.client = xhr.getResponseHeader('client');
                                 self.$store.commit('personalDataChange',data.data);//保存个人信息
                                 router.replace(self.$route.path);  // 刷新页面
-                                console.log(xhr.getResponseHeader('access-token'),111)
-                                console.log(xhr.getResponseHeader('client'),222)
+                                // console.log(xhr.getResponseHeader('access-token'),111)
+                                // console.log(xhr.getResponseHeader('client'),222)
                               
                                 // self.$store.commit('personalDataChange',data.data)
                             }else{

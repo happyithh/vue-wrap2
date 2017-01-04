@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="base-info">基本信息</div>
+            <div class="base-info1">基本信息</div>
             <div class="base-info-detail"> 最大容量：<span>{{placeDtl.max_people}}人</span></div>
             <div class="base-info-detail"> 空间面积：<span>{{placeDtl.max_size}}㎡</span></div>
             <div class="base-info-detail"> 场地类型：<span>{{placeDtl.site_type}}</span></div>
@@ -89,7 +89,7 @@
                                 <span>最大容纳 {{item.Max_seating_capacity}}人</span>
                                 <span>面积{{item.area}}㎡</span>
                             </p>
-                            <div class="price">￥1350000 元／天</div>
+                            <div class="price">{{item.market_price}}</div>
                         </div>
                     </router-link>
                 </li>
