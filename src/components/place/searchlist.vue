@@ -256,12 +256,14 @@
         mounted () {
             var self = this;
 
+            //默认城市
+            self.urlData.city_id = self.$store.state.city_id
+            //self.placePositionScreen();
+
             self.holdData();
             $(document).scroll(function(){
                 $('.needfixed').addClass('fixed');
             })
-
-
         },
         methods:{
             //多选
