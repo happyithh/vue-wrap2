@@ -59,7 +59,7 @@
                     </a>
                     <div class="cont">
                         <div class="title clearfix">
-                            <div class="price">预算 <span>¥</span> {{item.budget_amount}}</div>
+                            <div class="price">预算 {{item.budget_amount ? item.budget_amount : '暂无'}}</div>
                             {{item.title}}
                         </div>
                         <div class="tags clearfix">

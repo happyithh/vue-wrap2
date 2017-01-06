@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
     <script src="/static/js/jquery-3.1.1.min.js"></script>
     <script src="//cdn.bootcss.com/jquery-weui/0.8.0/js/jquery-weui.min.js"></script>
+    <script src="/static/js/share/SFE.mShare.js"></script>
 
     <script src="/static/lazyload/jquery.lazyload.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=aaNCRRcGGai6klHMOGZ8yBbP"></script>
@@ -33,4 +34,34 @@
 <div id="app"></div>
 <!-- built files will be auto injected -->
 </body>
+<script>
+    function showShare(url,title,des) {
+        share.init({
+            title:"分享到",   //可选，默认为"分享到"
+            maskLayer:true,    //可选，遮罩层，默认为true
+            needCancel:true,  //可选，取消按钮，默认为true
+            shareTo:{
+                wb:{
+                    type:"新浪微博",
+                    description:des || "【云SPACE－商业空间短租平台】提供全国活动场地_发布会场地_场地租赁_活动资讯_找场地上云SPACE",
+                    url:url || location.href,
+                    imgUrl:"http://image3.suning.cn/uimg/cms/img/143821992646004888.jpg"
+                },
+                kj:{
+                    type:"QQ空间",
+                    title:title,
+                    description:des || "【云SPACE－商业空间短租平台】提供全国活动场地_发布会场地_场地租赁_活动资讯_找场地上云SPACE",
+                    url:url || location.href,
+                    imgUrl:"http://image3.suning.cn/uimg/cms/img/143821992646004888.jpg"
+                },
+                wm:{
+                    type:"生成二维码",
+                    url:location.href
+                }
+            }
+        });
+        share.open();
+    }
+
+</script>
 </html>

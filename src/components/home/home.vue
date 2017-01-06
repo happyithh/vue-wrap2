@@ -77,13 +77,13 @@
             </div>
             <ul>
                 <li v-for="item in recommendSite">
-                    <router-link :to="'/place/detail/'+item.id">
+                    <router-link :to="'/place/detail/'+item.id" class="img">
 
                             <!--<img src="/static/images/test.png">-->
                             <img class="lazy" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''" >
-                            <!--<div class="price">-->
-                                <!--<sup>￥</sup>{{}} 元/天<span>起</span>-->
-                            <!--</div>-->
+                            <div class="price">
+                                {{item.lower_price}}
+                            </div>
 
                     </router-link>
                     <div class="text">
@@ -208,14 +208,10 @@
             /*轮播*/
             init : function () {
                 var citySelectionSwiper = new Swiper('.selectedtopic-cont', {
-//                    pagination: '.swiper-pagination',
-//                    nextButton: '.citysubject .btnright',
-//                    prevButton: '.citysubject .btnleft',
-//                    loop : true,
                     slidesPerView: 1.2,
                     paginationClickable: true,
                     spaceBetween: 10,
-                    autoplay: false
+                    autoplay: false,
 //                    freeMode: true
                 });
                 $("img.lazy").lazyload({

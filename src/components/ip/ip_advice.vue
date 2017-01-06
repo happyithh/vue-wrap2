@@ -121,6 +121,9 @@
             },
             submitConsult : function () {
                 var self = this;
+
+                self.consult.project_id = this.$route.query.id  //ip 项目的id
+
                 if(!self.consult.the_contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
@@ -139,6 +142,10 @@
                 }
                 if(!self.consult.consulting_content){
                     $.toptip('其他要求不能为空!',2000,'error');
+                    return;
+                }
+                if(!self.consult.city_id){
+                    $.toptip('请选择城市!',2000,'error');
                     return;
                 }
                 $.post({
