@@ -27,7 +27,7 @@
         <!--轮播图end-->
        <!--信息展示开始-->
         <div class="infor-show">
-            <h2>{{spaceDtl.site_name}}</h2>
+            <h2>{{spaceDtl.name}}</h2>
             <div class="base-info1">基本信息</div>
             <div class="base-info-detail"> 最大容量：<span>{{spaceDtl.Max_seating_capacity}}人</span></div>
             <div class="base-info-detail"> 空间面积<span>：{{
@@ -65,10 +65,10 @@
             </div>
         </div>  
         <!--收藏与分享-->
-         <div class="infor-show1">
-            <a href="javascript:;" class="fl btn-onekey1" @click="showShare('',placeDtl.title)"><i class="icon icon-share"></i>分享</a>
+        <div class="infor-show1">
+            <a href="javascript:;" class="fl btn-onekey1" @click="showShare('',spaceDtl.name)"><i class="icon icon-share"></i>分享</a>
             <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
-            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': spaceDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
+           <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': spaceDtl.follow }"><i class="icon icon-collection"></i>{{spaceDtl.follow ? "已收藏" : " 收藏"}}</a>
         </div>
        <!--电话-->
         <div class="tel-wrap">
