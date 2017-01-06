@@ -30,7 +30,7 @@
          <div class="inquiry-list">
             <ul >
                 <li class="clearfix" v-for='item in spaceList'>
-                <mt-cell-swipe :right="[{content: '删除', style: { background: 'red', color: '#fff' },handler: () =>deleteData('确认删除？')}]">
+                <mt-cell-swipe :right="[{content: '删除', style: { background: 'red', color: '#fff' },handler: () =>deleteData(item.id)}]">
                     <router-link :to="item.special_url ? item.special_url : '/space/detail/' + item.id">
                         <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.site_name}}--{{item.name}}</div>
                         <div class="local-price-detail clearfix">
@@ -49,7 +49,7 @@
          <div class="inquiry-list">
             <ul >
                 <li class="clearfix" v-for='item in placeList'>
-                <mt-cell-swipe :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deletePlaceData('确认删除？') } ]">
+                <mt-cell-swipe :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deletePlaceData(item.id) } ]">
                 <!--<li class="clearfix" v-for='item in spaceList'>-->
                     <router-link :to="item.special_url ? item.special_url : '/place/detail/' + item.id">
                         <div class="local-price"><strong>{{item.lower_price}}{{item.units}}</strong> {{item.title}}</div>
@@ -157,14 +157,14 @@
                     
                 
             },
-            deleteData:function(){
+            deleteData:function(id){
                 var self = this;
                $.post({
                         // type:'put',
                         url: window.YUNAPI.collection,
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Space',
-                            followable_id: self.spaceList[0].id, 
+                            followable_id: id, 
                             //  console.log(data)
                         },
                        
@@ -175,14 +175,13 @@
                         }   
                     });
             },
-            deletePlaceData:function(){
+            deletePlaceData:function(id){
                  var self = this;
                  $.post({
-                        // type:'put',
                         url: window.YUNAPI.collection,
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Site',
-                            followable_id:self.placeList[0].id,  
+                            followable_id: id,  
                         }
                             ),
                         success: function (data) {

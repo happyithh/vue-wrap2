@@ -28,7 +28,7 @@
         <div class="case-container">
             <ul class="case-content" id='case-content' >
                 <li v-for="item in casecontents">
-                   <mt-cell-swipe style="text-align: left" :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('确认删除？') } ]">
+                   <mt-cell-swipe style="text-align: left" :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData(item.id) } ]">
                         <router-link  :to="item.special_url ? item.special_url : '/Article/' + item.id">
                             {{item.title}}
                         </router-link>
@@ -103,7 +103,7 @@
                         success: function (data){
                            self.casecontents= data.follows ;
                             console.log( self.casecontents);
-                             if(self.casecontents.length==0){
+                             if(data.follows.length==0){
                                 $('.case-container1').css('display','block')
                             }else{
                                 $('.case-container1').css('display','none')
@@ -113,13 +113,15 @@
                    
 
              },
-             deleteData:function(){  
+             deleteData:function(id){  
                 var self = this;
+                console.log(id)
+                return
                $.post({
                     url: window.YUNAPI.collection,
                     data : GlobleFun.objConcat(this.$store.getters.validationData,{
                         followable_type:'Article',
-                        followable_id: self.casecontents[0].id, 
+                        followable_id: id, 
                         //  console.log(data)
                     },
                     

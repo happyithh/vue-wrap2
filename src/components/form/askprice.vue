@@ -114,6 +114,9 @@
                     self.consult.phone = self.personalData.mobile
                     self.consult.contact = self.personalData.name
                     self.consult.email = self.personalData.email
+                }else{
+                    $.toptip('请先登录!',2000,'error');
+                    router.replace('/order/Login'); 
                 }
             },300)
         },
@@ -128,19 +131,6 @@
             },
            createInquiry : function () {
                 var self = this;
-            //     var inquirys = LS.get('inquiry')
-            //     var ids = []
-            //     for( var i in inquirys){
-            //         ids.push(i)
-            //     }
-            //     self.consult.space_ids = ids
-            //     if(self.consult.space_ids.length==0){
-            //         $.toptip('请先添加询价空间!',2000,'error');
-            //           setTimeout(function () {
-            //            router.back('/place') 
-            // },1500)
-            //         return;     
-            //     }
                 if(!self.consult.contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
@@ -158,13 +148,14 @@
                         //console.log(self.$store.getters.validationData)
                         var status = data.status == 1 ? 'success' : 'error';
                         if(data.status == 1){
-                           
                             $.alert({
                                 title: '提交成功',
                                 text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                 onOK: function () {
                                     LS.remove('inquiry')
-                                    self.$store.commit('personalDataChange',{});
+                                    self.$store.state.inquiryCount=0;
+                                    self.$store.state.inquiryList=0;
+                                    // self.$store.commit('inquiryList');
                                     router.back('/place')
                                 }
                             });

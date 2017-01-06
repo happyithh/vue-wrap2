@@ -230,13 +230,7 @@
                     Max_seating_capacity : self.spaceDtl.Max_seating_capacity,
                     id : self.spaceDtl.id
                 }, type : 1});
-            //    if(self.personal.id==''){
-            //         $.toptip('请先登录!',2000,'error');
-            //             setTimeout(function(){
-            //                 router.push('/form/askprice')
-            //             },1000)
-            //     }
-                router.push('/form/askprice')
+            router.push('/form/askprice')
              },
             changeCollect(){
                 var self = this
