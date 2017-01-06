@@ -36,6 +36,17 @@
                 </li>
             </ul>
         </div>
+        <div class="case-container1">
+            <div class="case-content1" >
+                <div class="notice-tit1">抱歉，您没有任何收藏</div>
+            </div>
+            <div class="hot-tit1">热门推荐</div>
+            <div class="hottit-box1">
+                <ul>
+                    <li v-for='showplace in showplaces' class="fl">{{showplace.showmsg}}</li>
+                </ul>
+            </div>
+        </div>
     </div>
     
 </template>
@@ -60,12 +71,22 @@
                         handler: () => this.deleteData('delete')
                     }
                    
+                ],
+                 showplaces:[
+                    {showmsg:'秀场展馆'},
+                    {showmsg:'影院剧院'},
+                    {showmsg:'商业广场'},
+                    {showmsg:'艺术馆画廊'},
+                    {showmsg:'星级酒店'},
+                    {showmsg:'咖啡馆书店'}
                 ]
+
             }
         },     
         mounted(){
             var self = this;
             self.collectList()//调用数据
+            
            // console.log(this.$store.getters.validationData)
            // console.log(GlobleFun.objConcat(this.$store.getters.validationData,{page:1,order_id:222}))
         },
@@ -80,15 +101,21 @@
                             page:1
                         }),
                         success: function (data){
-                            console.log(data);
-                            self.casecontents= data.follows ;
+                           self.casecontents= data.follows ;
+                            console.log( self.casecontents);
+                             if(self.casecontents.length==0){
+                                $('.case-container1').css('display','block')
+                            }else{
+                                $('.case-container1').css('display','none')
+                            }
                         }   
                     });
+                   
+
              },
              deleteData:function(){  
                 var self = this;
                $.post({
-                    // type:'put',
                     url: window.YUNAPI.collection,
                     data : GlobleFun.objConcat(this.$store.getters.validationData,{
                         followable_type:'Article',
@@ -184,10 +211,50 @@
         padding: 0!important;
         border: none;
     }*/
+    .case-container1{
+        width:100%;
+        height: auto;
+        padding:0 15px;
+    }
+    .case-content1{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    }
+    .case-content1 .notice-tit1{
+        padding:20px 0;
+        font-size: 1rem;
+        color:#666666;
+        border-bottom: 1px solid #ffffff;
+    }
+    .case-container1 .hot-tit1{
+        font-size: 1rem;
+    }
+    .case-container1 .hottit-box1{
+        overflow: hidden;
+        height: auto;
+        border-bottom: 1px solid #222222;
+        
+
+    }
+    .case-container1 .hottit-box1 ul{
+        width: 100%;
+        height: auto;
+    }
+
+    .case-container1 .hottit-box1 li{
+        text-align: center;
+        margin: 10px 3px;
+        border: 1px solid #000000;
+        padding:12px 5px;
+        color: #999999;
+        font-size: .8rem;
+    }
 </style>
 <style>
     .mint-cell .mint-cell-swipe{
         width:120%;
+        line-height: 80px;
     }
     .mint-cell-title {
         -webkit-box-flex: 0;

@@ -89,11 +89,25 @@
         },
         mounted(){
             //获取 询价 列表
-            var e = {}
-            for( var i in this.inquiryList){
-                e[i] = true
-            }
-            this.inquiryListChange = e;
+            // var e = {}
+            // for( var i in this.inquiryList){
+            //     e[i] = true
+            // }
+            var self = this;
+            var inquirys = LS.get('inquiry')
+            var ids = []
+                for( var i in inquirys){
+                    ids.push(i)
+                }
+                self.consult.space_ids = ids
+            // this.inquiryListChange = e;
+            if(self.consult.space_ids.length==0){
+                    $.toptip('请先添加询价空间!',2000,'error');
+                      setTimeout(function () {
+                       router.back('/place') 
+            },1500)
+                    return;     
+                }
             var self = this;
             setTimeout(function () {
                 if(self.personalData.name){
@@ -114,19 +128,19 @@
             },
            createInquiry : function () {
                 var self = this;
-                var inquirys = LS.get('inquiry')
-                var ids = []
-                for( var i in inquirys){
-                    ids.push(i)
-                }
-                self.consult.space_ids = ids
-                if(self.consult.space_ids.length==0){
-                    $.toptip('请先添加询价空间!',2000,'error');
-                      setTimeout(function () {
-                       router.back('/place') 
-            },1500)
-                    return;     
-                }
+            //     var inquirys = LS.get('inquiry')
+            //     var ids = []
+            //     for( var i in inquirys){
+            //         ids.push(i)
+            //     }
+            //     self.consult.space_ids = ids
+            //     if(self.consult.space_ids.length==0){
+            //         $.toptip('请先添加询价空间!',2000,'error');
+            //           setTimeout(function () {
+            //            router.back('/place') 
+            // },1500)
+            //         return;     
+            //     }
                 if(!self.consult.contact){
                     $.toptip('姓名不能为空!',2000,'error');
                     return;
@@ -149,6 +163,8 @@
                                 title: '提交成功',
                                 text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                 onOK: function () {
+                                    LS.remove('inquiry')
+                                    self.$store.commit('personalDataChange',{});
                                     router.back('/place')
                                 }
                             });

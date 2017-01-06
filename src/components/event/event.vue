@@ -137,6 +137,9 @@
                 var self = this
                 $.ajax({
                     url: window.YUNAPI.active,
+                    data:{
+                        city_id: self.$store.state.city_id
+                    },
                     success: function (data) {
                         //console.log(data)
                         self.venues=data.space_recommend;

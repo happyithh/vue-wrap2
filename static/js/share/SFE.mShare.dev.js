@@ -990,16 +990,16 @@ var share={
 };
 
 $(function(){
-        $('body').on('touchstart','.cancel',function(){
+        $('body').on('click','.cancel',function(){
             share.close();
         });
-        $('body').on('touchstart','.share-mask',function(){
+        $('body').on('click','.share-mask',function(){
             share.close();
         });
-        $('body').on('touchstart','.share-area',function(){
+        $('body').on('click','.share-area',function(){
             share.close();
         });
-         $('body').on('touchstart','#share-wm',function(e){
+         $('body').on('click','#share-wm',function(e){
             $('body').append($('<div class="qrcode-mask"><div class="qrcode-box"><h3>长按即可保存或者识别二维码</h3><div class="qrcode"><span class="qrcode-close"></span></div></div></div>'))
                 var qrcode = new QRCode($(".qrcode").get(0), {
                     width : 160,height : 160
@@ -1008,11 +1008,11 @@ $(function(){
                 e.stopPropagation();
                 return false;
         });
-         $('body').on('touchstart','.qrcode-close',function(e){
+         $('body').on('click','.qrcode-close',function(e){
             //关闭二维码
             $('.qrcode-mask').remove();
         });
-         $('body').on('touchstart','.share-out',function(e){
+         $('body').on('click','.share-out',function(e){
             if(!$(this).hasClass('share-wm')){
                 window.location.href =$(this).attr('href');
                 e.preventDefault();

@@ -30,7 +30,7 @@
                 <div class="collect-line">
                     <img class="fl mt" src="/static/images/icon/collect_hv.png" alt=""/>
                     <router-link to="/form/case-article" class="back fl">
-                        文章案例
+                        案例文章
                     </router-link>
                     <!--<div class="fl">场地空间</div>-->
                     <i class="icon-arrowright mt fr"></i>
