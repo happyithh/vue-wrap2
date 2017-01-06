@@ -21,7 +21,7 @@
                 <div class="swiper-slide" v-for="item in placeDtl.site_pictures">
                     <!--<img :src="item.url_790_526" alt=""/>-->
                     <img class="lazy" :title="item.url_790_526"
-                         v-bind:data-original="item.url_790_526"/>
+                         v-bind:src="item.url_790_526"/>
                 </div>
             </div>
             <!-- Add Pagination -->
@@ -201,10 +201,11 @@
             self.getData()//调用数据5
         },
         methods:{
-            /*顶部轮播*/
             showShare(url,title){
                 showShare(url,title)
             },
+            /*顶部轮播*/
+
             init1 : function () {
                 var citySelectionSwiper = new Swiper('.top-banner', {
                     pagination: '.swiper-pagination',

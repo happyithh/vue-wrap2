@@ -60,7 +60,7 @@
                         <!--<router-link :to="'/article/'+item.id">-->
                             <!--<a href="javascript:;" target="_blank">-->
                                 <!--<img src="/static/images/test.png" alt="">-->
-                                <img class="lazy" :title="item.title" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                                <img class="lazy" :title="item.title" v-bind:src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
                                 <p>{{item.title}}</p>
                             </a>
                             <!--</router-link>-->
@@ -80,7 +80,7 @@
                     <router-link :to="'/place/detail/'+item.id" class="img">
 
                             <!--<img src="/static/images/test.png">-->
-                            <img class="lazy" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''" >
+                            <img class="lazy twoThirds" :title="item.title" v-bind:data-original="item.site_pictures.length > 0 ? item.site_pictures[0]['url_790_526'] : ''" >
                             <div class="price">
                                 {{item.lower_price}}
                             </div>

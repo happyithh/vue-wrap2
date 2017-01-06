@@ -1,3 +1,6 @@
 /*body .weui_toptips{*/
     /*top:56px*/
 /*}*/
+.twoThirds{
+    height:calc(66.6vw)!important;
+}
