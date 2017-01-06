@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <div class="onekey-rentail-wrap fixed">
+                <div class="onekey-rentail-wrap needfixed">
                     <a href="javascript:;" @click="getData" class="btn-onekey">搜索</a>
                 </div>
             </div>
@@ -154,7 +154,8 @@
                     q : {
                         keyword: '',
                         district_name_eq:'',  //行政区域
-                        site_type_eq:'',
+                        site_type_eq:'',      //场地类型单选
+                        site_type_in:'',      //场地类型多选
                         spaces_market_price_gteq:'',
                         spaces_market_price_lteq:'',
                         spaces_area_gteq:'',
@@ -256,6 +257,9 @@
             var self = this;
 
             self.holdData();
+            $(document).scroll(function(){
+                $('.needfixed').addClass('fixed');
+            })
 
 
         },
@@ -296,6 +300,15 @@
             //场地位置筛选
             placePositionScreen(){
                 var self = this
+
+                if(self.urlData.city_id == ''){
+                    self.arrAdmArea = ''
+                    self.arrBusinessDistrict = ''
+                    self.urlData.q.district_name_eq = ''
+                    self.urlData.business_district = ''
+                    return
+                }
+
                 $.ajax({
                     url: window.YUNAPI.host+'api/tags/get_city_business',
                     data : {
@@ -371,8 +384,8 @@
                 $('.placeType span.active').each(function () {
                     self.urlData.arrPlaceType.push($(this).data('id'));
                 });
-                self.stringPlaceType = self.urlData.arrPlaceType.join(',')
-                self.urlData.q.site_type_eq = self.stringPlaceType
+                //self.stringPlaceType = self.urlData.arrPlaceType.join(',')
+                self.urlData.q.site_type_in = self.urlData.arrPlaceType
 
 
                 //容纳人数

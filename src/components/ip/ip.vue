@@ -23,7 +23,7 @@
                 <div class="swiper-wrapper swiper-container">
                     <div class="swiper-slide" v-for="item in ipBrand">
                         <!--<img :src="/static/images/test_logo.png" alt="">-->
-                        <img class="lazy" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                        <img class="lazy" v-bind:src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
                     </div>
                     <!--<div class="swiper-slide">-->
                         <!--<img src="/static/images/test_logo.png" alt="">-->
@@ -54,12 +54,12 @@
                 <li v-for="item in ipProject">
                     <a class="img" href="javascript:;">
                         <!--<img src="/static/images/test.png">-->
-                        <img class="lazy" v-bind:data-original="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
+                        <img class="lazy twoThirds" v-bind:src="item.img_paths.length > 0 ? item.img_paths[0]['url_400_267'] : ''">
 
                     </a>
                     <div class="cont">
                         <div class="title clearfix">
-                            <div class="price">预算 <span>¥</span> {{item.budget_amount}}</div>
+                            <div class="price">预算 {{item.budget_amount ? item.budget_amount : '暂无'}}</div>
                             {{item.title}}
                         </div>
                         <div class="tags clearfix">
@@ -151,10 +151,10 @@
                         }
                         setTimeout(function () {
                             self.init();//调用轮播
-                            $("img.lazy").lazyload({
-                                effect : "fadeIn",
-                                placeholder : '/static/images/placeholder.jpg'
-                            });
+//                            $("img.lazy").lazyload({
+//                                effect : "fadeIn",
+//                                placeholder : '/static/images/placeholder.jpg'
+//                            });
                             self.$store.commit('loading',false);
 
                             //ip文创关键词滚动
@@ -294,5 +294,6 @@
         font-size: 0.93rem;
         line-height: 1.5em;
     }
+
 
 </style>
