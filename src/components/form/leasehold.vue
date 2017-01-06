@@ -181,13 +181,29 @@
                     $.toptip('验证码不能为空!',2000,'error');
                     return;
                 }
-                
                 if(!self.consult.order_city){
                     $.toptip('请先获取活动城市!',2000,'error');
                     return;
                 }
                 if(!self.consult.number_of_activities){
                     $.toptip('请先获取活动人数!',2000,'error');
+                    return;
+                }
+                if(!self.consult.s_time){
+                    $.toptip('开始时间不能为空!',2000,'error');
+                    return;
+                }
+                 if(!self.consult.e_time){
+                    $.toptip('结束时间不能为空!',2000,'error');
+                    return;
+                }
+                if(self.consult.s_time>self.consult.e_time){
+                    $.toptip('结束时间不能小于开始时间!',2000,'error');
+                    return;
+                }
+
+                if(!self.consult.activities_required){
+                    $.toptip('其他要求不能为空!',2000,'error');
                     return;
                 }
                 if(!self.consult.activity_type){

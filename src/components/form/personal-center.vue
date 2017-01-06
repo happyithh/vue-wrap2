@@ -19,9 +19,10 @@
                <router-link to="/form/personal" class="back">
                    <img :src="personalData.host + personalData.head_portrait.thumb.url" alt=""/>
                 </router-link>
-               <div class="person-name" v-text='personalData.name'></div>
+                <router-link to="/form/personal" class="back">
+                  <div class="person-name" v-text='personalData.name'></div>
+                </router-link>
             </div>
-           
            <router-link to="/form/personal/password" class="back">
                 <div class="infor-show">
                     <div class="collect-line">
@@ -148,6 +149,7 @@
     .person-name{
         margin: 8px 0;
         font-size: .8rem;
+        background: #ffffff;
     }
 
 </style>

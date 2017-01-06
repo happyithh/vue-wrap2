@@ -32,9 +32,9 @@
                 <li class="clearfix" v-for='item in spaceList'>
                 <mt-cell-swipe :right="[{content: '删除', style: { background: 'red', color: '#fff' },handler: () =>deleteData('确认删除？')}]">
                     <router-link :to="item.special_url ? item.special_url : '/space/detail/' + item.id">
-                        <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.name}}</div>
+                        <div class="local-price"><strong>{{item.market_price_real}}{{item.units}}</strong> {{item.site_name}}--{{item.name}}</div>
                         <div class="local-price-detail clearfix">
-                            <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人 面积{{item.area}}㎡ 地址 {{item.address}}</div>
+                            <div class='max-people fl ml10'>最大容纳 {{item.Max_seating_capacity}}人 面积{{item.area}}㎡ 地址 {{item.city_name}}市 {{item.district}} | {{item.address}}</div>
                             <div class='max-square fl ml10'></div>
                             <div class='add fl ml10'></div>
                         </div>
@@ -54,7 +54,7 @@
                     <router-link :to="item.special_url ? item.special_url : '/place/detail/' + item.id">
                         <div class="local-price"><strong>{{item.lower_price}}{{item.units}}</strong> {{item.title}}</div>
                         <div class="local-price-detail clearfix">
-                            <div class='max-people fl ml10'>最大容纳 {{item.max_people}}人 面积{{item.max_size}}㎡ 地址 {{item.address}}</div>
+                            <div class='max-people fl ml10'>最大容纳 {{item.max_people}}人 面积{{item.max_size}}㎡ 地址 {{item.city_name}}市 {{item.district}} |{{item.address}}</div>
                             <div class='max-square fl ml10'></div>
                             <div class='add fl ml10'></div>
                         </div>
@@ -115,6 +115,9 @@
             self.collecPlacetList()//调用场地数据
             //console.log(this.$store.getters.validationData)
            // console.log(GlobleFun.objConcat(this.$store.getters.validationData,{page:1,order_id:222}))
+           if(!self.spaceList.length){
+              
+           }
         },
       
         methods:{
@@ -147,7 +150,7 @@
                         }
                             ),
                         success: function (data) {
-                            // console.log(data.follows)
+                            console.log(data.follows)
                             self.placeList=data.follows
                         }   
                     });
@@ -255,10 +258,10 @@
         padding: 0;
         background-image: none;
     }
-.mint-cell-swipe-button {
-    height: 100%;
-    display: inline-block;
-    padding: 0 10px;
-    line-height: 80px;
-}
+    .mint-cell-swipe-button {
+        height: 100%;
+        display: inline-block;
+        padding: 0 10px;
+        line-height: 80px;
+    }
 </style>

@@ -23,12 +23,12 @@
             <div class="img-detail">
                 <h1>{{article.title}}</h1>
                 <div class="person-info clearfix">
-                    <div class="fl">发布人:{{article.creation_people}} <span>&nbsp;&nbsp;{{article.created_at}}</span></div>
+                    <div class="fl">发布人:{{article.audit_people}} <span>&nbsp;&nbsp;{{article.created_at}}</span></div>
                     <div class="fr"><img src="/static/images/icon/skim.png" alt=""/> {{article.viewed}} </div>
                 </div>
             </div>
-            <div class="op-title">空间详情</div>
-           <p v-html="article.details"></p>
+            <div class="op-title">内容详情</div>
+            <p class="img_detail_box" v-html="article.details"></p>
             
             <div class="infor-show1">
                 <a href="javascript:;" class="btn-onekey1"><img src="/static/images/icon/share.png" alt="">分享</a>
@@ -78,6 +78,7 @@
                         data: self.$store.getters.validationData,
                     success: function (data) {
                         self.article = data.information;
+                        console.log( self.article)
                         self.article.follow = (self.article.follow == true)
                         // console.log( data.information )
                         self.$parent.loading = false;
@@ -107,6 +108,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
     .imgbox img{
         width: 100%;
         height: 250px;
@@ -180,6 +182,7 @@
     .infor-show1{
         margin: 0 15px;
         overflow: hidden;
+        border-top: 1px solid #999999;
     }
     
     .btn-onekey1 img{
@@ -191,4 +194,11 @@
 .infor-show1 .btn-onekey1.hv .icon-collection{
     background-image: url("/static/images/icon/collect_hv.png");
 }
+</style>
+<style>
+    .img_detail_box  img{
+    border: none;
+    width: 100%!important;
+    height: 100%!important;
+    }
 </style>

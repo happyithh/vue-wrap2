@@ -28,7 +28,7 @@
             
             <div class="input-box">
                 <div class="base-info-name">您的称呼</div>
-                <input type="text" class="base-detail-name" v-model='personalData.name' placeholder="请输入您的称呼"/>
+                <input type="text" class="base-detail-name" v-model='order.name' placeholder="请输入您的称呼"/>
 
             </div>
             <div class="input-box">
@@ -38,7 +38,7 @@
             </div>
             <div class="input-box">
                 <div class="base-info-name">公司名称</div>
-                <input type="text" class="base-detail-name"v-model='order.company_name' placeholder="请输入公司名称"/>
+                <input type="text" class="base-detail-name" id='company_name' v-model='order.company_name' placeholder="请输入公司名称" />
 
             </div>
         </form>
@@ -74,13 +74,18 @@
             var self=this
             //self.$store.commit('getPersonalData');
             setTimeout(function () {
-                if(self.personalData.name){
+                if(self.personalData.mobile){
                     self.order.moblie = self.personalData.mobile
                     self.order.name = self.personalData.name
                     self.order.company_name = self.personalData.company_name
+                    if(self.order.company_name){
+                         $('#company_name').attr("disabled","disabled");
+                        return;
+                    }
                 }
             },300)
          },
+          
         methods:{
            
             // personalDataChange(data){
@@ -101,12 +106,13 @@
                         $.toptip('请输入您的公司名称',2000,'error');
                         return;
                     }
+                    
                    
                 $.ajax({
                     type:'put',
                     url: window.YUNAPI.personalInfo,
                     data:GlobleFun.objConcat(self.$store.getters.validationData, {
-                        name:self.personalData.name,
+                        name:self.order.name,
                         company_name:self.order.company_name,
                         moblie:self.order.moblie,
                         head_portrait:self.avatarBase64
@@ -246,5 +252,9 @@
     #xFile{
         opacity:0;
     }
+    input:disabled, textarea:disabled {
+    background: #ffffff;
+    color: #000000 ;
+}
 
 </style>
