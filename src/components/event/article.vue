@@ -32,7 +32,7 @@
             
             <div class="infor-show1">
                 <a href="javascript:;" class="btn-onekey1"><img src="/static/images/icon/share.png" alt="">分享</a>
-                <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>收藏</a>
+                <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>{{article.follow ? "已收藏" : " 收藏"}}</a>
                 
             </div>
         </div>
@@ -165,22 +165,19 @@
     .imgboxp{
         padding:0 20px;
     }
-    .btn-onekey1{
-        /*position:relative;*/
-        height: 2.67rem;
-        width:45%;
-        line-height: 2.68rem;
-        border-radius: 5px;
-        background:#f7c73f;
-        font-size: 1.07rem;
-        float: left;
-        margin-top: 15px;
-        margin-right:5% ;
-        margin-bottom: 15px;
-        text-align: center;
+
+.btn-onekey1{
+    width: 47%;
+    height: 2.67rem;
+    line-height: 2.68rem;
+    background:#f7c73f;
+    font-size: 1.07rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
 }
     .infor-show1{
-        margin: 0 15px;
+        margin: 15px 15px 0;
         overflow: hidden;
         border-top: 1px solid #999999;
     }
