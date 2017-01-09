@@ -20,7 +20,7 @@
             <div class="swiper-wrapper swiper-container">
                 <div class="swiper-slide" v-for="item in placeDtl.site_pictures">
                     <!--<img :src="item.url_790_526" alt=""/>-->
-                    <img class="lazy twoThirds" :title="item.url_790_526"
+                    <img class="lazy" :title="item.url_790_526"
                          v-bind:src="item.url_790_526"/>
                 </div>
             </div>

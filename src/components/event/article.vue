@@ -31,8 +31,8 @@
             <p class="img_detail_box" v-html="article.details"></p>
             
             <div class="infor-show1">
-                <a href="javascript:;" class="btn-onekey1"><img src="/static/images/icon/share.png" alt="">分享</a>
-                <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>{{article.follow ? "已收藏" : " 收藏"}}</a>
+                <a href="javascript:;" class="fl btn-onekey1" @click="showShare('',article.title)"><i class="icon icon-share"></i>分享</a>
+                <a href="javascript:;" style="margin-right:0;margin-left:13px;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>{{article.follow ? "已收藏" : " 收藏"}}</a>
                 
             </div>
         </div>
@@ -70,6 +70,9 @@
         methods:{
             back(){
                 router.back();
+            },
+             showShare(url,title){
+                showShare(url,title)
             },
             getData(){
                  var self = this;
@@ -165,21 +168,23 @@
     .imgboxp{
         padding:0 20px;
     }
-
-.btn-onekey1{
-    width: 47%;
-    height: 2.67rem;
-    line-height: 2.68rem;
-    background:#f7c73f;
-    font-size: 1.07rem;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    text-align: center;
+    .btn-onekey1{
+        height: 2.67rem;
+        width:45%;
+        line-height: 2.68rem;
+        background:#f7c73f;
+        font-size: 1.07rem;
+        float: left;
+        margin-top: 15px;
+        margin-right:4%;
+        margin-bottom: 15px;
+        text-align: center;
+        
 }
+
     .infor-show1{
-        margin: 15px 15px 0;
-        overflow: hidden;
         border-top: 1px solid #999999;
+        padding-top: 20px;
     }
     
     .btn-onekey1 img{
@@ -190,6 +195,18 @@
 }
 .infor-show1 .btn-onekey1.hv .icon-collection{
     background-image: url("/static/images/icon/collect_hv.png");
+}
+.infor-show1 .icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 10px;
+    margin-top: -4px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.icon-share {
+    background-image: url(/static/images/icon/share.png);
 }
 </style>
 <style>
