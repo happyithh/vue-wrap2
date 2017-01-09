@@ -114,10 +114,10 @@
         methods:{
             //悬浮搜索导航
             headerSearchFixed:function () {
-                var htop=$('.space-list').offset().top;
+                //var htop=$('.space-list ul').offset().top; //会被首页的css污染，暂弃，直接用具体数字134px
                 $(document).scroll(function () {
                     var scrolltop=$(document).scrollTop();
-                    if(scrolltop>htop){
+                    if(scrolltop>134){
                         $('header.fixed').css({
                             top:0
                         });
@@ -138,7 +138,7 @@
             getData(){
                 var self = this;
                 self.$store.commit('loading',true);
-                if(!self.placeSearchCondition.city_id){
+                if(this.$route.query.type == 'all'){
                     self.placeSearchCondition.city_id = self.$store.state.city_id;
                 }
                 $.ajax({

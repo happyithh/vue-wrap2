@@ -73,7 +73,7 @@
         <div class="space-list home">
             <div class="list-title clearfix">
                 <h2 class="fl">场地推荐</h2>
-                <router-link class="fr more" to="/place">查看所有<span class="icon icon-arrowright"></span></router-link>
+                <router-link class="fr more" to="/place?type=all">查看所有<span class="icon icon-arrowright"></span></router-link>
             </div>
             <ul>
                 <li v-for="item in recommendSite">
