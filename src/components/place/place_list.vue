@@ -138,6 +138,9 @@
             getData(){
                 var self = this;
                 self.$store.commit('loading',true);
+                if(!self.placeSearchCondition.city_id){
+                    self.placeSearchCondition.city_id = self.$store.state.city_id;
+                }
                 $.ajax({
                     url: window.YUNAPI.placeList,
                     data: self.placeSearchCondition,
