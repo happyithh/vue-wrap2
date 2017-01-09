@@ -80,6 +80,7 @@
         methods:{
              logout(){
                 this.$store.commit('personalDataChange',{});//保存个人信息
+                // this.$store.state.inquiryList=0;
                 router.replace('/')
             }
             

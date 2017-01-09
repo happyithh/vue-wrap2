@@ -138,8 +138,15 @@
                                     title: '登录成功',
                                     // text: '客服专员将尽快联系你,请耐心等待!<br>客服热线 : 400-056-0599',
                                     onOK: function () {
-                                         router.replace('/')
-                                        setTimeout('',5000)
+                                        if(self.$store.state.inquiryCount==0){
+                                              router.replace('/')
+                                              console.log('11111')
+                                        }else{
+                                            router.replace('/form/askprice')
+                                            console.log('2222222')
+                                            setTimeout('',5000)
+                                        }
+                                         
                                     },
                                 
                                 });

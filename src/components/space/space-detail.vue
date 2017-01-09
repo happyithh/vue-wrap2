@@ -54,7 +54,7 @@
             <div class="base-info2">场地相关案例</div>
             <div class="selectedtopic-cont1 about-cases">
                   <div class="swiper-wrapper swiper-container">
-                        <div class="swiper-slide"  v-for="item in relate_topics">
+                        <div class="swiper-slide"  v-for="item in relate_cases">
                             <router-link :to="item.img_paths.url ? item.img_paths.url : '/article/' + item.id">
                             <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_420_300'] : ''">
 
@@ -125,7 +125,7 @@
                     1, 2, 3, 4
                 ],
                 site:{},
-                relate_topics:'',
+                relate_cases:'',
                 spaceDtl : [],
                 otherSpace : [],
                 placeDtl : [],
@@ -194,9 +194,10 @@
                     //  url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
                     data : self.$store.getters.validationData,
                     success: function (data) {
+                        console.log(data)
                         self.spaceDtl = data.space;
                         self.otherSpace = data.other_spaces;
-                        self.relate_topics = data.relate_topics
+                        self.relate_cases = data.relate_cases
                         //场地配套
                         if(self.spaceDtl.facilities){
                             self.arrSort=self.spaceDtl.facilities.split(',');

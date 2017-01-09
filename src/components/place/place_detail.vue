@@ -100,10 +100,10 @@
             <div class="base-info2">场地相关案例</div>
             <div class="selectedtopic-cont about-cases">
                 <div class="swiper-wrapper swiper-container">
-                    <div class="swiper-slide" v-for="item in relate_topics">
+                    <div class="swiper-slide" v-for="item in relate_cases">
                         <!--<img src="/static/images/test.png" alt=""/>-->
                         <router-link :to="item.special_url ? item.special_url : '/article/' + item.id">
-                            <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_150_100'] : ''">
+                            <img :src="item.img_paths.length > 0 ? item.img_paths[0]['url_591_320'] : ''">
 
                             <h3>{{item.title}}</h3>
                         </router-link>
@@ -165,7 +165,7 @@
                 ],
                 placeDtl : [],
                 spaces : [],
-                relate_topics : '',
+                relate_cases : '',
                 relate_articles : '',
 
                 assortList: {
@@ -231,7 +231,7 @@
                         return current + ' / ' + total;
                     },
 //                    loop : true,
-                    slidesPerView: 1.2,
+                    slidesPerView: 1,
                     paginationClickable: true,
                     spaceBetween: 10,
                     autoplay: false
@@ -247,7 +247,7 @@
                     success: function (data) {
                         self.placeDtl = data.site
                         self.spaces = data.site_spaces
-                        self.relate_topics = data.relate_topics
+                        self.relate_cases = data.relate_cases
                         self.relate_articles = data.relate_articles
                         self.placeDtl.follow = (self.placeDtl.follow == true)
 

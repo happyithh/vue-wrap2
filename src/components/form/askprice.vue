@@ -116,7 +116,10 @@
                     self.consult.email = self.personalData.email
                 }else{
                     $.toptip('请先登录!',2000,'error');
-                    router.replace('/order/Login'); 
+                    setTimeout(function () {
+                        router.replace('/order/Login'); 
+                    },1500)
+                        return;  
                 }
             },300)
         },
@@ -143,7 +146,7 @@
                 $.post({
                     url: window.YUNAPI.inquiryContent,
                     //data : self.consult,
-                    data : GlobleFun.objConcat(self.$store.getters.validationData,self.consult),
+                    data : GlobleFun.objConcat(self.$store.getters.validationData,self.consult, self.consult.space_ids),
                     success: function (data,status,xhr) {
                         //console.log(self.$store.getters.validationData)
                         var status = data.status == 1 ? 'success' : 'error';
