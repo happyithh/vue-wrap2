@@ -17,7 +17,9 @@
         <div class="personal-box">
             <div class="img-box">
                <router-link to="/form/personal" class="back">
-                   <img :src="personalData.host + personalData.head_portrait.thumb.url" alt=""/>
+                   <img :src="personalData.host + personalData.head_portrait.thumb.url"
+                        onerror="javascript:this.src='/static/images/avatar.png';"
+                        alt=""/>
                 </router-link>
                 <router-link to="/form/personal" class="back">
                   <div class="person-name" v-text='personalData.name'></div>
