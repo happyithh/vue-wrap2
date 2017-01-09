@@ -113,7 +113,6 @@
                 if(self.personalData.name){
                     self.consult.phone = self.personalData.mobile
                     self.consult.contact = self.personalData.name
-                    self.consult.email = self.personalData.email
                 }else{
                     $.toptip('请先登录!',2000,'error');
                     setTimeout(function () {
