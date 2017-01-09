@@ -248,6 +248,10 @@
    
 </style>
 <style>
+     .mint-cell .mint-cell-swipe{
+        width:120%;
+        line-height: 80px;
+    }
     .mint-cell-title {
         -webkit-box-flex: 0;
         -ms-flex: 0;
@@ -257,10 +261,25 @@
         padding: 0;
         background-image: none;
     }
-    .mint-cell-swipe-button {
-        height: 100%;
-        display: inline-block;
-        padding: 0 10px;
-        line-height: 80px;
+    .mint-cell-right {
+    position: absolute;
+    height: 100%;
+    right: -2px;
     }
+    .mint-cell-swipe-button {
+    height: 100%;
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 80px; 
+}
+.mint-cell-value {
+    color: #000000;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: .9rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
 </style>

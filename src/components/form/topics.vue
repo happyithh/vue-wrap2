@@ -17,11 +17,11 @@
             <div class="case-container">
                 <ul class="case-content" id='case-content' >
                     <li v-for="item in casecontents">
+                         <router-link :to="item.special_url ? item.special_url : '/Article/' + item.id">
                         <mt-cell-swipe :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('确认删除？') } ]">
-                        <router-link :to="item.special_url ? item.special_url : '/Article/' + item.id">
-                            {{item.title}}
-                        </router-link>
-                    </mt-cell-swipe>
+                           {{item.title}}
+                       </mt-cell-swipe>
+                     </router-link>
                     </li>
                 </ul>
             </div>
@@ -152,6 +152,10 @@
     
 </style>
 <style>
+    .mint-cell .mint-cell-swipe{
+        width:120%;
+        line-height: 80px;
+    }
     .mint-cell-title {
         -webkit-box-flex: 0;
         -ms-flex: 0;
@@ -160,5 +164,26 @@
     .mint-cell-wrapper{
         padding: 0;
         background-image: none;
+    }
+    .mint-cell-right {
+        position: absolute;
+        height: 100%;
+        right: -2px;
+    }
+    .mint-cell-swipe-button {
+        height: 100%;
+        display: inline-block;
+        padding: 0 10px;
+        line-height: 80px; 
+    }
+    .mint-cell-value {
+        color: #000000;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        font-size: .9rem;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
 </style>
