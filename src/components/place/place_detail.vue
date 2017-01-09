@@ -20,7 +20,7 @@
             <div class="swiper-wrapper swiper-container">
                 <div class="swiper-slide" v-for="item in placeDtl.site_pictures">
                     <!--<img :src="item.url_790_526" alt=""/>-->
-                    <img class="lazy" :title="item.url_790_526"
+                    <img class="lazy twoThirds" :title="item.url_790_526"
                          v-bind:src="item.url_790_526"/>
                 </div>
             </div>
@@ -123,7 +123,7 @@
         <div class="infor-show1">
             <a href="javascript:;" class="fl btn-onekey1" @click="showShare('',placeDtl.title)"><i class="icon icon-share"></i>分享</a>
             <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
-            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': placeDtl.follow }"><i class="icon icon-collection"></i>收藏</a>
+            <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': placeDtl.follow == true }"><i class="icon icon-collection"></i>{{placeDtl.follow == true ? "已收藏" : " 收藏"}}</a>
 
 
         </div>

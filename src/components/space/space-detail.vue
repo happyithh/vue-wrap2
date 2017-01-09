@@ -17,7 +17,7 @@
             <div class="selectedtopic-cont top-banner">
                 <div class="swiper-wrapper swiper-container">
                     <div class="swiper-slide" v-for="item in spaceDtl.img_paths">
-                       <img :src="item.url_790_526" alt="首页banner图片01"/>
+                       <img class="twoThirds" :src="item.url_790_526" alt="首页banner图片01"/>
                     </div>
                 </div>
                 <!-- Add Pagination -->
@@ -68,7 +68,7 @@
         <div class="infor-show1">
             <a href="javascript:;" class="fl btn-onekey1" @click="showShare('',spaceDtl.name)"><i class="icon icon-share"></i>分享</a>
             <!--<a href="" class="fr btn-onekey"><img src="/static/images/icon/collect.png" alt="">收藏</a>-->
-           <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': spaceDtl.follow }"><i class="icon icon-collection"></i>{{spaceDtl.follow ? "已收藏" : " 收藏"}}</a>
+           <a href="javascript:;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': spaceDtl.follow == true }"><i class="icon icon-collection"></i>{{spaceDtl.follow == true ? "已收藏" : " 收藏"}}</a>
         </div>
        <!--电话-->
         <div class="tel-wrap">

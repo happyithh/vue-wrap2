@@ -56,7 +56,7 @@
                     </router-link>
                     <div class="text clearfix">
                         <div class="fl">
-                            <h3><router-link :to="'/article/'+item.site_id" class="title">{{item.title}}</router-link></h3>
+                            <h3><router-link :to="'/place/detail/'+item.id" class="title">{{item.title}}</router-link></h3>
                             <p>
                                 <span>最大容纳 {{item.max_people}}人</span>
                                 <span>面积 {{item.max_size}}㎡</span>
