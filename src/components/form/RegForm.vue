@@ -134,7 +134,7 @@
                                                 data.data.access_token = xhr.getResponseHeader('access-token');
                                                 data.data.client = xhr.getResponseHeader('client');
                                                 self.$store.commit('personalDataChange',data.data);//保存个人信息
-                                                router.replace(self.$route.path);  // 刷新页面
+                                                router.replace('/');  // 刷新页面
                                                 // console.log(xhr.getResponseHeader('access-token'),111)
                                                 // console.log(xhr.getResponseHeader('client'),222)
                                             
