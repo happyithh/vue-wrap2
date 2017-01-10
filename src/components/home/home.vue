@@ -221,7 +221,7 @@
             },
             getData(){
                 var self = this
-                self.$store.commit('loading',true);
+//                self.$store.commit('loading',true);
                 $.ajax({
                     url: window.YUNAPI.home,
                     data: {
