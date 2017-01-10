@@ -169,7 +169,7 @@
                 relate_articles : '',
 
                 assortList: {
-                    '卫生间':'wc',
+                    '洗手间':'wc',
                     '化妆间':'dressing_room',
                     '休息室':'rest',
                     '空调暖气':'air_conditioning',
