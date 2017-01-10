@@ -259,7 +259,7 @@
         background-color: #fff;
         /*height: 350px;*/
         margin-right: 10px !important;
-        padding-bottom: 52px;
+        padding-bottom: 3rem;
         position: relative;
     }
     .swiper-container .swiper-slide a{
@@ -280,7 +280,7 @@
         font-size:0.9rem;
         color:#000;
         margin: 0;
-        height: 42px;
+        height: 2.3rem;
         line-height: 1.35em;
         overflow: hidden;
         position: absolute;

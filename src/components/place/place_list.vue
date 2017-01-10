@@ -70,7 +70,19 @@
                     </div>
                 </li>
             </ul>
+
+            <!--加载更多-->
+            <a id="morePlace" class="more-place" v-if="!isNoMoreData" @click="getData('more')" href="javascript:;">
+                <span>加载更多</span>
+                <i class="icon-arrowbottom"></i>
+            </a>
+            <p style="text-align: center" v-if="isNoMoreData">没有更多了...</p>
         </div><!--列表-end-->
+
+        <!--回到顶部-->
+        <div class="listSlideUp img" @click="listSlideUp">
+            <span class="icon-arrowtop"></span>
+        </div>
 
         <!--电话-->
         <div class="tel-wrap">
@@ -89,7 +101,9 @@
     export default {
         data () {
             return {
-                places: []
+                places: [],
+                isNoMoreData : false,
+                page : 1,
             }
         },
         mounted () {
@@ -99,6 +113,16 @@
             self.headerSearchFixed();
             self.getData();
 
+            $(document).on('scroll',function () {
+                var scrollTop = $('body').scrollTop();
+                if(scrollTop > 400){
+                    $('.listSlideUp').show();
+                }else {
+                    $('.listSlideUp').hide();
+                }
+
+                //console.log(scrollTop,55)
+            });
         },
         computed:{
             inquiryCount () {
@@ -112,6 +136,11 @@
             }
         },
         methods:{
+            //置顶
+            listSlideUp(){
+                $('html,body').animate({scrollTop:0},300);
+            },
+
             //悬浮搜索导航
             headerSearchFixed:function () {
                 //var htop=$('.space-list ul').offset().top; //会被首页的css污染，暂弃，直接用具体数字134px
@@ -135,22 +164,40 @@
                 });
             },
 
-            getData(){
+            getData(type){
                 var self = this;
                 self.$store.commit('loading',true);
+
+                //参数
+                if(type == 'more'){
+                    self.page++;
+                    $('#morePlace span').text('正在加载...')
+                }
+
                 if(this.$route.query.type == 'all'){
                     self.placeSearchCondition.city_id = self.$store.state.city_id;
                 }
+                var ajaxdata = self.placeSearchCondition.page = self.page
                 $.ajax({
                     url: window.YUNAPI.placeList,
-                    data: self.placeSearchCondition,
+                    data: ajaxdata,
                     success: function (data) {
 //                        console.log(data,22222)
-                        self.places = data.sites
+                        if(type == 'more'){
+                            self.places = self.places.concat(data.sites);
+                        }else{
+                            self.places = data.sites
+                        }
+
+                        //self.places = data.sites
                         setTimeout(function () {
                             self.init();//调用轮播
                             self.$store.commit('loading',false);
+                            $('#morePlace span').text('加载更多')
                         },300)
+                    },
+                    error: function (data) {
+                        $('#morePlace span').text('加载更多')
                     }
                 })
             },

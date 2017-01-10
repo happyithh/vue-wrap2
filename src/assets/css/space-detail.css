@@ -5,7 +5,7 @@
     position: relative;
 }
 .selectedtopic-cont.top-banner .swiper-container .swiper-slide img{
-    max-height: calc(66vw);
+    max-height: calc(60vw);
 }
 
 .selectedtopic-cont h3{
