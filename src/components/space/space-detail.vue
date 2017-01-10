@@ -223,7 +223,20 @@
             addInquiry : function () {
               // LS.set('inquiry',[id,name])
                 var self = this
-                self.$store.commit('inquiryChange',{id : self.spaceDtl.id, name : {
+                 
+                 var inquirys = LS.get('inquiry')
+                  var ids = []
+                for( var i in inquirys){
+                    ids.push(i)
+                }
+                if(ids.length>2){
+                   $.toptip('最多添加3个空间!',2000,'error');
+                   
+                    setTimeout(function () {
+                            router.push('/form/askprice'); 
+                        },1000)
+                }else{
+                    self.$store.commit('inquiryChange',{id : self.spaceDtl.id, name : {
                     market_price : self.spaceDtl.market_price,
                     address : self.spaceDtl.address,
                     name : self.spaceDtl.name,
@@ -231,7 +244,9 @@
                     Max_seating_capacity : self.spaceDtl.Max_seating_capacity,
                     id : self.spaceDtl.id
                 }, type : 1});
-            router.push('/form/askprice')
+                   router.push('/form/askprice'); 
+                }
+            // router.push('/form/askprice')
              },
             changeCollect(){
                 var self = this
