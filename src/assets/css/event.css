@@ -87,6 +87,49 @@
 
 .onekey-rentail-wrap.fixed .btn-onekey{margin-top: 0;}
 
+/******查看更多******/
+.space-list .more-place{
+    display: block;
+    margin: 0 auto;
+    width: 76px;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    cursor: pointer;
+    color:#666;
+    margin-bottom: 15px;
+}
+.space-list .more-place .icon-arrowbottom{
+    width: 9px;
+    height: 9px;
+    border-color:#666;
+    position: absolute;
+    top: 6px;
+    right: 0;
+}
+/******回到顶部******/
+.listSlideUp{
+    width: 44px;
+    height: 44px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 22px;
+    position: fixed;
+    right: 10px;
+    bottom: 100px;
+    display: none;
+}
+.listSlideUp .icon-arrowtop{
+    border-color: #fff;
+    border-width: 2px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    margin-left: -8px;
+    margin-top: -4px;
+}
+
 
 @media screen and (min-width: 320px) and (max-width: 360px){
     .search-input-wrap.lg input{
