@@ -273,6 +273,7 @@
         width: 100%;
         height: 100%;
         background: #aaa;
+        max-height: calc(50.7vw);
     }
     .swiper-container .swiper-slide p{
         width: 100%;

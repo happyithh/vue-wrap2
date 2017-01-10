@@ -3,6 +3,8 @@
 .selectedtopic-cont{
     overflow: hidden;
     position: relative;
+}
+.selectedtopic-cont.top-banner .swiper-container .swiper-slide img{
     max-height: calc(66vw);
 }
 
@@ -27,11 +29,11 @@
     width: 100%;
     height: 100%;
 }
-
 .swiper-container .swiper-slide img{
     display: block;
     width: 100%;
     background: #aaa;
+    max-height: calc(46vw);
 }
 .swiper-container .swiper-slide p{
     width: 100%;
@@ -189,6 +191,7 @@
     position: fixed;
     bottom: 0;
     z-index: 200;
+    max-width: 768px;
 }
 .infor-show-shadow .btn-onekey{
     width: 45%;

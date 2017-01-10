@@ -52,7 +52,7 @@
         <!--场地详情相关案例数据-->
         <div class="infor-show clearfix">
             <div class="base-info2">场地相关案例</div>
-            <div class="selectedtopic-cont1 about-cases">
+            <div class="selectedtopic-cont about-cases">
                   <div class="swiper-wrapper swiper-container">
                         <div class="swiper-slide"  v-for="item in relate_cases">
                             <router-link :to="item.img_paths.url ? item.img_paths.url : '/article/' + item.id">
@@ -108,6 +108,7 @@
             return {
                 
                 assortList: {
+                    '洗手间':'wc',
                     '卫生间':'wc',
                     '化妆间':'dressing_room',
                     '休息室':'rest',
