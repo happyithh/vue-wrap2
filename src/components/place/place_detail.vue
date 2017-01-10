@@ -231,7 +231,7 @@
                         return current + ' / ' + total;
                     },
 //                    loop : true,
-                    slidesPerView: 1,
+                    slidesPerView: 1.2,
                     paginationClickable: true,
                     spaceBetween: 10,
                     autoplay: false
@@ -313,7 +313,5 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-
+<style >
 </style>

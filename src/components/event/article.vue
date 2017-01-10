@@ -30,7 +30,7 @@
             <div class="op-title">内容详情</div>
             <p class="img_detail_box" v-html="article.details"></p>
             
-            <div class="infor-show1">
+            <div class="infor-show1 clearfix">
                 <a href="javascript:;" class="fl btn-onekey1" @click="showShare('',article.title)"><i class="icon icon-share"></i>分享</a>
                 <a href="javascript:;" style="margin-right:0;margin-left:13px;" @click='changeCollect' class="fr btn-onekey1" :class=" {'hv': article.follow }"><i class="icon icon-collection"></i>{{article.follow ? "已收藏" : " 收藏"}}</a>
                 
@@ -111,7 +111,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
     .imgbox img{
         width: 100%;
         height: 250px;
@@ -176,13 +175,12 @@
         font-size: 1.07rem;
         float: left;
         margin-top: 15px;
-        margin-right:4%;
+        margin-right:5%;
         margin-bottom: 15px;
         text-align: center;
         
 }
-
-    .infor-show1{
+     .infor-show1{
         border-top: 1px solid #999999;
         padding-top: 20px;
     }

@@ -17,11 +17,13 @@
             <div class="case-container">
                 <ul class="case-content" id='case-content' >
                     <li v-for="item in casecontents">
-                         <router-link :to="item.special_url ? item.special_url : '/Article/' + item.id">
-                        <mt-cell-swipe :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('确认删除？') } ]">
+                        
+                        <mt-cell-swipe :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData('item.id') } ]">
+                             <router-link :to="item.special_url ? item.special_url : '/Article/' + item.id">
                            {{item.title}}
+                           </router-link>
                        </mt-cell-swipe>
-                     </router-link>
+                     
                     </li>
                 </ul>
             </div>
@@ -69,8 +71,7 @@
                         url: window.YUNAPI.collection+'.json',
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Article',
-                            page:1,
-                            i_types:40
+                            
                         }
                             ),
                         success: function (data,status,xhr) {
@@ -79,14 +80,14 @@
                         }   
                     });
             },
-            deleteData:function(){
+            deleteData:function(id){
                 var self = this;
                 $.post({
                     // type:'put',
                     url: window.YUNAPI.collection,
                     data : GlobleFun.objConcat(this.$store.getters.validationData,{
                         followable_type:'Article',
-                        followable_id: self.casecontents[0].id, 
+                        followable_id: id, 
                         //  console.log(data)
                     },
                 
@@ -148,6 +149,8 @@
     }
     .mint-cell a{
          line-height: 1.2!important;
+         display: block;
+          padding: 20px 20px 20px 0;
     }
     
 </style>

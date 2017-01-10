@@ -178,7 +178,7 @@
                         return current + ' / ' + total;
                     },
 //                    loop : true,
-                    slidesPerView: 1,
+                    slidesPerView: 1.2,
                     paginationClickable: true,
                     spaceBetween: 10,
                     autoplay: false
@@ -194,7 +194,7 @@
                     //  url: window.YUNAPI.placeDtl +'/'+ this.$route.params.id,
                     data : self.$store.getters.validationData,
                     success: function (data) {
-                        console.log(data)
+                        // console.log(data)
                         self.spaceDtl = data.space;
                         self.otherSpace = data.other_spaces;
                         self.relate_cases = data.relate_cases
@@ -261,6 +261,6 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
 
 </style>

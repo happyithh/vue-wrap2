@@ -28,11 +28,13 @@
         <div class="case-container">
             <ul class="case-content" id='case-content' >
                 <li v-for="item in casecontents">
-                    <router-link  :to="item.special_url ? item.special_url : '/Article/' + item.id">
+                    <!--<router-link  :to="item.special_url ? item.special_url : '/Article/' + item.id">-->
                         <mt-cell-swipe style="text-align: left" :right="[ { content: '删除', style: { background: 'red', color: '#fff' }, handler: () =>deleteData(item.id) } ]">
+                           <router-link  :to="item.special_url ? item.special_url : '/Article/' + item.id">
                             {{item.title}}
+                            </router-link>
                         </mt-cell-swipe>
-                    </router-link>
+                     <!--</router-link>    -->
                 </li>
             </ul>
         </div>
@@ -97,12 +99,11 @@
                         url: window.YUNAPI.collection+'.json',
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Article',
-                            i_types:40,
-                            page:1
+                            
                         }),
                         success: function (data){
                            self.casecontents= data.follows ;
-                            console.log( self.casecontents);
+                            console.log(self.casecontents);
                              if(data.follows.length==0){
                                 $('.case-container1').css('display','block')
                             }else{
@@ -116,7 +117,6 @@
              deleteData:function(id){  
                 var self = this;
                 console.log(id)
-                return
                $.post({
                     url: window.YUNAPI.collection,
                     data : GlobleFun.objConcat(this.$store.getters.validationData,{
@@ -128,7 +128,7 @@
                         ),
                     success: function (data) {
                             self.collectList()
-                        console.log(self.casecontents)
+                            console.log(self.casecontents)
                     }   
                 });
             },
@@ -205,7 +205,9 @@
        
     }
     .mint-cell a{
-         line-height: 1.2!important;
+        line-height: 1.2!important;
+        display: block;
+        padding: 20px 20px 20px 0;
     }
     
    /*.case-content .mint-cell-wrapper{

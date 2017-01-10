@@ -157,7 +157,7 @@
                                     LS.remove('inquiry')
                                     self.$store.state.inquiryCount=0;
                                     self.$store.state.inquiryList=0;
-                                    // self.$store.commit('inquiryList');
+                                    self.$store.commit('inquiryList');
                                     router.back('/place')
                                 }
                             });
