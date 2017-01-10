@@ -115,20 +115,16 @@
             self.collecPlacetList()//调用场地数据
             //console.log(this.$store.getters.validationData)
            // console.log(GlobleFun.objConcat(this.$store.getters.validationData,{page:1,order_id:222}))
-           if(!self.spaceList.length){
-              
-           }
         },
       
         methods:{
-            
-            collectList : function(){
+           collectList : function(){
                 var self = this;
                     $.get({
                         url: window.YUNAPI.collection+'.json',
                         data : GlobleFun.objConcat(this.$store.getters.validationData,{
                             followable_type:'Space',
-                            i_types:40
+                            i_types:'40'
                         }
                             ),
                         success: function (data) {

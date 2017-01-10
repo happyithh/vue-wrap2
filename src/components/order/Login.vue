@@ -140,10 +140,8 @@
                                     onOK: function () {
                                         if(self.$store.state.inquiryCount==0){
                                               router.replace('/')
-                                              console.log('11111')
                                         }else{
                                             router.replace('/form/askprice')
-                                            console.log('2222222')
                                             setTimeout('',5000)
                                         }
                                          
